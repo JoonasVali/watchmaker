@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.islands;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.framework.EvaluatedCandidate;
 import org.uncommons.watchmaker.framework.FrameworkTestUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Unit test for the {@link RingMigration} class.

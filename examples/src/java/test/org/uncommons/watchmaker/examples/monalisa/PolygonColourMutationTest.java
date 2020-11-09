@@ -15,15 +15,14 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.monalisa;
 
-import java.awt.Color;
-import java.awt.Point;
-import java.util.Arrays;
-import java.util.List;
-
 import org.testng.annotations.Test;
 import org.uncommons.maths.number.ConstantGenerator;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.examples.ExamplesTestUtils;
+
+import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Unit test for the {@link PolygonColourMutation} evolutionary operator.

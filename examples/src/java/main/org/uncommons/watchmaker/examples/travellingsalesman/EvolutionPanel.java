@@ -15,19 +15,14 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.travellingsalesman;
 
-import java.awt.FlowLayout;
-import java.util.List;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.SpringLayout;
-
 import org.uncommons.maths.random.Probability;
 import org.uncommons.swing.SpringUtilities;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
 import org.uncommons.watchmaker.swing.SelectionStrategyControl;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.List;
 
 /**
  * Controls for configuring an {@link EvolutionaryTravellingSalesman} object.

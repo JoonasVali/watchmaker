@@ -15,13 +15,13 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.sudoku;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.examples.ExamplesTestUtils;
 import org.uncommons.watchmaker.framework.CandidateFactory;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Unit test for sudoku candidate solution factory.

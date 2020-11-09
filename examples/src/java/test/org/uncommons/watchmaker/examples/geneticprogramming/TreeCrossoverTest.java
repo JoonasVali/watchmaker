@@ -15,11 +15,11 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.geneticprogramming;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.examples.ExamplesTestUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Unit test for the {@link TreeCrossover} evolutionary operator used by

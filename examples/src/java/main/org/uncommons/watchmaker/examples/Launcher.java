@@ -15,11 +15,6 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples;
 
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import org.uncommons.util.reflection.ReflectionUtils;
 import org.uncommons.watchmaker.examples.biomorphs.BiomorphApplet;
 import org.uncommons.watchmaker.examples.bits.BitsExample;
@@ -28,6 +23,11 @@ import org.uncommons.watchmaker.examples.monalisa.MonaLisaApplet;
 import org.uncommons.watchmaker.examples.strings.StringsExample;
 import org.uncommons.watchmaker.examples.sudoku.SudokuApplet;
 import org.uncommons.watchmaker.examples.travellingsalesman.TravellingSalesmanApplet;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Launcher for Watchmaker example applications.

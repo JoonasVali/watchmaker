@@ -15,11 +15,11 @@
 //=============================================================================
 package org.uncommons.util.concurrent;
 
-import java.util.concurrent.ThreadFactory;
-
 import org.uncommons.util.id.IDSource;
 import org.uncommons.util.id.IntSequenceIDSource;
 import org.uncommons.util.id.StringPrefixIDSource;
+
+import java.util.concurrent.ThreadFactory;
 
 /**
  * Thread factory that creates threads for use by a

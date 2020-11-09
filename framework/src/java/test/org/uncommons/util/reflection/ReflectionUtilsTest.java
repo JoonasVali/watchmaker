@@ -15,11 +15,11 @@
 //=============================================================================
 package org.uncommons.util.reflection;
 
+import org.testng.annotations.Test;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
-
-import org.testng.annotations.Test;
 
 /**
  * Unit test for {@link ReflectionUtils}.

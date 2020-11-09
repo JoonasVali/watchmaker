@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.geneticprogramming;
 
-import java.util.List;
-
 import org.testng.annotations.Test;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.examples.ExamplesTestUtils;
 import org.uncommons.watchmaker.framework.CandidateFactory;
+
+import java.util.List;
 
 /**
  * Unit test for the {@link TreeFactory} used by the gentic programming

@@ -15,14 +15,14 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.biomorphs;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import org.testng.annotations.Test;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.examples.ExamplesTestUtils;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Unit test for random mutation operator for biomorphs.

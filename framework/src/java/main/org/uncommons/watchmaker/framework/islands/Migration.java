@@ -15,10 +15,10 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.islands;
 
+import org.uncommons.watchmaker.framework.EvaluatedCandidate;
+
 import java.util.List;
 import java.util.Random;
-
-import org.uncommons.watchmaker.framework.EvaluatedCandidate;
 
 /**
  * Strategy interface for different ways of migrating individuals between islands

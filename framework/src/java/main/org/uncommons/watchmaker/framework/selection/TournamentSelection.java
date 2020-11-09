@@ -15,15 +15,15 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.selection;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import org.uncommons.maths.number.ConstantGenerator;
 import org.uncommons.maths.number.NumberGenerator;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvaluatedCandidate;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Selection strategy that picks a pair of candidates at random and then

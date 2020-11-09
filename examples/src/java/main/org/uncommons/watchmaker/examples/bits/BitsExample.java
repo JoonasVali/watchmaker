@@ -15,9 +15,6 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.bits;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.uncommons.maths.binary.BitString;
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
@@ -30,6 +27,9 @@ import org.uncommons.watchmaker.framework.operators.BitStringMutation;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
 import org.uncommons.watchmaker.framework.termination.TargetFitness;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An implementation of the first exercise (page 31) from the book An Introduction to

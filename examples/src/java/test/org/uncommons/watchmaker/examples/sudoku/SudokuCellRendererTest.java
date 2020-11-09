@@ -15,13 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.sudoku;
 
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.table.TableCellRenderer;
-
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import javax.swing.*;
+import javax.swing.table.TableCellRenderer;
+import java.awt.*;
 
 /**
  * Unit test for the {@link SudokuCellRenderer} class.

@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.operators;
 
+import org.uncommons.maths.number.NumberGenerator;
+import org.uncommons.maths.random.Probability;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import org.uncommons.maths.number.NumberGenerator;
-import org.uncommons.maths.random.Probability;
 
 /**
  * Variable-point (fixed or random) cross-over for arbitrary lists.

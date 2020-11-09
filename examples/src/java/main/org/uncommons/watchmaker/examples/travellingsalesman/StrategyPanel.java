@@ -15,13 +15,10 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.travellingsalesman;
 
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 
 /**
  * Panel for configuring a route-finding strategy for the travelling

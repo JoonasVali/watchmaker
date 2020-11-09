@@ -15,14 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.monalisa;
 
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
+import org.uncommons.watchmaker.framework.interactive.Renderer;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
-import javax.swing.JComponent;
-
-import org.uncommons.watchmaker.framework.interactive.Renderer;
 
 /**
  * Converts a {@link BufferedImage} to a {@link JComponent} that displays that image

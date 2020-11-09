@@ -15,16 +15,15 @@
 //=============================================================================
 package org.uncommons.watchmaker.swing;
 
-import java.awt.BorderLayout;
-import java.util.Arrays;
-import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.Robot;
 import org.fest.swing.fixture.FrameFixture;
 import org.testng.annotations.Test;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Unit test for the {@link SwingConsole} class.

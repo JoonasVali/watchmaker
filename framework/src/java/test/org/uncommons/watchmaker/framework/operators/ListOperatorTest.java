@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.operators;
 
+import org.testng.annotations.Test;
+import org.uncommons.watchmaker.framework.FrameworkTestUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import org.testng.annotations.Test;
-import org.uncommons.watchmaker.framework.FrameworkTestUtils;
 
 /**
  * Unit test for the {@link ListOperator} high-order evolutionary operator.

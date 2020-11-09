@@ -15,10 +15,10 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.travellingsalesman;
 
+import org.testng.annotations.Test;
+
 import java.util.Arrays;
 import java.util.List;
-
-import org.testng.annotations.Test;
 
 /**
  * Unit test for the route evaluator used by both Travelling Salesman

@@ -17,8 +17,8 @@ package org.uncommons.watchmaker.framework.islands;
 
 import org.uncommons.watchmaker.framework.EvaluatedCandidate;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Utility methods used by unit tests for migration strategies.

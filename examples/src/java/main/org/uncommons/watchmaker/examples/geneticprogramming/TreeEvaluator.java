@@ -15,10 +15,10 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.geneticprogramming;
 
+import org.uncommons.watchmaker.framework.FitnessEvaluator;
+
 import java.util.List;
 import java.util.Map;
-
-import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
 /**
  * Fitness function for the genetic programming example application.

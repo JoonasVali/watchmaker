@@ -15,11 +15,11 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.operators;
 
+import org.uncommons.watchmaker.framework.EvolutionaryOperator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
 /**
  * Evolutionary operator that simply returns the selected candidates unaltered.

@@ -15,14 +15,14 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.biomorphs;
 
+import org.testng.annotations.Test;
+import org.uncommons.watchmaker.examples.ExamplesTestUtils;
+import org.uncommons.watchmaker.framework.EvolutionaryOperator;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.testng.annotations.Test;
-import org.uncommons.watchmaker.examples.ExamplesTestUtils;
-import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
 /**
  * Unit test for non-random mutation used by Biomorph example application.

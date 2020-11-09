@@ -15,8 +15,10 @@
 //=============================================================================
 package org.uncommons.watchmaker.swing;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import org.uncommons.watchmaker.framework.interactive.Console;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -24,13 +26,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
-import org.uncommons.watchmaker.framework.interactive.Console;
 
 /**
  * Swing-based console for interactive evolutionary algorithms.

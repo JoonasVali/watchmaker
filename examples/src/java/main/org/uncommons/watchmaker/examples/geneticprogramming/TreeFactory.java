@@ -15,10 +15,10 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.geneticprogramming;
 
-import java.util.Random;
-
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.factories.AbstractCandidateFactory;
+
+import java.util.Random;
 
 /**
  * {@link org.uncommons.watchmaker.framework.CandidateFactory} for generating

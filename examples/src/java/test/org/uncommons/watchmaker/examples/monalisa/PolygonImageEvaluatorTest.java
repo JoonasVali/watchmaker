@@ -15,15 +15,13 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.monalisa;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
+import org.testng.annotations.Test;
+import org.uncommons.maths.random.MersenneTwisterRNG;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.List;
-
-import org.testng.annotations.Test;
-import org.uncommons.maths.random.MersenneTwisterRNG;
 
 /**
  * Unit test for {@link PolygonImageEvaluator}.

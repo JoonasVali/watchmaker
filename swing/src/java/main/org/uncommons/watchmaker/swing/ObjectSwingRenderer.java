@@ -15,10 +15,9 @@
 //=============================================================================
 package org.uncommons.watchmaker.swing;
 
-import javax.swing.JComponent;
-import javax.swing.JTextArea;
-
 import org.uncommons.watchmaker.framework.interactive.Renderer;
+
+import javax.swing.*;
 
 /**
  * A default {@link Renderer} implementation that can display any object

@@ -15,12 +15,6 @@
 //=============================================================================
 package org.uncommons.watchmaker.swing.evolutionmonitor;
 
-import java.awt.BorderLayout;
-import java.math.BigDecimal;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.text.JTextComponent;
-
 import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.Robot;
 import org.fest.swing.fixture.FrameFixture;
@@ -30,6 +24,11 @@ import org.testng.annotations.Test;
 import org.uncommons.watchmaker.framework.PopulationData;
 import org.uncommons.watchmaker.framework.interactive.Renderer;
 import org.uncommons.watchmaker.swing.ObjectSwingRenderer;
+
+import javax.swing.*;
+import javax.swing.text.JTextComponent;
+import java.awt.*;
+import java.math.BigDecimal;
 
 /**
  * Unit test for the {@link FittestCandidateView} evolution monitor panel.

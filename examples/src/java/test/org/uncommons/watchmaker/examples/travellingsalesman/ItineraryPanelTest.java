@@ -15,16 +15,16 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.travellingsalesman;
 
-import java.awt.BorderLayout;
-import java.util.Collection;
-import javax.swing.JFrame;
-
 import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.Robot;
 import org.fest.swing.fixture.FrameFixture;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Collection;
 
 /**
  * Basic unit test for the {@link ItineraryPanel} class.  Makes sure that the

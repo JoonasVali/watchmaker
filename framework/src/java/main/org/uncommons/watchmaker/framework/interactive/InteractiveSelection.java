@@ -15,15 +15,15 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.interactive;
 
+import org.uncommons.util.reflection.ReflectionUtils;
+import org.uncommons.watchmaker.framework.EvaluatedCandidate;
+import org.uncommons.watchmaker.framework.SelectionStrategy;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import org.uncommons.util.reflection.ReflectionUtils;
-import org.uncommons.watchmaker.framework.EvaluatedCandidate;
-import org.uncommons.watchmaker.framework.SelectionStrategy;
 
 /**
  * Special selection strategy used for interactive evolutionary algorithms.

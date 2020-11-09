@@ -15,13 +15,13 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.sudoku;
 
+import org.uncommons.watchmaker.framework.factories.AbstractCandidateFactory;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import org.uncommons.watchmaker.framework.factories.AbstractCandidateFactory;
 
 /**
  * Factory that generates potential Sudoku solutions from a list of "givens".

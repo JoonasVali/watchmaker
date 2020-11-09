@@ -15,9 +15,7 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.monalisa;
 
-import java.awt.Color;
-import java.awt.Point;
-import java.awt.Polygon;
+import java.awt.*;
 import java.util.List;
 
 /**

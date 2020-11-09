@@ -15,14 +15,14 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.sudoku;
 
+import org.testng.annotations.Test;
+import org.uncommons.watchmaker.examples.ExamplesTestUtils;
+import org.uncommons.watchmaker.framework.EvolutionaryOperator;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.testng.annotations.Test;
-import org.uncommons.watchmaker.examples.ExamplesTestUtils;
-import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
 /**
  * Unit test for Sudoku mutation operator.

@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.swing;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-
 import org.uncommons.watchmaker.framework.TerminationCondition;
 import org.uncommons.watchmaker.framework.termination.UserAbort;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * A GUI control that allows the user to abort an evolutionary program.

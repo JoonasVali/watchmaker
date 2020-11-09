@@ -15,11 +15,11 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.geneticprogramming;
 
+import org.uncommons.watchmaker.framework.operators.AbstractCrossover;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import org.uncommons.watchmaker.framework.operators.AbstractCrossover;
 
 /**
  * Cross-over operator for the trees of {@link Node}s used in the genetic

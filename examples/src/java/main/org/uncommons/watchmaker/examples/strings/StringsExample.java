@@ -15,9 +15,6 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.strings;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionEngine;
@@ -31,6 +28,9 @@ import org.uncommons.watchmaker.framework.operators.StringCrossover;
 import org.uncommons.watchmaker.framework.operators.StringMutation;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
 import org.uncommons.watchmaker.framework.termination.TargetFitness;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Simple evolutionary algorithm that evolves a population of randomly-generated

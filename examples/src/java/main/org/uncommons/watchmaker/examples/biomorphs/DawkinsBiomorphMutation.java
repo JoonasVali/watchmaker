@@ -15,11 +15,11 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.biomorphs;
 
+import org.uncommons.watchmaker.framework.EvolutionaryOperator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
 /**
  * Non-random mutation of a population of biomorphs.  This ensures that each selected candidate

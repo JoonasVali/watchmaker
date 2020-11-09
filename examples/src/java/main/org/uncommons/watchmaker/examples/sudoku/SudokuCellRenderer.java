@@ -15,16 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.sudoku;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JTable;
+import org.uncommons.swing.ConfigurableLineBorder;
+
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
-
-import org.uncommons.swing.ConfigurableLineBorder;
+import java.awt.*;
 
 /**
  * Renders Sudoku cells in a JTable.  As well as displaying the cell value,

@@ -15,14 +15,14 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.monalisa;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import org.uncommons.maths.number.ConstantGenerator;
 import org.uncommons.maths.number.NumberGenerator;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Randomly mutates the polygons that make up an image by adding a polygon

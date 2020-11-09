@@ -15,14 +15,14 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.factories;
 
+import org.testng.annotations.Test;
+import org.uncommons.watchmaker.framework.CandidateFactory;
+import org.uncommons.watchmaker.framework.FrameworkTestUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.testng.annotations.Test;
-import org.uncommons.watchmaker.framework.CandidateFactory;
-import org.uncommons.watchmaker.framework.FrameworkTestUtils;
 
 /**
  * Unit test for the list permutation candidate factory.  Checks that it

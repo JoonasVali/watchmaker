@@ -15,14 +15,14 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.operators;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import org.uncommons.maths.number.ConstantGenerator;
 import org.uncommons.maths.number.NumberGenerator;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Mutation of individual characters in a string according to some

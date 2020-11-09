@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.selection;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.framework.EvaluatedCandidate;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Unit test for truncation selection strategy.  Ensures the

@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.util.concurrent;
 
+import org.testng.annotations.Test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import org.testng.annotations.Test;
 
 /**
  * Unit test for the general-purpose thread factory implementation.

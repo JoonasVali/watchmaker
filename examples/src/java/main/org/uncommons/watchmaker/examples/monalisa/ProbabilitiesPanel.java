@@ -15,14 +15,6 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.monalisa;
 
-import java.awt.Dimension;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-
 import org.uncommons.maths.number.ConstantGenerator;
 import org.uncommons.maths.random.GaussianGenerator;
 import org.uncommons.maths.random.Probability;
@@ -32,6 +24,12 @@ import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
 import org.uncommons.watchmaker.framework.operators.ListCrossover;
 import org.uncommons.watchmaker.framework.operators.ListOperator;
 import org.uncommons.watchmaker.swing.ProbabilityParameterControl;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Panel that displays controls for the Mona Lisa example program.  These

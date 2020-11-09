@@ -15,9 +15,9 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework;
 
-import java.util.Random;
-
 import org.uncommons.maths.random.XORShiftRNG;
+
+import java.util.Random;
 
 /**
  * Utility methods for Watchmaker Framework unit tests.  Provides

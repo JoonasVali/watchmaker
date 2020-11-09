@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.swing;
 
-import java.math.BigDecimal;
-import javax.swing.JComponent;
-import javax.swing.text.JTextComponent;
-
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.framework.interactive.Renderer;
+
+import javax.swing.*;
+import javax.swing.text.JTextComponent;
+import java.math.BigDecimal;
 
 /**
  * Unit test for the {@link ObjectSwingRenderer} class.

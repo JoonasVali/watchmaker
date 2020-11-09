@@ -15,13 +15,13 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.selection;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import org.uncommons.maths.statistics.DataSet;
 import org.uncommons.watchmaker.framework.EvaluatedCandidate;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * An alternative to straightforward fitness-proportionate selection such as that offered

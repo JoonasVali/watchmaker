@@ -15,11 +15,11 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.operators;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.framework.FrameworkTestUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Unit test for forked evolutionary schemes.

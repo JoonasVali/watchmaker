@@ -15,11 +15,11 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.sudoku;
 
+import org.uncommons.watchmaker.framework.FitnessEvaluator;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
 /**
  * {@link org.uncommons.watchmaker.framework.FitnessEvaluator} for potential Sudoku

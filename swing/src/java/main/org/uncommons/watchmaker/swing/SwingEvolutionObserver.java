@@ -1,13 +1,13 @@
 package org.uncommons.watchmaker.swing;
 
+import org.uncommons.util.concurrent.ConfigurableThreadFactory;
+import org.uncommons.watchmaker.framework.EvolutionObserver;
+import org.uncommons.watchmaker.framework.PopulationData;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
-
-import org.uncommons.util.concurrent.ConfigurableThreadFactory;
-import org.uncommons.watchmaker.framework.EvolutionObserver;
-import org.uncommons.watchmaker.framework.PopulationData;
 
 /**
  * Limits the update rate of a Swing-based {@link EvolutionObserver}.

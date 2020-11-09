@@ -15,13 +15,13 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.operators;
 
+import org.uncommons.maths.number.NumberGenerator;
+import org.uncommons.maths.random.Probability;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import org.uncommons.maths.number.NumberGenerator;
-import org.uncommons.maths.random.Probability;
 
 /**
  * Cross-over with a configurable number of points (fixed or random) for

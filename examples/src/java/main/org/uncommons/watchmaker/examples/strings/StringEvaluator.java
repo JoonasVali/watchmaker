@@ -15,9 +15,9 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.strings;
 
-import java.util.List;
-
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
+
+import java.util.List;
 
 /**
  * Evaluates strings and assigns a fitness score based on how many characters

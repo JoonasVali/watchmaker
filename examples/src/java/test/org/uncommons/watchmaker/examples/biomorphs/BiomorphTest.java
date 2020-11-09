@@ -15,9 +15,9 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.biomorphs;
 
-import java.util.Arrays;
-
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
 
 /**
  * Some basic sanity checks for the {@link Biomorph} type used in the

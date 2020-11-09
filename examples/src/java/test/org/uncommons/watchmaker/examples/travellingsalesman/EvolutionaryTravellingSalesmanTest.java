@@ -15,11 +15,11 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.travellingsalesman;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.framework.selection.TruncationSelection;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Unit test for the evolutionary approach to the travelling salesman problem.

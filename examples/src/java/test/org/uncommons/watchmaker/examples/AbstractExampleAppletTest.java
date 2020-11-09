@@ -15,12 +15,6 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
-
 import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.Robot;
 import org.fest.swing.core.matcher.FrameMatcher;
@@ -28,6 +22,9 @@ import org.fest.swing.fixture.FrameFixture;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Unit test for the {@link AbstractExampleAppletTest} class.

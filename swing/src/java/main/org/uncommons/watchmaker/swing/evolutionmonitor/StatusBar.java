@@ -15,15 +15,11 @@
 //=============================================================================
 package org.uncommons.watchmaker.swing.evolutionmonitor;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
-
 import org.uncommons.watchmaker.framework.PopulationData;
 import org.uncommons.watchmaker.framework.islands.IslandEvolutionObserver;
+
+import javax.swing.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Status bar component for the evolution monitor.  Can also be used separately to

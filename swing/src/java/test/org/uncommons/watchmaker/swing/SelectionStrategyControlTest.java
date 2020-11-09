@@ -15,16 +15,16 @@
 //=============================================================================
 package org.uncommons.watchmaker.swing;
 
-import java.util.LinkedList;
-import java.util.List;
-import javax.swing.JComboBox;
-
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.framework.EvaluatedCandidate;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
 import org.uncommons.watchmaker.framework.selection.RankSelection;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
 import org.uncommons.watchmaker.framework.selection.TruncationSelection;
+
+import javax.swing.*;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Unit test for the {@link SelectionStrategyControl}.

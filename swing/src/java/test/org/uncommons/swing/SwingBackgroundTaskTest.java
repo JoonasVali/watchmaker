@@ -15,10 +15,10 @@
 //=============================================================================
 package org.uncommons.swing;
 
-import javax.swing.SwingUtilities;
-
 import org.testng.Reporter;
 import org.testng.annotations.Test;
+
+import javax.swing.*;
 
 /**
  * Unit test for {@link SwingBackgroundTask}.  Ensures code is

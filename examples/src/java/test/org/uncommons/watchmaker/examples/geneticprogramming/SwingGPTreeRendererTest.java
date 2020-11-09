@@ -15,10 +15,10 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.geneticprogramming;
 
-import java.awt.Dimension;
-import javax.swing.JComponent;
-
 import org.testng.annotations.Test;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Basic unit test for the {@link SwingGPTreeRenderer} class.

@@ -15,15 +15,15 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework;
 
-import java.util.concurrent.Future;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
 import org.uncommons.util.concurrent.ConfigurableThreadFactory;
 import org.uncommons.util.id.IDSource;
 import org.uncommons.util.id.IntSequenceIDSource;
 import org.uncommons.util.id.StringPrefixIDSource;
+
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This is the class that actually runs the fitness evaluation tasks created by a

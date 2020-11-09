@@ -15,10 +15,8 @@
 //=============================================================================
 package org.uncommons.swing;
 
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Insets;
 import javax.swing.border.Border;
+import java.awt.*;
 
 /**
  * Border class that allows each of the four sides of the border to be enabled

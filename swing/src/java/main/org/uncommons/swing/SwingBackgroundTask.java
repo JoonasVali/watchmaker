@@ -15,10 +15,9 @@
 //=============================================================================
 package org.uncommons.swing;
 
+import javax.swing.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 /**
  * A task that is executed on a background thread and then updates

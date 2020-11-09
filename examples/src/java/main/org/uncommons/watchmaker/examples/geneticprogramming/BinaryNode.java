@@ -15,11 +15,11 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.geneticprogramming;
 
-import java.lang.reflect.Constructor;
-import java.util.Random;
-
 import org.uncommons.maths.random.Probability;
 import org.uncommons.util.reflection.ReflectionUtils;
+
+import java.lang.reflect.Constructor;
+import java.util.Random;
 
 /**
  * Convenient base class for {@link Node}s that have two sub-trees.

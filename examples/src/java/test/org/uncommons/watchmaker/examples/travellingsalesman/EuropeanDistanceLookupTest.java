@@ -15,11 +15,11 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.travellingsalesman;
 
+import org.testng.annotations.Test;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-
-import org.testng.annotations.Test;
 
 /**
  * Unit test for the distance look-ups for European cities that is used by

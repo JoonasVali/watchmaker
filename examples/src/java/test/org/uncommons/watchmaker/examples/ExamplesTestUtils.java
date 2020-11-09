@@ -15,9 +15,9 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples;
 
-import java.util.Random;
-
 import org.uncommons.maths.random.XORShiftRNG;
+
+import java.util.Random;
 
 /**
  * Utility methods for Watchmaker examples unit tests.  Provides

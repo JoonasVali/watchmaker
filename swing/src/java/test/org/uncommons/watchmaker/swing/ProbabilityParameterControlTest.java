@@ -15,10 +15,6 @@
 //=============================================================================
 package org.uncommons.watchmaker.swing;
 
-import java.awt.BorderLayout;
-import javax.swing.JFrame;
-import javax.swing.JSlider;
-
 import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.Robot;
 import org.fest.swing.fixture.FrameFixture;
@@ -26,6 +22,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.uncommons.maths.random.Probability;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Unit test for the {@link ProbabilityParameterControl} component.

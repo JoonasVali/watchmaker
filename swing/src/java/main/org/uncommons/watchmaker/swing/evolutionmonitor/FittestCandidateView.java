@@ -15,17 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.swing.evolutionmonitor;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
-
 import org.uncommons.watchmaker.framework.PopulationData;
 import org.uncommons.watchmaker.framework.interactive.Renderer;
 import org.uncommons.watchmaker.framework.islands.IslandEvolutionObserver;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * {@link EvolutionMonitor} view for displaying a graphical representation

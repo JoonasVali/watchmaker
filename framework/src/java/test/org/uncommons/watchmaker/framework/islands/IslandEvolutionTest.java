@@ -15,8 +15,6 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.islands;
 
-import java.util.List;
-
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
 import org.uncommons.watchmaker.framework.FrameworkTestUtils;
@@ -26,6 +24,8 @@ import org.uncommons.watchmaker.framework.operators.IntegerAdjuster;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
 import org.uncommons.watchmaker.framework.termination.ElapsedTime;
 import org.uncommons.watchmaker.framework.termination.GenerationCount;
+
+import java.util.List;
 
 /**
  * Unit test for the {@link IslandEvolution} class.

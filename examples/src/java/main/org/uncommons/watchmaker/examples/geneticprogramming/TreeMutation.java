@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.geneticprogramming;
 
+import org.uncommons.maths.random.Probability;
+import org.uncommons.watchmaker.framework.EvolutionaryOperator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import org.uncommons.maths.random.Probability;
-import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
 /**
  * Mutation operator for the trees of {@link Node}s used in the genetic

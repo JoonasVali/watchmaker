@@ -15,18 +15,16 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.travellingsalesman;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
+import org.uncommons.swing.SwingBackgroundTask;
+import org.uncommons.watchmaker.examples.AbstractExampleApplet;
+import org.uncommons.watchmaker.framework.FitnessEvaluator;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import org.uncommons.swing.SwingBackgroundTask;
-import org.uncommons.watchmaker.examples.AbstractExampleApplet;
-import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
 /**
  * Applet for comparing evolutionary and brute force approaches to the

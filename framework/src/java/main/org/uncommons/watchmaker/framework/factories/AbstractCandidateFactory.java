@@ -15,13 +15,13 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.factories;
 
+import org.uncommons.watchmaker.framework.CandidateFactory;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import org.uncommons.watchmaker.framework.CandidateFactory;
 
 /**
  * Convenient base class for implementations of

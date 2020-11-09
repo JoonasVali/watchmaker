@@ -15,9 +15,9 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.interactive;
 
-import java.lang.reflect.Method;
-
 import org.uncommons.util.reflection.ReflectionUtils;
+
+import java.lang.reflect.Method;
 
 /**
  * Adapter class for chaining together two renderers in series to provide

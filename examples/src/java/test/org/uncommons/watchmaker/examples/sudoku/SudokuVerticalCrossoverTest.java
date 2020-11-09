@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.sudoku;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.examples.ExamplesTestUtils;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Unit test for Sudoku cross-over operator.

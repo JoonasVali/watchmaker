@@ -15,11 +15,11 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework;
 
+import org.uncommons.maths.statistics.DataSet;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.uncommons.maths.statistics.DataSet;
 
 /**
  * Utility methods used by different evolution implementations.  This class exists to

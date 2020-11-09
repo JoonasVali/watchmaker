@@ -15,13 +15,13 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.selection;
 
+import org.uncommons.watchmaker.framework.EvaluatedCandidate;
+import org.uncommons.watchmaker.framework.SelectionStrategy;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
-import org.uncommons.watchmaker.framework.EvaluatedCandidate;
-import org.uncommons.watchmaker.framework.SelectionStrategy;
 
 /**
  * <p>Implements selection of <i>n</i> candidates from a population by selecting

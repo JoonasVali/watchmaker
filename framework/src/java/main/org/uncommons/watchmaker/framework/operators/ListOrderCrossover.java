@@ -15,15 +15,15 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.operators;
 
+import org.uncommons.maths.number.ConstantGenerator;
+import org.uncommons.maths.number.NumberGenerator;
+import org.uncommons.maths.random.Probability;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
-import org.uncommons.maths.number.ConstantGenerator;
-import org.uncommons.maths.number.NumberGenerator;
-import org.uncommons.maths.random.Probability;
 
 /**
  * Implements ordered cross-over between arbitrary lists.  The algorithm is

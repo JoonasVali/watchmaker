@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.sudoku;
 
+import org.uncommons.maths.number.NumberGenerator;
+import org.uncommons.watchmaker.framework.operators.AbstractCrossover;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import org.uncommons.maths.number.NumberGenerator;
-import org.uncommons.watchmaker.framework.operators.AbstractCrossover;
 
 /**
  * Performs cross-over between Sudoku grids by re-combining rows from parents

@@ -15,13 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.monalisa;
 
-import java.awt.Dimension;
-import java.awt.Point;
-import java.util.List;
-
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.examples.ExamplesTestUtils;
 import org.uncommons.watchmaker.framework.CandidateFactory;
+
+import java.awt.*;
+import java.util.List;
 
 /**
  * Unit test for {@link PolygonImageFactory}.

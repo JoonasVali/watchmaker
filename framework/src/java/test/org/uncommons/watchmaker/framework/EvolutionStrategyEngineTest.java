@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.framework.factories.StubIntegerFactory;
 import org.uncommons.watchmaker.framework.operators.IntegerAdjuster;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Unit test for {@link EvolutionStrategyEngine} class.

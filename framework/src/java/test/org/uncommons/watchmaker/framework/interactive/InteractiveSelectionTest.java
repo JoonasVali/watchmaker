@@ -15,14 +15,14 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.interactive;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.framework.EvaluatedCandidate;
 import org.uncommons.watchmaker.framework.FrameworkTestUtils;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Unit test for user-guided selection strategy.

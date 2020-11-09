@@ -15,13 +15,10 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.biomorphs;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import javax.swing.JComponent;
-
 import org.uncommons.watchmaker.framework.interactive.Renderer;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Renders Biomorphs as Swing components.

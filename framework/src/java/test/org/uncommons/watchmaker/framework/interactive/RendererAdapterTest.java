@@ -15,9 +15,9 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.interactive;
 
-import java.util.Date;
-
 import org.testng.annotations.Test;
+
+import java.util.Date;
 
 /**
  * Unit test to ensure that renderer chaining works correctly.

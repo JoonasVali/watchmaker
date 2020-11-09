@@ -15,10 +15,10 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.bits;
 
-import java.util.List;
-
 import org.uncommons.maths.binary.BitString;
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
+
+import java.util.List;
 
 /**
  * A fitness evaluator that simply counts the number of ones in a bit

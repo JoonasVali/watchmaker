@@ -15,9 +15,6 @@
 //=============================================================================
 package org.uncommons.watchmaker.swing.evolutionmonitor;
 
-import java.awt.Dialog;
-import java.awt.Frame;
-
 import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.Robot;
 import org.fest.swing.core.matcher.DialogMatcher;
@@ -27,6 +24,8 @@ import org.fest.swing.fixture.FrameFixture;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.awt.*;
 
 /**
  * Basic unit test for the {@link EvolutionMonitor} component.

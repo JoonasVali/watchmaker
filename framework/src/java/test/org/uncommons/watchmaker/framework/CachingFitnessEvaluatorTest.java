@@ -15,10 +15,10 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework;
 
+import org.testng.annotations.Test;
+
 import java.util.Collections;
 import java.util.List;
-
-import org.testng.annotations.Test;
 
 /**
  * Unit test for the {@link CachingFitnessEvaluator} wrapper.

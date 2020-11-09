@@ -15,7 +15,7 @@
 //=============================================================================
 package org.uncommons.watchmaker.swing;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 /**
  * Common interface for GUI controls for evolutionary programs.

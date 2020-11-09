@@ -15,14 +15,14 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.factories;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.testng.annotations.Test;
 import org.uncommons.maths.binary.BitString;
 import org.uncommons.watchmaker.framework.CandidateFactory;
 import org.uncommons.watchmaker.framework.FrameworkTestUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Unit test for bit string candidate factory.

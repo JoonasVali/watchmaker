@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework;
 
+import org.uncommons.watchmaker.framework.interactive.InteractiveSelection;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
-import org.uncommons.watchmaker.framework.interactive.InteractiveSelection;
 
 /**
  * <p>This class implements a general-purpose generational evolutionary algorithm.

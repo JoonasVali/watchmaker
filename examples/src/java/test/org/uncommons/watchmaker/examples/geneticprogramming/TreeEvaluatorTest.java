@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.geneticprogramming;
 
+import org.testng.annotations.Test;
+import org.uncommons.watchmaker.framework.FitnessEvaluator;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.testng.annotations.Test;
-import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
 /**
  * Unit test for the {@link FitnessEvaluator} used

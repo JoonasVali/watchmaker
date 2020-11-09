@@ -15,9 +15,9 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.biomorphs;
 
-import java.util.Random;
-
 import org.uncommons.watchmaker.framework.factories.AbstractCandidateFactory;
+
+import java.util.Random;
 
 /**
  * Candidate factory for creating random biomorphs.

@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.islands;
 
+import org.uncommons.watchmaker.framework.EvaluatedCandidate;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import org.uncommons.watchmaker.framework.EvaluatedCandidate;
 
 /**
  * Migrates a fixed number of individuals from each island to the adjacent island.

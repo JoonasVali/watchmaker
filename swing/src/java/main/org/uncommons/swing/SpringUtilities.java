@@ -15,10 +15,8 @@
 //=============================================================================
 package org.uncommons.swing;
 
-import java.awt.Component;
-import java.awt.Container;
-import javax.swing.Spring;
-import javax.swing.SpringLayout;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Utility methods for creating form-style or grid-style layouts with SpringLayout.

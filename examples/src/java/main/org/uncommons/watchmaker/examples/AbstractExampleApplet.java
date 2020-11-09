@@ -15,13 +15,9 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples;
 
-import java.awt.Container;
+import javax.swing.*;
+import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
-import javax.swing.JApplet;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 /**
  * Base class for examples that run as applets.

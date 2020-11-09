@@ -15,12 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.islands;
 
-import java.util.List;
-import java.util.concurrent.Callable;
-
 import org.uncommons.watchmaker.framework.EvaluatedCandidate;
 import org.uncommons.watchmaker.framework.EvolutionEngine;
 import org.uncommons.watchmaker.framework.TerminationCondition;
+
+import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
  * @author Daniel Dyer

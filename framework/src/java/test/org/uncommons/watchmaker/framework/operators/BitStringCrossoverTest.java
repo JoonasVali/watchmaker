@@ -15,9 +15,6 @@
 //=============================================================================
 package org.uncommons.watchmaker.framework.operators;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.testng.annotations.Test;
 import org.uncommons.maths.binary.BitString;
 import org.uncommons.maths.number.ConstantGenerator;
@@ -25,6 +22,9 @@ import org.uncommons.watchmaker.framework.CandidateFactory;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 import org.uncommons.watchmaker.framework.FrameworkTestUtils;
 import org.uncommons.watchmaker.framework.factories.BitStringFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Unit test for cross-over applied to bit strings.

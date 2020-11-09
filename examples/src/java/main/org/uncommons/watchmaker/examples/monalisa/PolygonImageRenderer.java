@@ -15,15 +15,12 @@
 //=============================================================================
 package org.uncommons.watchmaker.examples.monalisa;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import org.uncommons.watchmaker.framework.interactive.Renderer;
+
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.List;
-
-import org.uncommons.watchmaker.framework.interactive.Renderer;
 
 /**
  * Renders a polygon-based image to a {@link BufferedImage}.  For efficiency reasons, this

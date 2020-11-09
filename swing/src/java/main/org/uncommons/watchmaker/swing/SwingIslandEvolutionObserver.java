@@ -1,14 +1,14 @@
 package org.uncommons.watchmaker.swing;
 
+import org.uncommons.util.concurrent.ConfigurableThreadFactory;
+import org.uncommons.watchmaker.framework.PopulationData;
+import org.uncommons.watchmaker.framework.islands.IslandEvolutionObserver;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
-
-import org.uncommons.util.concurrent.ConfigurableThreadFactory;
-import org.uncommons.watchmaker.framework.PopulationData;
-import org.uncommons.watchmaker.framework.islands.IslandEvolutionObserver;
 
 /**
  * Limits the update rate of a Swing-based {@link IslandEvolutionObserver}.
