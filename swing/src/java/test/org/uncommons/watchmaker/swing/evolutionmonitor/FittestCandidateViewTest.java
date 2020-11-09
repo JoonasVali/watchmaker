@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.text.JTextComponent;
+
 import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.Robot;
 import org.fest.swing.fixture.FrameFixture;
@@ -32,82 +33,78 @@ import org.uncommons.watchmaker.swing.ObjectSwingRenderer;
 
 /**
  * Unit test for the {@link FittestCandidateView} evolution monitor panel.
+ *
  * @author Daniel Dyer
  */
-public class FittestCandidateViewTest
-{
-    private Robot robot;
+public class FittestCandidateViewTest {
+  private Robot robot;
 
-    @BeforeMethod
-    public void prepare()
-    {
-        robot = BasicRobot.robotWithNewAwtHierarchy();
-    }
+  @BeforeMethod
+  public void prepare() {
+    robot = BasicRobot.robotWithNewAwtHierarchy();
+  }
 
 
-    @AfterMethod
-    public void cleanUp()
-    {
-        robot.cleanUp();
-        robot = null;
-    }
-
-    
-    @Test(groups = "display-required")
-    public void testUpdate()
-    {
-        Renderer<Object, JComponent> renderer = new ObjectSwingRenderer();
-        FittestCandidateView<BigDecimal> view = new FittestCandidateView<BigDecimal>(renderer);
-        JFrame frame = new JFrame();
-        frame.add(view, BorderLayout.CENTER);
-        FrameFixture frameFixture = new FrameFixture(robot, frame);
-        frame.setSize(300, 300);
-        frame.validate();
-        frame.setVisible(true);
-
-        view.populationUpdate(new PopulationData<BigDecimal>(BigDecimal.TEN, 10, 5, 2, true, 5, 0, 1, 100));
-        robot.waitForIdle();
-
-        // Check displayed fitness.
-        String fitnessText = frameFixture.label("FitnessLabel").text();
-        assert fitnessText.equals("10.0") : "Wrong fitness score displayed: " + fitnessText;
-
-        // Check rendered candidate.
-        frameFixture.textBox().requireNotEditable();
-        String text = frameFixture.textBox().component().getText();
-        assert text.equals("10") : "Candidate rendered incorrectly.";
-    }
+  @AfterMethod
+  public void cleanUp() {
+    robot.cleanUp();
+    robot = null;
+  }
 
 
-    /**
-     * If the view is updated with the same candidate it is already displaying, it should
-     * avoid the expense of re-rendering it.
-     */
-    @Test(groups = "display-required",
-          dependsOnMethods = "testUpdate")
-    public void testUpdateSameCandidate()
-    {
-        Renderer<Object, JComponent> renderer = new ObjectSwingRenderer();
-        FittestCandidateView<BigDecimal> view = new FittestCandidateView<BigDecimal>(renderer);
-        JFrame frame = new JFrame();
-        frame.add(view, BorderLayout.CENTER);
-        FrameFixture frameFixture = new FrameFixture(robot, frame);
-        frame.setSize(300, 300);
-        frame.validate();
-        frame.setVisible(true);
+  @Test(groups = "display-required")
+  public void testUpdate() {
+    Renderer<Object, JComponent> renderer = new ObjectSwingRenderer();
+    FittestCandidateView<BigDecimal> view = new FittestCandidateView<BigDecimal>(renderer);
+    JFrame frame = new JFrame();
+    frame.add(view, BorderLayout.CENTER);
+    FrameFixture frameFixture = new FrameFixture(robot, frame);
+    frame.setSize(300, 300);
+    frame.validate();
+    frame.setVisible(true);
 
-        PopulationData<BigDecimal> data1 = new PopulationData<BigDecimal>(BigDecimal.TEN, 10, 5, 2, true, 5, 0, 1, 100);
-        // Render the first time.
-        view.populationUpdate(data1);
-        robot.waitForIdle();
-        JTextComponent component1 = frameFixture.textBox().component();
+    view.populationUpdate(new PopulationData<BigDecimal>(BigDecimal.TEN, 10, 5, 2, true, 5, 0, 1, 100));
+    robot.waitForIdle();
 
-        // Render the same candidate for the second generation.
-        PopulationData<BigDecimal> data2 = new PopulationData<BigDecimal>(BigDecimal.TEN, 10, 5, 2, true, 5, 0, 2, 100);
-        view.populationUpdate(data2);
-        robot.waitForIdle();
-        JTextComponent component2 = frameFixture.textBox().component();
+    // Check displayed fitness.
+    String fitnessText = frameFixture.label("FitnessLabel").text();
+    assert fitnessText.equals("10.0") : "Wrong fitness score displayed: " + fitnessText;
 
-        assert component1 == component2 : "Rendered component should be the same.";
-    }
+    // Check rendered candidate.
+    frameFixture.textBox().requireNotEditable();
+    String text = frameFixture.textBox().component().getText();
+    assert text.equals("10") : "Candidate rendered incorrectly.";
+  }
+
+
+  /**
+   * If the view is updated with the same candidate it is already displaying, it should
+   * avoid the expense of re-rendering it.
+   */
+  @Test(groups = "display-required",
+      dependsOnMethods = "testUpdate")
+  public void testUpdateSameCandidate() {
+    Renderer<Object, JComponent> renderer = new ObjectSwingRenderer();
+    FittestCandidateView<BigDecimal> view = new FittestCandidateView<BigDecimal>(renderer);
+    JFrame frame = new JFrame();
+    frame.add(view, BorderLayout.CENTER);
+    FrameFixture frameFixture = new FrameFixture(robot, frame);
+    frame.setSize(300, 300);
+    frame.validate();
+    frame.setVisible(true);
+
+    PopulationData<BigDecimal> data1 = new PopulationData<BigDecimal>(BigDecimal.TEN, 10, 5, 2, true, 5, 0, 1, 100);
+    // Render the first time.
+    view.populationUpdate(data1);
+    robot.waitForIdle();
+    JTextComponent component1 = frameFixture.textBox().component();
+
+    // Render the same candidate for the second generation.
+    PopulationData<BigDecimal> data2 = new PopulationData<BigDecimal>(BigDecimal.TEN, 10, 5, 2, true, 5, 0, 2, 100);
+    view.populationUpdate(data2);
+    robot.waitForIdle();
+    JTextComponent component2 = frameFixture.textBox().component();
+
+    assert component1 == component2 : "Rendered component should be the same.";
+  }
 }

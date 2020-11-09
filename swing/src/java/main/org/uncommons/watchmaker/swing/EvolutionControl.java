@@ -19,24 +19,25 @@ import javax.swing.JComponent;
 
 /**
  * Common interface for GUI controls for evolutionary programs.
+ *
  * @author Daniel Dyer
  */
-public interface EvolutionControl
-{
-    /**
-     * @return The GUI component used by this control.
-     */
-    JComponent getControl();
+public interface EvolutionControl {
+  /**
+   * @return The GUI component used by this control.
+   */
+  JComponent getControl();
 
-    /**
-     * Resets the control to its initial configuration.
-     */
-    void reset();
+  /**
+   * Resets the control to its initial configuration.
+   */
+  void reset();
 
-    /**
-     * Provides a textual description of the purpose of the control.  This may be displayed
-     * somewhere on the GUI component (typically as tooltip text).
-     * @param description The description of the control.
-     */
-    void setDescription(String description);
+  /**
+   * Provides a textual description of the purpose of the control.  This may be displayed
+   * somewhere on the GUI component (typically as tooltip text).
+   *
+   * @param description The description of the control.
+   */
+  void setDescription(String description);
 }

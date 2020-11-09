@@ -19,23 +19,22 @@ import org.testng.annotations.Test;
 
 /**
  * Unit test for evolution abort control.
+ *
  * @author Daniel Dyer
  */
-public class AbortControlTest
-{
-    /**
-     * Make sure that clicking the button causes the termination condition
-     * to be satisfied.
-     */
-    @Test
-    public void testAbort()
-    {
-        AbortControl control = new AbortControl();
-        assert !control.getTerminationCondition().shouldTerminate(null) : "Abort condition should be false.";
-        control.getControl().doClick(); // Should fire an event that changes the condition.
-        assert control.getTerminationCondition().shouldTerminate(null) : "Abort condition should be true.";
-        // Finally, ensure that reset works as expected.
-        control.reset();
-        assert !control.getTerminationCondition().shouldTerminate(null) : "Abort condition should be false.";
-    }
+public class AbortControlTest {
+  /**
+   * Make sure that clicking the button causes the termination condition
+   * to be satisfied.
+   */
+  @Test
+  public void testAbort() {
+    AbortControl control = new AbortControl();
+    assert !control.getTerminationCondition().shouldTerminate(null) : "Abort condition should be false.";
+    control.getControl().doClick(); // Should fire an event that changes the condition.
+    assert control.getTerminationCondition().shouldTerminate(null) : "Abort condition should be true.";
+    // Finally, ensure that reset works as expected.
+    control.reset();
+    assert !control.getTerminationCondition().shouldTerminate(null) : "Abort condition should be false.";
+  }
 }

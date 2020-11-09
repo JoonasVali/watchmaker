@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
+
 import org.uncommons.watchmaker.framework.PopulationData;
 import org.uncommons.watchmaker.framework.interactive.Renderer;
 import org.uncommons.watchmaker.framework.islands.IslandEvolutionObserver;
@@ -30,72 +31,67 @@ import org.uncommons.watchmaker.framework.islands.IslandEvolutionObserver;
  * {@link EvolutionMonitor} view for displaying a graphical representation
  * of the fittest candidate found so far.  This allows us to monitor the
  * progress of an evolutionary algorithm.
+ *
  * @param <T> The type of the evolved entity displayed by this component.
  * @author Daniel Dyer
  */
-class FittestCandidateView<T> extends JPanel implements IslandEvolutionObserver<T>
-{
-    private static final Font BIG_FONT = new Font("Dialog", Font.BOLD, 16);
+class FittestCandidateView<T> extends JPanel implements IslandEvolutionObserver<T> {
+  private static final Font BIG_FONT = new Font("Dialog", Font.BOLD, 16);
 
-    private final Renderer<? super T, JComponent> renderer;
-    private final JLabel fitnessLabel = new JLabel("N/A", JLabel.CENTER);
-    private final JScrollPane scroller = new JScrollPane();
+  private final Renderer<? super T, JComponent> renderer;
+  private final JLabel fitnessLabel = new JLabel("N/A", JLabel.CENTER);
+  private final JScrollPane scroller = new JScrollPane();
 
-    private T fittestCandidate = null;
+  private T fittestCandidate = null;
 
-    /**
-     * Creates a Swing view that uses the specified renderer to display
-     * evolved entities.
-     * @param renderer A renderer that convert evolved entities of the type
-     * recognised by this view into Swing components.
-     */
-    FittestCandidateView(Renderer<? super T, JComponent> renderer)
-    {
-        super(new BorderLayout(0, 10));
-        this.renderer = renderer;
+  /**
+   * Creates a Swing view that uses the specified renderer to display
+   * evolved entities.
+   *
+   * @param renderer A renderer that convert evolved entities of the type
+   *                 recognised by this view into Swing components.
+   */
+  FittestCandidateView(Renderer<? super T, JComponent> renderer) {
+    super(new BorderLayout(0, 10));
+    this.renderer = renderer;
 
-        JPanel header = new JPanel(new BorderLayout());
-        JLabel label = new JLabel("Fitness", JLabel.CENTER);
-        header.add(label, BorderLayout.NORTH);
-        fitnessLabel.setFont(BIG_FONT);
-        header.add(fitnessLabel, BorderLayout.CENTER);
-        add(header, BorderLayout.NORTH);
+    JPanel header = new JPanel(new BorderLayout());
+    JLabel label = new JLabel("Fitness", JLabel.CENTER);
+    header.add(label, BorderLayout.NORTH);
+    fitnessLabel.setFont(BIG_FONT);
+    header.add(fitnessLabel, BorderLayout.CENTER);
+    add(header, BorderLayout.NORTH);
 
-        scroller.setBackground(null);
-        scroller.getViewport().setBackground(null);
-        scroller.setBorder(null);
-        add(scroller, BorderLayout.CENTER);
+    scroller.setBackground(null);
+    scroller.getViewport().setBackground(null);
+    scroller.setBorder(null);
+    add(scroller, BorderLayout.CENTER);
 
-        // Set names for easier identification in unit tests.
-        fitnessLabel.setName("FitnessLabel");
-    }
-
-
-    public void populationUpdate(final PopulationData<? extends T> populationData)
-    {
-        SwingUtilities.invokeLater(new Runnable()
-        {
-            public void run()
-            {
-                fitnessLabel.setText(String.valueOf(populationData.getBestCandidateFitness()));
-                // If the fittest candidate is already displayed (because it was the fittest
-                // candidate in the previous generation), don't incur the expense of rendering
-                // it again.  Note that we still have to update the fitness score label above
-                // because the fitness may be different even if the candidate isn't (in the
-                // case where fitness is evaluated against other members of the population).
-                if (populationData.getBestCandidate() != fittestCandidate)
-                {
-                    fittestCandidate = populationData.getBestCandidate();
-                    JComponent renderedCandidate = renderer.render(fittestCandidate);
-                    scroller.setViewportView(renderedCandidate);
-                }
-            }
-        });
-    }
+    // Set names for easier identification in unit tests.
+    fitnessLabel.setName("FitnessLabel");
+  }
 
 
-    public void islandPopulationUpdate(int islandIndex, final PopulationData<? extends T> populationData)
-    {
-        // Do nothing.
-    }
+  public void populationUpdate(final PopulationData<? extends T> populationData) {
+    SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        fitnessLabel.setText(String.valueOf(populationData.getBestCandidateFitness()));
+        // If the fittest candidate is already displayed (because it was the fittest
+        // candidate in the previous generation), don't incur the expense of rendering
+        // it again.  Note that we still have to update the fitness score label above
+        // because the fitness may be different even if the candidate isn't (in the
+        // case where fitness is evaluated against other members of the population).
+        if (populationData.getBestCandidate() != fittestCandidate) {
+          fittestCandidate = populationData.getBestCandidate();
+          JComponent renderedCandidate = renderer.render(fittestCandidate);
+          scroller.setViewportView(renderedCandidate);
+        }
+      }
+    });
+  }
+
+
+  public void islandPopulationUpdate(int islandIndex, final PopulationData<? extends T> populationData) {
+    // Do nothing.
+  }
 }

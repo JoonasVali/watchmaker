@@ -6,9 +6,9 @@
 		<artifactId>oss-parent</artifactId>
 		<version>7</version>
 	</parent>
-	<groupId>org.uncommons.watchmaker</groupId>
+	<groupId>com.github.joonasvali.watchmaker</groupId>
 	<artifactId>watchmaker</artifactId>
-	<version>0.7.2</version>
+	<version>0.7.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>watchmaker</name>
 	<description>Watchmaker Framework - Root Project</description>
@@ -23,9 +23,9 @@
 	</licenses>
 	
 	<scm>
-		<url>https://github.com/dwdyer/watchmaker</url>
-		<connection>scm:git://github.com/dwdyer/watchmaker.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:dwdyer/watchmaker.git</developerConnection>
+		<url>https://github.com/JoonasVali/watchmaker</url>
+		<connection>scm:git://github.com/JoonasVali/watchmaker.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:JoonasVali/watchmaker.git</developerConnection>
 	</scm>
 	
 	<developers>
@@ -39,6 +39,13 @@
 		<developer>
 			<id>cowwoc</id>
 			<name>Gili Tzabari</name>
+			<roles>
+				<role>contributor</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>JoonasVali</id>
+			<name>Joonas Vali</name>
 			<roles>
 				<role>contributor</role>
 			</roles>
@@ -57,8 +64,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>

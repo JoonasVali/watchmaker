@@ -18,21 +18,21 @@ package org.uncommons.watchmaker.swing;
 import java.math.BigDecimal;
 import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
+
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.framework.interactive.Renderer;
 
 /**
  * Unit test for the {@link ObjectSwingRenderer} class.
+ *
  * @author Daniel Dyer
  */
-public class ObjectSwingRendererTest
-{
-    @Test
-    public void testRendering()
-    {
-        Renderer<Object, JComponent> renderer = new ObjectSwingRenderer();
-        JTextComponent textComponent = (JTextComponent) renderer.render(BigDecimal.TEN);
-        assert textComponent.getText().equals("10") : "Wrong text rendered.";
-        assert !textComponent.isEditable() : "Text component should not be editable.";
-    }
+public class ObjectSwingRendererTest {
+  @Test
+  public void testRendering() {
+    Renderer<Object, JComponent> renderer = new ObjectSwingRenderer();
+    JTextComponent textComponent = (JTextComponent) renderer.render(BigDecimal.TEN);
+    assert textComponent.getText().equals("10") : "Wrong text rendered.";
+    assert !textComponent.isEditable() : "Text component should not be editable.";
+  }
 }

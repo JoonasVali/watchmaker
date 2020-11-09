@@ -17,6 +17,7 @@ package org.uncommons.watchmaker.swing;
 
 import javax.swing.JComponent;
 import javax.swing.JTextArea;
+
 import org.uncommons.watchmaker.framework.interactive.Renderer;
 
 /**
@@ -24,23 +25,23 @@ import org.uncommons.watchmaker.framework.interactive.Renderer;
  * as a Swing component.  It simply converts the object into its String
  * representation (via the {@link Object#toString()} method) and shows
  * that in a text area.
+ *
  * @author Daniel Dyer
  */
-public class ObjectSwingRenderer implements Renderer<Object, JComponent>
-{
-    /**
-     * Calls {@link Object#toString()} on the specified entity and creates
-     * a {@link JTextArea} containing that text.
-     * @param entity The evolved entity to render.
-     * @return A text area containing the string representation of the entity.
-     */
-    public JComponent render(Object entity)
-    {
-        JTextArea text = new JTextArea(entity.toString());
-        text.setEditable(false);
-        text.setBackground(null);
-        text.setLineWrap(true);
-        text.setWrapStyleWord(true);
-        return text;
-    }
+public class ObjectSwingRenderer implements Renderer<Object, JComponent> {
+  /**
+   * Calls {@link Object#toString()} on the specified entity and creates
+   * a {@link JTextArea} containing that text.
+   *
+   * @param entity The evolved entity to render.
+   * @return A text area containing the string representation of the entity.
+   */
+  public JComponent render(Object entity) {
+    JTextArea text = new JTextArea(entity.toString());
+    text.setEditable(false);
+    text.setBackground(null);
+    text.setLineWrap(true);
+    text.setWrapStyleWord(true);
+    return text;
+  }
 }

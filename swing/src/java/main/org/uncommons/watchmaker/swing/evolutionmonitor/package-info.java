@@ -15,6 +15,7 @@
 //=============================================================================
 /**
  * This package provides an experimental evolution monitor Swing component.
+ *
  * @author Daniel Dyer
  */
 package org.uncommons.watchmaker.swing.evolutionmonitor;
