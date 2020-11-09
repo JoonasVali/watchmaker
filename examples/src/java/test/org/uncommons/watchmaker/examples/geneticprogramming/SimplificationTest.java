@@ -17,54 +17,51 @@ package org.uncommons.watchmaker.examples.geneticprogramming;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.testng.annotations.Test;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.examples.ExamplesTestUtils;
 
 /**
  * Unit test for the {@link Simplification} evolutionary operator.
+ *
  * @author Daniel Dyer
  */
-public class SimplificationTest
-{
-    /**
-     * When the probability is 1, all candidates should be processed.
-     */
-    @Test
-    public void testProbabilityOne()
-    {
-        Node node1 = new Addition(new Constant(1), new Constant(1));
-        Node node2 = new Subtraction(new Constant(5), new Constant(4));
-        Node node3 = new Multiplication(new Constant(3), new Constant(3));
-        List<Node> population = Arrays.asList(node1, node2, node3); 
+public class SimplificationTest {
+  /**
+   * When the probability is 1, all candidates should be processed.
+   */
+  @Test
+  public void testProbabilityOne() {
+    Node node1 = new Addition(new Constant(1), new Constant(1));
+    Node node2 = new Subtraction(new Constant(5), new Constant(4));
+    Node node3 = new Multiplication(new Constant(3), new Constant(3));
+    List<Node> population = Arrays.asList(node1, node2, node3);
 
-        Simplification simplification = new Simplification();
-        List<Node> evolved = simplification.apply(population, ExamplesTestUtils.getRNG());
-        assert evolved.size() == population.size() : "Output should be same size as input.";
-        for (Node node : evolved)
-        {
-            assert node instanceof Constant : "Node was not simplified.";
-        }
+    Simplification simplification = new Simplification();
+    List<Node> evolved = simplification.apply(population, ExamplesTestUtils.getRNG());
+    assert evolved.size() == population.size() : "Output should be same size as input.";
+    for (Node node : evolved) {
+      assert node instanceof Constant : "Node was not simplified.";
     }
+  }
 
 
-    /**
-     * When the probability is 0, no candidates should be processed.
-     */
-    @Test
-    public void testProbabilityZero()
-    {
-        Node node1 = new Addition(new Constant(1), new Constant(1));
-        Node node2 = new Subtraction(new Constant(5), new Constant(4));
-        Node node3 = new Multiplication(new Constant(3), new Constant(3));
-        List<Node> population = Arrays.asList(node1, node2, node3);
+  /**
+   * When the probability is 0, no candidates should be processed.
+   */
+  @Test
+  public void testProbabilityZero() {
+    Node node1 = new Addition(new Constant(1), new Constant(1));
+    Node node2 = new Subtraction(new Constant(5), new Constant(4));
+    Node node3 = new Multiplication(new Constant(3), new Constant(3));
+    List<Node> population = Arrays.asList(node1, node2, node3);
 
-        Simplification simplification = new Simplification(Probability.ZERO);
-        List<Node> evolved = simplification.apply(population, ExamplesTestUtils.getRNG());
-        assert evolved.size() == population.size() : "Output should be same size as input.";
-        for (Node node : evolved)
-        {
-            assert !(node instanceof Constant) : "Node should not have been simplified.";
-        }
+    Simplification simplification = new Simplification(Probability.ZERO);
+    List<Node> evolved = simplification.apply(population, ExamplesTestUtils.getRNG());
+    assert evolved.size() == population.size() : "Output should be same size as input.";
+    for (Node node : evolved) {
+      assert !(node instanceof Constant) : "Node should not have been simplified.";
     }
+  }
 }

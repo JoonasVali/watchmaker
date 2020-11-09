@@ -17,6 +17,7 @@ package org.uncommons.watchmaker.framework.islands;
 
 import java.util.List;
 import java.util.concurrent.Callable;
+
 import org.uncommons.watchmaker.framework.EvaluatedCandidate;
 import org.uncommons.watchmaker.framework.EvolutionEngine;
 import org.uncommons.watchmaker.framework.TerminationCondition;
@@ -24,30 +25,27 @@ import org.uncommons.watchmaker.framework.TerminationCondition;
 /**
  * @author Daniel Dyer
  */
-class Epoch<T> implements Callable<List<EvaluatedCandidate<T>>>
-{
-    private final EvolutionEngine<T> island;
-    private final int populationSize;
-    private final int eliteCount;
-    private final List<T> seedCandidates;
-    private final TerminationCondition[] terminationConditions;
+class Epoch<T> implements Callable<List<EvaluatedCandidate<T>>> {
+  private final EvolutionEngine<T> island;
+  private final int populationSize;
+  private final int eliteCount;
+  private final List<T> seedCandidates;
+  private final TerminationCondition[] terminationConditions;
 
-    Epoch(EvolutionEngine<T> island,
-          int populationSize,
-          int eliteCount,
-          List<T> seedCandidates,
-          TerminationCondition... terminationConditions)
-    {
-        this.island = island;
-        this.populationSize = populationSize;
-        this.eliteCount = eliteCount;
-        this.seedCandidates = seedCandidates;
-        this.terminationConditions = terminationConditions;
-    }
+  Epoch(EvolutionEngine<T> island,
+        int populationSize,
+        int eliteCount,
+        List<T> seedCandidates,
+        TerminationCondition... terminationConditions) {
+    this.island = island;
+    this.populationSize = populationSize;
+    this.eliteCount = eliteCount;
+    this.seedCandidates = seedCandidates;
+    this.terminationConditions = terminationConditions;
+  }
 
 
-    public List<EvaluatedCandidate<T>> call() throws Exception
-    {
-        return island.evolvePopulation(populationSize, eliteCount, seedCandidates, terminationConditions);
-    }
+  public List<EvaluatedCandidate<T>> call() throws Exception {
+    return island.evolvePopulation(populationSize, eliteCount, seedCandidates, terminationConditions);
+  }
 }

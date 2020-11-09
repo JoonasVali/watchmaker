@@ -18,81 +18,72 @@ package org.uncommons.watchmaker.examples.biomorphs;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
 /**
  * Mutation operator for biomorphs.  Mutates each individual gene
  * according to some mutation probability.
+ *
  * @author Daniel Dyer
  */
-public class RandomBiomorphMutation implements EvolutionaryOperator<Biomorph>
-{
-    private final Probability mutationProbability;
+public class RandomBiomorphMutation implements EvolutionaryOperator<Biomorph> {
+  private final Probability mutationProbability;
 
-    /**
-     * @param mutationProbability The probability that a given gene
-     * is changed.
-     */
-    public RandomBiomorphMutation(Probability mutationProbability)
-    {
-        this.mutationProbability = mutationProbability;
+  /**
+   * @param mutationProbability The probability that a given gene
+   *                            is changed.
+   */
+  public RandomBiomorphMutation(Probability mutationProbability) {
+    this.mutationProbability = mutationProbability;
+  }
+
+
+  /**
+   * Randomly mutate each selected candidate.
+   *
+   * @param selectedCandidates {@inheritDoc}
+   * @param rng                {@inheritDoc}
+   * @return {@inheritDoc}
+   */
+  public List<Biomorph> apply(List<Biomorph> selectedCandidates, Random rng) {
+    List<Biomorph> mutatedPopulation = new ArrayList<Biomorph>(selectedCandidates.size());
+    for (Biomorph biomorph : selectedCandidates) {
+      mutatedPopulation.add(mutateBiomorph(biomorph, rng));
     }
+    return mutatedPopulation;
+  }
 
 
-    /**
-     * Randomly mutate each selected candidate.
-     * @param selectedCandidates {@inheritDoc}
-     * @param rng {@inheritDoc}
-     * @return {@inheritDoc}
-     */
-    public List<Biomorph> apply(List<Biomorph> selectedCandidates, Random rng)
-    {
-        List<Biomorph> mutatedPopulation = new ArrayList<Biomorph>(selectedCandidates.size());
-        for (Biomorph biomorph : selectedCandidates)
-        {
-            mutatedPopulation.add(mutateBiomorph(biomorph, rng));
-        }
-        return mutatedPopulation;
-    }
-
-
-    /**
-     * Mutates a single biomorph.
-     * @param biomorph The biomorph to mutate.
-     * @param rng The source of randomness to use for mutation.
-     * @return A mutated version of the biomorph.
-     */
-    private Biomorph mutateBiomorph(Biomorph biomorph, Random rng)
-    {
-        int[] genes = biomorph.getGenotype();
-        assert genes.length == Biomorph.GENE_COUNT : "Biomorphs must have " + Biomorph.GENE_COUNT + " genes.";
-        for (int i = 0; i < Biomorph.GENE_COUNT - 1; i++)
-        {
-            if (mutationProbability.nextEvent(rng))
-            {
-                boolean increase = rng.nextBoolean();
-                genes[i] += (increase ? 1 : -1);
-                if (genes[i] > Biomorph.GENE_MAX)
-                {
-                    genes[i] = Biomorph.GENE_MIN;
-                }
-                else if (genes[i] < Biomorph.GENE_MIN)
-                {
-                    genes[i] = Biomorph.GENE_MAX;
-                }
-            }
-        }
+  /**
+   * Mutates a single biomorph.
+   *
+   * @param biomorph The biomorph to mutate.
+   * @param rng      The source of randomness to use for mutation.
+   * @return A mutated version of the biomorph.
+   */
+  private Biomorph mutateBiomorph(Biomorph biomorph, Random rng) {
+    int[] genes = biomorph.getGenotype();
+    assert genes.length == Biomorph.GENE_COUNT : "Biomorphs must have " + Biomorph.GENE_COUNT + " genes.";
+    for (int i = 0; i < Biomorph.GENE_COUNT - 1; i++) {
+      if (mutationProbability.nextEvent(rng)) {
         boolean increase = rng.nextBoolean();
-        genes[Biomorph.LENGTH_GENE_INDEX] += (increase ? 1 : -1);
-        if (genes[Biomorph.LENGTH_GENE_INDEX] > Biomorph.LENGTH_GENE_MAX)
-        {
-            genes[Biomorph.LENGTH_GENE_INDEX] = Biomorph.LENGTH_GENE_MIN;
+        genes[i] += (increase ? 1 : -1);
+        if (genes[i] > Biomorph.GENE_MAX) {
+          genes[i] = Biomorph.GENE_MIN;
+        } else if (genes[i] < Biomorph.GENE_MIN) {
+          genes[i] = Biomorph.GENE_MAX;
         }
-        else if (genes[Biomorph.LENGTH_GENE_INDEX] < Biomorph.LENGTH_GENE_MIN)
-        {
-            genes[Biomorph.LENGTH_GENE_INDEX] = Biomorph.LENGTH_GENE_MAX;
-        }
-        return new Biomorph(genes);
+      }
     }
+    boolean increase = rng.nextBoolean();
+    genes[Biomorph.LENGTH_GENE_INDEX] += (increase ? 1 : -1);
+    if (genes[Biomorph.LENGTH_GENE_INDEX] > Biomorph.LENGTH_GENE_MAX) {
+      genes[Biomorph.LENGTH_GENE_INDEX] = Biomorph.LENGTH_GENE_MIN;
+    } else if (genes[Biomorph.LENGTH_GENE_INDEX] < Biomorph.LENGTH_GENE_MIN) {
+      genes[Biomorph.LENGTH_GENE_INDEX] = Biomorph.LENGTH_GENE_MAX;
+    }
+    return new Biomorph(genes);
+  }
 }

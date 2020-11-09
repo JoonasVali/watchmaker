@@ -21,19 +21,17 @@ import org.uncommons.watchmaker.framework.islands.IslandEvolutionObserver;
 /**
  * Trivial evolution observer for displaying information at the end
  * of each generation.
+ *
  * @param <T> The type of entity being evolved.
  * @author Daniel Dyer
  */
-public class EvolutionLogger<T> implements IslandEvolutionObserver<T>
-{
-    public void populationUpdate(PopulationData<? extends T> data)
-    {
-        System.out.println("Generation " + data.getGenerationNumber() + ": " + data.getBestCandidateFitness());
-    }
+public class EvolutionLogger<T> implements IslandEvolutionObserver<T> {
+  public void populationUpdate(PopulationData<? extends T> data) {
+    System.out.println("Generation " + data.getGenerationNumber() + ": " + data.getBestCandidateFitness());
+  }
 
 
-    public void islandPopulationUpdate(int islandIndex, PopulationData<? extends T> populationData)
-    {
-        // Do nothing.
-    }
+  public void islandPopulationUpdate(int islandIndex, PopulationData<? extends T> populationData) {
+    // Do nothing.
+  }
 }

@@ -21,55 +21,51 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.watchmaker.framework.factories.AbstractCandidateFactory;
 
 /**
  * Creates random polygon-based images.
+ *
  * @author Daniel Dyer
  */
-public class PolygonImageFactory extends AbstractCandidateFactory<List<ColouredPolygon>>
-{
-    /**
-     * Each image must have at least 2 polygons.
-     */
-    static final int MINIMUM_POLYGON_COUNT = 2;
+public class PolygonImageFactory extends AbstractCandidateFactory<List<ColouredPolygon>> {
+  /**
+   * Each image must have at least 2 polygons.
+   */
+  static final int MINIMUM_POLYGON_COUNT = 2;
 
-    /**
-     * Each polygon must have at least 3 points.
-     */
-    static final int MINIMUM_VERTEX_COUNT = 3;
+  /**
+   * Each polygon must have at least 3 points.
+   */
+  static final int MINIMUM_VERTEX_COUNT = 3;
 
-    private final Dimension canvasSize;
+  private final Dimension canvasSize;
 
-    /**
-     * @param canvasSize The size of the canvas on which the image will be rendered.
-     * All polygons must fit within its bounds. 
-     */
-    public PolygonImageFactory(Dimension canvasSize)
-    {
-        this.canvasSize = canvasSize;
+  /**
+   * @param canvasSize The size of the canvas on which the image will be rendered.
+   *                   All polygons must fit within its bounds.
+   */
+  public PolygonImageFactory(Dimension canvasSize) {
+    this.canvasSize = canvasSize;
+  }
+
+
+  public List<ColouredPolygon> generateRandomCandidate(Random rng) {
+    List<ColouredPolygon> polygons = new ArrayList<ColouredPolygon>(MINIMUM_POLYGON_COUNT);
+    for (int i = 0; i < MINIMUM_POLYGON_COUNT; i++) {
+      polygons.add(createRandomPolygon(rng));
     }
+    return polygons;
+  }
 
-    
-    public List<ColouredPolygon> generateRandomCandidate(Random rng)
-    {
-        List<ColouredPolygon> polygons = new ArrayList<ColouredPolygon>(MINIMUM_POLYGON_COUNT);
-        for (int i = 0; i < MINIMUM_POLYGON_COUNT; i++)
-        {
-            polygons.add(createRandomPolygon(rng));
-        }
-        return polygons;
+
+  ColouredPolygon createRandomPolygon(Random rng) {
+    List<Point> vertices = new ArrayList<Point>(MINIMUM_VERTEX_COUNT);
+    for (int j = 0; j < MINIMUM_VERTEX_COUNT; j++) {
+      vertices.add(new Point(rng.nextInt(canvasSize.width), rng.nextInt(canvasSize.height)));
     }
-
-
-    ColouredPolygon createRandomPolygon(Random rng)
-    {
-        List<Point> vertices = new ArrayList<Point>(MINIMUM_VERTEX_COUNT);
-        for (int j = 0; j < MINIMUM_VERTEX_COUNT; j++)
-        {
-            vertices.add(new Point(rng.nextInt(canvasSize.width), rng.nextInt(canvasSize.height)));
-        }
-        Color colour = new Color(rng.nextInt(256), rng.nextInt(256), rng.nextInt(256), rng.nextInt(256));
-        return new ColouredPolygon(colour, vertices);
-    }
+    Color colour = new Color(rng.nextInt(256), rng.nextInt(256), rng.nextInt(256), rng.nextInt(256));
+    return new ColouredPolygon(colour, vertices);
+  }
 }

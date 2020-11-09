@@ -18,6 +18,7 @@
  * Algorithms, by Melanie Mitchell.  The algorithm evolves bit strings and the
  * fitness function simply counts the number of ones in the bit string.  The evolution
  * should therefore converge on strings that consist only of ones.
+ *
  * @author Daniel Dyer
  */
 package org.uncommons.watchmaker.examples.bits;

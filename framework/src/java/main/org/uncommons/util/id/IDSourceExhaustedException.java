@@ -17,17 +17,15 @@ package org.uncommons.util.id;
 
 /**
  * Unchecked exception thrown if an {@link IDSource} runs out of unique IDs.
+ *
  * @author Daniel Dyer
  */
-public class IDSourceExhaustedException extends RuntimeException
-{
-    public IDSourceExhaustedException(String string)
-    {
-        super(string);
-    }
+public class IDSourceExhaustedException extends RuntimeException {
+  public IDSourceExhaustedException(String string) {
+    super(string);
+  }
 
-    public IDSourceExhaustedException(String string, Throwable throwable)
-    {
-        super(string, throwable);
-    }
+  public IDSourceExhaustedException(String string, Throwable throwable) {
+    super(string, throwable);
+  }
 }

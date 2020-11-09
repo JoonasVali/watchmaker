@@ -19,6 +19,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 import org.uncommons.util.reflection.ReflectionUtils;
 import org.uncommons.watchmaker.examples.biomorphs.BiomorphApplet;
 import org.uncommons.watchmaker.examples.bits.BitsExample;
@@ -30,50 +31,48 @@ import org.uncommons.watchmaker.examples.travellingsalesman.TravellingSalesmanAp
 
 /**
  * Launcher for Watchmaker example applications.
+ *
  * @author Daniel Dyer
  */
-public class Launcher
-{
-    private static final Map<String, Class<?>> EXAMPLES = new LinkedHashMap<String, Class<?>>();
-    static
-    {
-        EXAMPLES.put("biomorphs", BiomorphApplet.class);
-        EXAMPLES.put("bits", BitsExample.class);
-        EXAMPLES.put("gp", GeneticProgrammingExample.class);
-        EXAMPLES.put("monalisa", MonaLisaApplet.class);
-        EXAMPLES.put("salesman", TravellingSalesmanApplet.class);
-        EXAMPLES.put("strings", StringsExample.class);
-        EXAMPLES.put("sudoku", SudokuApplet.class);
+public class Launcher {
+  private static final Map<String, Class<?>> EXAMPLES = new LinkedHashMap<String, Class<?>>();
+
+  static {
+    EXAMPLES.put("biomorphs", BiomorphApplet.class);
+    EXAMPLES.put("bits", BitsExample.class);
+    EXAMPLES.put("gp", GeneticProgrammingExample.class);
+    EXAMPLES.put("monalisa", MonaLisaApplet.class);
+    EXAMPLES.put("salesman", TravellingSalesmanApplet.class);
+    EXAMPLES.put("strings", StringsExample.class);
+    EXAMPLES.put("sudoku", SudokuApplet.class);
+  }
+
+
+  private Launcher() {
+    // Prevents instantiation of launcher class.
+  }
+
+
+  /**
+   * Launch the specified example application from the command-line.
+   *
+   * @param args First item is the name of the example to run.  Any subsequent arguments are passed
+   *             on to the specific example.
+   */
+  public static void main(String[] args) {
+    Class<?> exampleClass = args.length > 0 ? EXAMPLES.get(args[0]) : null;
+    if (exampleClass == null) {
+      System.err.println("First argument must be the name of an example, i.e. one of "
+          + Arrays.toString(EXAMPLES.keySet().toArray()));
+      System.exit(1);
     }
 
+    // All args except the first one should be passed to the example application.
+    String[] appArgs = new String[args.length - 1];
+    System.arraycopy(args, 1, appArgs, 0, appArgs.length);
 
-    private Launcher()
-    {
-        // Prevents instantiation of launcher class.
-    }
-
-    
-    /**
-     * Launch the specified example application from the command-line.
-     * @param args First item is the name of the example to run.  Any subsequent arguments are passed
-     * on to the specific example.
-     */
-    public static void main(String[] args)
-    {
-        Class<?> exampleClass = args.length > 0 ? EXAMPLES.get(args[0]) : null;
-        if (exampleClass == null)
-        {
-            System.err.println("First argument must be the name of an example, i.e. one of "
-                               + Arrays.toString(EXAMPLES.keySet().toArray()));
-            System.exit(1);
-        }
-
-        // All args except the first one should be passed to the example application.
-        String[] appArgs = new String[args.length - 1];
-        System.arraycopy(args, 1, appArgs, 0, appArgs.length);
-
-        // Invoke the main method for the selected example application.
-        Method main = ReflectionUtils.findKnownMethod(exampleClass, "main", String[].class);
-        ReflectionUtils.invokeUnchecked(main, exampleClass, new Object[]{appArgs});
-    }
+    // Invoke the main method for the selected example application.
+    Method main = ReflectionUtils.findKnownMethod(exampleClass, "main", String[].class);
+    ReflectionUtils.invokeUnchecked(main, exampleClass, new Object[]{appArgs});
+  }
 }

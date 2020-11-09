@@ -18,44 +18,43 @@ package org.uncommons.watchmaker.examples.geneticprogramming;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
 /**
  * Mutation operator for the trees of {@link Node}s used in the genetic
  * programming example application.
+ *
  * @author Daniel Dyer
  */
-public class TreeMutation implements EvolutionaryOperator<Node>
-{
-    private final TreeFactory treeFactory;
+public class TreeMutation implements EvolutionaryOperator<Node> {
+  private final TreeFactory treeFactory;
 
-    private final Probability mutationProbability;
+  private final Probability mutationProbability;
 
-    /**
-     * The tree mutation operator requires a {@link TreeFactory} because
-     * the process of mutation involves creating new sub-trees.  The same
-     * TreeFactory that is used to create the initial population should be
-     * used.
-     * @param treeFactory Used to generate the new sub-trees required for mutation.
-     * @param mutationProbability The probability that any given node in a tree is
-     * mutated by this operator.
-     */
-    public TreeMutation(TreeFactory treeFactory,
-                        Probability mutationProbability)
-    {
-        this.treeFactory = treeFactory;
-        this.mutationProbability = mutationProbability;
+  /**
+   * The tree mutation operator requires a {@link TreeFactory} because
+   * the process of mutation involves creating new sub-trees.  The same
+   * TreeFactory that is used to create the initial population should be
+   * used.
+   *
+   * @param treeFactory         Used to generate the new sub-trees required for mutation.
+   * @param mutationProbability The probability that any given node in a tree is
+   *                            mutated by this operator.
+   */
+  public TreeMutation(TreeFactory treeFactory,
+                      Probability mutationProbability) {
+    this.treeFactory = treeFactory;
+    this.mutationProbability = mutationProbability;
+  }
+
+
+  public List<Node> apply(List<Node> selectedCandidates, Random rng) {
+    List<Node> mutatedPopulation = new ArrayList<Node>(selectedCandidates.size());
+    for (Node tree : selectedCandidates) {
+      mutatedPopulation.add(tree.mutate(rng, mutationProbability, treeFactory));
     }
-
-
-    public List<Node> apply(List<Node> selectedCandidates, Random rng)
-    {
-        List<Node> mutatedPopulation = new ArrayList<Node>(selectedCandidates.size());
-        for (Node tree : selectedCandidates)
-        {
-            mutatedPopulation.add(tree.mutate(rng, mutationProbability, treeFactory));
-        }
-        return mutatedPopulation;
-    }
+    return mutatedPopulation;
+  }
 }

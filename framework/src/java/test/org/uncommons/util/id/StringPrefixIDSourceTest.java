@@ -19,17 +19,16 @@ import org.testng.annotations.Test;
 
 /**
  * Unit test for prefixed ID source.
+ *
  * @author Daniel Dyer
  */
-public class StringPrefixIDSourceTest
-{
-    @Test
-    public void testPrefix()
-    {
-        IDSource<String> idSource = new StringPrefixIDSource("Watchmaker", new IntSequenceIDSource());
-        String id1 = idSource.nextID();
-        assert id1.equals("Watchmaker0") : "Wrong ID: " + id1;
-        String id2 = idSource.nextID();
-        assert id2.equals("Watchmaker1") : "Wrong ID: " + id2;
-    }
+public class StringPrefixIDSourceTest {
+  @Test
+  public void testPrefix() {
+    IDSource<String> idSource = new StringPrefixIDSource("Watchmaker", new IntSequenceIDSource());
+    String id1 = idSource.nextID();
+    assert id1.equals("Watchmaker0") : "Wrong ID: " + id1;
+    String id2 = idSource.nextID();
+    assert id2.equals("Watchmaker1") : "Wrong ID: " + id2;
+  }
 }

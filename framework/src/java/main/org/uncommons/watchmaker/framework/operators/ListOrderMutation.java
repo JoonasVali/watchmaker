@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.maths.number.ConstantGenerator;
 import org.uncommons.maths.number.NumberGenerator;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
@@ -32,74 +33,68 @@ import org.uncommons.watchmaker.framework.EvolutionaryOperator;
  * sequence, typically a poisson distribution (see
  * {@link org.uncommons.maths.random.PoissonGenerator}), to determine how
  * many mutations to apply.
+ *
  * @param <T> The component type of the lists that are mutated.
  * @author Daniel Dyer
  */
-public class ListOrderMutation<T> implements EvolutionaryOperator<List<T>>
-{
-    private final NumberGenerator<Integer> mutationCountVariable;
-    private final NumberGenerator<Integer> mutationAmountVariable;
+public class ListOrderMutation<T> implements EvolutionaryOperator<List<T>> {
+  private final NumberGenerator<Integer> mutationCountVariable;
+  private final NumberGenerator<Integer> mutationAmountVariable;
 
-    /**
-     * Default is one mutation per candidate.
-     */
-    public ListOrderMutation()
-    {
-        this(1, 1);
-    }
+  /**
+   * Default is one mutation per candidate.
+   */
+  public ListOrderMutation() {
+    this(1, 1);
+  }
 
-    /**
-     * @param mutationCount The constant number of mutations
-     * to apply to each individual in the population.
-     * @param mutationAmount The constant number of positions by
-     * which a list element will be displaced as a result of mutation.
-     */
-    public ListOrderMutation(int mutationCount, int mutationAmount)
-    {
-        this(new ConstantGenerator<Integer>(mutationCount),
-             new ConstantGenerator<Integer>(mutationAmount));
-    }
+  /**
+   * @param mutationCount  The constant number of mutations
+   *                       to apply to each individual in the population.
+   * @param mutationAmount The constant number of positions by
+   *                       which a list element will be displaced as a result of mutation.
+   */
+  public ListOrderMutation(int mutationCount, int mutationAmount) {
+    this(new ConstantGenerator<Integer>(mutationCount),
+        new ConstantGenerator<Integer>(mutationAmount));
+  }
 
 
-    /**
-     * Typically the mutation count will be from a Poisson distribution.
-     * The mutation amount can be from any discrete probability distribution
-     * and can include negative values.
-     * @param mutationCount A random variable that provides a number
-     * of mutations that will be applied to each individual.
-     * @param mutationAmount A random variable that provides a number
-     * of positions by which to displace an element when mutating.
-     */
-    public ListOrderMutation(NumberGenerator<Integer> mutationCount,
-                             NumberGenerator<Integer> mutationAmount)
-    {
-        this.mutationCountVariable = mutationCount;
-        this.mutationAmountVariable = mutationAmount;
-    }
+  /**
+   * Typically the mutation count will be from a Poisson distribution.
+   * The mutation amount can be from any discrete probability distribution
+   * and can include negative values.
+   *
+   * @param mutationCount  A random variable that provides a number
+   *                       of mutations that will be applied to each individual.
+   * @param mutationAmount A random variable that provides a number
+   *                       of positions by which to displace an element when mutating.
+   */
+  public ListOrderMutation(NumberGenerator<Integer> mutationCount,
+                           NumberGenerator<Integer> mutationAmount) {
+    this.mutationCountVariable = mutationCount;
+    this.mutationAmountVariable = mutationAmount;
+  }
 
 
-    public List<List<T>> apply(List<List<T>> selectedCandidates, Random rng)
-    {
-        List<List<T>> result = new ArrayList<List<T>>(selectedCandidates.size());
-        for (List<T> candidate : selectedCandidates)
-        {
-            List<T> newCandidate = new ArrayList<T>(candidate);
-            int mutationCount = Math.abs(mutationCountVariable.nextValue());
-            for (int i = 0; i < mutationCount; i++)
-            {
-                int fromIndex = rng.nextInt(newCandidate.size());
-                int mutationAmount = mutationAmountVariable.nextValue();
-                int toIndex = (fromIndex + mutationAmount) % newCandidate.size();
-                if (toIndex < 0)
-                {
-                    toIndex += newCandidate.size();
-                }
-                // Swap the randomly selected element with the one that is the
-                // specified displacement distance away.
-                Collections.swap(newCandidate, fromIndex, toIndex);
-            }
-            result.add(newCandidate);
+  public List<List<T>> apply(List<List<T>> selectedCandidates, Random rng) {
+    List<List<T>> result = new ArrayList<List<T>>(selectedCandidates.size());
+    for (List<T> candidate : selectedCandidates) {
+      List<T> newCandidate = new ArrayList<T>(candidate);
+      int mutationCount = Math.abs(mutationCountVariable.nextValue());
+      for (int i = 0; i < mutationCount; i++) {
+        int fromIndex = rng.nextInt(newCandidate.size());
+        int mutationAmount = mutationAmountVariable.nextValue();
+        int toIndex = (fromIndex + mutationAmount) % newCandidate.size();
+        if (toIndex < 0) {
+          toIndex += newCandidate.size();
         }
-        return result;
+        // Swap the randomly selected element with the one that is the
+        // specified displacement distance away.
+        Collections.swap(newCandidate, fromIndex, toIndex);
+      }
+      result.add(newCandidate);
     }
+    return result;
+  }
 }

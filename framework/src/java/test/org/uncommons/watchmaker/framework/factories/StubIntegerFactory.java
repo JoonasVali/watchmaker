@@ -19,12 +19,11 @@ import java.util.Random;
 
 /**
  * Stub candidate factory for tests.  Always returns zero-valued integers.
+ *
  * @author Daniel Dyer
  */
-public final class StubIntegerFactory extends AbstractCandidateFactory<Integer>
-{
-    public Integer generateRandomCandidate(Random rng)
-    {
-        return 0;
-    }
+public final class StubIntegerFactory extends AbstractCandidateFactory<Integer> {
+  public Integer generateRandomCandidate(Random rng) {
+    return 0;
+  }
 }

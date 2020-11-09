@@ -25,46 +25,42 @@ import org.uncommons.watchmaker.framework.TerminationCondition;
  * application should retain a reference to the instance after passing it to
  * the evolution engine and should invoke the {@link #abort()} method to make
  * the evolution terminate at the end of the current generation.
- * @see org.uncommons.watchmaker.swing.AbortControl
+ *
  * @author Daniel Dyer
+ * @see org.uncommons.watchmaker.swing.AbortControl
  */
-public final class UserAbort implements TerminationCondition
-{
-    private volatile boolean aborted = false;
+public final class UserAbort implements TerminationCondition {
+  private volatile boolean aborted = false;
 
-    /**
-     * {@inheritDoc}
-     */
-    public boolean shouldTerminate(PopulationData<?> populationData)
-    {
-        return isAborted();
-    }
+  /**
+   * {@inheritDoc}
+   */
+  public boolean shouldTerminate(PopulationData<?> populationData) {
+    return isAborted();
+  }
 
 
-    /**
-     * Aborts any evolutionary algorithms that monitor this termination condition
-     * instance.
-     */
-    public void abort()
-    {
-        aborted = true;
-    }
+  /**
+   * Aborts any evolutionary algorithms that monitor this termination condition
+   * instance.
+   */
+  public void abort() {
+    aborted = true;
+  }
 
 
-    /**
-     * @return true if the {@link #abort()} method has been invoked, false otherwise.
-     */
-    public boolean isAborted()
-    {
-        return aborted;
-    }
+  /**
+   * @return true if the {@link #abort()} method has been invoked, false otherwise.
+   */
+  public boolean isAborted() {
+    return aborted;
+  }
 
 
-    /**
-     * Resets the abort condition to false so that it may be reused.
-     */
-    public void reset()
-    {
-        aborted = false;
-    }
+  /**
+   * Resets the abort condition to false so that it may be reused.
+   */
+  public void reset() {
+    aborted = false;
+  }
 }

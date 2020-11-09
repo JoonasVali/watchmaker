@@ -20,30 +20,27 @@ import org.uncommons.watchmaker.framework.TerminationCondition;
 
 /**
  * Terminates evolution after a set number of generations have passed.
+ *
  * @author Daniel Dyer
  */
-public class GenerationCount implements TerminationCondition
-{
-    private final int generationCount;
+public class GenerationCount implements TerminationCondition {
+  private final int generationCount;
 
-    /**
-     * @param generationCount The maximum number of generations that the
-     * evolutionary algorithm will permit before terminating.
-     */
-    public GenerationCount(int generationCount)
-    {
-        if (generationCount <= 0)
-        {
-            throw new IllegalArgumentException("Generation count must be positive.");
-        }
-        this.generationCount = generationCount;
+  /**
+   * @param generationCount The maximum number of generations that the
+   *                        evolutionary algorithm will permit before terminating.
+   */
+  public GenerationCount(int generationCount) {
+    if (generationCount <= 0) {
+      throw new IllegalArgumentException("Generation count must be positive.");
     }
+    this.generationCount = generationCount;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public boolean shouldTerminate(PopulationData<?> populationData)
-    {
-        return populationData.getGenerationNumber() + 1 >= generationCount;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  public boolean shouldTerminate(PopulationData<?> populationData) {
+    return populationData.getGenerationNumber() + 1 >= generationCount;
+  }
 }

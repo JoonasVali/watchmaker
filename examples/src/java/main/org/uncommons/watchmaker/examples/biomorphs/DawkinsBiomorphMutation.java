@@ -18,50 +18,47 @@ package org.uncommons.watchmaker.examples.biomorphs;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
 /**
  * Non-random mutation of a population of biomorphs.  This ensures that each selected candidate
  * is mutated differently.  This is the mutation used by Dawkins in his original experiment.
+ *
  * @author Daniel Dyer
  */
-public class DawkinsBiomorphMutation implements EvolutionaryOperator<Biomorph>
-{
-    /**
-     * Mutate a population of biomorphs non-randomly, ensuring that each selected
-     * candidate is mutated differently. 
-     * @param selectedCandidates {@inheritDoc}
-     * @param rng A source of randomness (not used since this mutation is non-random).
-     * @return {@inheritDoc}
-     */
-    public List<Biomorph> apply(List<Biomorph> selectedCandidates, Random rng)
-    {
-        List<Biomorph> mutatedPopulation = new ArrayList<Biomorph>(selectedCandidates.size());
-        int mutatedGene = 0;
-        int mutation = 1;
-        for (Biomorph b : selectedCandidates)
-        {
-            int[] genes = b.getGenotype();
+public class DawkinsBiomorphMutation implements EvolutionaryOperator<Biomorph> {
+  /**
+   * Mutate a population of biomorphs non-randomly, ensuring that each selected
+   * candidate is mutated differently.
+   *
+   * @param selectedCandidates {@inheritDoc}
+   * @param rng                A source of randomness (not used since this mutation is non-random).
+   * @return {@inheritDoc}
+   */
+  public List<Biomorph> apply(List<Biomorph> selectedCandidates, Random rng) {
+    List<Biomorph> mutatedPopulation = new ArrayList<Biomorph>(selectedCandidates.size());
+    int mutatedGene = 0;
+    int mutation = 1;
+    for (Biomorph b : selectedCandidates) {
+      int[] genes = b.getGenotype();
 
-            mutation *= -1; // Alternate between incrementing and decrementing.
-            if (mutation == 1) // After gene has been both incremented and decremented, move to next one.
-            {
-                mutatedGene = (mutatedGene + 1) % Biomorph.GENE_COUNT;
-            }
-            genes[mutatedGene] += mutation;
-            int min = mutatedGene == Biomorph.LENGTH_GENE_INDEX ? Biomorph.LENGTH_GENE_MIN : Biomorph.GENE_MIN;
-            int max = mutatedGene == Biomorph.LENGTH_GENE_INDEX ? Biomorph.LENGTH_GENE_MAX : Biomorph.GENE_MAX;
-            if (genes[mutatedGene] > max)
-            {
-                genes[mutatedGene] = min;
-            }
-            else if (genes[mutatedGene] < min)
-            {
-                genes[mutatedGene] = max;
-            }
+      mutation *= -1; // Alternate between incrementing and decrementing.
+      if (mutation == 1) // After gene has been both incremented and decremented, move to next one.
+      {
+        mutatedGene = (mutatedGene + 1) % Biomorph.GENE_COUNT;
+      }
+      genes[mutatedGene] += mutation;
+      int min = mutatedGene == Biomorph.LENGTH_GENE_INDEX ? Biomorph.LENGTH_GENE_MIN : Biomorph.GENE_MIN;
+      int max = mutatedGene == Biomorph.LENGTH_GENE_INDEX ? Biomorph.LENGTH_GENE_MAX : Biomorph.GENE_MAX;
+      if (genes[mutatedGene] > max) {
+        genes[mutatedGene] = min;
+      } else if (genes[mutatedGene] < min) {
+        genes[mutatedGene] = max;
+      }
 
-            mutatedPopulation.add(new Biomorph(genes));
-        }
-        return mutatedPopulation;
+      mutatedPopulation.add(new Biomorph(genes));
     }
+    return mutatedPopulation;
+  }
 }

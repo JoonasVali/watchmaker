@@ -16,7 +16,8 @@
 /**
  * An implementation of island model evolution.  Manages parallel evolution across
  * multiple {@link org.uncommons.watchmaker.framework.EvolutionEngine}s (islands)
- * with periodic migration between them. 
+ * with periodic migration between them.
+ *
  * @author Daniel Dyer
  */
 package org.uncommons.watchmaker.framework.islands;

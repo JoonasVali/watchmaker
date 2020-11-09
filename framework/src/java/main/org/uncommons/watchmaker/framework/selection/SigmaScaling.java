@@ -18,6 +18,7 @@ package org.uncommons.watchmaker.framework.selection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.maths.statistics.DataSet;
 import org.uncommons.watchmaker.framework.EvaluatedCandidate;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
@@ -30,85 +31,76 @@ import org.uncommons.watchmaker.framework.SelectionStrategy;
  * caused by the dominance of one or two relatively fit candidates in a population of mostly
  * unfit individuals.  It also helps to amplify minor fitness differences in a more mature
  * population where the rate of improvement has slowed.
+ *
  * @author Daniel Dyer
  */
-public class SigmaScaling implements SelectionStrategy<Object>
-{
-    private final SelectionStrategy<Object> delegate;
+public class SigmaScaling implements SelectionStrategy<Object> {
+  private final SelectionStrategy<Object> delegate;
 
-    /**
-     * Creates a default sigma-scaled selection strategy.
-     */
-    public SigmaScaling()
-    {
-        this(new StochasticUniversalSampling());
+  /**
+   * Creates a default sigma-scaled selection strategy.
+   */
+  public SigmaScaling() {
+    this(new StochasticUniversalSampling());
+  }
+
+
+  /**
+   * Creates a sigma-scaled selection strategy that delegates to the specified selection
+   * strategy after adjusting individual fitness scores using sigma-scaling.
+   *
+   * @param delegate The proportionate selector that will be delegated
+   *                 to after fitness scores have been adjusted using sigma-scaling.
+   */
+  public SigmaScaling(SelectionStrategy<Object> delegate) {
+    this.delegate = delegate;
+  }
+
+
+  /**
+   * {@inheritDoc}
+   */
+  public <S> List<S> select(List<EvaluatedCandidate<S>> population,
+                            boolean naturalFitnessScores,
+                            int selectionSize,
+                            Random rng) {
+    DataSet statistics = new DataSet(population.size());
+    for (EvaluatedCandidate<S> candidate : population) {
+      statistics.addValue(candidate.getFitness());
     }
 
-
-    /**
-     * Creates a sigma-scaled selection strategy that delegates to the specified selection
-     * strategy after adjusting individual fitness scores using sigma-scaling.
-     * @param delegate The proportionate selector that will be delegated
-     * to after fitness scores have been adjusted using sigma-scaling.
-     */
-    public SigmaScaling(SelectionStrategy<Object> delegate)
-    {
-        this.delegate = delegate;
+    List<EvaluatedCandidate<S>> scaledPopulation = new ArrayList<EvaluatedCandidate<S>>(population.size());
+    for (EvaluatedCandidate<S> candidate : population) {
+      double scaledFitness = getSigmaScaledFitness(candidate.getFitness(),
+          statistics.getArithmeticMean(),
+          statistics.getStandardDeviation());
+      scaledPopulation.add(new EvaluatedCandidate<S>(candidate.getCandidate(),
+          scaledFitness));
     }
+    return delegate.select(scaledPopulation, naturalFitnessScores, selectionSize, rng);
+  }
 
 
-    /**
-     * {@inheritDoc}
-     */
-    public <S> List<S> select(List<EvaluatedCandidate<S>> population,
-                              boolean naturalFitnessScores,
-                              int selectionSize,
-                              Random rng)
-    {
-        DataSet statistics = new DataSet(population.size());
-        for (EvaluatedCandidate<S> candidate : population)
-        {
-            statistics.addValue(candidate.getFitness());
-        }
-
-        List<EvaluatedCandidate<S>> scaledPopulation = new ArrayList<EvaluatedCandidate<S>>(population.size());
-        for (EvaluatedCandidate<S> candidate : population)
-        {
-            double scaledFitness = getSigmaScaledFitness(candidate.getFitness(),
-                                                         statistics.getArithmeticMean(),
-                                                         statistics.getStandardDeviation());
-            scaledPopulation.add(new EvaluatedCandidate<S>(candidate.getCandidate(),
-                                                           scaledFitness));
-        }
-        return delegate.select(scaledPopulation, naturalFitnessScores, selectionSize, rng);
+  private double getSigmaScaledFitness(double candidateFitness,
+                                       double populationMeanFitness,
+                                       double fitnessStandardDeviation) {
+    if (fitnessStandardDeviation == 0) {
+      return 1;
+    } else {
+      double scaledFitness = 1 + (candidateFitness - populationMeanFitness) / (2 * fitnessStandardDeviation);
+      // Don't allow negative expected frequencies, use an arbitrary low but still positive
+      // frequency of 1 time in 10 for extremely unfit individuals (relative to the remainder
+      // of the population).
+      return scaledFitness > 0 ? scaledFitness : 0.1;
     }
+  }
 
 
-    private double getSigmaScaledFitness(double candidateFitness,
-                                         double populationMeanFitness,
-                                         double fitnessStandardDeviation)
-    {
-        if (fitnessStandardDeviation == 0)
-        {
-            return 1;
-        }
-        else
-        {
-            double scaledFitness = 1 + (candidateFitness - populationMeanFitness) / (2 * fitnessStandardDeviation);
-            // Don't allow negative expected frequencies, use an arbitrary low but still positive
-            // frequency of 1 time in 10 for extremely unfit individuals (relative to the remainder
-            // of the population).
-            return scaledFitness > 0 ? scaledFitness : 0.1;
-        }
-    }
-
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString()
-    {
-        return "Sigma Scaling";
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+    return "Sigma Scaling";
+  }
 }

@@ -15,6 +15,7 @@
 //=============================================================================
 /**
  * Utilities for simplifying code that uses reflection.
+ *
  * @author Daniel Dyer
  */
 package org.uncommons.util.reflection;

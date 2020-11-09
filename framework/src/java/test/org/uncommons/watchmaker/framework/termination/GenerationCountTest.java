@@ -21,32 +21,30 @@ import org.uncommons.watchmaker.framework.TerminationCondition;
 
 /**
  * Unit test for termination condition that checks the number of evolved generations.
+ *
  * @author Daniel Dyer
  */
-public class GenerationCountTest
-{
-    @Test
-    public void testGenerationCounts()
-    {
-        TerminationCondition condition = new GenerationCount(5);
-        PopulationData<Object> data = new PopulationData<Object>(new Object(), 0, 0, 0, true, 2, 0, 3, 100);
-        // Generation number 3 is the 4th generation (generation numbers are zero-based).
-        assert !condition.shouldTerminate(data) : "Should not terminate after 4th generation.";
-        data = new PopulationData<Object>(new Object(), 0, 0, 0, true, 2, 0, 4, 100);
-        // Generation number 4 is the 5th generation (generation numbers are zero-based).
-        assert condition.shouldTerminate(data) : "Should terminate after 5th generation.";
-    }
+public class GenerationCountTest {
+  @Test
+  public void testGenerationCounts() {
+    TerminationCondition condition = new GenerationCount(5);
+    PopulationData<Object> data = new PopulationData<Object>(new Object(), 0, 0, 0, true, 2, 0, 3, 100);
+    // Generation number 3 is the 4th generation (generation numbers are zero-based).
+    assert !condition.shouldTerminate(data) : "Should not terminate after 4th generation.";
+    data = new PopulationData<Object>(new Object(), 0, 0, 0, true, 2, 0, 4, 100);
+    // Generation number 4 is the 5th generation (generation numbers are zero-based).
+    assert condition.shouldTerminate(data) : "Should terminate after 5th generation.";
+  }
 
 
-    /**
-     * The generation count must be greater than zero to be useful.  This test
-     * ensures that an appropriate exception is thrown if the count is not positive.
-     * Not throwing an exception is an error because it permits undetected bugs in
-     * evolutionary programs.
-     */
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testZeroRatio()
-    {
-        new GenerationCount(0);
-    }
+  /**
+   * The generation count must be greater than zero to be useful.  This test
+   * ensures that an appropriate exception is thrown if the count is not positive.
+   * Not throwing an exception is an error because it permits undetected bugs in
+   * evolutionary programs.
+   */
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testZeroRatio() {
+    new GenerationCount(0);
+  }
 }

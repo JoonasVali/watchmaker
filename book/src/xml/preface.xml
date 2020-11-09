@@ -4,20 +4,21 @@
   <title>Preface</title>
   <para>
     This book is intended to be a pragmatic, hands-on guide to implementing evolutionary
-    algorithms.  The emphasis is on writing useful evolutionary programs and solving interesting
-    problems.  This is not intended to be a thorough theoretical guide.  I will introduce the
+    algorithms. The emphasis is on writing useful evolutionary programs and solving interesting
+    problems. This is not intended to be a thorough theoretical guide. I will introduce the
     key evolutionary computation concepts and demonstrate their practical application, but I will
     endeavour to keep abstract theory and mathematics to the minimum necessary.
     For a more academic treatment of the material, I recommend Melanie Mitchell's
-    <emphasis>An Introduction to Genetic Algorithms</emphasis> and A.E. Eiben and J.E. Smith's
+    <emphasis>An Introduction to Genetic Algorithms</emphasis>
+    and A.E. Eiben and J.E. Smith's
     <emphasis>Introduction to Evolutionary Computing</emphasis>.
   </para>
   <para>
     Though evolutionary algorithms can be implemented in any general purpose programming language,
-    all of the examples in this book are presented using Java.  Java is one of the most widely
-    used programming languages in the world today.  As such, many software developers are already
+    all of the examples in this book are presented using Java. Java is one of the most widely
+    used programming languages in the world today. As such, many software developers are already
     familiar with Java and able to understand programs written in it, even if they usually
-    develop in other languages.  Java provides a good balance of performance, ease-of-use and
+    develop in other languages. Java provides a good balance of performance, ease-of-use and
     a rich standard library.
   </para>
   <para>

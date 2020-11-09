@@ -18,6 +18,7 @@
  * Mona Lisa (http://rogeralsing.com/2008/12/07/genetic-programming-evolution-of-mona-lisa/).
  * It attempts to find the combination of 50 translucent polygons that most closely
  * resembles Leonardo da Vinci's Mona Lisa.
+ *
  * @author Daniel Dyer
  */
 package org.uncommons.watchmaker.examples.monalisa;

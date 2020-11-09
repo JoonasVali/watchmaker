@@ -21,14 +21,13 @@ import org.uncommons.maths.binary.BitString;
 /**
  * Simple unit test for the bits example.  Makes sure that the evolution engine
  * eventually returns the expected result.
+ *
  * @author Daniel Dyer
  */
-public class BitsExampleTest
-{
-    @Test
-    public void testEvolution()
-    {
-        BitString result = BitsExample.evolveBits(8);
-        assert result.toString().equals("11111111") : "Wrong result returned: " + result.toString();
-    }
+public class BitsExampleTest {
+  @Test
+  public void testEvolution() {
+    BitString result = BitsExample.evolveBits(8);
+    assert result.toString().equals("11111111") : "Wrong result returned: " + result.toString();
+  }
 }

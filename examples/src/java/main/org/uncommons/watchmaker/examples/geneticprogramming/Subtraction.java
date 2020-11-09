@@ -17,64 +17,56 @@ package org.uncommons.watchmaker.examples.geneticprogramming;
 
 /**
  * Simple subtraction operator {@link Node}.
+ *
  * @author Daniel Dyer
  */
-public class Subtraction extends BinaryNode
-{
-    /**
-     * Creates a node that evaluates the the value of {@literal left}
-     * minus the value of {@literal right}.
-     * @param left The first operand.
-     * @param right The second operand.
-     */
-    public Subtraction(Node left, Node right)
-    {
-        super(left, right, '-');
+public class Subtraction extends BinaryNode {
+  /**
+   * Creates a node that evaluates the the value of {@literal left}
+   * minus the value of {@literal right}.
+   *
+   * @param left  The first operand.
+   * @param right The second operand.
+   */
+  public Subtraction(Node left, Node right) {
+    super(left, right, '-');
+  }
+
+
+  /**
+   * Evaluates the two sub-trees and returns the difference between these two values.
+   *
+   * @param programParameters Program parameters (ignored by the subtraction operator
+   *                          but may be used in evaluating the sub-trees).
+   * @return The difference between the values of the two child nodes.
+   */
+  public double evaluate(double[] programParameters) {
+    return left.evaluate(programParameters) - right.evaluate(programParameters);
+  }
+
+
+  /**
+   * {@inheritDoc}
+   */
+  public Node simplify() {
+    Node simplifiedLeft = left.simplify();
+    Node simplifiedRight = right.simplify();
+    // If the two arguments are identical then the result will always be zero.
+    if (simplifiedLeft.equals(simplifiedRight)) {
+      return new Constant(0);
     }
-
-
-    /**
-     * Evaluates the two sub-trees and returns the difference between these two values.
-     * @param programParameters Program parameters (ignored by the subtraction operator
-     * but may be used in evaluating the sub-trees).
-     * @return The difference between the values of the two child nodes.
-     */
-    public double evaluate(double[] programParameters)
-    {
-        return left.evaluate(programParameters) - right.evaluate(programParameters);
+    // Subtracting zero is pointless, the expression can be reduced to its lefthand side.
+    else if (simplifiedRight instanceof Constant && simplifiedRight.evaluate(NO_ARGS) == 0) {
+      return simplifiedLeft;
     }
-
-
-    /**
-     * {@inheritDoc}
-     */
-    public Node simplify()
-    {
-        Node simplifiedLeft = left.simplify();
-        Node simplifiedRight = right.simplify();
-        // If the two arguments are identical then the result will always be zero.
-        if (simplifiedLeft.equals(simplifiedRight))
-        {
-            return new Constant(0);
-        }
-        // Subtracting zero is pointless, the expression can be reduced to its lefthand side.
-        else if (simplifiedRight instanceof Constant && simplifiedRight.evaluate(NO_ARGS) == 0)
-        {
-            return simplifiedLeft;
-        }
-        // If the two arguments are constants, we can simplify by calculating the result, it won't
-        // ever change.
-        else if (simplifiedLeft instanceof Constant && simplifiedRight instanceof Constant)
-        {
-            return new Constant(simplifiedLeft.evaluate(NO_ARGS) - simplifiedRight.evaluate(NO_ARGS));
-        }
-        else if (simplifiedLeft != left || simplifiedRight != right)
-        {
-            return new Subtraction(simplifiedLeft, simplifiedRight);
-        }
-        else
-        {
-            return this;
-        }
+    // If the two arguments are constants, we can simplify by calculating the result, it won't
+    // ever change.
+    else if (simplifiedLeft instanceof Constant && simplifiedRight instanceof Constant) {
+      return new Constant(simplifiedLeft.evaluate(NO_ARGS) - simplifiedRight.evaluate(NO_ARGS));
+    } else if (simplifiedLeft != left || simplifiedRight != right) {
+      return new Subtraction(simplifiedLeft, simplifiedRight);
+    } else {
+      return this;
     }
+  }
 }

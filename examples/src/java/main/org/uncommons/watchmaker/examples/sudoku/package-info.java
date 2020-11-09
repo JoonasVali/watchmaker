@@ -15,6 +15,7 @@
 //=============================================================================
 /**
  * An evolutionary Sudoku solver.
+ *
  * @author Daniel Dyer
  */
 package org.uncommons.watchmaker.examples.sudoku;

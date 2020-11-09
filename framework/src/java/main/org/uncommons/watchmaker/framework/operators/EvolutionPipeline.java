@@ -18,6 +18,7 @@ package org.uncommons.watchmaker.framework.operators;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
 /**
@@ -30,41 +31,38 @@ import org.uncommons.watchmaker.framework.EvolutionaryOperator;
  * @param <T> The type of evolved candidate that this pipeline operates on.
  * @author Daniel Dyer
  */
-public class EvolutionPipeline<T> implements EvolutionaryOperator<T>
-{
-    private final List<EvolutionaryOperator<T>> pipeline;
+public class EvolutionPipeline<T> implements EvolutionaryOperator<T> {
+  private final List<EvolutionaryOperator<T>> pipeline;
 
 
-    /**
-     * Creates a pipeline consisting of the specified operators in
-     * the order that they are supplied.
-     * @param pipeline An ordered list of operators that make up the
-     * pipeline.
-     */
-    public EvolutionPipeline(List<EvolutionaryOperator<T>> pipeline)
-    {
-        if (pipeline.isEmpty())
-        {
-            throw new IllegalArgumentException("Pipeline must contain at least one operator.");
-        }
-        this.pipeline = new ArrayList<EvolutionaryOperator<T>>(pipeline);
+  /**
+   * Creates a pipeline consisting of the specified operators in
+   * the order that they are supplied.
+   *
+   * @param pipeline An ordered list of operators that make up the
+   *                 pipeline.
+   */
+  public EvolutionPipeline(List<EvolutionaryOperator<T>> pipeline) {
+    if (pipeline.isEmpty()) {
+      throw new IllegalArgumentException("Pipeline must contain at least one operator.");
     }
+    this.pipeline = new ArrayList<EvolutionaryOperator<T>>(pipeline);
+  }
 
 
-    /**
-     * Applies each operation in the pipeline in turn to the selection.
-     * @param selectedCandidates The candidates to subjected to evolution.
-     * @param rng A source of randomness used by all stochastic processes in
-     * the pipeline.
-     * @return A list of evolved candidates.
-     */
-    public List<T> apply(List<T> selectedCandidates, Random rng)
-    {
-        List<T> population = selectedCandidates;
-        for (EvolutionaryOperator<T> operator : pipeline)
-        {
-            population = operator.apply(population, rng);
-        }
-        return population;
+  /**
+   * Applies each operation in the pipeline in turn to the selection.
+   *
+   * @param selectedCandidates The candidates to subjected to evolution.
+   * @param rng                A source of randomness used by all stochastic processes in
+   *                           the pipeline.
+   * @return A list of evolved candidates.
+   */
+  public List<T> apply(List<T> selectedCandidates, Random rng) {
+    List<T> population = selectedCandidates;
+    for (EvolutionaryOperator<T> operator : pipeline) {
+      population = operator.apply(population, rng);
     }
+    return population;
+  }
 }

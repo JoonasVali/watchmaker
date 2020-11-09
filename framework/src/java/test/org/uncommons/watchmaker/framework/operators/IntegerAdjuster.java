@@ -18,28 +18,26 @@ package org.uncommons.watchmaker.framework.operators;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
 /**
  * Trivial test operator that mutates all integers by adding a fixed offset.
+ *
  * @author Daniel Dyer
  */
-public final class IntegerAdjuster implements EvolutionaryOperator<Integer>
-{
-    private final int adjustment;
+public final class IntegerAdjuster implements EvolutionaryOperator<Integer> {
+  private final int adjustment;
 
-    public IntegerAdjuster(int adjustment)
-    {
-        this.adjustment = adjustment;
-    }
+  public IntegerAdjuster(int adjustment) {
+    this.adjustment = adjustment;
+  }
 
-    public List<Integer> apply(List<Integer> selectedCandidates, Random rng)
-    {
-        List<Integer> result = new ArrayList<Integer>(selectedCandidates.size());
-        for (Integer i : selectedCandidates)
-        {
-            result.add(i + adjustment);
-        }
-        return result;
+  public List<Integer> apply(List<Integer> selectedCandidates, Random rng) {
+    List<Integer> result = new ArrayList<Integer>(selectedCandidates.size());
+    for (Integer i : selectedCandidates) {
+      result.add(i + adjustment);
     }
+    return result;
+  }
 }

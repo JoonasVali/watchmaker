@@ -17,6 +17,7 @@ package org.uncommons.watchmaker.examples.geneticprogramming;
 
 import java.util.List;
 import java.util.Map;
+
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
 /**
@@ -25,55 +26,53 @@ import org.uncommons.watchmaker.framework.FitnessEvaluator;
  * expected outputs.  If the evolved program correctly calculates the right answer
  * for all sets of inputs then it has a fitness of zero.  Otherwise, its fitness
  * is an error value that indicates how accurate it was (the larger the combined
- * error value, the less accurate the function is). 
+ * error value, the less accurate the function is).
+ *
  * @author Daniel Dyer
  */
-public class TreeEvaluator implements FitnessEvaluator<Node>
-{
-    private final Map<double[], Double> data;
+public class TreeEvaluator implements FitnessEvaluator<Node> {
+  private final Map<double[], Double> data;
 
 
-    /**
-     * @param data Each row is consists of a set of inputs and an expected output (the
-     * last item in the row is the output).
-     */
-    public TreeEvaluator(Map<double[], Double> data)
-    {
-        this.data = data;
+  /**
+   * @param data Each row is consists of a set of inputs and an expected output (the
+   *             last item in the row is the output).
+   */
+  public TreeEvaluator(Map<double[], Double> data) {
+    this.data = data;
+  }
+
+
+  /**
+   * If the evolved program correctly calculates the right answer
+   * for all sets of inputs then it has a fitness of zero.  Otherwise, its fitness
+   * is an error value that indicates how accurate it was (the larger the combined
+   * error value, the less accurate the function is).
+   * The combined error value is calculated by summing the squares of each individual
+   * error (the difference between the expected output and the actual output).
+   *
+   * @param candidate  The program tree to evaluate.
+   * @param population Ignored by this implementation.
+   * @return The fitness score for the specified candidate.
+   */
+  public double getFitness(Node candidate, List<? extends Node> population) {
+    double error = 0;
+    for (Map.Entry<double[], Double> entry : data.entrySet()) {
+      double actualValue = candidate.evaluate(entry.getKey());
+      double diff = actualValue - entry.getValue();
+      error += (diff * diff);
     }
+    return error;
+  }
 
 
-    /**
-     * If the evolved program correctly calculates the right answer
-     * for all sets of inputs then it has a fitness of zero.  Otherwise, its fitness
-     * is an error value that indicates how accurate it was (the larger the combined
-     * error value, the less accurate the function is).
-     * The combined error value is calculated by summing the squares of each individual
-     * error (the difference between the expected output and the actual output).
-     * @param candidate The program tree to evaluate.
-     * @param population Ignored by this implementation.
-     * @return The fitness score for the specified candidate.
-     */
-    public double getFitness(Node candidate, List<? extends Node> population)
-    {
-        double error = 0;
-        for (Map.Entry<double[], Double> entry : data.entrySet())
-        {
-            double actualValue = candidate.evaluate(entry.getKey());
-            double diff = actualValue - entry.getValue();
-            error += (diff * diff);
-        }
-        return error;
-    }
-
-
-    /**
-     * This fitness evaluator is a minimising function.  A fitness of zero
-     * indicates a perfect solution.
-     * @return false
-     */
-    public boolean isNatural()
-    {
-        return false;
-    }
+  /**
+   * This fitness evaluator is a minimising function.  A fitness of zero
+   * indicates a perfect solution.
+   *
+   * @return false
+   */
+  public boolean isNatural() {
+    return false;
+  }
 }

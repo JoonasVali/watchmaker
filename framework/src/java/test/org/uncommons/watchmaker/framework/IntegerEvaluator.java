@@ -19,19 +19,17 @@ import java.util.List;
 
 /**
  * Trivial fitness evaluator for integers.  Used by unit tests.
+ *
  * @author Daniel Dyer
  */
-final class IntegerEvaluator implements FitnessEvaluator<Integer>
-{
+final class IntegerEvaluator implements FitnessEvaluator<Integer> {
 
-    public double getFitness(Integer candidate,
-                             List<? extends Integer> population)
-    {
-        return candidate;
-    }
+  public double getFitness(Integer candidate,
+                           List<? extends Integer> population) {
+    return candidate;
+  }
 
-    public boolean isNatural()
-    {
-        return true;
-    }
+  public boolean isNatural() {
+    return true;
+  }
 }

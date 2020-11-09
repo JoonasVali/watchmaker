@@ -21,40 +21,35 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * Thread-safe ID source that wraps another source of IDs and adds a fixed String
  * prefix to each ID generated.
+ *
  * @author Daniel Dyer
  */
-public class StringPrefixIDSource implements IDSource<String>
-{
-    private final Lock lock = new ReentrantLock();
-    private final String prefix;
-    private final IDSource<?> source;
+public class StringPrefixIDSource implements IDSource<String> {
+  private final Lock lock = new ReentrantLock();
+  private final String prefix;
+  private final IDSource<?> source;
 
-    /**
-     * @param prefix A fixed String that is attached to the front of each ID.
-     * @param source The source of IDs to which the prefix is added.
-     */
-    public StringPrefixIDSource(String prefix, IDSource<?> source)
-    {
-        this.prefix = prefix;
-        this.source = source;
+  /**
+   * @param prefix A fixed String that is attached to the front of each ID.
+   * @param source The source of IDs to which the prefix is added.
+   */
+  public StringPrefixIDSource(String prefix, IDSource<?> source) {
+    this.prefix = prefix;
+    this.source = source;
+  }
+
+
+  /**
+   * {@inheritDoc}
+   */
+  public String nextID() {
+    lock.lock();
+    try {
+      StringBuilder output = new StringBuilder(prefix);
+      output.append(source.nextID());
+      return output.toString();
+    } finally {
+      lock.unlock();
     }
-
-
-    /**
-     * {@inheritDoc}
-     */
-    public String nextID()
-    {
-        lock.lock();
-        try
-        {
-            StringBuilder output = new StringBuilder(prefix);
-            output.append(source.nextID());
-            return output.toString();
-        }
-        finally
-        {
-            lock.unlock();
-        }
-    }
+  }
 }

@@ -17,6 +17,7 @@ package org.uncommons.watchmaker.examples.travellingsalesman;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
+
 import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.Robot;
 import org.fest.swing.fixture.FrameFixture;
@@ -28,92 +29,87 @@ import org.testng.annotations.Test;
  * Basic unit test for the {@link StrategyPanel} used by the Travelling
  * Salesman example applet.  Makes sure that it returns the correct type
  * of solver strategy depending on the radio button settings.
+ *
  * @author Daniel Dyer
  */
-public class StrategyPanelTest
-{
-    private static final TestDistances CITIES = new TestDistances();
-    
-    private Robot robot;
+public class StrategyPanelTest {
+  private static final TestDistances CITIES = new TestDistances();
 
-    @BeforeMethod
-    public void prepare()
-    {
-        robot = BasicRobot.robotWithNewAwtHierarchy();
-    }
+  private Robot robot;
+
+  @BeforeMethod
+  public void prepare() {
+    robot = BasicRobot.robotWithNewAwtHierarchy();
+  }
 
 
-    @AfterMethod
-    public void cleanUp()
-    {
-        robot.cleanUp();
-        robot = null;
-    }
-
-    
-    @Test(groups = "display-required")
-    public void testBruteForceOption()
-    {
-        StrategyPanel strategyPanel = new StrategyPanel(CITIES);
-        JFrame frame = new JFrame();
-        frame.add(strategyPanel, BorderLayout.CENTER);
-        FrameFixture frameFixture = new FrameFixture(robot, frame);
-        frame.setSize(500, 300);
-        frame.validate();
-        frame.setVisible(true);
-        robot.waitForIdle();
-
-        // Evolution controls should be enabled by default.
-        frameFixture.panel("EvolutionPanel").requireEnabled();
-
-        frameFixture.radioButton("BruteForceOption").click();
-
-        // Evolution controls should be disabled when brute force option is selected.
-        frameFixture.panel("EvolutionPanel").requireDisabled();
-
-        TravellingSalesmanStrategy strategy = strategyPanel.getStrategy();
-        assert strategy instanceof BruteForceTravellingSalesman : "Wrong strategy class: " + strategy.getClass();
-    }
+  @AfterMethod
+  public void cleanUp() {
+    robot.cleanUp();
+    robot = null;
+  }
 
 
-    @Test(groups = "display-required")
-    public void testEvolutionOption()
-    {
-        StrategyPanel strategyPanel = new StrategyPanel(CITIES);
-        JFrame frame = new JFrame();
-        frame.add(strategyPanel, BorderLayout.CENTER);
-        FrameFixture frameFixture = new FrameFixture(robot, frame);
-        frame.setSize(500, 300);
-        frame.validate();
-        frame.setVisible(true);
-        robot.waitForIdle();
+  @Test(groups = "display-required")
+  public void testBruteForceOption() {
+    StrategyPanel strategyPanel = new StrategyPanel(CITIES);
+    JFrame frame = new JFrame();
+    frame.add(strategyPanel, BorderLayout.CENTER);
+    FrameFixture frameFixture = new FrameFixture(robot, frame);
+    frame.setSize(500, 300);
+    frame.validate();
+    frame.setVisible(true);
+    robot.waitForIdle();
 
-        frameFixture.radioButton("EvolutionOption").click();
-        TravellingSalesmanStrategy strategy = strategyPanel.getStrategy();
-        assert strategy instanceof EvolutionaryTravellingSalesman : "Wrong strategy class: " + strategy.getClass();
-    }
+    // Evolution controls should be enabled by default.
+    frameFixture.panel("EvolutionPanel").requireEnabled();
+
+    frameFixture.radioButton("BruteForceOption").click();
+
+    // Evolution controls should be disabled when brute force option is selected.
+    frameFixture.panel("EvolutionPanel").requireDisabled();
+
+    TravellingSalesmanStrategy strategy = strategyPanel.getStrategy();
+    assert strategy instanceof BruteForceTravellingSalesman : "Wrong strategy class: " + strategy.getClass();
+  }
 
 
-    @Test(groups = "display-required")
-    public void testDisablePanel()
-    {
-        StrategyPanel strategyPanel = new StrategyPanel(CITIES);
-        JFrame frame = new JFrame();
-        frame.add(strategyPanel, BorderLayout.CENTER);
-        FrameFixture frameFixture = new FrameFixture(robot, frame);
-        frame.setSize(500, 300);
-        frame.validate();
-        frame.setVisible(true);
-        robot.waitForIdle();
+  @Test(groups = "display-required")
+  public void testEvolutionOption() {
+    StrategyPanel strategyPanel = new StrategyPanel(CITIES);
+    JFrame frame = new JFrame();
+    frame.add(strategyPanel, BorderLayout.CENTER);
+    FrameFixture frameFixture = new FrameFixture(robot, frame);
+    frame.setSize(500, 300);
+    frame.validate();
+    frame.setVisible(true);
+    robot.waitForIdle();
 
-        // Components should be enabled initially.
-        frameFixture.radioButton("EvolutionOption").requireEnabled();
-        frameFixture.panel("EvolutionPanel").requireEnabled();
-        frameFixture.radioButton("BruteForceOption").requireEnabled();
+    frameFixture.radioButton("EvolutionOption").click();
+    TravellingSalesmanStrategy strategy = strategyPanel.getStrategy();
+    assert strategy instanceof EvolutionaryTravellingSalesman : "Wrong strategy class: " + strategy.getClass();
+  }
 
-        strategyPanel.setEnabled(false);
-        frameFixture.radioButton("EvolutionOption").requireDisabled();
-        frameFixture.panel("EvolutionPanel").requireDisabled();
-        frameFixture.radioButton("BruteForceOption").requireDisabled();        
-    }
+
+  @Test(groups = "display-required")
+  public void testDisablePanel() {
+    StrategyPanel strategyPanel = new StrategyPanel(CITIES);
+    JFrame frame = new JFrame();
+    frame.add(strategyPanel, BorderLayout.CENTER);
+    FrameFixture frameFixture = new FrameFixture(robot, frame);
+    frame.setSize(500, 300);
+    frame.validate();
+    frame.setVisible(true);
+    robot.waitForIdle();
+
+    // Components should be enabled initially.
+    frameFixture.radioButton("EvolutionOption").requireEnabled();
+    frameFixture.panel("EvolutionPanel").requireEnabled();
+    frameFixture.radioButton("BruteForceOption").requireEnabled();
+
+    strategyPanel.setEnabled(false);
+    frameFixture.radioButton("EvolutionOption").requireDisabled();
+    frameFixture.panel("EvolutionPanel").requireDisabled();
+    frameFixture.radioButton("BruteForceOption").requireDisabled();
+  }
 }

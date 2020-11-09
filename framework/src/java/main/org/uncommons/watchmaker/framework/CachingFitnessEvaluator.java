@@ -16,6 +16,7 @@
 package org.uncommons.watchmaker.framework;
 
 import com.google.common.collect.MapMaker;
+
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
@@ -37,7 +38,7 @@ import java.util.concurrent.ConcurrentMap;
  * except when the candidate is unaffected by the evolution, as per the contract of the
  * {@link EvolutionaryOperator} interface.  In other words, the Watchmaker Framework
  * treats candidate representations as immutable even when that is not strictly the case.</p>
- * 
+ *
  * <p>Caching of fitness scores is provided as an option rather than as the default
  * Watchmaker Framework behaviour because caching is only valid when fitness evaluations
  * are <em>isolated</em> and repeatable.  An isolated fitness evaluation is one where the
@@ -45,53 +46,49 @@ import java.util.concurrent.ConcurrentMap;
  * candidates are evaluated against the other members of the population.  So unless the
  * fitness evaluator ignores the second parameter to the
  * {@link #getFitness(Object, List)} method, caching must not be used.</p>
+ *
  * @param <T> The type of evolvable entity that can be evaluated.
- * 
  * @author Daniel Dyer
  */
-public class CachingFitnessEvaluator<T> implements FitnessEvaluator<T>
-{
-    private final FitnessEvaluator<T> delegate;
+public class CachingFitnessEvaluator<T> implements FitnessEvaluator<T> {
+  private final FitnessEvaluator<T> delegate;
 
-    // This field is marked as transient, even though the class is not Serializable, because
-    // Terracotta will respect the fact it is transient and not try to share it.
-    private final transient ConcurrentMap<T, Double> cache = new MapMaker().weakKeys().makeMap();
+  // This field is marked as transient, even though the class is not Serializable, because
+  // Terracotta will respect the fact it is transient and not try to share it.
+  private final transient ConcurrentMap<T, Double> cache = new MapMaker().weakKeys().makeMap();
 
 
-    /**
-     * Creates a caching fitness evaluator that wraps the specified evaluator.
-     * @param delegate The fitness evaluator that performs the actual calculations.
-     */
-    public CachingFitnessEvaluator(FitnessEvaluator<T> delegate)
-    {
-        this.delegate = delegate;
+  /**
+   * Creates a caching fitness evaluator that wraps the specified evaluator.
+   *
+   * @param delegate The fitness evaluator that performs the actual calculations.
+   */
+  public CachingFitnessEvaluator(FitnessEvaluator<T> delegate) {
+    this.delegate = delegate;
+  }
+
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>This implementation performs a cache look-up every time it is invoked.  If the
+   * fitness evaluator has already calculated the fitness score for the specified
+   * candidate that score is returned without delegating to the wrapped evaluator.</p>
+   */
+  public double getFitness(T candidate, List<? extends T> population) {
+    Double fitness = cache.get(candidate);
+    if (fitness == null) {
+      fitness = delegate.getFitness(candidate, population);
+      cache.put(candidate, fitness);
     }
+    return fitness;
+  }
 
 
-    /**
-     * {@inheritDoc}
-     *
-     * <p>This implementation performs a cache look-up every time it is invoked.  If the
-     * fitness evaluator has already calculated the fitness score for the specified
-     * candidate that score is returned without delegating to the wrapped evaluator.</p>
-     */
-    public double getFitness(T candidate, List<? extends T> population)
-    {
-        Double fitness = cache.get(candidate);
-        if (fitness == null)
-        {
-            fitness = delegate.getFitness(candidate, population);
-            cache.put(candidate, fitness);
-        }
-        return fitness;
-    }
-
-
-    /**
-     * {@inheritDoc}
-     */
-    public boolean isNatural()
-    {
-        return delegate.isNatural();
-    }
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isNatural() {
+    return delegate.isNatural();
+  }
 }

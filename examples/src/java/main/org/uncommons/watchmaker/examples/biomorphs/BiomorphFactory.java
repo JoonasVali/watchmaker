@@ -16,29 +16,29 @@
 package org.uncommons.watchmaker.examples.biomorphs;
 
 import java.util.Random;
+
 import org.uncommons.watchmaker.framework.factories.AbstractCandidateFactory;
 
 /**
  * Candidate factory for creating random biomorphs.
+ *
  * @author Daniel Dyer
  */
-public class BiomorphFactory extends AbstractCandidateFactory<Biomorph>
-{
-    /**
-     * Generates a random biomorph by providing a random value for each gene.
-     * @param rng The source of randomness used to generate the biomoprh. 
-     * @return A randomly-generated biomorph.
-     */
-    public Biomorph generateRandomCandidate(Random rng)
-    {
-        int[] genes = new int[Biomorph.GENE_COUNT];
-        for (int i = 0; i < Biomorph.GENE_COUNT - 1; i++)
-        {
-            // First 8 genes have values between -5 and 5.
-            genes[i] = rng.nextInt(11) - 5;
-        }
-        // Last genes ha a value between 1 and 7.
-        genes[Biomorph.LENGTH_GENE_INDEX] = rng.nextInt(Biomorph.LENGTH_GENE_MAX) + 1;
-        return new Biomorph(genes);
+public class BiomorphFactory extends AbstractCandidateFactory<Biomorph> {
+  /**
+   * Generates a random biomorph by providing a random value for each gene.
+   *
+   * @param rng The source of randomness used to generate the biomoprh.
+   * @return A randomly-generated biomorph.
+   */
+  public Biomorph generateRandomCandidate(Random rng) {
+    int[] genes = new int[Biomorph.GENE_COUNT];
+    for (int i = 0; i < Biomorph.GENE_COUNT - 1; i++) {
+      // First 8 genes have values between -5 and 5.
+      genes[i] = rng.nextInt(11) - 5;
     }
+    // Last genes ha a value between 1 and 7.
+    genes[Biomorph.LENGTH_GENE_INDEX] = rng.nextInt(Biomorph.LENGTH_GENE_MAX) + 1;
+    return new Biomorph(genes);
+  }
 }

@@ -33,12 +33,12 @@
   </info>
 
   <!-- Chapters -->
-  <xi:include href="evolution.xml" />
-  <xi:include href="watchmaker.xml" />
-  <xi:include href="selection.xml" />
-  <xi:include href="islands.xml" />
+  <xi:include href="evolution.xml"/>
+  <xi:include href="watchmaker.xml"/>
+  <xi:include href="selection.xml"/>
+  <xi:include href="islands.xml"/>
 
   <!-- Appendices -->
-  <xi:include href="performance.xml" />
+  <xi:include href="performance.xml"/>
 
 </book>

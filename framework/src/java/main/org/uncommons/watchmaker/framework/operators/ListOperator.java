@@ -18,6 +18,7 @@ package org.uncommons.watchmaker.framework.operators;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
 /**
@@ -33,36 +34,33 @@ import org.uncommons.watchmaker.framework.EvolutionaryOperator;
  * @param <T> The element type of the lists to be mutated.
  * @author Daniel Dyer
  */
-public class ListOperator <T> implements EvolutionaryOperator<List<T>>
-{
-    private final EvolutionaryOperator<T> delegate;
+public class ListOperator<T> implements EvolutionaryOperator<List<T>> {
+  private final EvolutionaryOperator<T> delegate;
 
-    /**
-     * @param delegate The evolutionary operator that will be applied to each
-     * list candidate.
-     */
-    public ListOperator(EvolutionaryOperator<T> delegate)
-    {
-        this.delegate = delegate;
+  /**
+   * @param delegate The evolutionary operator that will be applied to each
+   *                 list candidate.
+   */
+  public ListOperator(EvolutionaryOperator<T> delegate) {
+    this.delegate = delegate;
+  }
+
+
+  /**
+   * Applies the configured operator to each list candidate, operating on the elements
+   * that make up a candidate rather than on the list of candidates.
+   * candidates and returns the results.
+   *
+   * @param selectedCandidates A list of list candidates.
+   * @param rng                A source of randomness.
+   * @return The result of applying the configured operator to each element
+   * in each list candidates.
+   */
+  public List<List<T>> apply(List<List<T>> selectedCandidates, Random rng) {
+    List<List<T>> output = new ArrayList<List<T>>(selectedCandidates.size());
+    for (List<T> item : selectedCandidates) {
+      output.add(delegate.apply(item, rng));
     }
-
-
-    /**
-     * Applies the configured operator to each list candidate, operating on the elements
-     * that make up a candidate rather than on the list of candidates.
-     * candidates and returns the results.
-     * @param selectedCandidates A list of list candidates.
-     * @param rng A source of randomness.
-     * @return The result of applying the configured operator to each element
-     * in each list candidates.
-     */
-    public List<List<T>> apply(List<List<T>> selectedCandidates, Random rng)
-    {
-        List<List<T>> output = new ArrayList<List<T>>(selectedCandidates.size());
-        for (List<T> item : selectedCandidates)
-        {
-            output.add(delegate.apply(item, rng));
-        }
-        return output;
-    }
+    return output;
+  }
 }

@@ -22,17 +22,18 @@ import org.uncommons.watchmaker.framework.PopulationData;
  * A specialisation of {@link org.uncommons.watchmaker.framework.EvolutionObserver} that, as well as
  * receiving global population updates (at the end of each epoch), can receive individual island
  * population updates (at the end of each generation on each island).
+ *
  * @param <T> The type of entity being evolved.
  * @author Daniel Dyer
  */
-public interface IslandEvolutionObserver<T> extends EvolutionObserver<T>
-{
-    /**
-     * Method called to notify the listener of the state of the population of an individual
-     * island.  This will be called once for each generation on each island.
-     * @param islandIndex Identifies which individual island the data comes from.
-     * Indices start at zero and are sequential.
-     * @param data The latest data from the evolution on the specified island.
-     */
-    void islandPopulationUpdate(int islandIndex, PopulationData<? extends T> data);
+public interface IslandEvolutionObserver<T> extends EvolutionObserver<T> {
+  /**
+   * Method called to notify the listener of the state of the population of an individual
+   * island.  This will be called once for each generation on each island.
+   *
+   * @param islandIndex Identifies which individual island the data comes from.
+   *                    Indices start at zero and are sequential.
+   * @param data        The latest data from the evolution on the specified island.
+   */
+  void islandPopulationUpdate(int islandIndex, PopulationData<? extends T> data);
 }

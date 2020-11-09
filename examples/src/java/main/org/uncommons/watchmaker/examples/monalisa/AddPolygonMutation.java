@@ -18,6 +18,7 @@ package org.uncommons.watchmaker.examples.monalisa;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.maths.number.ConstantGenerator;
 import org.uncommons.maths.number.NumberGenerator;
 import org.uncommons.maths.random.Probability;
@@ -26,72 +27,64 @@ import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 /**
  * Randomly mutates the polygons that make up an image by adding a polygon
  * according to some probability.
+ *
  * @author Daniel Dyer
  */
-public class AddPolygonMutation implements EvolutionaryOperator<List<ColouredPolygon>>
-{
-    private final NumberGenerator<Probability> addPolygonProbability;
-    private final PolygonImageFactory factory;
-    private final int maxPolygons;
+public class AddPolygonMutation implements EvolutionaryOperator<List<ColouredPolygon>> {
+  private final NumberGenerator<Probability> addPolygonProbability;
+  private final PolygonImageFactory factory;
+  private final int maxPolygons;
 
 
-
-    /**
-     * @param addPolygonProbability A {@link NumberGenerator} that controls the probability
-     * that a polygon will be added.
-     * @param factory Used to create new polygons.
-     * @param maxPolygons The maximum number of polygons permitted in an image (must be at least 2).
-     */
-    public AddPolygonMutation(NumberGenerator<Probability> addPolygonProbability,
-                              PolygonImageFactory factory,
-                              int maxPolygons)
-    {
-        if (maxPolygons < 2)
-        {
-            throw new IllegalArgumentException("Max polygons must be > 1.");
-        }
-        this.addPolygonProbability = addPolygonProbability;
-        this.factory = factory;
-        this.maxPolygons = maxPolygons;
+  /**
+   * @param addPolygonProbability A {@link NumberGenerator} that controls the probability
+   *                              that a polygon will be added.
+   * @param factory               Used to create new polygons.
+   * @param maxPolygons           The maximum number of polygons permitted in an image (must be at least 2).
+   */
+  public AddPolygonMutation(NumberGenerator<Probability> addPolygonProbability,
+                            PolygonImageFactory factory,
+                            int maxPolygons) {
+    if (maxPolygons < 2) {
+      throw new IllegalArgumentException("Max polygons must be > 1.");
     }
+    this.addPolygonProbability = addPolygonProbability;
+    this.factory = factory;
+    this.maxPolygons = maxPolygons;
+  }
 
 
-    /**
-     * @param addPolygonProbability The probability that a polygon will be removed.
-     * @param factory Used to create new polygons.
-     * @param maxPolygons The maximum number of polygons permitted in an image (must be at least 2).
-     */
-    public AddPolygonMutation(Probability addPolygonProbability,
-                              PolygonImageFactory factory,
-                              int maxPolygons)
-    {
-        this(new ConstantGenerator<Probability>(addPolygonProbability),
-             factory,
-             maxPolygons);
+  /**
+   * @param addPolygonProbability The probability that a polygon will be removed.
+   * @param factory               Used to create new polygons.
+   * @param maxPolygons           The maximum number of polygons permitted in an image (must be at least 2).
+   */
+  public AddPolygonMutation(Probability addPolygonProbability,
+                            PolygonImageFactory factory,
+                            int maxPolygons) {
+    this(new ConstantGenerator<Probability>(addPolygonProbability),
+        factory,
+        maxPolygons);
+  }
+
+
+  public List<List<ColouredPolygon>> apply(List<List<ColouredPolygon>> selectedCandidates, Random rng) {
+    List<List<ColouredPolygon>> mutatedCandidates = new ArrayList<List<ColouredPolygon>>(selectedCandidates.size());
+    for (List<ColouredPolygon> candidate : selectedCandidates) {
+      // A single polygon is added with the configured probability, unless
+      // we already have the maximum permitted number of polygons.
+      if (candidate.size() < maxPolygons && addPolygonProbability.nextValue().nextEvent(rng)) {
+        List<ColouredPolygon> newPolygons = new ArrayList<ColouredPolygon>(candidate);
+        newPolygons.add(rng.nextInt(newPolygons.size() + 1),
+            factory.createRandomPolygon(rng));
+        mutatedCandidates.add(newPolygons);
+      } else // Nothing changed.
+      {
+        mutatedCandidates.add(candidate);
+      }
     }
-
-
-    public List<List<ColouredPolygon>> apply(List<List<ColouredPolygon>> selectedCandidates, Random rng)
-    {
-        List<List<ColouredPolygon>> mutatedCandidates = new ArrayList<List<ColouredPolygon>>(selectedCandidates.size());
-        for (List<ColouredPolygon> candidate : selectedCandidates)
-        {
-            // A single polygon is added with the configured probability, unless
-            // we already have the maximum permitted number of polygons.
-            if (candidate.size() < maxPolygons && addPolygonProbability.nextValue().nextEvent(rng))
-            {
-                List<ColouredPolygon> newPolygons = new ArrayList<ColouredPolygon>(candidate);
-                newPolygons.add(rng.nextInt(newPolygons.size() + 1),
-                                factory.createRandomPolygon(rng));
-                mutatedCandidates.add(newPolygons);
-            }
-            else // Nothing changed.
-            {
-                mutatedCandidates.add(candidate);
-            }
-        }
-        return mutatedCandidates;
-    }
+    return mutatedCandidates;
+  }
 
 
 }

@@ -17,38 +17,37 @@ package org.uncommons.watchmaker.framework.operators;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.testng.annotations.Test;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.FrameworkTestUtils;
 
 /**
  * Unit test for string mutation operator.
+ *
  * @author Daniel Dyer
  */
-public class StringMutationTest
-{
-    private final char[] alphabet = {'a', 'b', 'c', 'd'};
+public class StringMutationTest {
+  private final char[] alphabet = {'a', 'b', 'c', 'd'};
 
-    @Test
-    public void testMutation()
-    {        
-        StringMutation mutation = new StringMutation(alphabet, Probability.EVENS);
-        String individual1 = "abcd";
-        String individual2 = "abab";
-        String individual3 = "cccc";
-        List<String> population = Arrays.asList(individual1, individual2, individual3);
-        for (int i = 0; i < 20; i++) // Perform several iterations.
-        {
-            population = mutation.apply(population, FrameworkTestUtils.getRNG());
-            assert population.size() == 3 : "Population size changed after mutation: " + population.size();
-            for (String individual : population) // Check that each individual is still valid.
-            {
-                assert individual.length() == 4 : "Individual size changed after mutation: " + individual.length();
-                for (char c : individual.toCharArray())
-                {
-                    assert c >= 'a' && c <= 'd' : "Mutation introduced invalid character: " + c; 
-                }
-            }
+  @Test
+  public void testMutation() {
+    StringMutation mutation = new StringMutation(alphabet, Probability.EVENS);
+    String individual1 = "abcd";
+    String individual2 = "abab";
+    String individual3 = "cccc";
+    List<String> population = Arrays.asList(individual1, individual2, individual3);
+    for (int i = 0; i < 20; i++) // Perform several iterations.
+    {
+      population = mutation.apply(population, FrameworkTestUtils.getRNG());
+      assert population.size() == 3 : "Population size changed after mutation: " + population.size();
+      for (String individual : population) // Check that each individual is still valid.
+      {
+        assert individual.length() == 4 : "Individual size changed after mutation: " + individual.length();
+        for (char c : individual.toCharArray()) {
+          assert c >= 'a' && c <= 'd' : "Mutation introduced invalid character: " + c;
         }
+      }
     }
+  }
 }

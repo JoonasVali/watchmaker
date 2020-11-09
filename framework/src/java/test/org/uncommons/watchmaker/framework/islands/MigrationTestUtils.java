@@ -16,40 +16,36 @@
 package org.uncommons.watchmaker.framework.islands;
 
 import org.uncommons.watchmaker.framework.EvaluatedCandidate;
+
 import java.util.List;
 import java.util.ArrayList;
 
 /**
  * Utility methods used by unit tests for migration strategies.
+ *
  * @author Daniel Dyer
  */
-class MigrationTestUtils
-{
-    private MigrationTestUtils()
-    {
-        // Prevents instantiation.
+class MigrationTestUtils {
+  private MigrationTestUtils() {
+    // Prevents instantiation.
+  }
+
+
+  public static <T> List<EvaluatedCandidate<T>> createTestPopulation(T... members) {
+    List<EvaluatedCandidate<T>> population = new ArrayList<EvaluatedCandidate<T>>(members.length);
+    for (T member : members) {
+      population.add(new EvaluatedCandidate<T>(member, 0));
     }
+    return population;
+  }
 
 
-    public static <T> List<EvaluatedCandidate<T>> createTestPopulation(T... members)
-    {
-        List<EvaluatedCandidate<T>> population = new ArrayList<EvaluatedCandidate<T>>(members.length);
-        for (T member : members)
-        {
-            population.add(new EvaluatedCandidate<T>(member, 0));
-        }
-        return population;
+  public static void testPopulationContents(List<EvaluatedCandidate<String>> actualPopulation,
+                                            String... expectedPopulation) {
+    assert actualPopulation.size() == expectedPopulation.length : "Wrong population size after migration.";
+    for (int i = 0; i < actualPopulation.size(); i++) {
+      assert actualPopulation.get(i).getCandidate().equals(expectedPopulation[i]) : "Wrong value at index " + i;
     }
-
-
-    public static void testPopulationContents(List<EvaluatedCandidate<String>> actualPopulation,
-                                              String... expectedPopulation)
-    {
-        assert actualPopulation.size() == expectedPopulation.length : "Wrong population size after migration.";
-        for (int i = 0; i < actualPopulation.size(); i++)
-        {
-            assert actualPopulation.get(i).getCandidate().equals(expectedPopulation[i]) : "Wrong value at index " + i;
-        }
-    }
+  }
 
 }

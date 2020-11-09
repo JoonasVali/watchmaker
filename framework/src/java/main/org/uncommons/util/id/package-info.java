@@ -15,6 +15,7 @@
 //=============================================================================
 /**
  * Strategies for providing unique identifiers of different types.
+ *
  * @author Daniel Dyer
  */
 package org.uncommons.util.id;

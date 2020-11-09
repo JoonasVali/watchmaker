@@ -16,6 +16,7 @@
 package org.uncommons.watchmaker.examples.geneticprogramming;
 
 import java.util.List;
+
 import org.testng.annotations.Test;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.examples.ExamplesTestUtils;
@@ -24,43 +25,39 @@ import org.uncommons.watchmaker.framework.CandidateFactory;
 /**
  * Unit test for the {@link TreeFactory} used by the gentic programming
  * example.
+ *
  * @author Daniel Dyer
  */
-public class TreeFactoryTest
-{
-    @Test
-    public void testMaxDepth()
-    {
-        final int maxDepth = 3;
-        CandidateFactory<Node> factory = new TreeFactory(2,
-                                                         maxDepth,
-                                                         new Probability(0.6),
-                                                         Probability.EVENS);
-        List<Node> trees = factory.generateInitialPopulation(20, ExamplesTestUtils.getRNG());
-        for (Node tree : trees)
-        {
-            // Make sure that each tree is no bigger than the maximum permitted.
-            assert tree.getDepth() <= maxDepth : "Generated tree is too deep: " + tree.getDepth();
-        }
+public class TreeFactoryTest {
+  @Test
+  public void testMaxDepth() {
+    final int maxDepth = 3;
+    CandidateFactory<Node> factory = new TreeFactory(2,
+        maxDepth,
+        new Probability(0.6),
+        Probability.EVENS);
+    List<Node> trees = factory.generateInitialPopulation(20, ExamplesTestUtils.getRNG());
+    for (Node tree : trees) {
+      // Make sure that each tree is no bigger than the maximum permitted.
+      assert tree.getDepth() <= maxDepth : "Generated tree is too deep: " + tree.getDepth();
     }
+  }
 
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testInvalidParameterCount()
-    {
-        new TreeFactory(-1,
-                        1,
-                        Probability.EVENS,
-                        Probability.EVENS); // Should throw an exception, parameter count can't be negative.
-    }
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testInvalidParameterCount() {
+    new TreeFactory(-1,
+        1,
+        Probability.EVENS,
+        Probability.EVENS); // Should throw an exception, parameter count can't be negative.
+  }
 
-    
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testInvalidMaxDepth()
-    {
-        new TreeFactory(1,
-                        0,
-                        Probability.EVENS,
-                        Probability.EVENS); // Should throw an exception, depth must be at least one.
-    }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testInvalidMaxDepth() {
+    new TreeFactory(1,
+        0,
+        Probability.EVENS,
+        Probability.EVENS); // Should throw an exception, depth must be at least one.
+  }
 }

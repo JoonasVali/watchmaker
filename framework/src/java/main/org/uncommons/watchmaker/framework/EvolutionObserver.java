@@ -40,18 +40,19 @@ package org.uncommons.watchmaker.framework;
  * executed synchronously.  The downside is that evolution threads are stalled/idle until
  * Swing has finished performing the updates.  This won't make much difference on a single
  * core machine but will impact throughput on multi-core machines.</p>
+ *
  * @param <T> The type of entity that exists in the evolving population
- * that is being observed.  This type can be bound to a super-type of the
- * actual population type so as to allow a non-specific observer that can
- * be re-used for different population types.
+ *            that is being observed.  This type can be bound to a super-type of the
+ *            actual population type so as to allow a non-specific observer that can
+ *            be re-used for different population types.
  * @author Daniel Dyer
  */
-public interface EvolutionObserver<T>
-{
-    /**
-     * Invoked when the state of the population has changed (typically
-     * at the end of a generation).
-     * @param data Statistics about the state of the current generation.
-     */
-    void populationUpdate(PopulationData<? extends T> data);
+public interface EvolutionObserver<T> {
+  /**
+   * Invoked when the state of the population has changed (typically
+   * at the end of a generation).
+   *
+   * @param data Statistics about the state of the current generation.
+   */
+  void populationUpdate(PopulationData<? extends T> data);
 }

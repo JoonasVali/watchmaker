@@ -20,39 +20,36 @@ import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
 /**
  * Unit test for fitness function used by the strings example.
+ *
  * @author Daniel Dyer
  */
-public class StringEvaluatorTest
-{
-    @Test
-    public void testIdentical()
-    {
-        String target = "abcdefgh";
-        String candidate = "abcdefgh";
-        FitnessEvaluator<String> evaluator = new StringEvaluator(target);
-        int score = (int) evaluator.getFitness(candidate, null);
-        assert score == 0 : "Fitness should be zero for identical strings, is " + score;
-    }
+public class StringEvaluatorTest {
+  @Test
+  public void testIdentical() {
+    String target = "abcdefgh";
+    String candidate = "abcdefgh";
+    FitnessEvaluator<String> evaluator = new StringEvaluator(target);
+    int score = (int) evaluator.getFitness(candidate, null);
+    assert score == 0 : "Fitness should be zero for identical strings, is " + score;
+  }
 
 
-    @Test
-    public void testCompletelyDifferent()
-    {
-        String target = "abcdefgh";
-        String candidate = "ijklmnop";
-        FitnessEvaluator<String> evaluator = new StringEvaluator(target);
-        int score = (int) evaluator.getFitness(candidate, null);
-        assert score == target.length() : "Fitness should be " + target.length() + ", is " + score;
-    }
+  @Test
+  public void testCompletelyDifferent() {
+    String target = "abcdefgh";
+    String candidate = "ijklmnop";
+    FitnessEvaluator<String> evaluator = new StringEvaluator(target);
+    int score = (int) evaluator.getFitness(candidate, null);
+    assert score == target.length() : "Fitness should be " + target.length() + ", is " + score;
+  }
 
 
-    @Test
-    public void testPartialSolution()
-    {
-        String target = "abcdefgh";
-        String candidate = "abcdxxxx";
-        FitnessEvaluator<String> evaluator = new StringEvaluator(target);
-        int score = (int) evaluator.getFitness(candidate, null);
-        assert score == 4 : "Fitness score should be 4, is " + score;
-    }
+  @Test
+  public void testPartialSolution() {
+    String target = "abcdefgh";
+    String candidate = "abcdxxxx";
+    FitnessEvaluator<String> evaluator = new StringEvaluator(target);
+    int score = (int) evaluator.getFitness(candidate, null);
+    assert score == 4 : "Fitness score should be 4, is " + score;
+  }
 }

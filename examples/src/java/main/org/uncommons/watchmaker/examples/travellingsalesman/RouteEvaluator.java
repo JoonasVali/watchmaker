@@ -16,6 +16,7 @@
 package org.uncommons.watchmaker.examples.travellingsalesman;
 
 import java.util.List;
+
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
 /**
@@ -24,51 +25,49 @@ import org.uncommons.watchmaker.framework.FitnessEvaluator;
  * is represented as a list of cities in the order that they will be visited.
  * The last leg of the journey is from the last city in the list back to the
  * first.
+ *
  * @author Daniel Dyer
  */
-public class RouteEvaluator implements FitnessEvaluator<List<String>>
-{
-    private final DistanceLookup distances;
+public class RouteEvaluator implements FitnessEvaluator<List<String>> {
+  private final DistanceLookup distances;
 
 
-    /**
-     * @param distances Provides distances between a set of cities.
-     */
-    public RouteEvaluator(DistanceLookup distances)
-    {
-        this.distances = distances;
+  /**
+   * @param distances Provides distances between a set of cities.
+   */
+  public RouteEvaluator(DistanceLookup distances) {
+    this.distances = distances;
+  }
+
+
+  /**
+   * Calculates the length of an evolved route.
+   *
+   * @param candidate  The route to evaluate.
+   * @param population {@inheritDoc}
+   * @return The total distance (in kilometres) of a journey that visits
+   * each city in order and returns to the starting point.
+   */
+  public double getFitness(List<String> candidate,
+                           List<? extends List<String>> population) {
+    int totalDistance = 0;
+    int cityCount = candidate.size();
+    for (int i = 0; i < cityCount; i++) {
+      int nextIndex = i < cityCount - 1 ? i + 1 : 0;
+      totalDistance += distances.getDistance(candidate.get(i),
+          candidate.get(nextIndex));
     }
+    return totalDistance;
+  }
 
 
-    /**
-     * Calculates the length of an evolved route. 
-     * @param candidate The route to evaluate.
-     * @param population {@inheritDoc}
-     * @return The total distance (in kilometres) of a journey that visits
-     * each city in order and returns to the starting point.
-     */
-    public double getFitness(List<String> candidate,
-                             List<? extends List<String>> population)
-    {
-        int totalDistance = 0;
-        int cityCount = candidate.size();
-        for (int i = 0; i < cityCount; i++)
-        {
-            int nextIndex = i < cityCount - 1 ? i + 1 : 0;
-            totalDistance += distances.getDistance(candidate.get(i),
-                                                   candidate.get(nextIndex));
-        }
-        return totalDistance;
-    }
-
-
-    /**
-     * {@inheritDoc}
-     * Returns false since shorter distances represent fitter candidates.
-     * @return false
-     */
-    public boolean isNatural()
-    {
-        return false;
-    }
+  /**
+   * {@inheritDoc}
+   * Returns false since shorter distances represent fitter candidates.
+   *
+   * @return false
+   */
+  public boolean isNatural() {
+    return false;
+  }
 }

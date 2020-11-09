@@ -15,6 +15,7 @@
 //=============================================================================
 /**
  * Concurrency utility classes.
+ *
  * @author Daniel Dyer
  */
 package org.uncommons.util.concurrent;

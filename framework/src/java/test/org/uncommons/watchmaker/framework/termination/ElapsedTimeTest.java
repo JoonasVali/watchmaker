@@ -22,31 +22,29 @@ import org.uncommons.watchmaker.framework.TerminationCondition;
 /**
  * Unit test for termination condition that checks the time taken so far by the
  * evolutionary algorithm.
+ *
  * @author Daniel Dyer
  */
-public class ElapsedTimeTest
-{
-    @Test
-    public void testElapsedTimes()
-    {
-        TerminationCondition condition = new ElapsedTime(1000);
-        PopulationData<Object> data = new PopulationData<Object>(new Object(), 0, 0, 0, true, 2, 0, 0, 100);
-        assert !condition.shouldTerminate(data) : "Should not terminate before timeout.";
-        data = new PopulationData<Object>(new Object(), 0, 0, 0, true, 2, 0, 0, 1000);
-        assert condition.shouldTerminate(data) : "Should terminate after timeout.";
-    }
+public class ElapsedTimeTest {
+  @Test
+  public void testElapsedTimes() {
+    TerminationCondition condition = new ElapsedTime(1000);
+    PopulationData<Object> data = new PopulationData<Object>(new Object(), 0, 0, 0, true, 2, 0, 0, 100);
+    assert !condition.shouldTerminate(data) : "Should not terminate before timeout.";
+    data = new PopulationData<Object>(new Object(), 0, 0, 0, true, 2, 0, 0, 1000);
+    assert condition.shouldTerminate(data) : "Should terminate after timeout.";
+  }
 
 
-    /**
-     * The duration must be greater than zero to be useful.  This test
-     * ensures that an appropriate exception is thrown if the duration is not positive.
-     * Not throwing an exception is an error because it permits undetected bugs in
-     * evolutionary programs.
-     */
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testZeroRatio()
-    {
-        new ElapsedTime(0L);
-    }
+  /**
+   * The duration must be greater than zero to be useful.  This test
+   * ensures that an appropriate exception is thrown if the duration is not positive.
+   * Not throwing an exception is an error because it permits undetected bugs in
+   * evolutionary programs.
+   */
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testZeroRatio() {
+    new ElapsedTime(0L);
+  }
 
 }

@@ -29,48 +29,43 @@ import javax.swing.table.TableColumnModel;
 
 /**
  * A component for displaying Sudoku puzzles and solutions.
+ *
  * @author Daniel Dyer
  */
-class SudokuView extends JPanel
-{
-    private final SudokuTableModel sudokuTableModel = new SudokuTableModel();
+class SudokuView extends JPanel {
+  private final SudokuTableModel sudokuTableModel = new SudokuTableModel();
 
-    SudokuView()
-    {
-        super(new BorderLayout());
-        JTable sudokuTable = new JTable(sudokuTableModel);
-        sudokuTable.setRowHeight(40);
-        sudokuTable.setGridColor(Color.GRAY);
-        sudokuTable.setShowGrid(true);
-        TableColumnModel columnModel = sudokuTable.getColumnModel();
-        TableCellRenderer renderer = new SudokuCellRenderer();
-        JComboBox valueCombo = new JComboBox(new Object[]{null, '1', '2', '3', '4', '5', '6', '7', '8', '9'});
-        TableCellEditor editor = new DefaultCellEditor(valueCombo);
-        for (int i = 0; i < columnModel.getColumnCount(); i++)
-        {
-            TableColumn column = columnModel.getColumn(i);
-            column.setCellRenderer(renderer);
-            column.setCellEditor(editor);
-        }
-        add(sudokuTable, BorderLayout.CENTER);
-        setBorder(BorderFactory.createTitledBorder("Puzzle/Solution"));
+  SudokuView() {
+    super(new BorderLayout());
+    JTable sudokuTable = new JTable(sudokuTableModel);
+    sudokuTable.setRowHeight(40);
+    sudokuTable.setGridColor(Color.GRAY);
+    sudokuTable.setShowGrid(true);
+    TableColumnModel columnModel = sudokuTable.getColumnModel();
+    TableCellRenderer renderer = new SudokuCellRenderer();
+    JComboBox valueCombo = new JComboBox(new Object[]{null, '1', '2', '3', '4', '5', '6', '7', '8', '9'});
+    TableCellEditor editor = new DefaultCellEditor(valueCombo);
+    for (int i = 0; i < columnModel.getColumnCount(); i++) {
+      TableColumn column = columnModel.getColumn(i);
+      column.setCellRenderer(renderer);
+      column.setCellEditor(editor);
     }
+    add(sudokuTable, BorderLayout.CENTER);
+    setBorder(BorderFactory.createTitledBorder("Puzzle/Solution"));
+  }
 
 
-    public void setSolution(Sudoku sudoku)
-    {
-        sudokuTableModel.setSudoku(sudoku);
-    }
+  public void setSolution(Sudoku sudoku) {
+    sudokuTableModel.setSudoku(sudoku);
+  }
 
 
-    public void setPuzzle(String[] pattern)
-    {
-        sudokuTableModel.setPattern(pattern);
-    }
+  public void setPuzzle(String[] pattern) {
+    sudokuTableModel.setPattern(pattern);
+  }
 
 
-    public String[] getPuzzle()
-    {
-        return sudokuTableModel.getPattern();
-    }
+  public String[] getPuzzle() {
+    return sudokuTableModel.getPattern();
+  }
 }

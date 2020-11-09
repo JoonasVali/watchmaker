@@ -20,6 +20,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.maths.number.ConstantGenerator;
 import org.uncommons.maths.number.NumberGenerator;
 import org.uncommons.maths.random.Probability;
@@ -27,50 +28,45 @@ import org.uncommons.maths.random.Probability;
 /**
  * Evolutionary operator for mutating individual polygons.  Polygons are mutated
  * by removing a point, according to some probability.
+ *
  * @author Daniel Dyer
  */
-public class RemoveVertexMutation extends AbstractVertexMutation
-{
-    /**
-     * @param mutationProbability A {@link NumberGenerator} that controls the
-     * probability that a point will be removed.
-     * @param canvasSize The size of the canvas.  Used to constrain the positions
-     * of the points.
-     */
-    public RemoveVertexMutation(Dimension canvasSize,
-                                NumberGenerator<Probability> mutationProbability)
+public class RemoveVertexMutation extends AbstractVertexMutation {
+  /**
+   * @param mutationProbability A {@link NumberGenerator} that controls the
+   *                            probability that a point will be removed.
+   * @param canvasSize          The size of the canvas.  Used to constrain the positions
+   *                            of the points.
+   */
+  public RemoveVertexMutation(Dimension canvasSize,
+                              NumberGenerator<Probability> mutationProbability) {
+    super(mutationProbability, canvasSize);
+  }
+
+
+  /**
+   * @param mutationProbability The probability that a point will be removed.
+   * @param canvasSize          The size of the canvas.  Used to constrain the positions
+   *                            of the points.
+   */
+  public RemoveVertexMutation(Dimension canvasSize,
+                              Probability mutationProbability) {
+    this(canvasSize, new ConstantGenerator<Probability>(mutationProbability));
+  }
+
+
+  @Override
+  protected List<Point> mutateVertices(List<Point> vertices, Random rng) {
+    // A single point is removed with the configured probability, unless
+    // we already have the minimum permitted number of points.
+    if (vertices.size() > PolygonImageFactory.MINIMUM_VERTEX_COUNT
+        && getMutationProbability().nextValue().nextEvent(rng)) {
+      List<Point> newVertices = new ArrayList<Point>(vertices);
+      newVertices.remove(rng.nextInt(newVertices.size()));
+      return newVertices;
+    } else // Nothing changed.
     {
-        super(mutationProbability, canvasSize);
+      return vertices;
     }
-
-
-    /**
-     * @param mutationProbability The probability that a point will be removed.
-     * @param canvasSize The size of the canvas.  Used to constrain the positions
-     * of the points.
-     */
-    public RemoveVertexMutation(Dimension canvasSize,
-                                Probability mutationProbability)
-    {
-        this(canvasSize, new ConstantGenerator<Probability>(mutationProbability));
-    }
-
-
-    @Override
-    protected List<Point> mutateVertices(List<Point> vertices, Random rng)
-    {
-        // A single point is removed with the configured probability, unless
-        // we already have the minimum permitted number of points.
-        if (vertices.size() > PolygonImageFactory.MINIMUM_VERTEX_COUNT
-            && getMutationProbability().nextValue().nextEvent(rng))
-        {
-            List<Point> newVertices = new ArrayList<Point>(vertices);
-            newVertices.remove(rng.nextInt(newVertices.size()));
-            return newVertices;
-        }
-        else // Nothing changed.
-        {
-            return vertices;
-        }
-    }
+  }
 }

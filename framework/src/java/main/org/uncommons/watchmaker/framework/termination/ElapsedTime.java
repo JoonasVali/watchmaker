@@ -20,33 +20,30 @@ import org.uncommons.watchmaker.framework.TerminationCondition;
 
 /**
  * Terminates evolution after a pre-determined period of time has elapsed.
+ *
  * @author Daniel Dyer
  */
-public class ElapsedTime implements TerminationCondition
-{
-    private final long maxDuration;
+public class ElapsedTime implements TerminationCondition {
+  private final long maxDuration;
 
-    /**
-     * @param maxDuration The maximum period of time (in milliseconds) before
-     * evolution will be terminated.
-     */
-    public ElapsedTime(long maxDuration)
-    {
-        if (maxDuration <= 0)
-        {
-            throw new IllegalArgumentException("Duration must be positive.");
-        }
-        this.maxDuration = maxDuration;
+  /**
+   * @param maxDuration The maximum period of time (in milliseconds) before
+   *                    evolution will be terminated.
+   */
+  public ElapsedTime(long maxDuration) {
+    if (maxDuration <= 0) {
+      throw new IllegalArgumentException("Duration must be positive.");
     }
+    this.maxDuration = maxDuration;
+  }
 
 
-    /**
-     * {@inheritDoc}
-     * This implementation terminates evolution if the pre-configured maximum
-     * permitted time has elapsed.
-     */
-    public boolean shouldTerminate(PopulationData<?> populationData)
-    {
-        return populationData.getElapsedTime() >= maxDuration;
-    }
+  /**
+   * {@inheritDoc}
+   * This implementation terminates evolution if the pre-configured maximum
+   * permitted time has elapsed.
+   */
+  public boolean shouldTerminate(PopulationData<?> populationData) {
+    return populationData.getElapsedTime() >= maxDuration;
+  }
 }

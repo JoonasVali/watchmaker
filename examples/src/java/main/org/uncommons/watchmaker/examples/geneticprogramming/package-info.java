@@ -15,6 +15,7 @@
 //=============================================================================
 /**
  * A simple example of tree-based genetic programming.
+ *
  * @author Daniel Dyer
  */
 package org.uncommons.watchmaker.examples.geneticprogramming;

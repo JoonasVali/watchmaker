@@ -20,29 +20,29 @@ import java.util.List;
 /**
  * Fitness evaluation is not required for interactive selection, so this stub
  * implementation is used to satisfy the framework requirements.
+ *
  * @author Daniel Dyer
  */
-class NullFitnessEvaluator implements FitnessEvaluator<Object>
-{
-    /**
-     * Returns a score of zero, regardless of the candidate being evaluated.
-     * @param candidate The individual to evaluate.
-     * @param population {@inheritDoc}
-     * @return Zero.
-     */
-    public double getFitness(Object candidate,
-                             List<?> population)
-    {
-        return 0;
-    }
+class NullFitnessEvaluator implements FitnessEvaluator<Object> {
+  /**
+   * Returns a score of zero, regardless of the candidate being evaluated.
+   *
+   * @param candidate  The individual to evaluate.
+   * @param population {@inheritDoc}
+   * @return Zero.
+   */
+  public double getFitness(Object candidate,
+                           List<?> population) {
+    return 0;
+  }
 
-    /**
-     * Always returns true.  However, the return value of this method is
-     * irrelevant since no meaningful fitness scores are produced.
-     * @return True.
-     */
-    public boolean isNatural()
-    {
-        return true;
-    }
+  /**
+   * Always returns true.  However, the return value of this method is
+   * irrelevant since no meaningful fitness scores are produced.
+   *
+   * @return True.
+   */
+  public boolean isNatural() {
+    return true;
+  }
 }

@@ -20,62 +20,54 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Thread-safe source for unique IDs.  This particular implementation restricts
- * values to those positive integer values that can be represented by the int data type. 
+ * values to those positive integer values that can be represented by the int data type.
  * Provides sequenced 32-bit IDs.
+ *
  * @author Daniel Dyer
  */
-public final class IntSequenceIDSource implements IDSource<Integer>
-{
-    private static final long SECONDS_IN_HOUR = 3600L;
+public final class IntSequenceIDSource implements IDSource<Integer> {
+  private static final long SECONDS_IN_HOUR = 3600L;
 
-    private final Lock lock = new ReentrantLock();
-    private final long startTime;
-    private int lastID = -1;
+  private final Lock lock = new ReentrantLock();
+  private final long startTime;
+  private int lastID = -1;
 
 
-    /**
-     * @param firstValue The value at which to start the sequence (must
-     * be non-negative).
-     */
-    public IntSequenceIDSource(int firstValue)
-    {
-        if (firstValue < 0)
-        {
-            throw new IllegalArgumentException("Initial value must be non-negative.");
-        }
-        lastID = firstValue - 1;
-        startTime = System.currentTimeMillis();
+  /**
+   * @param firstValue The value at which to start the sequence (must
+   *                   be non-negative).
+   */
+  public IntSequenceIDSource(int firstValue) {
+    if (firstValue < 0) {
+      throw new IllegalArgumentException("Initial value must be non-negative.");
     }
+    lastID = firstValue - 1;
+    startTime = System.currentTimeMillis();
+  }
 
 
-    /**
-     * Creates a sequence that starts at zero.
-     */
-    public IntSequenceIDSource()
-    {
-        this(0);
+  /**
+   * Creates a sequence that starts at zero.
+   */
+  public IntSequenceIDSource() {
+    this(0);
+  }
+
+
+  /**
+   * {@inheritDoc}
+   */
+  public Integer nextID() {
+    lock.lock();
+    try {
+      if (lastID == Integer.MAX_VALUE) {
+        long hours = (System.currentTimeMillis() - startTime) / SECONDS_IN_HOUR;
+        throw new IDSourceExhaustedException("32-bit ID source exhausted after " + hours + " hours.");
+      }
+      ++lastID;
+      return lastID;
+    } finally {
+      lock.unlock();
     }
-
-
-    /**
-     * {@inheritDoc} 
-     */
-    public Integer nextID()
-    {
-        lock.lock();
-        try
-        {
-            if (lastID == Integer.MAX_VALUE)
-            {
-                long hours = (System.currentTimeMillis() - startTime) / SECONDS_IN_HOUR;
-                throw new IDSourceExhaustedException("32-bit ID source exhausted after " + hours + " hours.");
-            }
-            ++lastID;
-            return lastID;
-        }
-        finally
-        {
-            lock.unlock();
-        }
-    }
+  }
 }

@@ -20,17 +20,17 @@ import java.util.List;
 /**
  * A console provides users with a mechanism for interacting with an
  * evolutionary algorithm.
+ *
  * @param <T> The type of entity that can be presented by this console.
- * Evolutionary algorithms that evolve a different type can work with
- * a console via a {@link Renderer} that performs the necessary conversions.
+ *            Evolutionary algorithms that evolve a different type can work with
+ *            a console via a {@link Renderer} that performs the necessary conversions.
  * @author Daniel Dyer
  */
-public interface Console<T>
-{
-    /**
-     * @param renderedEntities A list of the suitably transformed entities
-     * that will be presented to the user for selection.
-     * @return The index of the selected entity.
-     */
-    int select(List<? extends T> renderedEntities);
+public interface Console<T> {
+  /**
+   * @param renderedEntities A list of the suitably transformed entities
+   *                         that will be presented to the user for selection.
+   * @return The index of the selected entity.
+   */
+  int select(List<? extends T> renderedEntities);
 }

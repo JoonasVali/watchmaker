@@ -20,6 +20,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.maths.Maths;
 import org.uncommons.maths.number.ConstantGenerator;
 import org.uncommons.maths.number.NumberGenerator;
@@ -28,67 +29,62 @@ import org.uncommons.maths.random.Probability;
 /**
  * Evolutionary operator for mutating individual polygons.  Polygons are mutated
  * by moving a point, according to some probability.
+ *
  * @author Daniel Dyer
  */
-public class AdjustVertexMutation extends AbstractVertexMutation
-{
-    private final NumberGenerator<? extends Number> changeAmount;
+public class AdjustVertexMutation extends AbstractVertexMutation {
+  private final NumberGenerator<? extends Number> changeAmount;
 
-    /**
-     * @param mutationProbability A {@link NumberGenerator} that controls the
-     * probability that a point will be moved.
-     * @param canvasSize The size of the canvas.  Used to constrain the positions
-     * of the points.
-     * @param changeAmount A {@link NumberGenerator} that controls the distance
-     * that points are moved (in pixels).  Should generate both positive and
-     * negative values.
-     */
-    public AdjustVertexMutation(Dimension canvasSize,
-                                NumberGenerator<Probability> mutationProbability,
-                                NumberGenerator<? extends Number> changeAmount)
+  /**
+   * @param mutationProbability A {@link NumberGenerator} that controls the
+   *                            probability that a point will be moved.
+   * @param canvasSize          The size of the canvas.  Used to constrain the positions
+   *                            of the points.
+   * @param changeAmount        A {@link NumberGenerator} that controls the distance
+   *                            that points are moved (in pixels).  Should generate both positive and
+   *                            negative values.
+   */
+  public AdjustVertexMutation(Dimension canvasSize,
+                              NumberGenerator<Probability> mutationProbability,
+                              NumberGenerator<? extends Number> changeAmount) {
+    super(mutationProbability, canvasSize);
+    this.changeAmount = changeAmount;
+  }
+
+
+  /**
+   * @param mutationProbability The probability that a point will be moved.
+   * @param canvasSize          The size of the canvas.  Used to constrain the positions
+   *                            of the points.
+   * @param changeAmount        A {@link NumberGenerator} that controls the distance
+   *                            that points are moved (in pixels).  Should generate both positive and
+   *                            negative values.
+   */
+  public AdjustVertexMutation(Dimension canvasSize,
+                              Probability mutationProbability,
+                              NumberGenerator<? extends Number> changeAmount) {
+    this(canvasSize, new ConstantGenerator<Probability>(mutationProbability), changeAmount);
+  }
+
+
+  @Override
+  protected List<Point> mutateVertices(List<Point> vertices, Random rng) {
+    // A single point is modified with the configured probability.
+    if (getMutationProbability().nextValue().nextEvent(rng)) {
+      List<Point> newVertices = new ArrayList<Point>(vertices);
+      int xDelta = (int) Math.round(changeAmount.nextValue().doubleValue());
+      int yDelta = (int) Math.round(changeAmount.nextValue().doubleValue());
+      int index = rng.nextInt(newVertices.size());
+      Point oldPoint = newVertices.get(index);
+      int newX = oldPoint.x + xDelta;
+      int newY = oldPoint.y + yDelta;
+      newX = Maths.restrictRange(newX, 0, getCanvasSize().width - 1);
+      newY = Maths.restrictRange(newY, 0, getCanvasSize().height - 1);
+      newVertices.set(index, new Point(newX, newY));
+      return newVertices;
+    } else // Nothing changed.
     {
-        super(mutationProbability, canvasSize);
-        this.changeAmount = changeAmount;
+      return vertices;
     }
-
-
-    /**
-     * @param mutationProbability The probability that a point will be moved.
-     * @param canvasSize The size of the canvas.  Used to constrain the positions
-     * of the points.
-     * @param changeAmount A {@link NumberGenerator} that controls the distance
-     * that points are moved (in pixels).  Should generate both positive and
-     * negative values.
-     */
-    public AdjustVertexMutation(Dimension canvasSize,
-                                Probability mutationProbability,
-                                NumberGenerator<? extends Number> changeAmount)
-    {
-        this(canvasSize, new ConstantGenerator<Probability>(mutationProbability), changeAmount);
-    }
-
-
-    @Override
-    protected List<Point> mutateVertices(List<Point> vertices, Random rng)
-    {
-        // A single point is modified with the configured probability.
-        if (getMutationProbability().nextValue().nextEvent(rng))
-        {
-            List<Point> newVertices = new ArrayList<Point>(vertices);
-            int xDelta = (int) Math.round(changeAmount.nextValue().doubleValue());
-            int yDelta = (int) Math.round(changeAmount.nextValue().doubleValue());
-            int index = rng.nextInt(newVertices.size());
-            Point oldPoint = newVertices.get(index);
-            int newX = oldPoint.x + xDelta;
-            int newY = oldPoint.y + yDelta;
-            newX = Maths.restrictRange(newX, 0, getCanvasSize().width - 1);
-            newY = Maths.restrictRange(newY, 0, getCanvasSize().height - 1);
-            newVertices.set(index, new Point(newX, newY));
-            return newVertices;
-        }
-        else // Nothing changed.
-        {
-            return vertices;
-        }
-    }
+  }
 }

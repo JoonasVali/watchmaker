@@ -16,6 +16,7 @@
 /**
  * An evolutionary simulation along the lines of the Biomporph program described
  * by Richard Dawkins in his book, The Blind Watchmaker.
+ *
  * @author Daniel Dyer
  */
 package org.uncommons.watchmaker.examples.biomorphs;

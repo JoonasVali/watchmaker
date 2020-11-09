@@ -20,6 +20,7 @@ import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
+
 import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.Robot;
 import org.fest.swing.core.matcher.FrameMatcher;
@@ -30,65 +31,57 @@ import org.testng.annotations.Test;
 
 /**
  * Unit test for the {@link AbstractExampleAppletTest} class.
+ *
  * @author Daniel Dyer
  */
-public class AbstractExampleAppletTest
-{
-    private Robot robot;
+public class AbstractExampleAppletTest {
+  private Robot robot;
 
-    @BeforeMethod
-    public void prepare()
-    {
-        robot = BasicRobot.robotWithNewAwtHierarchy();
-    }
+  @BeforeMethod
+  public void prepare() {
+    robot = BasicRobot.robotWithNewAwtHierarchy();
+  }
 
 
-    @AfterMethod
-    public void cleanUp()
-    {
-        robot.cleanUp();
-        robot = null;
-    }
-
-    
-    @Test(groups = "display-required") // Will fail if run in a headless environment.
-    public void testPreparationOnEDT()
-    {
-        final boolean[] onEDT = new boolean[1];
-        AbstractExampleApplet applet = new AbstractExampleApplet()
-        {
-            @Override
-            protected void prepareGUI(Container container)
-            {
-                onEDT[0] = SwingUtilities.isEventDispatchThread();
-            }
-        };
-        applet.init();
-        assert onEDT[0] : "Prepare method was not called on Event Dispatch Thread.";
-    }
+  @AfterMethod
+  public void cleanUp() {
+    robot.cleanUp();
+    robot = null;
+  }
 
 
-    @Test(groups = "display-required") // Will fail if run in a headless environment.
-    public void testDisplayInFrame()
-    {
-        AbstractExampleApplet applet = new AbstractExampleApplet()
-        {
-            @Override
-            protected void prepareGUI(Container container)
-            {
-                JLabel label = new JLabel("Test");
-                label.setName("Test");
-                container.add(label, BorderLayout.CENTER);
-            }
-        };
-        applet.displayInFrame("ExampleFrame");
-        robot.waitForIdle();
-        // There ought to be a visible frame containing the example GUI.
-        JFrame frame = (JFrame) robot.finder().find(FrameMatcher.withTitle("ExampleFrame").andShowing());
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+  @Test(groups = "display-required") // Will fail if run in a headless environment.
+  public void testPreparationOnEDT() {
+    final boolean[] onEDT = new boolean[1];
+    AbstractExampleApplet applet = new AbstractExampleApplet() {
+      @Override
+      protected void prepareGUI(Container container) {
+        onEDT[0] = SwingUtilities.isEventDispatchThread();
+      }
+    };
+    applet.init();
+    assert onEDT[0] : "Prepare method was not called on Event Dispatch Thread.";
+  }
 
-        FrameFixture frameFixture = new FrameFixture(robot, frame);
-        assert frameFixture.label("Test").component().isShowing() : "GUI not displayed correctly.";        
-        frameFixture.close();
-    }
+
+  @Test(groups = "display-required") // Will fail if run in a headless environment.
+  public void testDisplayInFrame() {
+    AbstractExampleApplet applet = new AbstractExampleApplet() {
+      @Override
+      protected void prepareGUI(Container container) {
+        JLabel label = new JLabel("Test");
+        label.setName("Test");
+        container.add(label, BorderLayout.CENTER);
+      }
+    };
+    applet.displayInFrame("ExampleFrame");
+    robot.waitForIdle();
+    // There ought to be a visible frame containing the example GUI.
+    JFrame frame = (JFrame) robot.finder().find(FrameMatcher.withTitle("ExampleFrame").andShowing());
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+    FrameFixture frameFixture = new FrameFixture(robot, frame);
+    assert frameFixture.label("Test").component().isShowing() : "GUI not displayed correctly.";
+    frameFixture.close();
+  }
 }

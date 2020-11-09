@@ -16,38 +16,38 @@
 package org.uncommons.watchmaker.framework.factories;
 
 import java.util.Random;
+
 import org.uncommons.maths.binary.BitString;
 
 /**
  * General purpose candidate factory for generating bit strings for
  * genetic algorithms.
- * @see BitString
+ *
  * @author Daniel Dyer
+ * @see BitString
  */
-public class BitStringFactory extends AbstractCandidateFactory<BitString>
-{
-    private final int length;
+public class BitStringFactory extends AbstractCandidateFactory<BitString> {
+  private final int length;
 
 
-    /**
-     * @param length The length of all bit strings created by this
-     * factory.
-     */
-    public BitStringFactory(int length)
-    {
-        this.length = length;
-    }
+  /**
+   * @param length The length of all bit strings created by this
+   *               factory.
+   */
+  public BitStringFactory(int length) {
+    this.length = length;
+  }
 
 
-    /**
-     * Generates a random bit string, with a uniform distribution of
-     * ones and zeroes.
-     * @param rng The source of randomness for setting the bits.
-     * @return A random bit string of the length configured for this
-     * factory.
-     */
-    public BitString generateRandomCandidate(Random rng)
-    {
-        return new BitString(length, rng);
-    }
+  /**
+   * Generates a random bit string, with a uniform distribution of
+   * ones and zeroes.
+   *
+   * @param rng The source of randomness for setting the bits.
+   * @return A random bit string of the length configured for this
+   * factory.
+   */
+  public BitString generateRandomCandidate(Random rng) {
+    return new BitString(length, rng);
+  }
 }

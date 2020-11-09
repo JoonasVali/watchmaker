@@ -18,42 +18,39 @@ package org.uncommons.watchmaker.examples.monalisa;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.List;
+
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.examples.ExamplesTestUtils;
 import org.uncommons.watchmaker.framework.CandidateFactory;
 
 /**
  * Unit test for {@link PolygonImageFactory}.
+ *
  * @author Daniel Dyer
  */
-public class PolygonImageFactoryTest
-{
-    /**
-     * Make sure that the generated images have the correct number of polygons,
-     * that each polygon has the correct number of points and that all of the
-     * points fall within the bounds of the specified canvas.
-     */
-    @Test
-    public void testConstraints()
-    {
-        final int width = 100;
-        final int height = 50;
-        CandidateFactory<List<ColouredPolygon>> factory = new PolygonImageFactory(new Dimension(width, height));
-        List<List<ColouredPolygon>> candidates = factory.generateInitialPopulation(20, ExamplesTestUtils.getRNG());
-        for (List<ColouredPolygon> image : candidates)
-        {
-            assert image.size() == PolygonImageFactory.MINIMUM_POLYGON_COUNT
-                : "Wrong number of polygons: " + image.size();
-            for (ColouredPolygon polygon : image)
-            {
-                assert polygon.getVertices().size() == PolygonImageFactory.MINIMUM_VERTEX_COUNT
-                    : "Wrong number of vertices: " + polygon.getVertices().size();
-                for (Point point : polygon.getVertices())
-                {
-                    assert point.x >= 0 && point.x < width : "X out-of-range: " + point.x;
-                    assert point.y >= 0 && point.y < height : "Y out-of-range: " + point.y;
-                }
-            }
+public class PolygonImageFactoryTest {
+  /**
+   * Make sure that the generated images have the correct number of polygons,
+   * that each polygon has the correct number of points and that all of the
+   * points fall within the bounds of the specified canvas.
+   */
+  @Test
+  public void testConstraints() {
+    final int width = 100;
+    final int height = 50;
+    CandidateFactory<List<ColouredPolygon>> factory = new PolygonImageFactory(new Dimension(width, height));
+    List<List<ColouredPolygon>> candidates = factory.generateInitialPopulation(20, ExamplesTestUtils.getRNG());
+    for (List<ColouredPolygon> image : candidates) {
+      assert image.size() == PolygonImageFactory.MINIMUM_POLYGON_COUNT
+          : "Wrong number of polygons: " + image.size();
+      for (ColouredPolygon polygon : image) {
+        assert polygon.getVertices().size() == PolygonImageFactory.MINIMUM_VERTEX_COUNT
+            : "Wrong number of vertices: " + polygon.getVertices().size();
+        for (Point point : polygon.getVertices()) {
+          assert point.x >= 0 && point.x < width : "X out-of-range: " + point.x;
+          assert point.y >= 0 && point.y < height : "Y out-of-range: " + point.y;
         }
+      }
     }
+  }
 }

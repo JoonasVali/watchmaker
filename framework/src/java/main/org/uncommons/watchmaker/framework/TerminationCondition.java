@@ -17,16 +17,17 @@ package org.uncommons.watchmaker.framework;
 
 /**
  * Interface for implementing conditions used to terminate evolutionary algorithms.
+ *
  * @author Daniel Dyer
  */
-public interface TerminationCondition
-{
-    /**
-     * The condition is queried via this method to determine whether or not evolution
-     * should finish at the current point.
-     * @param populationData Information about the current state of evolution.  This may
-     * be used to determine whether evolution should continue or not.
-     * @return true if evolution should be terminated, false otherwise.
-     */
-    boolean shouldTerminate(PopulationData<?> populationData);
+public interface TerminationCondition {
+  /**
+   * The condition is queried via this method to determine whether or not evolution
+   * should finish at the current point.
+   *
+   * @param populationData Information about the current state of evolution.  This may
+   *                       be used to determine whether evolution should continue or not.
+   * @return true if evolution should be terminated, false otherwise.
+   */
+  boolean shouldTerminate(PopulationData<?> populationData);
 }

@@ -17,32 +17,29 @@ package org.uncommons.watchmaker.examples.sudoku;
 
 /**
  * Utility methods that help in unit tests.
+ *
  * @author Daniel Dyer
  */
-class SudokuTestUtils
-{
-    private SudokuTestUtils()
-    {
-        // Prevents instantiation.
-    }
+class SudokuTestUtils {
+  private SudokuTestUtils() {
+    // Prevents instantiation.
+  }
 
 
-    /**
-     * Convenience method for creating a Sudoku object from a 2D array of ints.
-     * Ignores which cells are fixed and which are not.
-     * @param values A 9x9 2-dimensional array that contains values (1-9) for
-     * each of the cells in a Sudoku grid.
-     */
-    public static Sudoku createSudoku(int[][] values)
-    {
-        Sudoku.Cell[][] cells = new Sudoku.Cell[Sudoku.SIZE][Sudoku.SIZE];
-        for (int i = 0; i < Sudoku.SIZE; i++)
-        {
-            for (int j = 0; j < Sudoku.SIZE; j++)
-            {
-                cells[i][j] = new Sudoku.Cell(values[i][j], false);
-            }
-        }
-        return new Sudoku(cells);
+  /**
+   * Convenience method for creating a Sudoku object from a 2D array of ints.
+   * Ignores which cells are fixed and which are not.
+   *
+   * @param values A 9x9 2-dimensional array that contains values (1-9) for
+   *               each of the cells in a Sudoku grid.
+   */
+  public static Sudoku createSudoku(int[][] values) {
+    Sudoku.Cell[][] cells = new Sudoku.Cell[Sudoku.SIZE][Sudoku.SIZE];
+    for (int i = 0; i < Sudoku.SIZE; i++) {
+      for (int j = 0; j < Sudoku.SIZE; j++) {
+        cells[i][j] = new Sudoku.Cell(values[i][j], false);
+      }
     }
+    return new Sudoku(cells);
+  }
 }

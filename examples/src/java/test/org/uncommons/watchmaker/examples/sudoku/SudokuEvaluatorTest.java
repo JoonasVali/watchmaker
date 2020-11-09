@@ -20,17 +20,16 @@ import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
 /**
  * Unit test for sudoku fitness evaluator.
+ *
  * @author Daniel Dyer
  */
-public class SudokuEvaluatorTest
-{
-    /**
-     * Ensure that the evaluator returns zero for a correct solution.
-     */
-    @Test
-    public void testCorrectSolution()
-    {
-        Sudoku sudoku = SudokuTestUtils.createSudoku(new int[][]
+public class SudokuEvaluatorTest {
+  /**
+   * Ensure that the evaluator returns zero for a correct solution.
+   */
+  @Test
+  public void testCorrectSolution() {
+    Sudoku sudoku = SudokuTestUtils.createSudoku(new int[][]
         {
             {1, 2, 8, 5, 4, 3, 9, 6, 7},
             {7, 6, 4, 9, 2, 8, 5, 1, 3},
@@ -42,21 +41,20 @@ public class SudokuEvaluatorTest
             {9, 4, 6, 8, 5, 7, 3, 2, 1},
             {2, 3, 7, 1, 9, 4, 6, 8, 5}
         });
-        FitnessEvaluator<Sudoku> evaluator = new SudokuEvaluator();
-        int fitness = (int) evaluator.getFitness(sudoku, null);
-        assert fitness == 0 : "Fitness should be zero for correct solution, is " + fitness; 
-    }
+    FitnessEvaluator<Sudoku> evaluator = new SudokuEvaluator();
+    int fitness = (int) evaluator.getFitness(sudoku, null);
+    assert fitness == 0 : "Fitness should be zero for correct solution, is " + fitness;
+  }
 
 
-    /**
-     * Ensure that the evaluator returns zero for a correct solution.
-     */
-    @Test
-    public void testDuplicates()
-    {
-        // This sudoku as 4 invalid columns (0, 1, 3 and 5) and 2 invalid
-        // sub-grids (bottom-left and bottom-center).
-        Sudoku sudoku = SudokuTestUtils.createSudoku(new int[][]
+  /**
+   * Ensure that the evaluator returns zero for a correct solution.
+   */
+  @Test
+  public void testDuplicates() {
+    // This sudoku as 4 invalid columns (0, 1, 3 and 5) and 2 invalid
+    // sub-grids (bottom-left and bottom-center).
+    Sudoku sudoku = SudokuTestUtils.createSudoku(new int[][]
         {
             {2, 1, 8, 5, 4, 3, 9, 6, 7},
             {7, 6, 4, 9, 2, 8, 5, 1, 3},
@@ -68,10 +66,10 @@ public class SudokuEvaluatorTest
             {9, 4, 6, 8, 5, 7, 3, 2, 1},
             {2, 3, 7, 1, 9, 4, 6, 8, 5}
         });
-        FitnessEvaluator<Sudoku> evaluator = new SudokuEvaluator();
-        int fitness = (int) evaluator.getFitness(sudoku, null);
-        assert fitness == 6 : "Fitness should be 6, is " + fitness;
-    }
+    FitnessEvaluator<Sudoku> evaluator = new SudokuEvaluator();
+    int fitness = (int) evaluator.getFitness(sudoku, null);
+    assert fitness == 6 : "Fitness should be 6, is " + fitness;
+  }
 
 
 }

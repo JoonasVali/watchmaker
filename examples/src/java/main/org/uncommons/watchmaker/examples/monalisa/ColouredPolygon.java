@@ -23,56 +23,52 @@ import java.util.List;
 /**
  * A coloured polygon consists of a set of vertices and a colour that is used to
  * fill the polygon when it is rendered.
+ *
  * @author Daniel Dyer
  */
-public class ColouredPolygon
-{
-    private final Color colour;
-    private final List<Point> vertices;
-    private final Polygon polygon;
+public class ColouredPolygon {
+  private final Color colour;
+  private final List<Point> vertices;
+  private final Polygon polygon;
 
 
-    /**
-     * Creates a new filled polygon with the specified points and colour.
-     * @param colour The colour of this polygon.  The alpha channel is used
-     * to specify the polygons translucency.
-     * @param vertices The points that define the polygon's outline.
-     */
-    public ColouredPolygon(Color colour, List<Point> vertices)
-    {
-        this.colour = colour;
-        this.vertices = vertices;
-        this.polygon = new Polygon();
-        for (Point point : vertices)
-        {
-            polygon.addPoint(point.x, point.y);
-        }
+  /**
+   * Creates a new filled polygon with the specified points and colour.
+   *
+   * @param colour   The colour of this polygon.  The alpha channel is used
+   *                 to specify the polygons translucency.
+   * @param vertices The points that define the polygon's outline.
+   */
+  public ColouredPolygon(Color colour, List<Point> vertices) {
+    this.colour = colour;
+    this.vertices = vertices;
+    this.polygon = new Polygon();
+    for (Point point : vertices) {
+      polygon.addPoint(point.x, point.y);
     }
+  }
 
 
-    /**
-     * @return The colour that this polygon should be rendered.
-     */
-    public Color getColour()
-    {
-        return colour;
-    }
+  /**
+   * @return The colour that this polygon should be rendered.
+   */
+  public Color getColour() {
+    return colour;
+  }
 
 
-    /**
-     * @return A list of this polygon's vertices.
-     */
-    public List<Point> getVertices()
-    {
-        return vertices;
-    }
+  /**
+   * @return A list of this polygon's vertices.
+   */
+  public List<Point> getVertices() {
+    return vertices;
+  }
 
 
-    /**
-     * @return The AWT shape used for rendering.
-     */
-    public Polygon getPolygon()
-    {
-        return polygon;
-    }
+  /**
+   * @return The AWT shape used for rendering.
+   */
+  public Polygon getPolygon() {
+    return polygon;
+  }
 }

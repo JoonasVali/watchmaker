@@ -18,6 +18,7 @@ package org.uncommons.watchmaker.framework.operators;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+
 import org.testng.annotations.Test;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
@@ -25,40 +26,38 @@ import org.uncommons.watchmaker.framework.FrameworkTestUtils;
 
 /**
  * Unit test for the {@link ListInversion} evolutionary operator.
+ *
  * @author Daniel Dyer
  */
-public class ListInversionTest
-{
-    @Test
-    public void testZeroProbability()
+public class ListInversionTest {
+  @Test
+  public void testZeroProbability() {
+    EvolutionaryOperator<List<Integer>> inversion = new ListInversion<Integer>(Probability.ZERO);
+    @SuppressWarnings("unchecked")
+    List<List<Integer>> selection = Arrays.asList(Arrays.asList(1, 2, 3));
+    List<List<Integer>> evolvedSelection = inversion.apply(selection, FrameworkTestUtils.getRNG());
+    assert evolvedSelection.size() == 1 : "Wrong number of individuals after evolution: " + evolvedSelection.size();
+    assert evolvedSelection.get(0) == selection.get(0) : "Candidate should not have been modified.";
+  }
+
+
+  @Test
+  public void testInversion() {
+    EvolutionaryOperator<List<Integer>> inversion = new ListInversion<Integer>(Probability.ONE);
+    @SuppressWarnings("unchecked")
+    List<List<Integer>> selection = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
+    for (int i = 0; i < 50; i++) // Try several times so that different random numbers are generated.
     {
-        EvolutionaryOperator<List<Integer>> inversion = new ListInversion<Integer>(Probability.ZERO);
-        @SuppressWarnings("unchecked")
-        List<List<Integer>> selection = Arrays.asList(Arrays.asList(1, 2, 3));
-        List<List<Integer>> evolvedSelection = inversion.apply(selection, FrameworkTestUtils.getRNG());
-        assert evolvedSelection.size() == 1 : "Wrong number of individuals after evolution: " + evolvedSelection.size();
-        assert evolvedSelection.get(0) == selection.get(0) : "Candidate should not have been modified.";
+      List<List<Integer>> evolvedSelection = inversion.apply(selection, FrameworkTestUtils.getRNG());
+
+      // After inversion, candidate should have same elements but not in the same order.
+      assert evolvedSelection.size() == 1 : "Wrong number of individuals after evolution: " + evolvedSelection.size();
+      assert evolvedSelection.get(0).size() == selection.get(0).size() : "Candidate length should be unchanged.";
+      assert !Arrays.deepEquals(evolvedSelection.get(0).toArray(), selection.get(0).toArray())
+          : "Candidate should have been modified.";
+      assert new HashSet<Integer>(evolvedSelection.get(0)).size() == 8
+          : "Evolved candidate should contain each element once.";
     }
-
-
-    @Test
-    public void testInversion()
-    {
-        EvolutionaryOperator<List<Integer>> inversion = new ListInversion<Integer>(Probability.ONE);
-        @SuppressWarnings("unchecked")
-        List<List<Integer>> selection = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
-        for (int i = 0; i < 50; i++) // Try several times so that different random numbers are generated.
-        {
-            List<List<Integer>> evolvedSelection = inversion.apply(selection, FrameworkTestUtils.getRNG());
-
-            // After inversion, candidate should have same elements but not in the same order.
-            assert evolvedSelection.size() == 1 : "Wrong number of individuals after evolution: " + evolvedSelection.size();
-            assert evolvedSelection.get(0).size() == selection.get(0).size() : "Candidate length should be unchanged.";
-            assert !Arrays.deepEquals(evolvedSelection.get(0).toArray(), selection.get(0).toArray())
-                : "Candidate should have been modified.";
-            assert new HashSet<Integer>(evolvedSelection.get(0)).size() == 8
-                : "Evolved candidate should contain each element once.";
-        }
-    }
+  }
 
 }

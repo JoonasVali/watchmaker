@@ -20,6 +20,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.maths.number.ConstantGenerator;
 import org.uncommons.maths.number.NumberGenerator;
 import org.uncommons.maths.random.Probability;
@@ -27,58 +28,54 @@ import org.uncommons.maths.random.Probability;
 /**
  * Evolutionary operator for mutating individual polygons.  Polygons are mutated
  * by adding a point, according to some probability.
+ *
  * @author Daniel Dyer
  */
-public class AddVertexMutation extends AbstractVertexMutation
-{
-    static final int MAX_VERTEX_COUNT = 10;
+public class AddVertexMutation extends AbstractVertexMutation {
+  static final int MAX_VERTEX_COUNT = 10;
 
-    /**
-     * @param mutationProbability A {@link NumberGenerator} that controls the probability
-     * that a point will be added.
-     * @param canvasSize The size of the canvas.  Used to constrain the positions of the points.
-     */
-    public AddVertexMutation(Dimension canvasSize,
-                             NumberGenerator<Probability> mutationProbability)
+  /**
+   * @param mutationProbability A {@link NumberGenerator} that controls the probability
+   *                            that a point will be added.
+   * @param canvasSize          The size of the canvas.  Used to constrain the positions of the points.
+   */
+  public AddVertexMutation(Dimension canvasSize,
+                           NumberGenerator<Probability> mutationProbability) {
+    super(mutationProbability, canvasSize);
+  }
+
+
+  /**
+   * @param mutationProbability The probability that a point will be added.
+   * @param canvasSize          The size of the canvas.  Used to constrain the positions of the points.
+   */
+  public AddVertexMutation(Dimension canvasSize,
+                           Probability mutationProbability) {
+    this(canvasSize, new ConstantGenerator<Probability>(mutationProbability));
+  }
+
+
+  /**
+   * Mutates the list of vertices for a given polygon by adding a new random point.
+   * Whether or not a point is actually added is determined by the configured mutation probability.
+   *
+   * @param vertices A list of the points that make up the polygon.
+   * @param rng      A source of randomness.
+   * @return A mutated list of points.
+   */
+  @Override
+  protected List<Point> mutateVertices(List<Point> vertices, Random rng) {
+    // A single point is added with the configured probability, unless
+    // we already have the maximum permitted number of points.
+    if (vertices.size() < MAX_VERTEX_COUNT && getMutationProbability().nextValue().nextEvent(rng)) {
+      List<Point> newVertices = new ArrayList<Point>(vertices);
+      newVertices.add(rng.nextInt(newVertices.size()),
+          new Point(rng.nextInt(getCanvasSize().width),
+              rng.nextInt(getCanvasSize().height)));
+      return newVertices;
+    } else // Nothing changed.
     {
-        super(mutationProbability, canvasSize);
+      return vertices;
     }
-
-
-    /**
-     * @param mutationProbability The probability that a point will be added.
-     * @param canvasSize The size of the canvas.  Used to constrain the positions of the points.
-     */
-    public AddVertexMutation(Dimension canvasSize,
-                             Probability mutationProbability)
-    {
-        this(canvasSize, new ConstantGenerator<Probability>(mutationProbability));
-    }
-
-
-    /**
-     * Mutates the list of vertices for a given polygon by adding a new random point.
-     * Whether or not a point is actually added is determined by the configured mutation probability.
-     * @param vertices A list of the points that make up the polygon.
-     * @param rng A source of randomness.
-     * @return A mutated list of points.
-     */
-    @Override
-    protected List<Point> mutateVertices(List<Point> vertices, Random rng)
-    {
-        // A single point is added with the configured probability, unless
-        // we already have the maximum permitted number of points.
-        if (vertices.size() < MAX_VERTEX_COUNT && getMutationProbability().nextValue().nextEvent(rng))
-        {
-            List<Point> newVertices = new ArrayList<Point>(vertices);
-            newVertices.add(rng.nextInt(newVertices.size()),
-                            new Point(rng.nextInt(getCanvasSize().width),
-                                      rng.nextInt(getCanvasSize().height)));
-            return newVertices;
-        }
-        else // Nothing changed.
-        {
-            return vertices;
-        }
-    }
+  }
 }

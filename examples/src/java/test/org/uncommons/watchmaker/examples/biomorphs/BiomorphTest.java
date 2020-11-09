@@ -16,44 +16,42 @@
 package org.uncommons.watchmaker.examples.biomorphs;
 
 import java.util.Arrays;
+
 import org.testng.annotations.Test;
 
 /**
  * Some basic sanity checks for the {@link Biomorph} type used in the
  * interactive evolution example program.
+ *
  * @author Daniel Dyer
  */
-public class BiomorphTest
-{
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testInsufficientGenes()
-    {
-        new Biomorph(new int[Biomorph.GENE_COUNT - 1]);
-    }
+public class BiomorphTest {
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testInsufficientGenes() {
+    new Biomorph(new int[Biomorph.GENE_COUNT - 1]);
+  }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testTooManyGenes()
-    {
-        new Biomorph(new int[Biomorph.GENE_COUNT + 1]);
-    }
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testTooManyGenes() {
+    new Biomorph(new int[Biomorph.GENE_COUNT + 1]);
+  }
 
 
-    @Test
-    public void testEquality()
-    {
-        Biomorph biomorph1 = new Biomorph(new int[Biomorph.GENE_COUNT]);
-        Biomorph biomorph2 = new Biomorph(new int[Biomorph.GENE_COUNT]);
-        int[] genes = new int[Biomorph.GENE_COUNT];
-        Arrays.fill(genes, 2);
-        Biomorph biomorph3 = new Biomorph(genes);
+  @Test
+  public void testEquality() {
+    Biomorph biomorph1 = new Biomorph(new int[Biomorph.GENE_COUNT]);
+    Biomorph biomorph2 = new Biomorph(new int[Biomorph.GENE_COUNT]);
+    int[] genes = new int[Biomorph.GENE_COUNT];
+    Arrays.fill(genes, 2);
+    Biomorph biomorph3 = new Biomorph(genes);
 
-        assert biomorph1.equals(biomorph1) : "Equality must be reflexive.";
-        assert biomorph1.equals(biomorph2) : "Biomorphs with identical genes should be considered equal.";
-        assert biomorph2.equals(biomorph1) : "Equality must be reflective.";
-        assert biomorph1.hashCode() == biomorph2.hashCode() : "Equal objects must have identical hash codes.";
-        assert !biomorph1.equals(biomorph3) : "Biomorphs with different genes should not be considered equal.";
+    assert biomorph1.equals(biomorph1) : "Equality must be reflexive.";
+    assert biomorph1.equals(biomorph2) : "Biomorphs with identical genes should be considered equal.";
+    assert biomorph2.equals(biomorph1) : "Equality must be reflective.";
+    assert biomorph1.hashCode() == biomorph2.hashCode() : "Equal objects must have identical hash codes.";
+    assert !biomorph1.equals(biomorph3) : "Biomorphs with different genes should not be considered equal.";
 
-        assert !biomorph1.equals(null) : "No object should be considered equal to a null reference.";
-        assert !biomorph3.equals(genes) : "Biomorphs should not be considered equal to objects of different types.";
-    }
+    assert !biomorph1.equals(null) : "No object should be considered equal to a null reference.";
+    assert !biomorph3.equals(genes) : "Biomorphs should not be considered equal to objects of different types.";
+  }
 }

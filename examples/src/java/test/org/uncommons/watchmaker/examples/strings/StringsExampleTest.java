@@ -20,15 +20,14 @@ import org.testng.annotations.Test;
 /**
  * Simple unit test for the Strings example.  Makes sure that the evolution engine
  * eventually returns the target String.
+ *
  * @author Daniel Dyer
  */
-public class StringsExampleTest
-{
-    @Test
-    public void testEvolution()
-    {
-        String target = "WATCHMAKER";
-        String result = StringsExample.evolveString(target);
-        assert result.equals(target) : "Evolution returned wrong result: " + result;
-    }
+public class StringsExampleTest {
+  @Test
+  public void testEvolution() {
+    String target = "WATCHMAKER";
+    String result = StringsExample.evolveString(target);
+    assert result.equals(target) : "Evolution returned wrong result: " + result;
+  }
 }

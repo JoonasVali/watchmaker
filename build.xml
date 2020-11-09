@@ -19,34 +19,34 @@
          basedir=".">
   <description>Ant build file for the Watchmaker framework.</description>
 
-  
-<!-- ==================================================================
-     GLOBAL BUILD PROPERTIES
-=================================================================== -->
+
+  <!-- ==================================================================
+       GLOBAL BUILD PROPERTIES
+  =================================================================== -->
 
   <!-- Project-global locations. -->
-  <property name="conf.dir" value="etc" />
-  <property name="lib.dir" value="lib" />
-  <property name="lib.compiletime" value="${lib.dir}/compiletime" />
-  <property name="lib.runtime" value="${lib.dir}/runtime" />
-  <property name="dist.dir" value="dist" />
-  <property name="docs.dir" value="docs" />
-  <property name="checkstyle-results.dir" value="${docs.dir}/checkstyle" />
-  <property name="release.dir" value="release" />
+  <property name="conf.dir" value="etc"/>
+  <property name="lib.dir" value="lib"/>
+  <property name="lib.compiletime" value="${lib.dir}/compiletime"/>
+  <property name="lib.runtime" value="${lib.dir}/runtime"/>
+  <property name="dist.dir" value="dist"/>
+  <property name="docs.dir" value="docs"/>
+  <property name="checkstyle-results.dir" value="${docs.dir}/checkstyle"/>
+  <property name="release.dir" value="release"/>
   <!-- The "website" directory is a symlink to a copy of the Git repository
        at http://github.com/dwdyer/watchmaker-website. -->
-  <property name="web.dir" value="website" />
-  <property name="temp.dir" value="temp" />
+  <property name="web.dir" value="website"/>
+  <property name="temp.dir" value="temp"/>
 
   <!-- Per-module locations. -->
-  <property name="src.dir" value="src" />
-  <property name="java.dir" value="${src.dir}/java" />
+  <property name="src.dir" value="src"/>
+  <property name="java.dir" value="${src.dir}/java"/>
   <property name="build.dir" value="build"/>
 
 
   <!-- Classpath for compilation and tests. -->
   <path id="tool.path">
-    <fileset dir="${lib.dir}" includes="**/*.jar" />
+    <fileset dir="${lib.dir}" includes="**/*.jar"/>
   </path>
 
   <taskdef uri="antlib:org.uncommons.antlib"
@@ -61,38 +61,38 @@
        branches) that will be tolerated.  This is used to prevent
        regressions in coverage.  The threshold will be raised as
        test coverage improves. -->
-  <property name="minimum.coverage" value="80" />
+  <property name="minimum.coverage" value="80"/>
 
 
-<!-- ==================================================================
-     TARGETS FOR BUILDING THE SOFTWARE
-=================================================================== -->
+  <!-- ==================================================================
+       TARGETS FOR BUILDING THE SOFTWARE
+  =================================================================== -->
 
   <!-- Builds everything from scratch. -->
   <target name="all"
           depends="clean, dist, test, docs"
           description="Builds everything, excluding docs, from scratch."/>
-  
-  
+
+
   <!-- Deletes all directories and files created by the build process. -->
   <target name="clean"
-          description="Remove all files created by the build process." >
-    <delete dir="${docs.dir}" />
-    <delete dir="${dist.dir}" />
-    <delete dir="${release.dir}" />
-    <delete dir="${temp.dir}" />
-    <uncommons:clean module="examples" />
-    <uncommons:clean module="framework" />
-    <uncommons:clean module="swing" />
-    <uncommons:clean module="book" />
+          description="Remove all files created by the build process.">
+    <delete dir="${docs.dir}"/>
+    <delete dir="${dist.dir}"/>
+    <delete dir="${release.dir}"/>
+    <delete dir="${temp.dir}"/>
+    <uncommons:clean module="examples"/>
+    <uncommons:clean module="framework"/>
+    <uncommons:clean module="swing"/>
+    <uncommons:clean module="book"/>
   </target>
 
 
   <!-- Builds the core framework JAR. -->
   <target name="framework"
           description="Build the framework module.">
-    <uncommons:compile module="framework" />
-    <uncommons:jar module="framework" jarfile="${artifact.identifier}.jar" />
+    <uncommons:compile module="framework"/>
+    <uncommons:jar module="framework" jarfile="${artifact.identifier}.jar"/>
   </target>
 
 
@@ -100,8 +100,8 @@
   <target name="swing"
           depends="framework"
           description="Build the GUI module.">
-    <uncommons:compile module="swing" />
-    <uncommons:jar module="swing" jarfile="watchmaker-swing-${version}.jar" />
+    <uncommons:compile module="swing"/>
+    <uncommons:jar module="swing" jarfile="watchmaker-swing-${version}.jar"/>
   </target>
 
 
@@ -109,20 +109,20 @@
   <target name="examples"
           depends="framework, swing"
           description="Build the examples.">
-    <uncommons:compile module="examples" />
+    <uncommons:compile module="examples"/>
     <uncommons:jar module="examples"
                    jarfile="watchmaker-examples-${version}.jar"
                    classpath="${artifact.identifier}.jar lib/uncommons-maths-1.2.2.jar lib/google-collect-1.0.jar watchmaker-swing-${version}.jar lib/jfreechart-1.0.13.jar lib/jcommon-1.0.16.jar"
-                   mainclass="org.uncommons.watchmaker.examples.Launcher" />
+                   mainclass="org.uncommons.watchmaker.examples.Launcher"/>
   </target>
 
 
   <!-- Copy all necessary files to distribution directory. -->
   <target name="dist"
           depends="framework, swing, examples"
-          description="Generate the project distribution." >
-    <uncommons:dist />
-    <mkdir dir="${dist.dir}/src" />
+          description="Generate the project distribution.">
+    <uncommons:dist/>
+    <mkdir dir="${dist.dir}/src"/>
     <copy todir="${dist.dir}/src" flatten="true">
       <fileset dir="." includes="**/${build.dir}/*-src.jar"/>
     </copy>
@@ -131,8 +131,8 @@
 
   <!-- Build source JAR files for inclusion in the release. -->
   <target name="source" description="Build source JARs.">
-    <uncommons:source module="framework" jarfile="${artifact.identifier}-src.jar" />
-    <uncommons:source module="swing" jarfile="watchmaker-swing-${version}-src.jar" />
+    <uncommons:source module="framework" jarfile="${artifact.identifier}-src.jar"/>
+    <uncommons:source module="swing" jarfile="watchmaker-swing-${version}-src.jar"/>
   </target>
 
 
@@ -144,7 +144,7 @@
       <additionalcontents>
         <tarfileset dir="examples/${java.dir}/main"
                     prefix="${artifact.identifier}/examples/src"
-                    includes="**/*" />
+                    includes="**/*"/>
       </additionalcontents>
     </uncommons:release>
   </target>
@@ -164,10 +164,9 @@
   </target>
 
 
-
-<!-- ==================================================================
-      TARGETS FOR GENERATING TEST REPORTS & DOCUMENTATION
- =================================================================== -->
+  <!-- ==================================================================
+        TARGETS FOR GENERATING TEST REPORTS & DOCUMENTATION
+   =================================================================== -->
 
   <!-- Runs unit tests for all modules. -->
   <target name="test"
@@ -175,12 +174,12 @@
           description="Run the unit test suite.">
     <!-- Don't run FEST tests in a headless environment (they will fail) -->
     <condition property="tests.file" value="testng-headless.xml" else="testng.xml">
-      <isset property="headless" />
+      <isset property="headless"/>
     </condition>
     <uncommons:test suites="${conf.dir}/${tests.file}"
                     headless="${headless}"
                     title="Watchmaker Framework Unit Test Report"
-                    mincoverage="${minimum.coverage}" />
+                    mincoverage="${minimum.coverage}"/>
   </target>
 
 
@@ -188,13 +187,13 @@
           depends="dist"
           description="Check that coding standard are adhered to.">
     <taskdef resource="checkstyletask.properties" classpathref="tool.path"/>
-    <mkdir dir="${checkstyle-results.dir}" />
+    <mkdir dir="${checkstyle-results.dir}"/>
 
     <!-- Compiled classes must be available on the classpath to work-around this
          bug (http://jira.codehaus.org/browse/MPCHECKSTYLE-20).  That is why this
          target depends on the 'dist' target. -->
     <path id="checkstyle.path">
-      <fileset dir="${dist.dir}" includes="**/*.jar" />
+      <fileset dir="${dist.dir}" includes="**/*.jar"/>
     </path>
 
     <checkstyle config="${conf.dir}/checks.xml"
@@ -207,7 +206,7 @@
     </checkstyle>
     <xslt in="${checkstyle-results.dir}/checkstyle_report.xml"
           out="${checkstyle-results.dir}/checkstyle_report.html"
-          style="${conf.dir}/checkstyle-noframes-sorted.xsl" />
+          style="${conf.dir}/checkstyle-noframes-sorted.xsl"/>
   </target>
 
 
@@ -218,30 +217,32 @@
                        version="${version}"
                        excludes="examples/**/*,framework/${java.dir}/main/org/uncommons/util/**/*">
       <additionalconfig>
-        <group title="Watchmaker Evolution Framework" packages="org.uncommons.watchmaker.framework:org.uncommons.watchmaker.framework.*"/>
-        <group title="Watchmaker Swing Classes" packages="org.uncommons.swing:org.uncommons.swing.*:org.uncommons.watchmaker.swing:org.uncommons.watchmaker.swing.*"/>
+        <group title="Watchmaker Evolution Framework"
+               packages="org.uncommons.watchmaker.framework:org.uncommons.watchmaker.framework.*"/>
+        <group title="Watchmaker Swing Classes"
+               packages="org.uncommons.swing:org.uncommons.swing.*:org.uncommons.watchmaker.swing:org.uncommons.watchmaker.swing.*"/>
         <link href="http://maths.uncommons.org/api/"/>
       </additionalconfig>
     </uncommons:javadoc>
   </target>
 
-  
+
   <target name="book" description="Generates the PDF user guide.">
-    <mkdir dir="book/${build.dir}" />
+    <mkdir dir="book/${build.dir}"/>
     <uncommons:docbook classpathref="tool.path"
                        source="book/${src.dir}/xml/book.xml"
-                       format="pdf"                       
-                       outputDir="book/${build.dir}" >
-      <parameter name="paper.type" value="A4" />
-      <parameter name="highlight.source" value="1" />
-      <parameter name="img.src.path" value="./book/src/resources/" />
+                       format="pdf"
+                       outputDir="book/${build.dir}">
+      <parameter name="paper.type" value="A4"/>
+      <parameter name="highlight.source" value="1"/>
+      <parameter name="img.src.path" value="./book/src/resources/"/>
     </uncommons:docbook>
   </target>
 
 
-<!-- ==================================================================
-      TARGETS FOR UPDATING THE PROJECT WEBSITE
- =================================================================== -->
+  <!-- ==================================================================
+        TARGETS FOR UPDATING THE PROJECT WEBSITE
+   =================================================================== -->
 
   <target name="website-docs"
           description="Re-builds the website Javadocs."
@@ -249,8 +250,8 @@
     <!-- Delete all existing HTML files and then regenerate the docs over the top. -->
     <delete>
       <fileset dir="${web.dir}">
-        <include name="api/**/*.html" />
-        <include name="manual/**/*" />
+        <include name="api/**/*.html"/>
+        <include name="manual/**/*"/>
       </fileset>
     </delete>
 
@@ -260,8 +261,10 @@
                        version="${version}"
                        excludes="examples/**/*,framework/${java.dir}/main/org/uncommons/util/**/*">
       <additionalconfig>
-        <group title="Watchmaker Evolution Framework" packages="org.uncommons.watchmaker.framework:org.uncommons.watchmaker.framework.*"/>
-        <group title="Watchmaker Swing Classes" packages="org.uncommons.swing:org.uncommons.swing.*:org.uncommons.watchmaker.swing:org.uncommons.watchmaker.swing.*"/>
+        <group title="Watchmaker Evolution Framework"
+               packages="org.uncommons.watchmaker.framework:org.uncommons.watchmaker.framework.*"/>
+        <group title="Watchmaker Swing Classes"
+               packages="org.uncommons.swing:org.uncommons.swing.*:org.uncommons.watchmaker.swing:org.uncommons.watchmaker.swing.*"/>
         <link href="http://maths.uncommons.org/api/"/>
       </additionalconfig>
     </uncommons:javadoc>
@@ -274,10 +277,10 @@
 
     <!-- Copy latest jars into website examples directory. -->
     <copy todir="${web.dir}/examples">
-      <fileset dir="${dist.dir}" includes="*.jar" />
+      <fileset dir="${dist.dir}" includes="*.jar"/>
     </copy>
     <copy todir="${web.dir}/examples/lib">
-      <fileset dir="${dist.dir}/${lib.dir}" includes="*.jar" />
+      <fileset dir="${dist.dir}/${lib.dir}" includes="*.jar"/>
     </copy>
 
     <!-- Generate user manual from DocBook source. -->
@@ -285,10 +288,10 @@
                        source="book/${src.dir}/xml/website.xml"
                        format="html"
                        chunked="true"
-                       outputDir="${web.dir}/manual" >
-      <parameter name="highlight.source" value="1" />
-      <parameter name="img.src.path" value="./" />
-      <parameter name="html.stylesheet" value="docbook.css" />
+                       outputDir="${web.dir}/manual">
+      <parameter name="highlight.source" value="1"/>
+      <parameter name="img.src.path" value="./"/>
+      <parameter name="html.stylesheet" value="docbook.css"/>
     </uncommons:docbook>
     <copy todir="${web.dir}/manual">
       <fileset dir="book/${src.dir}/resources" includes="**/*"/>

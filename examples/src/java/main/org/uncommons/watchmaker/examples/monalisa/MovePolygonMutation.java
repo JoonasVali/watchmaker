@@ -18,6 +18,7 @@ package org.uncommons.watchmaker.examples.monalisa;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.maths.number.ConstantGenerator;
 import org.uncommons.maths.number.NumberGenerator;
 import org.uncommons.maths.random.Probability;
@@ -26,49 +27,43 @@ import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 /**
  * Randomly mutates an image by swapping the z-order of two of its polygons
  * according to some probability.
+ *
  * @author Daniel Dyer
  */
-public class MovePolygonMutation implements EvolutionaryOperator<List<ColouredPolygon>>
-{
-    private final NumberGenerator<Probability> movePolygonProbability;
+public class MovePolygonMutation implements EvolutionaryOperator<List<ColouredPolygon>> {
+  private final NumberGenerator<Probability> movePolygonProbability;
 
 
-    /**
-     * @param movePolygonProbability A {@link NumberGenerator} that controls the probability
-     * that a polygon will be replaced.
-     */
-    public MovePolygonMutation(NumberGenerator<Probability> movePolygonProbability)
-    {
-        this.movePolygonProbability = movePolygonProbability;
+  /**
+   * @param movePolygonProbability A {@link NumberGenerator} that controls the probability
+   *                               that a polygon will be replaced.
+   */
+  public MovePolygonMutation(NumberGenerator<Probability> movePolygonProbability) {
+    this.movePolygonProbability = movePolygonProbability;
+  }
+
+
+  /**
+   * @param replacePolygonProbability The probability that a polygon will be replaced.
+   */
+  public MovePolygonMutation(Probability replacePolygonProbability) {
+    this(new ConstantGenerator<Probability>(replacePolygonProbability));
+  }
+
+
+  public List<List<ColouredPolygon>> apply(List<List<ColouredPolygon>> selectedCandidates, Random rng) {
+    List<List<ColouredPolygon>> mutatedCandidates = new ArrayList<List<ColouredPolygon>>(selectedCandidates.size());
+    for (List<ColouredPolygon> candidate : selectedCandidates) {
+      if (movePolygonProbability.nextValue().nextEvent(rng)) {
+        List<ColouredPolygon> newPolygons = new ArrayList<ColouredPolygon>(candidate);
+        ColouredPolygon polygon = newPolygons.remove(rng.nextInt(newPolygons.size()));
+        newPolygons.add(rng.nextInt(newPolygons.size()) + 1, polygon);
+        mutatedCandidates.add(newPolygons);
+      } else // Nothing changed.
+      {
+        mutatedCandidates.add(candidate);
+      }
     }
-
-
-    /**
-     * @param replacePolygonProbability The probability that a polygon will be replaced.
-     */
-    public MovePolygonMutation(Probability replacePolygonProbability)
-    {
-        this(new ConstantGenerator<Probability>(replacePolygonProbability));
-    }
-
-
-    public List<List<ColouredPolygon>> apply(List<List<ColouredPolygon>> selectedCandidates, Random rng)
-    {
-        List<List<ColouredPolygon>> mutatedCandidates = new ArrayList<List<ColouredPolygon>>(selectedCandidates.size());
-        for (List<ColouredPolygon> candidate : selectedCandidates)
-        {
-            if (movePolygonProbability.nextValue().nextEvent(rng))
-            {
-                List<ColouredPolygon> newPolygons = new ArrayList<ColouredPolygon>(candidate);
-                ColouredPolygon polygon = newPolygons.remove(rng.nextInt(newPolygons.size()));
-                newPolygons.add(rng.nextInt(newPolygons.size()) + 1, polygon);
-                mutatedCandidates.add(newPolygons);
-            }
-            else // Nothing changed.
-            {
-                mutatedCandidates.add(candidate);
-            }
-        }
-        return mutatedCandidates;
-    }
+    return mutatedCandidates;
+  }
 }
