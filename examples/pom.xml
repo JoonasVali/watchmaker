@@ -45,14 +45,4 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <build>
-    <sourceDirectory>src/java/main</sourceDirectory>
-    <testSourceDirectory>src/java/test</testSourceDirectory>
-    <resources>
-      <resource>
-        <directory>src/java/resources</directory>
-      </resource>
-    </resources>
-  </build>
 </project>

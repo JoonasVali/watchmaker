@@ -19,6 +19,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
+  <packaging>jar</packaging>
   <parent>
     <groupId>com.github.joonasvali.watchmaker</groupId>
     <artifactId>watchmaker</artifactId>
@@ -46,7 +47,20 @@
   </dependencies>
 
   <build>
-    <sourceDirectory>src/java/main</sourceDirectory>
-    <testSourceDirectory>src/java/test</testSourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <archive>
+            <index>true</index>
+            <manifestEntries>
+              <Automatic-Module-Name>com.github.joonasvali.watchmaker</Automatic-Module-Name>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
