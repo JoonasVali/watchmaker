@@ -21,11 +21,52 @@
   <modelVersion>4.0.0</modelVersion>
   <packaging>jar</packaging>
   <parent>
-    <groupId>com.github.joonasvali.watchmaker</groupId>
-    <artifactId>watchmaker</artifactId>
-    <version>0.7.3-SNAPSHOT</version>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
   </parent>
+
+  <groupId>com.github.joonasvali.watchmaker</groupId>
   <artifactId>watchmaker-framework</artifactId>
+  <version>0.7.3-SNAPSHOT</version>
+
+  <developers>
+    <developer>
+      <id>dwdyer</id>
+      <name>Dan Dyer</name>
+      <roles>
+        <role>committer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>cowwoc</id>
+      <name>Gili Tzabari</name>
+      <roles>
+        <role>contributor</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>JoonasVali</id>
+      <name>Joonas Vali</name>
+      <roles>
+        <role>contributor</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version.source>1.8</java.version.source>
+    <java.version.target>1.8</java.version.target>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -46,6 +87,12 @@
     </dependency>
   </dependencies>
 
+  <scm>
+    <url>https://github.com/JoonasVali/watchmaker</url>
+    <connection>scm:git://github.com/JoonasVali/watchmaker.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:JoonasVali/watchmaker.git</developerConnection>
+  </scm>
+
   <build>
     <plugins>
       <plugin>
@@ -59,6 +106,15 @@
               <Automatic-Module-Name>com.github.joonasvali.watchmaker</Automatic-Module-Name>
             </manifestEntries>
           </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>${java.version.source}</source>
+          <target>${java.version.target}</target>
         </configuration>
       </plugin>
     </plugins>
