@@ -68,7 +68,7 @@ final class EvolutionPanel extends JPanel {
     selectionLabel = new JLabel("Selection Strategy: ");
     List<SelectionStrategy<? super List<String>>> strategies
         = SelectionStrategyControl.createDefaultOptions(new Probability(0.95d), 0.5d);
-    this.selectionControl = new SelectionStrategyControl<List<String>>(strategies);
+    this.selectionControl = new SelectionStrategyControl<>(strategies);
     innerPanel.add(selectionLabel);
     selectionControl.getControl().setSelectedIndex(selectionControl.getControl().getItemCount() - 1);
     innerPanel.add(selectionControl.getControl());

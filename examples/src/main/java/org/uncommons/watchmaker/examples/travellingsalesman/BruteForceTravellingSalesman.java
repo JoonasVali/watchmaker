@@ -74,7 +74,7 @@ public class BruteForceTravellingSalesman implements TravellingSalesmanStrategy 
     }
 
     FitnessEvaluator<List<String>> evaluator = new RouteEvaluator(distances);
-    PermutationGenerator<String> generator = new PermutationGenerator<String>(destinations);
+    PermutationGenerator<String> generator = new PermutationGenerator<>(destinations);
     long totalPermutations = generator.getTotalPermutations();
     long count = 0;
     List<String> shortestRoute = null;

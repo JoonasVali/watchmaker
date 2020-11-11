@@ -21,6 +21,7 @@ import org.uncommons.maths.random.MersenneTwisterRNG;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -53,12 +54,12 @@ public class PolygonImageEvaluatorTest {
   @Test(groups = "display-required")
   public void testDifferentImages() {
     Dimension canvasSize = new Dimension(100, 100);
-    List<ColouredPolygon> targetImage = Arrays.asList(new ColouredPolygon(Color.BLACK,
+    List<ColouredPolygon> targetImage = Collections.singletonList(new ColouredPolygon(Color.BLACK,
         Arrays.asList(new Point(0, 0),
             new Point(99, 0),
             new Point(99, 99),
             new Point(0, 99))));
-    List<ColouredPolygon> candidateImage = Arrays.asList(new ColouredPolygon(Color.WHITE,
+    List<ColouredPolygon> candidateImage = Collections.singletonList(new ColouredPolygon(Color.WHITE,
         Arrays.asList(new Point(0, 0),
             new Point(99, 0),
             new Point(99, 99),

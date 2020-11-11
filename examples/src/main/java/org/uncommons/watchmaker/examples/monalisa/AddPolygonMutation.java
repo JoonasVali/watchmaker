@@ -62,7 +62,7 @@ public class AddPolygonMutation implements EvolutionaryOperator<List<ColouredPol
   public AddPolygonMutation(Probability addPolygonProbability,
                             PolygonImageFactory factory,
                             int maxPolygons) {
-    this(new ConstantGenerator<Probability>(addPolygonProbability),
+    this(new ConstantGenerator<>(addPolygonProbability),
         factory,
         maxPolygons);
   }

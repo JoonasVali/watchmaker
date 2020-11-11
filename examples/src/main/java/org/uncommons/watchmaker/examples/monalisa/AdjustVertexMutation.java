@@ -62,7 +62,7 @@ public class AdjustVertexMutation extends AbstractVertexMutation {
   public AdjustVertexMutation(Dimension canvasSize,
                               Probability mutationProbability,
                               NumberGenerator<? extends Number> changeAmount) {
-    this(canvasSize, new ConstantGenerator<Probability>(mutationProbability), changeAmount);
+    this(canvasSize, new ConstantGenerator<>(mutationProbability), changeAmount);
   }
 
 

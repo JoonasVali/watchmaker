@@ -36,8 +36,6 @@ import org.uncommons.watchmaker.swing.evolutionmonitor.EvolutionMonitor;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -94,7 +92,7 @@ public class MonaLisaApplet extends AbstractExampleApplet {
     container.add(controls, BorderLayout.NORTH);
 
     Renderer<List<ColouredPolygon>, JComponent> renderer = new PolygonImageSwingRenderer(targetImage);
-    monitor = new EvolutionMonitor<List<ColouredPolygon>>(renderer, false);
+    monitor = new EvolutionMonitor<>(renderer, false);
     container.add(monitor.getGUIComponent(), BorderLayout.CENTER);
   }
 
@@ -189,14 +187,14 @@ public class MonaLisaApplet extends AbstractExampleApplet {
 
       Random rng = new XORShiftRNG();
       FitnessEvaluator<List<ColouredPolygon>> evaluator
-          = new CachingFitnessEvaluator<List<ColouredPolygon>>(new PolygonImageEvaluator(targetImage));
+          = new CachingFitnessEvaluator<>(new PolygonImageEvaluator(targetImage));
       PolygonImageFactory factory = new PolygonImageFactory(canvasSize);
       EvolutionaryOperator<List<ColouredPolygon>> pipeline
           = probabilitiesPanel.createEvolutionPipeline(factory, canvasSize, rng);
 
       SelectionStrategy<Object> selection = new TournamentSelection(selectionPressureControl.getNumberGenerator());
       EvolutionEngine<List<ColouredPolygon>> engine
-          = new GenerationalEvolutionEngine<List<ColouredPolygon>>(factory,
+          = new GenerationalEvolutionEngine<>(factory,
           pipeline,
           evaluator,
           selection,

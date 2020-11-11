@@ -19,8 +19,6 @@ import org.uncommons.maths.number.AdjustableNumberGenerator;
 import org.uncommons.maths.number.NumberGenerator;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 /**
  * A GUI control that allows the user to set/update the value of a

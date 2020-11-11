@@ -47,7 +47,7 @@ public class MovePolygonMutation implements EvolutionaryOperator<List<ColouredPo
    * @param replacePolygonProbability The probability that a polygon will be replaced.
    */
   public MovePolygonMutation(Probability replacePolygonProbability) {
-    this(new ConstantGenerator<Probability>(replacePolygonProbability));
+    this(new ConstantGenerator<>(replacePolygonProbability));
   }
 
 

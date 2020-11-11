@@ -32,10 +32,6 @@ import org.uncommons.watchmaker.swing.SwingConsole;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 /**
  * Watchmaker Framework implementation of Dawkin's biomorph program.
@@ -91,11 +87,11 @@ public class BiomorphApplet extends AbstractExampleApplet {
       protected Biomorph performTask() {
         EvolutionaryOperator<Biomorph> mutation = random ? new RandomBiomorphMutation(new Probability(0.12d))
             : new DawkinsBiomorphMutation();
-        InteractiveSelection<Biomorph> selection = new InteractiveSelection<Biomorph>(console,
+        InteractiveSelection<Biomorph> selection = new InteractiveSelection<>(console,
             renderer,
             populationSize,
             1);
-        EvolutionEngine<Biomorph> engine = new GenerationalEvolutionEngine<Biomorph>(new BiomorphFactory(),
+        EvolutionEngine<Biomorph> engine = new GenerationalEvolutionEngine<>(new BiomorphFactory(),
             mutation,
             selection,
             new MersenneTwisterRNG());

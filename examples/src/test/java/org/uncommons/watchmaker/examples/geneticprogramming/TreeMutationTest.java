@@ -20,7 +20,7 @@ import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.examples.ExamplesTestUtils;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +39,7 @@ public class TreeMutationTest {
     TreeFactory treeFactory = new TreeFactory(0, 3, Probability.EVENS, Probability.EVENS);
     EvolutionaryOperator<Node> mutation = new TreeMutation(treeFactory,
         Probability.ZERO); // Zero probability means no mutations.
-    List<Node> candidates = Arrays.<Node>asList(new Addition(new Constant(3), new Constant(4)));
+    List<Node> candidates = Collections.<Node>singletonList(new Addition(new Constant(3), new Constant(4)));
     List<Node> result = mutation.apply(candidates, ExamplesTestUtils.getRNG());
     assert result.size() == 1 : "Wrong number of trees returned: " + result.size();
     assert candidates.get(0) == result.get(0) : "Tree should have been returned unmodified.";

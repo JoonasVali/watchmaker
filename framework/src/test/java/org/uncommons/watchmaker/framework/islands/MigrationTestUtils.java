@@ -31,6 +31,7 @@ class MigrationTestUtils {
   }
 
 
+  @SafeVarargs
   public static <T> List<EvaluatedCandidate<T>> createTestPopulation(T... members) {
     List<EvaluatedCandidate<T>> population = new ArrayList<>(members.length);
     for (T member : members) {

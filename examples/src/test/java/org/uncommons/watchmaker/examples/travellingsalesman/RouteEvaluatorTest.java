@@ -18,6 +18,7 @@ package org.uncommons.watchmaker.examples.travellingsalesman;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -58,7 +59,7 @@ public class RouteEvaluatorTest {
   public void testSingleCityRoute() {
     RouteEvaluator evaluator = new RouteEvaluator(new TestDistances());
 
-    List<String> route = Arrays.asList("City1");
+    List<String> route = Collections.singletonList("City1");
     // Expected distance is sum of distances between adjacent cities on route
     // including returning to the start city.
     int distance = (int) evaluator.getFitness(route, null);

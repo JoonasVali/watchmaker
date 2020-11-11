@@ -50,7 +50,7 @@ public class RemoveVertexMutation extends AbstractVertexMutation {
    */
   public RemoveVertexMutation(Dimension canvasSize,
                               Probability mutationProbability) {
-    this(canvasSize, new ConstantGenerator<Probability>(mutationProbability));
+    this(canvasSize, new ConstantGenerator<>(mutationProbability));
   }
 
 

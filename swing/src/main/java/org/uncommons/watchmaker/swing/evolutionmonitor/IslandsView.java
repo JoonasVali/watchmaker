@@ -32,7 +32,6 @@ import org.uncommons.watchmaker.framework.islands.IslandEvolutionObserver;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.atomic.AtomicInteger;
 

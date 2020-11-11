@@ -151,14 +151,12 @@ abstract class BinaryNode implements Node {
    * {@inheritDoc}
    */
   public String print() {
-    StringBuilder buffer = new StringBuilder("(");
-    buffer.append(left.print());
-    buffer.append(' ');
-    buffer.append(symbol);
-    buffer.append(' ');
-    buffer.append(right.print());
-    buffer.append(')');
-    return buffer.toString();
+    return "(" + left.print() +
+        ' ' +
+        symbol +
+        ' ' +
+        right.print() +
+        ')';
   }
 
 

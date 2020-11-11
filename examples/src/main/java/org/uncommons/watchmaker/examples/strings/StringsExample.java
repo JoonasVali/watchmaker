@@ -65,11 +65,11 @@ public final class StringsExample {
 
   public static String evolveString(String target) {
     StringFactory factory = new StringFactory(ALPHABET, target.length());
-    List<EvolutionaryOperator<String>> operators = new ArrayList<EvolutionaryOperator<String>>(2);
+    List<EvolutionaryOperator<String>> operators = new ArrayList<>(2);
     operators.add(new StringMutation(ALPHABET, new Probability(0.02d)));
     operators.add(new StringCrossover());
-    EvolutionaryOperator<String> pipeline = new EvolutionPipeline<String>(operators);
-    EvolutionEngine<String> engine = new GenerationalEvolutionEngine<String>(factory,
+    EvolutionaryOperator<String> pipeline = new EvolutionPipeline<>(operators);
+    EvolutionEngine<String> engine = new GenerationalEvolutionEngine<>(factory,
         pipeline,
         new StringEvaluator(target),
         new RouletteWheelSelection(),

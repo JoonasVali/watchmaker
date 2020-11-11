@@ -36,7 +36,7 @@ public class PolygonImageEvaluator implements FitnessEvaluator<List<ColouredPoly
   // This field is marked as transient, even though the class is not Serializable, because
   // Terracotta will respect the fact it is transient and not try to share it.
   private final transient ThreadLocal<Renderer<List<ColouredPolygon>, BufferedImage>> threadLocalRenderer
-      = new ThreadLocal<Renderer<List<ColouredPolygon>, BufferedImage>>();
+      = new ThreadLocal<>();
 
   private final int width;
   private final int height;
@@ -55,7 +55,7 @@ public class PolygonImageEvaluator implements FitnessEvaluator<List<ColouredPoly
     // reduces the number of pixels that we need to check for fitness evaluation.
     Raster targetImageData;
     if (targetImage.getWidth() > 100 && targetImage.getHeight() > 100) {
-      double ratio = 100.0d / (targetImage.getWidth() > targetImage.getHeight() ? targetImage.getHeight() : targetImage.getWidth());
+      double ratio = 100.0d / (Math.min(targetImage.getWidth(), targetImage.getHeight()));
       transform = AffineTransform.getScaleInstance(ratio, ratio);
       AffineTransformOp transformOp = new AffineTransformOp(transform,
           AffineTransformOp.TYPE_NEAREST_NEIGHBOR);

@@ -46,7 +46,7 @@ public class RemovePolygonMutation implements EvolutionaryOperator<List<Coloured
    * @param removePolygonProbability The probability that a polygon will be removed.
    */
   public RemovePolygonMutation(Probability removePolygonProbability) {
-    this(new ConstantGenerator<Probability>(removePolygonProbability));
+    this(new ConstantGenerator<>(removePolygonProbability));
   }
 
 

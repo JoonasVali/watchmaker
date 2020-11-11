@@ -27,7 +27,6 @@ import org.uncommons.watchmaker.framework.selection.TruncationSelection;
 
 import javax.swing.*;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;

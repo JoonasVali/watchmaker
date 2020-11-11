@@ -29,10 +29,10 @@ public class CachingFitnessEvaluatorTest {
   @Test
   public void testCacheMiss() {
     FitnessEvaluator<String> evaluator = new CachingFitnessEvaluator<>(new IncrementingEvaluator(true));
-    double fitness = evaluator.getFitness("Test1", Collections.<String>emptyList());
+    double fitness = evaluator.getFitness("Test1", Collections.emptyList());
     assert fitness == 1 : "Wrong fitness: " + fitness;
     // Different candidate so shouldn't return a cached value.
-    fitness = evaluator.getFitness("Test2", Collections.<String>emptyList());
+    fitness = evaluator.getFitness("Test2", Collections.emptyList());
     assert fitness == 2 : "Wrong fitness: " + fitness;
 
   }
@@ -41,9 +41,9 @@ public class CachingFitnessEvaluatorTest {
   @Test
   public void testCacheHit() {
     FitnessEvaluator<String> evaluator = new CachingFitnessEvaluator<>(new IncrementingEvaluator(true));
-    double fitness = evaluator.getFitness("Test", Collections.<String>emptyList());
+    double fitness = evaluator.getFitness("Test", Collections.emptyList());
     assert fitness == 1 : "Wrong fitness: " + fitness;
-    fitness = evaluator.getFitness("Test", Collections.<String>emptyList());
+    fitness = evaluator.getFitness("Test", Collections.emptyList());
     // If the value is found in the cache it won't have changed.  If it is recalculated, it will have.
     assert fitness == 1 : "Expected cached value (1), got " + fitness;
   }

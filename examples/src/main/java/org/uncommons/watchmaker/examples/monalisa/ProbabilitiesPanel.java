@@ -150,22 +150,22 @@ class ProbabilitiesPanel extends JPanel {
                                                                              Dimension canvasSize,
                                                                              Random rng) {
     List<EvolutionaryOperator<List<ColouredPolygon>>> operators
-        = new LinkedList<EvolutionaryOperator<List<ColouredPolygon>>>();
-    operators.add(new ListCrossover<ColouredPolygon>(new ConstantGenerator<Integer>(2),
+        = new LinkedList<>();
+    operators.add(new ListCrossover<>(new ConstantGenerator<>(2),
         crossOverControl.getNumberGenerator()));
     operators.add(new RemovePolygonMutation(removePolygonControl.getNumberGenerator()));
     operators.add(new MovePolygonMutation(movePolygonControl.getNumberGenerator()));
-    operators.add(new ListOperator<ColouredPolygon>(new RemoveVertexMutation(canvasSize,
+    operators.add(new ListOperator<>(new RemoveVertexMutation(canvasSize,
         removeVertexControl.getNumberGenerator())));
-    operators.add(new ListOperator<ColouredPolygon>(new AdjustVertexMutation(canvasSize,
+    operators.add(new ListOperator<>(new AdjustVertexMutation(canvasSize,
         moveVertexControl.getNumberGenerator(),
         new GaussianGenerator(0, 3, rng))));
-    operators.add(new ListOperator<ColouredPolygon>(new AddVertexMutation(canvasSize,
+    operators.add(new ListOperator<>(new AddVertexMutation(canvasSize,
         addVertexControl.getNumberGenerator())));
-    operators.add(new ListOperator<ColouredPolygon>(new PolygonColourMutation(changeColourControl.getNumberGenerator(),
+    operators.add(new ListOperator<>(new PolygonColourMutation(changeColourControl.getNumberGenerator(),
         new GaussianGenerator(0, 20, rng))));
     operators.add(new AddPolygonMutation(addPolygonControl.getNumberGenerator(), factory, 50));
-    return new EvolutionPipeline<List<ColouredPolygon>>(operators);
+    return new EvolutionPipeline<>(operators);
   }
 
 }

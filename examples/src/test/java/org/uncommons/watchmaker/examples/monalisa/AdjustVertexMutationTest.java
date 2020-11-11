@@ -47,7 +47,7 @@ public class AdjustVertexMutationTest {
     final int amount = 5;
     EvolutionaryOperator<ColouredPolygon> mutation = new AdjustVertexMutation(canvasSize,
         Probability.ONE,
-        new ConstantGenerator<Integer>(amount));
+        new ConstantGenerator<>(amount));
 
     List<ColouredPolygon> evolved = mutation.apply(image, ExamplesTestUtils.getRNG());
     assert evolved.size() == 1 : "Polygon count should not be altered by mutation.";
@@ -92,7 +92,7 @@ public class AdjustVertexMutationTest {
 
     EvolutionaryOperator<ColouredPolygon> mutation = new AdjustVertexMutation(canvasSize,
         Probability.ZERO,
-        new ConstantGenerator<Integer>(1));
+        new ConstantGenerator<>(1));
 
     List<ColouredPolygon> evolved = mutation.apply(image, ExamplesTestUtils.getRNG());
     assert evolved.size() == 1 : "Polygon count should not be altered by mutation.";

@@ -27,7 +27,7 @@ import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -74,10 +74,10 @@ public class ProbabilitiesPanelTest {
     EvolutionaryOperator<List<ColouredPolygon>> operator = panel.createEvolutionPipeline(factory,
         canvasSize,
         ExamplesTestUtils.getRNG());
-    List<ColouredPolygon> candidate1 = Arrays.asList(new ColouredPolygon(Color.WHITE,
-        Arrays.asList(new Point(1, 1))));
-    List<ColouredPolygon> candidate2 = Arrays.asList(new ColouredPolygon(Color.BLACK,
-        Arrays.asList(new Point(2, 2))));
+    List<ColouredPolygon> candidate1 = Collections.singletonList(new ColouredPolygon(Color.WHITE,
+        Collections.singletonList(new Point(1, 1))));
+    List<ColouredPolygon> candidate2 = Collections.singletonList(new ColouredPolygon(Color.BLACK,
+        Collections.singletonList(new Point(2, 2))));
     List<List<ColouredPolygon>> population = new ArrayList<>(2);
     population.add(candidate1);
     population.add(candidate2);

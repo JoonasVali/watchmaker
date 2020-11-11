@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 import org.uncommons.watchmaker.framework.factories.StubIntegerFactory;
 import org.uncommons.watchmaker.framework.operators.IntegerAdjuster;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,7 +37,7 @@ public class EvolutionStrategyEngineTest {
         1,
         FrameworkTestUtils.getRNG());
     @SuppressWarnings("unchecked")
-    List<EvaluatedCandidate<Integer>> population = Arrays.asList(new EvaluatedCandidate<>(1, 1));
+    List<EvaluatedCandidate<Integer>> population = Collections.singletonList(new EvaluatedCandidate<>(1, 1));
 
     List<EvaluatedCandidate<Integer>> evolvedPopulation
         = engine.nextEvolutionStep(population, 0, FrameworkTestUtils.getRNG());
@@ -56,7 +56,7 @@ public class EvolutionStrategyEngineTest {
         1,
         FrameworkTestUtils.getRNG());
     @SuppressWarnings("unchecked")
-    List<EvaluatedCandidate<Integer>> population = Arrays.asList(new EvaluatedCandidate<>(1, 1));
+    List<EvaluatedCandidate<Integer>> population = Collections.singletonList(new EvaluatedCandidate<>(1, 1));
 
     List<EvaluatedCandidate<Integer>> evolvedPopulation
         = engine.nextEvolutionStep(population, 0, FrameworkTestUtils.getRNG());

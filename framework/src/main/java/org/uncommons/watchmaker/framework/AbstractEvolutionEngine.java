@@ -103,7 +103,7 @@ public abstract class AbstractEvolutionEngine<T> implements EvolutionEngine<T> {
                                                       TerminationCondition... conditions) {
     return evolvePopulation(populationSize,
         eliteCount,
-        Collections.<T>emptySet(),
+        Collections.emptySet(),
         conditions);
   }
 

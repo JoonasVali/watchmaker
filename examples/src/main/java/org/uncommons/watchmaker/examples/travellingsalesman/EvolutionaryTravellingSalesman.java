@@ -19,10 +19,8 @@ import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.PoissonGenerator;
 import org.uncommons.watchmaker.framework.CandidateFactory;
 import org.uncommons.watchmaker.framework.EvolutionEngine;
-import org.uncommons.watchmaker.framework.EvolutionObserver;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 import org.uncommons.watchmaker.framework.GenerationalEvolutionEngine;
-import org.uncommons.watchmaker.framework.PopulationData;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
 import org.uncommons.watchmaker.framework.factories.ListPermutationFactory;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
@@ -113,31 +111,27 @@ public class EvolutionaryTravellingSalesman implements TravellingSalesmanStrateg
     Random rng = new MersenneTwisterRNG();
 
     // Set-up evolution pipeline (cross-over followed by mutation).
-    List<EvolutionaryOperator<List<String>>> operators = new ArrayList<EvolutionaryOperator<List<String>>>(2);
+    List<EvolutionaryOperator<List<String>>> operators = new ArrayList<>(2);
     if (crossover) {
-      operators.add(new ListOrderCrossover<String>());
+      operators.add(new ListOrderCrossover<>());
     }
     if (mutation) {
-      operators.add(new ListOrderMutation<String>(new PoissonGenerator(1.5, rng),
+      operators.add(new ListOrderMutation<>(new PoissonGenerator(1.5, rng),
           new PoissonGenerator(1.5, rng)));
     }
 
-    EvolutionaryOperator<List<String>> pipeline = new EvolutionPipeline<List<String>>(operators);
+    EvolutionaryOperator<List<String>> pipeline = new EvolutionPipeline<>(operators);
 
     CandidateFactory<List<String>> candidateFactory
-        = new ListPermutationFactory<String>(new LinkedList<String>(cities));
+        = new ListPermutationFactory<>(new LinkedList<>(cities));
     EvolutionEngine<List<String>> engine
-        = new GenerationalEvolutionEngine<List<String>>(candidateFactory,
+        = new GenerationalEvolutionEngine<>(candidateFactory,
         pipeline,
         new RouteEvaluator(distances),
         selectionStrategy,
         rng);
     if (progressListener != null) {
-      engine.addEvolutionObserver(new EvolutionObserver<List<String>>() {
-        public void populationUpdate(PopulationData<? extends List<String>> data) {
-          progressListener.updateProgress(((double) data.getGenerationNumber() + 1) / generationCount * 100);
-        }
-      });
+      engine.addEvolutionObserver(data -> progressListener.updateProgress(((double) data.getGenerationNumber() + 1) / generationCount * 100));
     }
     return engine.evolve(populationSize,
         eliteCount,

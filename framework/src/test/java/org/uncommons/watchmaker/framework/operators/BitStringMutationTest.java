@@ -21,7 +21,7 @@ import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 import org.uncommons.watchmaker.framework.FrameworkTestUtils;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -40,7 +40,7 @@ public class BitStringMutationTest {
   public void testRandomMutation() {
     EvolutionaryOperator<BitString> mutation = new BitStringMutation(Probability.EVENS);
     BitString original = new BitString("111100101");
-    List<BitString> population = Arrays.asList(original);
+    List<BitString> population = Collections.singletonList(original);
     for (int i = 0; i < 20; i++) // Perform several iterations to get different mutations.
     {
       population = mutation.apply(population, FrameworkTestUtils.getRNG());
@@ -58,7 +58,7 @@ public class BitStringMutationTest {
   public void testSingleBitMutation() {
     BitString original = new BitString("111100101");
     EvolutionaryOperator<BitString> mutation = new BitStringMutation(Probability.ONE);
-    List<BitString> population = Arrays.asList(original);
+    List<BitString> population = Collections.singletonList(original);
     population = mutation.apply(population, FrameworkTestUtils.getRNG());
     BitString mutated = population.get(0);
     assert !mutated.equals(original) : "Mutation should be different from original.";

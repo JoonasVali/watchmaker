@@ -21,8 +21,6 @@ import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.List;
 

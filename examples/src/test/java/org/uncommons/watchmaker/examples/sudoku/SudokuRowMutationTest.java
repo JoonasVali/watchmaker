@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 import org.uncommons.watchmaker.examples.ExamplesTestUtils;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,7 +37,7 @@ public class SudokuRowMutationTest {
   @Test
   public void testValidity() {
     EvolutionaryOperator<Sudoku> mutation = new SudokuRowMutation(8, 1);
-    List<Sudoku> population = Arrays.asList(SudokuTestUtils.createSudoku(new int[][]
+    List<Sudoku> population = Collections.singletonList(SudokuTestUtils.createSudoku(new int[][]
         {
             {1, 2, 8, 5, 4, 3, 9, 6, 7},
             {7, 6, 4, 9, 2, 8, 5, 1, 3},
@@ -82,7 +82,7 @@ public class SudokuRowMutationTest {
         cells[row][column] = new Sudoku.Cell(column + 1, column == row);
       }
     }
-    List<Sudoku> population = Arrays.asList(new Sudoku(cells));
+    List<Sudoku> population = Collections.singletonList(new Sudoku(cells));
     for (int i = 0; i < 100; i++) // 100 generations of mutation.
     {
       population = mutation.apply(population, ExamplesTestUtils.getRNG());

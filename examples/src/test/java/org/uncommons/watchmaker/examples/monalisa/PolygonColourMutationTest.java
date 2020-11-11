@@ -22,6 +22,7 @@ import org.uncommons.watchmaker.examples.ExamplesTestUtils;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -33,13 +34,13 @@ public class PolygonColourMutationTest {
   @Test
   public void testColourMutation() {
     PolygonColourMutation mutation = new PolygonColourMutation(Probability.ONE, // Guaranteed mutation.
-        new ConstantGenerator<Double>(1d));
+        new ConstantGenerator<>(1d));
     // A grey triangle.
     final ColouredPolygon polygon = new ColouredPolygon(new Color(128, 128, 128, 128),
         Arrays.asList(new Point(0, 0),
             new Point(50, 50),
             new Point(0, 75)));
-    List<ColouredPolygon> image = Arrays.asList(polygon);
+    List<ColouredPolygon> image = Collections.singletonList(polygon);
     List<ColouredPolygon> mutatedImage = mutation.apply(image, ExamplesTestUtils.getRNG());
     Color mutatedColour = mutatedImage.get(0).getColour();
     assert mutatedColour.getRed() == 129 : "Red component should have been incremented, is " + mutatedColour.getRed();
@@ -52,14 +53,14 @@ public class PolygonColourMutationTest {
   @Test
   public void testZeroProbability() {
     PolygonColourMutation mutation = new PolygonColourMutation(Probability.ZERO,
-        new ConstantGenerator<Double>(1d));
+        new ConstantGenerator<>(1d));
     // A grey triangle.
     Color originalColour = new Color(128, 128, 128, 128);
     final ColouredPolygon polygon = new ColouredPolygon(originalColour,
         Arrays.asList(new Point(0, 0),
             new Point(50, 50),
             new Point(0, 75)));
-    List<ColouredPolygon> image = Arrays.asList(polygon);
+    List<ColouredPolygon> image = Collections.singletonList(polygon);
     List<ColouredPolygon> mutatedImage = mutation.apply(image, ExamplesTestUtils.getRNG());
     assert mutatedImage.get(0) == polygon : "Polygon should not have changed at all.";
     assert mutatedImage.get(0).getColour() == originalColour : "Colour should not have changed at all.";

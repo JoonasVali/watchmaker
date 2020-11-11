@@ -38,10 +38,6 @@ import org.uncommons.watchmaker.swing.evolutionmonitor.StatusBar;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -189,7 +185,7 @@ public class SudokuApplet extends AbstractExampleApplet {
       @Override
       protected Sudoku performTask() {
         Random rng = new MersenneTwisterRNG();
-        List<EvolutionaryOperator<Sudoku>> operators = new ArrayList<EvolutionaryOperator<Sudoku>>(2);
+        List<EvolutionaryOperator<Sudoku>> operators = new ArrayList<>(2);
         // Cross-over rows between parents (so offspring is x rows from parent1 and
         // y rows from parent2).
         operators.add(new SudokuVerticalCrossover());
@@ -197,14 +193,14 @@ public class SudokuApplet extends AbstractExampleApplet {
         operators.add(new SudokuRowMutation(new PoissonGenerator(2, rng),
             new DiscreteUniformGenerator(1, 8, rng)));
 
-        EvolutionaryOperator<Sudoku> pipeline = new EvolutionPipeline<Sudoku>(operators);
+        EvolutionaryOperator<Sudoku> pipeline = new EvolutionPipeline<>(operators);
 
-        EvolutionEngine<Sudoku> engine = new GenerationalEvolutionEngine<Sudoku>(new SudokuFactory(puzzle),
+        EvolutionEngine<Sudoku> engine = new GenerationalEvolutionEngine<>(new SudokuFactory(puzzle),
             pipeline,
             new SudokuEvaluator(),
             selectionStrategy,
             rng);
-        engine.addEvolutionObserver(new SwingEvolutionObserver<Sudoku>(new GridViewUpdater(),
+        engine.addEvolutionObserver(new SwingEvolutionObserver<>(new GridViewUpdater(),
             100,
             TimeUnit.MILLISECONDS));
         engine.addEvolutionObserver(statusBar);

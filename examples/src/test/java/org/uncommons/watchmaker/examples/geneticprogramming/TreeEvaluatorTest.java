@@ -18,7 +18,7 @@ package org.uncommons.watchmaker.examples.geneticprogramming;
 import org.testng.annotations.Test;
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +46,7 @@ public class TreeEvaluatorTest {
     // Program that multiplies its two inputs together.
     Node program = new Multiplication(new Parameter(0), new Parameter(1));
 
-    double fitness = evaluator.getFitness(program, Arrays.asList(program));
+    double fitness = evaluator.getFitness(program, Collections.singletonList(program));
     assert fitness == 0 : "Correct program should have zero fitness.";
   }
 
@@ -69,7 +69,7 @@ public class TreeEvaluatorTest {
     // for the first set of inputs but the wrong answer for the other two).
     Node program = new Multiplication(new Parameter(0), new Constant(3d));
 
-    double fitness = evaluator.getFitness(program, Arrays.asList(program));
+    double fitness = evaluator.getFitness(program, Collections.singletonList(program));
     // Error on second example is 15, error on third is 7.
     // 15^2 + 7^2 = 225 + 49 = 274
     assert fitness == 274d : "Wrong fitness for incorrect program.";

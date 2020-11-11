@@ -23,6 +23,7 @@ import org.uncommons.watchmaker.framework.FrameworkTestUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -111,7 +112,7 @@ public class ListCrossoverTest {
     EvolutionaryOperator<List<Integer>> crossover = new ListCrossover<>(new ConstantGenerator<>(1));
     List<List<Integer>> population = new ArrayList<>(2);
     List<Integer> parent1 = Arrays.asList(1, 2, 3);
-    List<Integer> parent2 = Arrays.asList(4); // Too short for cross-over.
+    List<Integer> parent2 = Collections.singletonList(4); // Too short for cross-over.
     population.add(parent1);
     population.add(parent2);
     population = crossover.apply(population, FrameworkTestUtils.getRNG());

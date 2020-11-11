@@ -21,6 +21,7 @@ import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 import org.uncommons.watchmaker.framework.FrameworkTestUtils;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class ListInversionTest {
   public void testZeroProbability() {
     EvolutionaryOperator<List<Integer>> inversion = new ListInversion<>(Probability.ZERO);
     @SuppressWarnings("unchecked")
-    List<List<Integer>> selection = Arrays.asList(Arrays.asList(1, 2, 3));
+    List<List<Integer>> selection = Collections.singletonList(Arrays.asList(1, 2, 3));
     List<List<Integer>> evolvedSelection = inversion.apply(selection, FrameworkTestUtils.getRNG());
     assert evolvedSelection.size() == 1 : "Wrong number of individuals after evolution: " + evolvedSelection.size();
     assert evolvedSelection.get(0) == selection.get(0) : "Candidate should not have been modified.";
@@ -45,7 +46,7 @@ public class ListInversionTest {
   public void testInversion() {
     EvolutionaryOperator<List<Integer>> inversion = new ListInversion<>(Probability.ONE);
     @SuppressWarnings("unchecked")
-    List<List<Integer>> selection = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
+    List<List<Integer>> selection = Collections.singletonList(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
     for (int i = 0; i < 50; i++) // Try several times so that different random numbers are generated.
     {
       List<List<Integer>> evolvedSelection = inversion.apply(selection, FrameworkTestUtils.getRNG());

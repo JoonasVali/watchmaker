@@ -50,7 +50,7 @@ public class AddVertexMutation extends AbstractVertexMutation {
    */
   public AddVertexMutation(Dimension canvasSize,
                            Probability mutationProbability) {
-    this(canvasSize, new ConstantGenerator<Probability>(mutationProbability));
+    this(canvasSize, new ConstantGenerator<>(mutationProbability));
   }
 
 

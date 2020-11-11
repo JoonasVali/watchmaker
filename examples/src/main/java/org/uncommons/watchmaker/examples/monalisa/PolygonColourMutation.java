@@ -58,7 +58,7 @@ public class PolygonColourMutation implements EvolutionaryOperator<ColouredPolyg
    */
   public PolygonColourMutation(Probability mutationProbability,
                                NumberGenerator<Double> mutationAmount) {
-    this(new ConstantGenerator<Probability>(mutationProbability), mutationAmount);
+    this(new ConstantGenerator<>(mutationProbability), mutationAmount);
   }
 
 

@@ -69,17 +69,17 @@ public class GeneticProgrammingExample {
         4, // Maximum depth of generated trees.
         Probability.EVENS, // Probability that a node is a function node.
         new Probability(0.6d)); // Probability that other nodes are params rather than constants.
-    List<EvolutionaryOperator<Node>> operators = new ArrayList<EvolutionaryOperator<Node>>(3);
+    List<EvolutionaryOperator<Node>> operators = new ArrayList<>(3);
     operators.add(new TreeMutation(factory, new Probability(0.4d)));
     operators.add(new TreeCrossover());
     operators.add(new Simplification());
     TreeEvaluator evaluator = new TreeEvaluator(data);
-    EvolutionEngine<Node> engine = new GenerationalEvolutionEngine<Node>(factory,
-        new EvolutionPipeline<Node>(operators),
+    EvolutionEngine<Node> engine = new GenerationalEvolutionEngine<>(factory,
+        new EvolutionPipeline<>(operators),
         evaluator,
         new RouletteWheelSelection(),
         new MersenneTwisterRNG());
-    engine.addEvolutionObserver(new EvolutionLogger<Node>());
+    engine.addEvolutionObserver(new EvolutionLogger<>());
     return engine.evolve(1000, 5, new TargetFitness(0d, evaluator.isNatural()));
   }
 }

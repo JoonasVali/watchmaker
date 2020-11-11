@@ -113,7 +113,7 @@ public class InteractiveSelectionTest {
    * Automated test console implementation that simply selects an
    * individual at random.
    */
-  private final class RandomConsole<T> implements Console<T> {
+  private static final class RandomConsole<T> implements Console<T> {
     private final int expectedGroupSize;
 
     /**
@@ -133,7 +133,7 @@ public class InteractiveSelectionTest {
     }
 
 
-    public int getSelectionCount() {
+    int getSelectionCount() {
       return selectionCount;
     }
   }

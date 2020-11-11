@@ -58,8 +58,8 @@ public class SudokuRowMutation implements EvolutionaryOperator<Sudoku> {
    *                       which a list element will be displaced as a result of mutation.
    */
   public SudokuRowMutation(int mutationCount, int mutationAmount) {
-    this(new ConstantGenerator<Integer>(mutationCount),
-        new ConstantGenerator<Integer>(mutationAmount));
+    this(new ConstantGenerator<>(mutationCount),
+        new ConstantGenerator<>(mutationAmount));
     if (mutationCount < 1) {
       throw new IllegalArgumentException("Mutation count must be at least 1.");
     } else if (mutationAmount < 1) {

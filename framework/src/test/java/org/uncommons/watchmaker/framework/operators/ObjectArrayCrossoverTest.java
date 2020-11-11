@@ -21,6 +21,7 @@ import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 import org.uncommons.watchmaker.framework.FrameworkTestUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,9 +46,7 @@ public class ObjectArrayCrossoverTest {
       assert population.size() == 4 : "Population size changed after cross-over.";
       for (String[] individual : population) {
         assert individual.length == 5 : "Invalid candidate length: " + individual.length;
-        for (String value : individual) {
-          values.add(value);
-        }
+        values.addAll(Arrays.asList(individual));
       }
       // All of the individual elements should still be present, just jumbled up
       // between individuals.
