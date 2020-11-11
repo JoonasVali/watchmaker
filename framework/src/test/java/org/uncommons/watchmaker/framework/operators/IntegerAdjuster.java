@@ -34,7 +34,7 @@ public final class IntegerAdjuster implements EvolutionaryOperator<Integer> {
   }
 
   public List<Integer> apply(List<Integer> selectedCandidates, Random rng) {
-    List<Integer> result = new ArrayList<Integer>(selectedCandidates.size());
+    List<Integer> result = new ArrayList<>(selectedCandidates.size());
     for (Integer i : selectedCandidates) {
       result.add(i + adjustment);
     }

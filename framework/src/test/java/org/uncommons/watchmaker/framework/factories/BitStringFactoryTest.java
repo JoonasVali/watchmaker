@@ -46,7 +46,7 @@ public class BitStringFactoryTest {
     CandidateFactory<BitString> factory = new BitStringFactory(candidateLength);
     BitString seed1 = new BitString("1111100000");
     BitString seed2 = new BitString("1010101010");
-    List<BitString> seeds = new ArrayList<BitString>(2);
+    List<BitString> seeds = new ArrayList<>(2);
     seeds.add(seed1);
     seeds.add(seed2);
     List<BitString> population = factory.generateInitialPopulation(populationSize,

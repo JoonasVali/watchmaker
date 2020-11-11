@@ -48,7 +48,7 @@ public class EuropeanDistanceLookupTest {
   @Test
   public void testReturnDistances() {
     DistanceLookup europe = new EuropeanDistanceLookup();
-    Queue<String> cities = new LinkedList<String>(europe.getKnownCities());
+    Queue<String> cities = new LinkedList<>(europe.getKnownCities());
     while (!cities.isEmpty()) {
       String startCity = cities.remove();
       for (String city : cities) {

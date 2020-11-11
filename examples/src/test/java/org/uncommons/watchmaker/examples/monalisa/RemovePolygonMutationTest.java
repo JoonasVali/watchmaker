@@ -39,7 +39,7 @@ public class RemovePolygonMutationTest {
         factory.createRandomPolygon(ExamplesTestUtils.getRNG()),
         factory.createRandomPolygon(ExamplesTestUtils.getRNG()),
         factory.createRandomPolygon(ExamplesTestUtils.getRNG()));
-    List<List<ColouredPolygon>> list = new ArrayList<List<ColouredPolygon>>(1);
+    List<List<ColouredPolygon>> list = new ArrayList<>(1);
     list.add(image);
 
     EvolutionaryOperator<List<ColouredPolygon>> mutation = new RemovePolygonMutation(Probability.ONE);
@@ -56,7 +56,7 @@ public class RemovePolygonMutationTest {
         factory.createRandomPolygon(ExamplesTestUtils.getRNG()),
         factory.createRandomPolygon(ExamplesTestUtils.getRNG()),
         factory.createRandomPolygon(ExamplesTestUtils.getRNG()));
-    List<List<ColouredPolygon>> list = new ArrayList<List<ColouredPolygon>>(1);
+    List<List<ColouredPolygon>> list = new ArrayList<>(1);
     list.add(image);
 
     EvolutionaryOperator<List<ColouredPolygon>> mutation = new RemovePolygonMutation(Probability.ZERO);
@@ -76,7 +76,7 @@ public class RemovePolygonMutationTest {
   public void testRemoveMinPolygons() {
     List<ColouredPolygon> image = factory.generateRandomCandidate(ExamplesTestUtils.getRNG());
     assert image.size() == 2 : "Image should have 2 polygons";
-    List<List<ColouredPolygon>> list = new ArrayList<List<ColouredPolygon>>(1);
+    List<List<ColouredPolygon>> list = new ArrayList<>(1);
     list.add(image);
 
     EvolutionaryOperator<List<ColouredPolygon>> mutation = new RemovePolygonMutation(Probability.ONE);

@@ -43,16 +43,14 @@ public abstract class AbstractExampleApplet extends JApplet {
     try {
       // Use invokeAndWait so that we can be sure that initialisation is complete
       // before continuing.
-      SwingUtilities.invokeAndWait(new Runnable() {
-        public void run() {
-          try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-          } catch (Exception ex) {
-            // This should never happen as we are installing a known look-and-feel.
-            System.err.println("Failed to load System look-and-feel.");
-          }
-          prepareGUI(container);
+      SwingUtilities.invokeAndWait(() -> {
+        try {
+          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+          // This should never happen as we are installing a known look-and-feel.
+          System.err.println("Failed to load System look-and-feel.");
         }
+        prepareGUI(container);
       });
     } catch (InterruptedException ex) {
       // Restore interrupt flag.

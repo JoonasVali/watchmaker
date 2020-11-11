@@ -60,7 +60,7 @@ public class RemoveVertexMutation extends AbstractVertexMutation {
     // we already have the minimum permitted number of points.
     if (vertices.size() > PolygonImageFactory.MINIMUM_VERTEX_COUNT
         && getMutationProbability().nextValue().nextEvent(rng)) {
-      List<Point> newVertices = new ArrayList<Point>(vertices);
+      List<Point> newVertices = new ArrayList<>(vertices);
       newVertices.remove(rng.nextInt(newVertices.size()));
       return newVertices;
     } else // Nothing changed.

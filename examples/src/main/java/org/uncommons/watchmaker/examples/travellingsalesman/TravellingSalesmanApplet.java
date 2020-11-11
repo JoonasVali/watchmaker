@@ -58,25 +58,23 @@ public final class TravellingSalesmanApplet extends AbstractExampleApplet {
     innerPanel.add(executionPanel, BorderLayout.CENTER);
     container.add(innerPanel, BorderLayout.CENTER);
 
-    executionPanel.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent actionEvent) {
-        Collection<String> cities = itineraryPanel.getSelectedCities();
-        if (cities.size() < 4) {
+    executionPanel.addActionListener(actionEvent -> {
+      Collection<String> cities = itineraryPanel.getSelectedCities();
+      if (cities.size() < 4) {
+        JOptionPane.showMessageDialog(TravellingSalesmanApplet.this,
+            "Itinerary must include at least 4 cities.",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+      } else {
+        try {
+          setEnabled(false);
+          createTask(cities).execute();
+        } catch (IllegalArgumentException ex) {
           JOptionPane.showMessageDialog(TravellingSalesmanApplet.this,
-              "Itinerary must include at least 4 cities.",
+              ex.getMessage(),
               "Error",
               JOptionPane.ERROR_MESSAGE);
-        } else {
-          try {
-            setEnabled(false);
-            createTask(cities).execute();
-          } catch (IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(TravellingSalesmanApplet.this,
-                ex.getMessage(),
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
-            setEnabled(true);
-          }
+          setEnabled(true);
         }
       }
     });

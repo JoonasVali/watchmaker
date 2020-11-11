@@ -69,12 +69,12 @@ public class AddPolygonMutation implements EvolutionaryOperator<List<ColouredPol
 
 
   public List<List<ColouredPolygon>> apply(List<List<ColouredPolygon>> selectedCandidates, Random rng) {
-    List<List<ColouredPolygon>> mutatedCandidates = new ArrayList<List<ColouredPolygon>>(selectedCandidates.size());
+    List<List<ColouredPolygon>> mutatedCandidates = new ArrayList<>(selectedCandidates.size());
     for (List<ColouredPolygon> candidate : selectedCandidates) {
       // A single polygon is added with the configured probability, unless
       // we already have the maximum permitted number of polygons.
       if (candidate.size() < maxPolygons && addPolygonProbability.nextValue().nextEvent(rng)) {
-        List<ColouredPolygon> newPolygons = new ArrayList<ColouredPolygon>(candidate);
+        List<ColouredPolygon> newPolygons = new ArrayList<>(candidate);
         newPolygons.add(rng.nextInt(newPolygons.size() + 1),
             factory.createRandomPolygon(rng));
         mutatedCandidates.add(newPolygons);

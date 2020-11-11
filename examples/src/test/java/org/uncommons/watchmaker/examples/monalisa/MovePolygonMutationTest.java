@@ -39,7 +39,7 @@ public class MovePolygonMutationTest {
         factory.createRandomPolygon(ExamplesTestUtils.getRNG()),
         factory.createRandomPolygon(ExamplesTestUtils.getRNG()),
         factory.createRandomPolygon(ExamplesTestUtils.getRNG()));
-    List<List<ColouredPolygon>> list = new ArrayList<List<ColouredPolygon>>(1);
+    List<List<ColouredPolygon>> list = new ArrayList<>(1);
     list.add(image);
 
     EvolutionaryOperator<List<ColouredPolygon>> mutation = new MovePolygonMutation(Probability.ONE);
@@ -58,7 +58,7 @@ public class MovePolygonMutationTest {
     ColouredPolygon polygon2 = factory.createRandomPolygon(ExamplesTestUtils.getRNG());
     ColouredPolygon polygon3 = factory.createRandomPolygon(ExamplesTestUtils.getRNG());
     List<ColouredPolygon> image = Arrays.asList(polygon1, polygon2, polygon3);
-    List<List<ColouredPolygon>> list = new ArrayList<List<ColouredPolygon>>(1);
+    List<List<ColouredPolygon>> list = new ArrayList<>(1);
     list.add(image);
 
     EvolutionaryOperator<List<ColouredPolygon>> mutation = new MovePolygonMutation(Probability.ZERO);

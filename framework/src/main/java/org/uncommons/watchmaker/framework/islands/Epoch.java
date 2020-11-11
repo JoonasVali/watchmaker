@@ -45,7 +45,7 @@ class Epoch<T> implements Callable<List<EvaluatedCandidate<T>>> {
   }
 
 
-  public List<EvaluatedCandidate<T>> call() throws Exception {
+  public List<EvaluatedCandidate<T>> call() {
     return island.evolvePopulation(populationSize, eliteCount, seedCandidates, terminationConditions);
   }
 }

@@ -34,7 +34,7 @@ public class SteadyStateEvolutionEngineTest {
    */
   @Test
   public void testIncrementalEvolution() {
-    SteadyStateEvolutionEngine<Integer> steadyState = new SteadyStateEvolutionEngine<Integer>(new StubIntegerFactory(),
+    SteadyStateEvolutionEngine<Integer> steadyState = new SteadyStateEvolutionEngine<>(new StubIntegerFactory(),
         new IntegerAdjuster(5),
         new NullFitnessEvaluator(),
         new RouletteWheelSelection(),
@@ -42,11 +42,11 @@ public class SteadyStateEvolutionEngineTest {
         true,
         FrameworkTestUtils.getRNG());
     @SuppressWarnings("unchecked")
-    List<EvaluatedCandidate<Integer>> population = Arrays.asList(new EvaluatedCandidate<Integer>(1, 0),
-        new EvaluatedCandidate<Integer>(1, 0),
-        new EvaluatedCandidate<Integer>(1, 0),
-        new EvaluatedCandidate<Integer>(1, 0),
-        new EvaluatedCandidate<Integer>(1, 0));
+    List<EvaluatedCandidate<Integer>> population = Arrays.asList(new EvaluatedCandidate<>(1, 0),
+        new EvaluatedCandidate<>(1, 0),
+        new EvaluatedCandidate<>(1, 0),
+        new EvaluatedCandidate<>(1, 0),
+        new EvaluatedCandidate<>(1, 0));
     List<EvaluatedCandidate<Integer>> evaluatedPopulation = steadyState.nextEvolutionStep(population,
         0,
         FrameworkTestUtils.getRNG());
@@ -67,7 +67,7 @@ public class SteadyStateEvolutionEngineTest {
    */
   @Test
   public void testForcedSingleCandidateUpdate() {
-    SteadyStateEvolutionEngine<Integer> steadyState = new SteadyStateEvolutionEngine<Integer>(new StubIntegerFactory(),
+    SteadyStateEvolutionEngine<Integer> steadyState = new SteadyStateEvolutionEngine<>(new StubIntegerFactory(),
         new IntegerAdjuster(5),
         new NullFitnessEvaluator(),
         new RouletteWheelSelection(),
@@ -75,11 +75,11 @@ public class SteadyStateEvolutionEngineTest {
         true, // Force single update.
         FrameworkTestUtils.getRNG());
     @SuppressWarnings("unchecked")
-    List<EvaluatedCandidate<Integer>> population = Arrays.asList(new EvaluatedCandidate<Integer>(1, 0),
-        new EvaluatedCandidate<Integer>(1, 0),
-        new EvaluatedCandidate<Integer>(1, 0),
-        new EvaluatedCandidate<Integer>(1, 0),
-        new EvaluatedCandidate<Integer>(1, 0));
+    List<EvaluatedCandidate<Integer>> population = Arrays.asList(new EvaluatedCandidate<>(1, 0),
+        new EvaluatedCandidate<>(1, 0),
+        new EvaluatedCandidate<>(1, 0),
+        new EvaluatedCandidate<>(1, 0),
+        new EvaluatedCandidate<>(1, 0));
     List<EvaluatedCandidate<Integer>> evaluatedPopulation = steadyState.nextEvolutionStep(population,
         0,
         FrameworkTestUtils.getRNG());
@@ -96,7 +96,7 @@ public class SteadyStateEvolutionEngineTest {
 
   @Test
   public void testElitism() {
-    SteadyStateEvolutionEngine<Integer> steadyState = new SteadyStateEvolutionEngine<Integer>(new StubIntegerFactory(),
+    SteadyStateEvolutionEngine<Integer> steadyState = new SteadyStateEvolutionEngine<>(new StubIntegerFactory(),
         new IntegerAdjuster(10),
         new NullFitnessEvaluator(),
         new RouletteWheelSelection(),
@@ -104,11 +104,11 @@ public class SteadyStateEvolutionEngineTest {
         true,
         FrameworkTestUtils.getRNG());
     @SuppressWarnings("unchecked")
-    List<EvaluatedCandidate<Integer>> population = Arrays.asList(new EvaluatedCandidate<Integer>(1, 1),
-        new EvaluatedCandidate<Integer>(2, 2),
-        new EvaluatedCandidate<Integer>(3, 3),
-        new EvaluatedCandidate<Integer>(4, 4),
-        new EvaluatedCandidate<Integer>(5, 5));
+    List<EvaluatedCandidate<Integer>> population = Arrays.asList(new EvaluatedCandidate<>(1, 1),
+        new EvaluatedCandidate<>(2, 2),
+        new EvaluatedCandidate<>(3, 3),
+        new EvaluatedCandidate<>(4, 4),
+        new EvaluatedCandidate<>(5, 5));
     // The fittest candidate should always be preserved.
     for (int i = 0; i < 20; i++) // Once is not enough to be confident.
     {

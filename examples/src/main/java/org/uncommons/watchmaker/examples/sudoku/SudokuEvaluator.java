@@ -49,7 +49,7 @@ public class SudokuEvaluator implements FitnessEvaluator<Sudoku> {
     int fitness = 0;
 
     // Check columns for duplicates.
-    Set<Integer> values = new HashSet<Integer>(Sudoku.SIZE * 2); // Big enough to avoid re-hashing.
+    Set<Integer> values = new HashSet<>(Sudoku.SIZE * 2); // Big enough to avoid re-hashing.
     for (int column = 0; column < Sudoku.SIZE; column++) {
       for (int row = 0; row < Sudoku.SIZE; row++) {
         values.add(candidate.getValue(row, column));

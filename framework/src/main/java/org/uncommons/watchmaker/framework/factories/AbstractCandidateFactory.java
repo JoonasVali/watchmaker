@@ -43,7 +43,7 @@ public abstract class AbstractCandidateFactory<T> implements CandidateFactory<T>
    * @return A randomly generated initial population of candidate solutions.
    */
   public List<T> generateInitialPopulation(int populationSize, Random rng) {
-    List<T> population = new ArrayList<T>(populationSize);
+    List<T> population = new ArrayList<>(populationSize);
     for (int i = 0; i < populationSize; i++) {
       population.add(generateRandomCandidate(rng));
     }
@@ -63,7 +63,7 @@ public abstract class AbstractCandidateFactory<T> implements CandidateFactory<T>
     if (seedCandidates.size() > populationSize) {
       throw new IllegalArgumentException("Too many seed candidates for specified population size.");
     }
-    List<T> population = new ArrayList<T>(populationSize);
+    List<T> population = new ArrayList<>(populationSize);
     population.addAll(seedCandidates);
     for (int i = seedCandidates.size(); i < populationSize; i++) {
       population.add(generateRandomCandidate(rng));

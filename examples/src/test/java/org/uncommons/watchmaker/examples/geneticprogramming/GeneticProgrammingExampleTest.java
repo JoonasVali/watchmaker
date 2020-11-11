@@ -28,7 +28,7 @@ import java.util.Map;
 public class GeneticProgrammingExampleTest {
   @Test
   public void testApplication() {
-    Map<double[], Double> testData = new HashMap<double[], Double>();
+    Map<double[], Double> testData = new HashMap<>();
     testData.put(new double[]{26, 35}, 165.0d);
     testData.put(new double[]{8, 24}, 64.0d);
     testData.put(new double[]{20, 1}, 101.0d);

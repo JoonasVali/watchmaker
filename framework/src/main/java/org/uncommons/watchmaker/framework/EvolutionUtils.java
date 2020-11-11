@@ -53,7 +53,7 @@ public final class EvolutionUtils {
       return Collections.emptyList();
     }
     // Otherwise check the termination conditions for the evolution.
-    List<TerminationCondition> satisfiedConditions = new LinkedList<TerminationCondition>();
+    List<TerminationCondition> satisfiedConditions = new LinkedList<>();
     for (TerminationCondition condition : conditions) {
       if (condition.shouldTerminate(data)) {
         satisfiedConditions.add(condition);
@@ -77,7 +77,7 @@ public final class EvolutionUtils {
     // Sort candidates in descending order according to fitness.
     if (naturalFitness) // Descending values for natural fitness.
     {
-      Collections.sort(evaluatedPopulation, Collections.reverseOrder());
+      evaluatedPopulation.sort(Collections.reverseOrder());
     } else // Ascending values for non-natural fitness.
     {
       Collections.sort(evaluatedPopulation);
@@ -108,7 +108,7 @@ public final class EvolutionUtils {
     for (EvaluatedCandidate<T> candidate : evaluatedPopulation) {
       stats.addValue(candidate.getFitness());
     }
-    return new PopulationData<T>(evaluatedPopulation.get(0).getCandidate(),
+    return new PopulationData<>(evaluatedPopulation.get(0).getCandidate(),
         evaluatedPopulation.get(0).getFitness(),
         stats.getArithmeticMean(),
         stats.getStandardDeviation(),

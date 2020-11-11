@@ -56,7 +56,7 @@ public class TreeMutationTest {
         Probability.ONE); // Probability of 1 means guaranteed mutations.
     List<Node> candidates = treeFactory.generateInitialPopulation(20, ExamplesTestUtils.getRNG());
 
-    Map<Node, Node> distinctTrees = new IdentityHashMap<Node, Node>();
+    Map<Node, Node> distinctTrees = new IdentityHashMap<>();
     for (Node node : candidates) {
       distinctTrees.put(node, node);
     }

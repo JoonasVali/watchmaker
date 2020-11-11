@@ -34,7 +34,7 @@ public class RendererAdapterTest {
     Date date = longToDate.render(currentTime);
     String expectedOutput = dateToString.render(date);
 
-    Renderer<Long, String> longToString = new RendererAdapter<Long, String>(longToDate,
+    Renderer<Long, String> longToString = new RendererAdapter<>(longToDate,
         dateToString);
     String actualOutput = longToString.render(currentTime);
     assert actualOutput.equals(expectedOutput) : "Actual/expected output mismatch: " + actualOutput;

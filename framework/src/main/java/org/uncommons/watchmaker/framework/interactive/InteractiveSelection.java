@@ -91,7 +91,7 @@ public class InteractiveSelection<T> implements SelectionStrategy<T> {
   public InteractiveSelection(Console<T> console,
                               int groupSize,
                               int maxSelectionsPerGeneration) {
-    this(console, new NoOpRenderer<T>(), groupSize, maxSelectionsPerGeneration);
+    this(console, new NoOpRenderer<>(), groupSize, maxSelectionsPerGeneration);
   }
 
 
@@ -107,11 +107,11 @@ public class InteractiveSelection<T> implements SelectionStrategy<T> {
     }
 
     int selectionCount = Math.min(selectionSize, maxSelectionsPerGeneration);
-    List<S> selection = new ArrayList<S>(selectionCount);
+    List<S> selection = new ArrayList<>(selectionCount);
     for (int i = 0; i < selectionCount; i++) {
       // Pick candidates at random (without replacement).
-      List<S> group = new ArrayList<S>(groupSize);
-      List<EvaluatedCandidate<S>> candidates = new ArrayList<EvaluatedCandidate<S>>(population);
+      List<S> group = new ArrayList<>(groupSize);
+      List<EvaluatedCandidate<S>> candidates = new ArrayList<>(population);
       Collections.shuffle(candidates);
       for (int j = 0; j < groupSize; j++) {
         group.add(candidates.get(j).getCandidate());
@@ -123,7 +123,7 @@ public class InteractiveSelection<T> implements SelectionStrategy<T> {
     // If the selection is not big enough, extend it by randomly duplicating some
     // of the selections.
     if (selectionCount < selectionSize) {
-      List<S> extendedSelection = new ArrayList<S>(selectionSize);
+      List<S> extendedSelection = new ArrayList<>(selectionSize);
       extendedSelection.addAll(selection);
       for (int i = 0; i < selectionSize - selectionCount; i++) {
         extendedSelection.add(selection.get(selectionCount == 1 ? 0 : rng.nextInt(selectionCount)));
@@ -136,7 +136,7 @@ public class InteractiveSelection<T> implements SelectionStrategy<T> {
 
 
   private <S extends T> S select(List<S> candidates) {
-    List<Object> renderedCandidates = new ArrayList<Object>(candidates.size());
+    List<Object> renderedCandidates = new ArrayList<>(candidates.size());
     for (S candidate : candidates) {
       renderedCandidates.add(renderer.render(candidate));
     }

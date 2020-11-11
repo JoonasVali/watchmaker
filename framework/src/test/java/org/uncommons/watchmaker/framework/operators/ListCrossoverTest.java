@@ -35,13 +35,13 @@ import java.util.Set;
 public class ListCrossoverTest {
   @Test
   public void testCrossover() {
-    EvolutionaryOperator<List<Integer>> crossover = new ListCrossover<Integer>();
-    List<List<Integer>> population = new ArrayList<List<Integer>>(4);
+    EvolutionaryOperator<List<Integer>> crossover = new ListCrossover<>();
+    List<List<Integer>> population = new ArrayList<>(4);
     population.add(Arrays.asList(1, 2, 3, 4, 5));
     population.add(Arrays.asList(6, 7, 8, 9, 10));
     population.add(Arrays.asList(11, 12, 13, 14, 15));
     population.add(Arrays.asList(16, 17, 18, 19, 20));
-    Set<Integer> values = new HashSet<Integer>(20);
+    Set<Integer> values = new HashSet<>(20);
     for (int i = 0; i < 20; i++) {
       population = crossover.apply(population, FrameworkTestUtils.getRNG());
       assert population.size() == 4 : "Population size changed after cross-over.";
@@ -64,8 +64,8 @@ public class ListCrossoverTest {
    */
   @Test
   public void testDifferentLengthParents() {
-    EvolutionaryOperator<List<Integer>> crossover = new ListCrossover<Integer>(1, Probability.ONE);
-    List<List<Integer>> population = new ArrayList<List<Integer>>(2);
+    EvolutionaryOperator<List<Integer>> crossover = new ListCrossover<>(1, Probability.ONE);
+    List<List<Integer>> population = new ArrayList<>(2);
     List<Integer> parent1 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
     population.add(parent1);
     List<Integer> parent2 = Arrays.asList(9, 10, 11);
@@ -87,9 +87,9 @@ public class ListCrossoverTest {
    */
   @Test
   public void testZeroProbability() {
-    EvolutionaryOperator<List<Integer>> crossover = new ListCrossover<Integer>(new ConstantGenerator<Integer>(1),
-        new ConstantGenerator<Probability>(Probability.ZERO));
-    List<List<Integer>> population = new ArrayList<List<Integer>>(4);
+    EvolutionaryOperator<List<Integer>> crossover = new ListCrossover<>(new ConstantGenerator<>(1),
+        new ConstantGenerator<>(Probability.ZERO));
+    List<List<Integer>> population = new ArrayList<>(4);
     List<Integer> parent1 = Arrays.asList(1, 2, 3, 4, 5);
     List<Integer> parent2 = Arrays.asList(6, 7, 8, 9, 10);
     population.add(parent1);
@@ -108,8 +108,8 @@ public class ListCrossoverTest {
    */
   @Test
   public void testParentTooShort() {
-    EvolutionaryOperator<List<Integer>> crossover = new ListCrossover<Integer>(new ConstantGenerator<Integer>(1));
-    List<List<Integer>> population = new ArrayList<List<Integer>>(2);
+    EvolutionaryOperator<List<Integer>> crossover = new ListCrossover<>(new ConstantGenerator<>(1));
+    List<List<Integer>> population = new ArrayList<>(2);
     List<Integer> parent1 = Arrays.asList(1, 2, 3);
     List<Integer> parent2 = Arrays.asList(4); // Too short for cross-over.
     population.add(parent1);

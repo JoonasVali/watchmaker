@@ -25,9 +25,9 @@ public class SwingIslandEvolutionObserver<T> implements IslandEvolutionObserver<
       true);
   private final ScheduledExecutorService timer = Executors.newScheduledThreadPool(1, threadFactory);
   private final AtomicReference<PopulationData<? extends T>> latestPopulation
-      = new AtomicReference<PopulationData<? extends T>>();
+      = new AtomicReference<>();
   private final ConcurrentHashMap<Integer, PopulationData<? extends T>> latestIslandPopulation
-      = new ConcurrentHashMap<Integer, PopulationData<? extends T>>();
+      = new ConcurrentHashMap<>();
 
   /**
    * Creates a new SwingIslandEvolutionObserver.
@@ -62,11 +62,7 @@ public class SwingIslandEvolutionObserver<T> implements IslandEvolutionObserver<
     }
 
     // Schedule an update.
-    timer.schedule(new Runnable() {
-      public void run() {
-        delegate.populationUpdate(latestPopulation.getAndSet(null));
-      }
-    }, delay, unit);
+    timer.schedule(() -> delegate.populationUpdate(latestPopulation.getAndSet(null)), delay, unit);
   }
 
 
@@ -77,10 +73,6 @@ public class SwingIslandEvolutionObserver<T> implements IslandEvolutionObserver<
     }
 
     // Schedule an update.
-    timer.schedule(new Runnable() {
-      public void run() {
-        delegate.islandPopulationUpdate(islandIndex, latestIslandPopulation.remove(islandIndex));
-      }
-    }, delay, unit);
+    timer.schedule(() -> delegate.islandPopulationUpdate(islandIndex, latestIslandPopulation.remove(islandIndex)), delay, unit);
   }
 }

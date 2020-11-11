@@ -52,10 +52,10 @@ public class MovePolygonMutation implements EvolutionaryOperator<List<ColouredPo
 
 
   public List<List<ColouredPolygon>> apply(List<List<ColouredPolygon>> selectedCandidates, Random rng) {
-    List<List<ColouredPolygon>> mutatedCandidates = new ArrayList<List<ColouredPolygon>>(selectedCandidates.size());
+    List<List<ColouredPolygon>> mutatedCandidates = new ArrayList<>(selectedCandidates.size());
     for (List<ColouredPolygon> candidate : selectedCandidates) {
       if (movePolygonProbability.nextValue().nextEvent(rng)) {
-        List<ColouredPolygon> newPolygons = new ArrayList<ColouredPolygon>(candidate);
+        List<ColouredPolygon> newPolygons = new ArrayList<>(candidate);
         ColouredPolygon polygon = newPolygons.remove(rng.nextInt(newPolygons.size()));
         newPolygons.add(rng.nextInt(newPolygons.size()) + 1, polygon);
         mutatedCandidates.add(newPolygons);

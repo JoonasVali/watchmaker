@@ -32,11 +32,9 @@ public class AbortControl implements EvolutionControl {
   private final UserAbort abortCondition = new UserAbort();
 
   public AbortControl() {
-    control.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent actionEvent) {
-        control.setEnabled(false);
-        abortCondition.abort();
-      }
+    control.addActionListener(actionEvent -> {
+      control.setEnabled(false);
+      abortCondition.abort();
     });
     setDescription("Terminate the evolution on completion of the current generation.");
   }

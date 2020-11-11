@@ -34,12 +34,10 @@ public class ConfigurableThreadFactory implements ThreadFactory {
    * A default exception handler that simply logs the stack trace of the exception.
    */
   private static final Thread.UncaughtExceptionHandler DEFAULT_EXCEPTION_HANDLER
-      = new Thread.UncaughtExceptionHandler() {
-    public void uncaughtException(Thread thread, Throwable throwable) {
-      // Log any exceptions thrown.
-      throwable.printStackTrace();
-    }
-  };
+      = (thread, throwable) -> {
+        // Log any exceptions thrown.
+        throwable.printStackTrace();
+      };
 
 
   private final IDSource<String> nameGenerator;

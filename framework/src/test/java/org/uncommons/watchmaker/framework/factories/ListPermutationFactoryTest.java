@@ -33,7 +33,7 @@ import java.util.List;
 public class ListPermutationFactoryTest {
   private final int candidateLength = 10;
   private final int populationSize = 5;
-  private final List<Integer> elements = new ArrayList<Integer>(candidateLength);
+  private final List<Integer> elements = new ArrayList<>(candidateLength);
 
   {
     for (int i = 1; i <= candidateLength; i++) {
@@ -49,7 +49,7 @@ public class ListPermutationFactoryTest {
    */
   @Test
   public void testUnseededPopulation() {
-    CandidateFactory<List<Integer>> factory = new ListPermutationFactory<Integer>(elements);
+    CandidateFactory<List<Integer>> factory = new ListPermutationFactory<>(elements);
     List<List<Integer>> population = factory.generateInitialPopulation(populationSize, FrameworkTestUtils.getRNG());
     assert population.size() == populationSize : "Wrong size population generated: " + population.size();
 
@@ -64,12 +64,12 @@ public class ListPermutationFactoryTest {
    */
   @Test
   public void testSeededPopulation() {
-    CandidateFactory<List<Integer>> factory = new ListPermutationFactory<Integer>(elements);
+    CandidateFactory<List<Integer>> factory = new ListPermutationFactory<>(elements);
 
-    List<Integer> seed1 = new ArrayList<Integer>(elements);
-    List<Integer> seed2 = new ArrayList<Integer>(elements);
+    List<Integer> seed1 = new ArrayList<>(elements);
+    List<Integer> seed2 = new ArrayList<>(elements);
     Collections.reverse(elements);
-    List<List<Integer>> seeds = new ArrayList<List<Integer>>(2);
+    List<List<Integer>> seeds = new ArrayList<>(2);
     seeds.add(seed1);
     seeds.add(seed2);
 
@@ -92,9 +92,9 @@ public class ListPermutationFactoryTest {
    */
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testTooManySeedCandidates() {
-    CandidateFactory<List<Integer>> factory = new ListPermutationFactory<Integer>(elements);
+    CandidateFactory<List<Integer>> factory = new ListPermutationFactory<>(elements);
 
-    List<List<Integer>> seeds = new LinkedList<List<Integer>>();
+    List<List<Integer>> seeds = new LinkedList<>();
     seeds.add(elements);
     seeds.add(elements);
     seeds.add(elements);

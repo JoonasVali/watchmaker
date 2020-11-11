@@ -29,8 +29,8 @@ public class EvaluatedCandidateTest {
     // Equality is determined only by fitness score, the actual candidate
     // representation is irrelevant.  These two candidates should be considered
     // equal.
-    EvaluatedCandidate<String> candidate1 = new EvaluatedCandidate<String>("AAAA", 5);
-    EvaluatedCandidate<String> candidate2 = new EvaluatedCandidate<String>("BBBB", 5);
+    EvaluatedCandidate<String> candidate1 = new EvaluatedCandidate<>("AAAA", 5);
+    EvaluatedCandidate<String> candidate2 = new EvaluatedCandidate<>("BBBB", 5);
 
     assert candidate1.equals(candidate1) : "Equality must be reflexive.";
     assert candidate2.equals(candidate2) : "Equality must be reflexive.";
@@ -48,8 +48,8 @@ public class EvaluatedCandidateTest {
     // Equality is determined only by fitness score, the actual candidate
     // representation is irrelevant.  These two candidates should be considered
     // unequal.
-    EvaluatedCandidate<String> candidate1 = new EvaluatedCandidate<String>("AAAA", 5);
-    EvaluatedCandidate<String> candidate2 = new EvaluatedCandidate<String>("AAAA", 7);
+    EvaluatedCandidate<String> candidate1 = new EvaluatedCandidate<>("AAAA", 5);
+    EvaluatedCandidate<String> candidate2 = new EvaluatedCandidate<>("AAAA", 7);
 
     assert !candidate1.equals(candidate2) : "Candidates with equal fitness should be equal.";
     assert !candidate2.equals(candidate1) : "Equality must be symmetric.";
@@ -60,14 +60,14 @@ public class EvaluatedCandidateTest {
 
   @Test
   public void testNullEquality() {
-    EvaluatedCandidate<String> candidate = new EvaluatedCandidate<String>("AAAA", 5);
+    EvaluatedCandidate<String> candidate = new EvaluatedCandidate<>("AAAA", 5);
     assert !candidate.equals(null) : "Object must not be considered equal to null reference.";
   }
 
 
   @Test
   public void testDifferentClassEquality() {
-    EvaluatedCandidate<String> candidate = new EvaluatedCandidate<String>("AAAA", 5);
+    EvaluatedCandidate<String> candidate = new EvaluatedCandidate<>("AAAA", 5);
     assert !candidate.equals(new Object()) : "Object must not be equal to instances of other classes.";
   }
 
@@ -79,8 +79,8 @@ public class EvaluatedCandidateTest {
   public void testComparisons() {
     // Only test greater than and less than comparisons here since we've already
     // done equality.
-    EvaluatedCandidate<String> candidate1 = new EvaluatedCandidate<String>("AAAA", 5);
-    EvaluatedCandidate<String> candidate2 = new EvaluatedCandidate<String>("AAAA", 7);
+    EvaluatedCandidate<String> candidate1 = new EvaluatedCandidate<>("AAAA", 5);
+    EvaluatedCandidate<String> candidate2 = new EvaluatedCandidate<>("AAAA", 7);
     assert candidate1.compareTo(candidate2) < 0 : "Incorrect ordering.";
     assert candidate2.compareTo(candidate1) > 0 : "Incorrect ordering.";
   }
@@ -91,6 +91,6 @@ public class EvaluatedCandidateTest {
    */
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testNegativeFitness() {
-    new EvaluatedCandidate<String>("ABC", -1); // Should throw an exception.
+    new EvaluatedCandidate<>("ABC", -1); // Should throw an exception.
   }
 }

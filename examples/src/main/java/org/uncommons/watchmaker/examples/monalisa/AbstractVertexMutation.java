@@ -76,7 +76,7 @@ abstract class AbstractVertexMutation implements EvolutionaryOperator<ColouredPo
    * modified.
    */
   public List<ColouredPolygon> apply(List<ColouredPolygon> polygons, Random rng) {
-    List<ColouredPolygon> newPolygons = new ArrayList<ColouredPolygon>(polygons.size());
+    List<ColouredPolygon> newPolygons = new ArrayList<>(polygons.size());
     for (ColouredPolygon polygon : polygons) {
       List<Point> newVertices = mutateVertices(polygon.getVertices(), rng);
       newPolygons.add(newVertices == polygon.getVertices()

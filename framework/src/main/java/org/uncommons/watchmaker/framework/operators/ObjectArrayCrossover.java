@@ -125,7 +125,7 @@ public class ObjectArrayCrossover<T> extends AbstractCrossover<T[]> {
       System.arraycopy(offspring2, 0, offspring1, 0, crossoverIndex);
       System.arraycopy(temp, 0, offspring2, 0, crossoverIndex);
     }
-    List<T[]> result = new ArrayList<T[]>(2);
+    List<T[]> result = new ArrayList<>(2);
     result.add(offspring1);
     result.add(offspring2);
     return result;

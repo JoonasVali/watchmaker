@@ -39,17 +39,15 @@ public class NumericParameterControl<T extends Number & Comparable<T>> implement
                                  T stepSize,
                                  T initialValue) {
     this.defaultValue = initialValue;
-    this.numberGenerator = new AdjustableNumberGenerator<T>(this.defaultValue);
+    this.numberGenerator = new AdjustableNumberGenerator<>(this.defaultValue);
     control = new JSpinner(new SpinnerNumberModel(initialValue,
         minimum,
         maximum,
         stepSize));
-    control.addChangeListener(new ChangeListener() {
-      public void stateChanged(ChangeEvent changeEvent) {
-        @SuppressWarnings("unchecked")
-        T value = (T) control.getValue();
-        numberGenerator.setValue(value);
-      }
+    control.addChangeListener(changeEvent -> {
+      @SuppressWarnings("unchecked")
+      T value = (T) control.getValue();
+      numberGenerator.setValue(value);
     });
   }
 

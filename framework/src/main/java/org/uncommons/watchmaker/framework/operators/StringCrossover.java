@@ -120,7 +120,7 @@ public class StringCrossover extends AbstractCrossover<String> {
         offspring2.setCharAt(j, temp);
       }
     }
-    List<String> result = new ArrayList<String>(2);
+    List<String> result = new ArrayList<>(2);
     result.add(offspring1.toString());
     result.add(offspring2.toString());
     return result;

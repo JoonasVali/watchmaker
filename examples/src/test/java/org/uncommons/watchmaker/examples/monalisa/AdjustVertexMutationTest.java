@@ -41,7 +41,7 @@ public class AdjustVertexMutationTest {
     final Point point3 = new Point(3, 3);
     List<Point> points = Arrays.asList(point1, point2, point3);
     ColouredPolygon polygon = new ColouredPolygon(Color.RED, points);
-    List<ColouredPolygon> image = new ArrayList<ColouredPolygon>(1);
+    List<ColouredPolygon> image = new ArrayList<>(1);
     image.add(polygon);
 
     final int amount = 5;
@@ -87,7 +87,7 @@ public class AdjustVertexMutationTest {
     Point point3 = new Point(3, 3);
     List<Point> points = Arrays.asList(point1, point2, point3);
     ColouredPolygon polygon = new ColouredPolygon(Color.RED, points);
-    List<ColouredPolygon> image = new ArrayList<ColouredPolygon>(1);
+    List<ColouredPolygon> image = new ArrayList<>(1);
     image.add(polygon);
 
     EvolutionaryOperator<ColouredPolygon> mutation = new AdjustVertexMutation(canvasSize,

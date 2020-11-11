@@ -78,24 +78,22 @@ public class StatusBar extends Box implements IslandEvolutionObserver<Object> {
    * {@inheritDoc}
    */
   public void populationUpdate(final PopulationData<?> populationData) {
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        if (populationData.getGenerationNumber() == 0) {
-          int islandSize = islandPopulationSize.get();
-          if (islandSize > 0) {
-            int islandCount = populationData.getPopulationSize() / islandSize;
-            populationLabel.setText(islandCount + "x" + islandSize);
-            elitismLabel.setText(islandCount + "x" + populationData.getEliteCount());
-          } else {
-            populationLabel.setText(String.valueOf(populationData.getPopulationSize()));
-            elitismLabel.setText(String.valueOf(populationData.getEliteCount()));
-          }
+    SwingUtilities.invokeLater(() -> {
+      if (populationData.getGenerationNumber() == 0) {
+        int islandSize = islandPopulationSize.get();
+        if (islandSize > 0) {
+          int islandCount = populationData.getPopulationSize() / islandSize;
+          populationLabel.setText(islandCount + "x" + islandSize);
+          elitismLabel.setText(islandCount + "x" + populationData.getEliteCount());
+        } else {
+          populationLabel.setText(String.valueOf(populationData.getPopulationSize()));
+          elitismLabel.setText(String.valueOf(populationData.getEliteCount()));
         }
-        generationsLabel.setText(String.valueOf(populationData.getGenerationNumber() + 1));
-        elapsedTime = populationData.getElapsedTime();
-        epochTime = 0;
-        timeLabel.setText(formatTime(elapsedTime));
       }
+      generationsLabel.setText(String.valueOf(populationData.getGenerationNumber() + 1));
+      elapsedTime = populationData.getElapsedTime();
+      epochTime = 0;
+      timeLabel.setText(formatTime(elapsedTime));
     });
   }
 
@@ -106,14 +104,12 @@ public class StatusBar extends Box implements IslandEvolutionObserver<Object> {
   public void islandPopulationUpdate(int islandIndex,
                                      final PopulationData<? extends Object> populationData) {
     islandPopulationSize.compareAndSet(-1, populationData.getPopulationSize());
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        // Only update the label if the time has advanced.  Sometimes, due to threading
-        // variations, later updates have shorter elapsed times.
-        if (populationData.getElapsedTime() > epochTime) {
-          epochTime = populationData.getElapsedTime();
-          timeLabel.setText(formatTime(elapsedTime + epochTime));
-        }
+    SwingUtilities.invokeLater(() -> {
+      // Only update the label if the time has advanced.  Sometimes, due to threading
+      // variations, later updates have shorter elapsed times.
+      if (populationData.getElapsedTime() > epochTime) {
+        epochTime = populationData.getElapsedTime();
+        timeLabel.setText(formatTime(elapsedTime + epochTime));
       }
     });
   }

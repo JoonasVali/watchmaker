@@ -40,7 +40,7 @@ import java.util.concurrent.TimeUnit;
  * @author Daniel Dyer
  */
 public class EvolutionMonitor<T> implements IslandEvolutionObserver<T> {
-  private final List<IslandEvolutionObserver<? super T>> views = new LinkedList<IslandEvolutionObserver<? super T>>();
+  private final List<IslandEvolutionObserver<? super T>> views = new LinkedList<>();
 
   private JComponent monitorComponent;
   private Window window = null;
@@ -87,11 +87,7 @@ public class EvolutionMonitor<T> implements IslandEvolutionObserver<T> {
       init(renderer);
     } else {
       try {
-        SwingUtilities.invokeAndWait(new Runnable() {
-          public void run() {
-            init(renderer);
-          }
-        });
+        SwingUtilities.invokeAndWait(() -> init(renderer));
       } catch (InterruptedException ex) {
         Thread.currentThread().interrupt();
         throw new IllegalStateException(ex);
@@ -111,9 +107,9 @@ public class EvolutionMonitor<T> implements IslandEvolutionObserver<T> {
     monitorComponent = new JPanel(new BorderLayout());
     monitorComponent.add(tabs, BorderLayout.CENTER);
 
-    FittestCandidateView<T> candidateView = new FittestCandidateView<T>(renderer);
+    FittestCandidateView<T> candidateView = new FittestCandidateView<>(renderer);
     tabs.add("Fittest Individual", candidateView);
-    views.add(new SwingIslandEvolutionObserver<T>(candidateView, 300, TimeUnit.MILLISECONDS));
+    views.add(new SwingIslandEvolutionObserver<>(candidateView, 300, TimeUnit.MILLISECONDS));
 
     PopulationFitnessView fitnessView = new PopulationFitnessView(islands);
     tabs.add(islands ? "Global Population" : "Population Fitness", fitnessView);
@@ -122,7 +118,7 @@ public class EvolutionMonitor<T> implements IslandEvolutionObserver<T> {
     if (islands) {
       IslandsView islandsView = new IslandsView();
       tabs.add("Island Populations", islandsView);
-      views.add(new SwingIslandEvolutionObserver<Object>(islandsView, 300, TimeUnit.MILLISECONDS));
+      views.add(new SwingIslandEvolutionObserver<>(islandsView, 300, TimeUnit.MILLISECONDS));
     }
 
     JVMView jvmView = new JVMView();
@@ -130,7 +126,7 @@ public class EvolutionMonitor<T> implements IslandEvolutionObserver<T> {
 
     StatusBar statusBar = new StatusBar(islands);
     monitorComponent.add(statusBar, BorderLayout.SOUTH);
-    views.add(new SwingIslandEvolutionObserver<Object>(statusBar, 300, TimeUnit.MILLISECONDS));
+    views.add(new SwingIslandEvolutionObserver<>(statusBar, 300, TimeUnit.MILLISECONDS));
   }
 
 
@@ -170,12 +166,10 @@ public class EvolutionMonitor<T> implements IslandEvolutionObserver<T> {
    */
   public void showInFrame(final String title,
                           final boolean exitOnClose) {
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        JFrame frame = new JFrame(title);
-        frame.setDefaultCloseOperation(exitOnClose ? JFrame.EXIT_ON_CLOSE : JFrame.DISPOSE_ON_CLOSE);
-        showWindow(frame);
-      }
+    SwingUtilities.invokeLater(() -> {
+      JFrame frame = new JFrame(title);
+      frame.setDefaultCloseOperation(exitOnClose ? JFrame.EXIT_ON_CLOSE : JFrame.DISPOSE_ON_CLOSE);
+      showWindow(frame);
     });
   }
 
@@ -192,12 +186,10 @@ public class EvolutionMonitor<T> implements IslandEvolutionObserver<T> {
   public void showInDialog(final JFrame owner,
                            final String title,
                            final boolean modal) {
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        JDialog dialog = new JDialog(owner, title, modal);
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        showWindow(dialog);
-      }
+    SwingUtilities.invokeLater(() -> {
+      JDialog dialog = new JDialog(owner, title, modal);
+      dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+      showWindow(dialog);
     });
   }
 

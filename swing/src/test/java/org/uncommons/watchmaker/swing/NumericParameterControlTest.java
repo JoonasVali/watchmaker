@@ -29,7 +29,7 @@ public class NumericParameterControlTest {
    */
   @Test
   public void testIntegerValues() {
-    NumericParameterControl<Integer> control = new NumericParameterControl<Integer>(50, 100, 1, 60);
+    NumericParameterControl<Integer> control = new NumericParameterControl<>(50, 100, 1, 60);
     NumberGenerator<Integer> generator = control.getNumberGenerator();
 
     // Check the initial output of the generator.
@@ -53,7 +53,7 @@ public class NumericParameterControlTest {
    */
   @Test
   public void testRealValues() {
-    NumericParameterControl<Double> control = new NumericParameterControl<Double>(0d, 1d, 0.01d, 0.4d);
+    NumericParameterControl<Double> control = new NumericParameterControl<>(0d, 1d, 0.01d, 0.4d);
     NumberGenerator<Double> generator = control.getNumberGenerator();
 
     // Check the initial output of the generator.

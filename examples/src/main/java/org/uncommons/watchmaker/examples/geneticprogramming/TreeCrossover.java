@@ -51,7 +51,7 @@ public class TreeCrossover extends AbstractCrossover<Node> {
                             Node parent2,
                             int numberOfCrossoverPoints,
                             Random rng) {
-    List<Node> offspring = new ArrayList<Node>(2);
+    List<Node> offspring = new ArrayList<>(2);
     Node offspring1 = parent1;
     Node offspring2 = parent2;
 

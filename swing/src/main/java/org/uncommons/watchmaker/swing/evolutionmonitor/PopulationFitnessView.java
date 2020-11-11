@@ -29,7 +29,6 @@ import org.uncommons.watchmaker.framework.islands.IslandEvolutionObserver;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 /**
  * {@link EvolutionMonitor} view for displaying a graph of population fitness data
@@ -100,11 +99,7 @@ class PopulationFitnessView extends JPanel implements IslandEvolutionObserver<Ob
   private JComponent createControls(boolean islands) {
     JPanel controls = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
-    allDataButton.addItemListener(new ItemListener() {
-      public void itemStateChanged(ItemEvent ev) {
-        updateDomainAxisRange();
-      }
-    });
+    allDataButton.addItemListener(ev -> updateDomainAxisRange());
     String text = "Last " + SHOW_FIXED_GENERATIONS + (islands ? " Epochs" : " Generations");
     JRadioButton recentDataButton = new JRadioButton(text, true);
     ButtonGroup buttonGroup = new ButtonGroup();
@@ -115,22 +110,16 @@ class PopulationFitnessView extends JPanel implements IslandEvolutionObserver<Ob
     controls.add(recentDataButton);
 
     final JCheckBox meanCheckBox = new JCheckBox("Show Mean", true);
-    meanCheckBox.addItemListener(new ItemListener() {
-      public void itemStateChanged(ItemEvent itemEvent) {
-        if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
-          dataSet.addSeries(meanSeries);
-        } else {
-          dataSet.removeSeries(meanSeries);
-        }
+    meanCheckBox.addItemListener(itemEvent -> {
+      if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
+        dataSet.addSeries(meanSeries);
+      } else {
+        dataSet.removeSeries(meanSeries);
       }
     });
     controls.add(meanCheckBox);
 
-    invertCheckBox.addItemListener(new ItemListener() {
-      public void itemStateChanged(ItemEvent itemEvent) {
-        rangeAxis.setInverted(invertCheckBox.isSelected());
-      }
-    });
+    invertCheckBox.addItemListener(itemEvent -> rangeAxis.setInverted(invertCheckBox.isSelected()));
     controls.add(invertCheckBox);
 
     return controls;
@@ -157,38 +146,36 @@ class PopulationFitnessView extends JPanel implements IslandEvolutionObserver<Ob
    * {@inheritDoc}
    */
   public void populationUpdate(final PopulationData<?> populationData) {
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        chart.setNotify(false); // Avoid triggering a redraw for every change we make in this method.
-        if (populationData.getGenerationNumber() == 0) {
-          if (!populationData.isNaturalFitness()) {
-            invertCheckBox.setSelected(true);
-          }
-          // The graph might be showing data from a previous run, so clear it.
-          meanSeries.clear();
-          bestSeries.clear();
+    SwingUtilities.invokeLater(() -> {
+      chart.setNotify(false); // Avoid triggering a redraw for every change we make in this method.
+      if (populationData.getGenerationNumber() == 0) {
+        if (!populationData.isNaturalFitness()) {
+          invertCheckBox.setSelected(true);
         }
-        meanSeries.add(populationData.getGenerationNumber(), populationData.getMeanFitness());
-        double best = populationData.getBestCandidateFitness();
-        bestSeries.add(populationData.getGenerationNumber(), best);
-
-        // We don't use JFreeChart's auto-range for the axes because it is inefficient
-        // (it degrades linearly with the number of items in the data set).  Instead we track
-        // the minimum and maximum ourselves.
-        double high = Math.max(populationData.getMeanFitness(), populationData.getBestCandidateFitness());
-        double low = Math.min(populationData.getMeanFitness(), populationData.getBestCandidateFitness());
-        if (high > maxY) {
-          maxY = high;
-          rangeAxis.setRange(minY, maxY);
-        }
-        if (low < minY) {
-          minY = low;
-          rangeAxis.setRange(minY, maxY);
-        }
-
-        updateDomainAxisRange();
-        chart.setNotify(true); // Redraw all at once now.
+        // The graph might be showing data from a previous run, so clear it.
+        meanSeries.clear();
+        bestSeries.clear();
       }
+      meanSeries.add(populationData.getGenerationNumber(), populationData.getMeanFitness());
+      double best = populationData.getBestCandidateFitness();
+      bestSeries.add(populationData.getGenerationNumber(), best);
+
+      // We don't use JFreeChart's auto-range for the axes because it is inefficient
+      // (it degrades linearly with the number of items in the data set).  Instead we track
+      // the minimum and maximum ourselves.
+      double high = Math.max(populationData.getMeanFitness(), populationData.getBestCandidateFitness());
+      double low = Math.min(populationData.getMeanFitness(), populationData.getBestCandidateFitness());
+      if (high > maxY) {
+        maxY = high;
+        rangeAxis.setRange(minY, maxY);
+      }
+      if (low < minY) {
+        minY = low;
+        rangeAxis.setRange(minY, maxY);
+      }
+
+      updateDomainAxisRange();
+      chart.setNotify(true); // Redraw all at once now.
     });
   }
 

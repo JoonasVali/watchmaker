@@ -48,7 +48,7 @@ public class RandomBiomorphMutation implements EvolutionaryOperator<Biomorph> {
    * @return {@inheritDoc}
    */
   public List<Biomorph> apply(List<Biomorph> selectedCandidates, Random rng) {
-    List<Biomorph> mutatedPopulation = new ArrayList<Biomorph>(selectedCandidates.size());
+    List<Biomorph> mutatedPopulation = new ArrayList<>(selectedCandidates.size());
     for (Biomorph biomorph : selectedCandidates) {
       mutatedPopulation.add(mutateBiomorph(biomorph, rng));
     }

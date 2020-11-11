@@ -36,7 +36,7 @@ public class DawkinsBiomorphMutationTest {
   @Test
   public void testMutations() {
     Biomorph source = new Biomorph(new int[]{-5, -4, -3, -2, -1, 0, 1, 2, 8});
-    List<Biomorph> originalPopulation = new ArrayList<Biomorph>(18);
+    List<Biomorph> originalPopulation = new ArrayList<>(18);
     for (int i = 0; i < 18; i++) {
       originalPopulation.add(source);
     }
@@ -46,7 +46,7 @@ public class DawkinsBiomorphMutationTest {
     assert mutatedPopulation.size() == originalPopulation.size() : "Mutated population is wrong size.";
     // Lazy way of checking for duplicates.  Add all mutations to a set.  If there are any
     // duplicates, the size of the set will be shorter than the list.
-    Set<Biomorph> distinctBiomorphs = new HashSet<Biomorph>(mutatedPopulation);
+    Set<Biomorph> distinctBiomorphs = new HashSet<>(mutatedPopulation);
     assert distinctBiomorphs.size() == mutatedPopulation.size() : "Mutated population contains duplicates.";
     // Check for each of the expected mutations (mutations should differ from the original in only one gene).
     assert distinctBiomorphs.contains(new Biomorph(new int[]{5, -4, -3, -2, -1, 0, 1, 2, 8})) : "Missing mutation.";

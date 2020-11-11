@@ -37,7 +37,7 @@ public class GenerationalEvolutionEngineTest {
 
   @BeforeMethod
   public void prepareEngine() {
-    this.engine = new GenerationalEvolutionEngine<Integer>(new StubIntegerFactory(),
+    this.engine = new GenerationalEvolutionEngine<>(new StubIntegerFactory(),
         new IntegerZeroMaker(),
         new IntegerEvaluator(),
         new RouletteWheelSelection(),
@@ -60,7 +60,7 @@ public class GenerationalEvolutionEngineTest {
     }
     ElitismObserver observer = new ElitismObserver();
     engine.addEvolutionObserver(observer);
-    List<Integer> elite = new ArrayList<Integer>(3);
+    List<Integer> elite = new ArrayList<>(3);
     // Add the following seed candidates, all better than any others that can possibly
     // get into the population (since every other candidate will always be zero).
     elite.add(7); // This candidate should be discarded by elitism.
@@ -104,11 +104,9 @@ public class GenerationalEvolutionEngineTest {
   public void testInterrupt() {
     final long timeout = 1000L;
     final Thread requestThread = Thread.currentThread();
-    engine.addEvolutionObserver(new EvolutionObserver<Integer>() {
-      public void populationUpdate(PopulationData<? extends Integer> populationData) {
-        if (populationData.getElapsedTime() > timeout / 2) {
-          requestThread.interrupt();
-        }
+    engine.addEvolutionObserver(populationData -> {
+      if (populationData.getElapsedTime() > timeout / 2) {
+        requestThread.interrupt();
       }
     });
     long startTime = System.currentTimeMillis();
@@ -143,7 +141,7 @@ public class GenerationalEvolutionEngineTest {
    */
   private static final class IntegerZeroMaker implements EvolutionaryOperator<Integer> {
     public List<Integer> apply(List<Integer> selectedCandidates, Random rng) {
-      List<Integer> result = new ArrayList<Integer>(selectedCandidates.size());
+      List<Integer> result = new ArrayList<>(selectedCandidates.size());
       for (int i = 0; i < selectedCandidates.size(); i++) {
         result.add(0);
       }

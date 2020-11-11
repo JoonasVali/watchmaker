@@ -68,11 +68,7 @@ final class ExecutionPanel extends JPanel implements ProgressListener {
    * Updates the position of the progress bar.
    */
   public void updateProgress(final double percentComplete) {
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        progressBar.setValue((int) percentComplete);
-      }
-    });
+    SwingUtilities.invokeLater(() -> progressBar.setValue((int) percentComplete));
   }
 
 

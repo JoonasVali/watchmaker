@@ -37,7 +37,7 @@ public abstract class AbstractEvolutionEngine<T> implements EvolutionEngine<T> {
   // A single multi-threaded worker is shared among multiple evolution engine instances.
   private static FitnessEvaluationWorker concurrentWorker = null;
 
-  private final Set<EvolutionObserver<? super T>> observers = new CopyOnWriteArraySet<EvolutionObserver<? super T>>();
+  private final Set<EvolutionObserver<? super T>> observers = new CopyOnWriteArraySet<>();
 
   private final Random rng;
   private final CandidateFactory<T> candidateFactory;
@@ -76,7 +76,7 @@ public abstract class AbstractEvolutionEngine<T> implements EvolutionEngine<T> {
                   TerminationCondition... conditions) {
     return evolve(populationSize,
         eliteCount,
-        Collections.<T>emptySet(),
+        Collections.emptySet(),
         conditions);
   }
 
@@ -186,12 +186,12 @@ public abstract class AbstractEvolutionEngine<T> implements EvolutionEngine<T> {
    * scores).
    */
   protected List<EvaluatedCandidate<T>> evaluatePopulation(List<T> population) {
-    List<EvaluatedCandidate<T>> evaluatedPopulation = new ArrayList<EvaluatedCandidate<T>>(population.size());
+    List<EvaluatedCandidate<T>> evaluatedPopulation = new ArrayList<>(population.size());
 
     if (singleThreaded) // Do fitness evaluations on the request thread.
     {
       for (T candidate : population) {
-        evaluatedPopulation.add(new EvaluatedCandidate<T>(candidate,
+        evaluatedPopulation.add(new EvaluatedCandidate<>(candidate,
             fitnessEvaluator.getFitness(candidate, population)));
       }
     } else {
@@ -200,10 +200,10 @@ public abstract class AbstractEvolutionEngine<T> implements EvolutionEngine<T> {
       // proceed until all threads have finished processing.
       try {
         List<T> unmodifiablePopulation = Collections.unmodifiableList(population);
-        List<Future<EvaluatedCandidate<T>>> results = new ArrayList<Future<EvaluatedCandidate<T>>>(population.size());
+        List<Future<EvaluatedCandidate<T>>> results = new ArrayList<>(population.size());
         // Submit tasks for execution and wait until all threads have finished fitness evaluations.
         for (T candidate : population) {
-          results.add(getSharedWorker().submit(new FitnessEvalutationTask<T>(fitnessEvaluator,
+          results.add(getSharedWorker().submit(new FitnessEvalutationTask<>(fitnessEvaluator,
               candidate,
               unmodifiablePopulation)));
         }

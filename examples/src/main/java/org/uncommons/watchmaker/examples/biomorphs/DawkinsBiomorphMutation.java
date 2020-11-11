@@ -37,7 +37,7 @@ public class DawkinsBiomorphMutation implements EvolutionaryOperator<Biomorph> {
    * @return {@inheritDoc}
    */
   public List<Biomorph> apply(List<Biomorph> selectedCandidates, Random rng) {
-    List<Biomorph> mutatedPopulation = new ArrayList<Biomorph>(selectedCandidates.size());
+    List<Biomorph> mutatedPopulation = new ArrayList<>(selectedCandidates.size());
     int mutatedGene = 0;
     int mutation = 1;
     for (Biomorph b : selectedCandidates) {

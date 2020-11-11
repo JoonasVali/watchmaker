@@ -120,7 +120,7 @@ public class CharArrayCrossover extends AbstractCrossover<char[]> {
       System.arraycopy(offspring2, 0, offspring1, 0, crossoverIndex);
       System.arraycopy(temp, 0, offspring2, 0, crossoverIndex);
     }
-    List<char[]> result = new ArrayList<char[]>(2);
+    List<char[]> result = new ArrayList<>(2);
     result.add(offspring1);
     result.add(offspring2);
     return result;

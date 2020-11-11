@@ -36,7 +36,7 @@ public class AddVertexMutationTest {
   @Test
   public void testAddVertex() {
     ColouredPolygon polygon = factory.createRandomPolygon(ExamplesTestUtils.getRNG());
-    List<ColouredPolygon> image = new ArrayList<ColouredPolygon>(1);
+    List<ColouredPolygon> image = new ArrayList<>(1);
     image.add(polygon);
 
     EvolutionaryOperator<ColouredPolygon> mutation = new AddVertexMutation(canvasSize,
@@ -53,7 +53,7 @@ public class AddVertexMutationTest {
   @Test
   public void testZeroProbability() {
     ColouredPolygon polygon = factory.createRandomPolygon(ExamplesTestUtils.getRNG());
-    List<ColouredPolygon> image = new ArrayList<ColouredPolygon>(1);
+    List<ColouredPolygon> image = new ArrayList<>(1);
     image.add(polygon);
 
     EvolutionaryOperator<ColouredPolygon> mutation = new AddVertexMutation(canvasSize,
@@ -74,12 +74,12 @@ public class AddVertexMutationTest {
    */
   @Test
   public void testAddMaxPoints() {
-    List<Point> points = new ArrayList<Point>(AddVertexMutation.MAX_VERTEX_COUNT);
+    List<Point> points = new ArrayList<>(AddVertexMutation.MAX_VERTEX_COUNT);
     for (int i = 0; i < AddVertexMutation.MAX_VERTEX_COUNT; i++) {
       points.add(new Point(i, i));
     }
     ColouredPolygon polygon = new ColouredPolygon(Color.RED, points);
-    List<ColouredPolygon> image = new ArrayList<ColouredPolygon>(1);
+    List<ColouredPolygon> image = new ArrayList<>(1);
     image.add(polygon);
 
     EvolutionaryOperator<ColouredPolygon> mutation = new AddVertexMutation(canvasSize,

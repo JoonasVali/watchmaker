@@ -47,11 +47,9 @@ public class SwingConsoleTest {
         new JLabel("Two"));
 
     final int[] selection = new int[1];
-    new Thread(new Runnable() {
-      public void run() {
-        // This method blocks so we can't run it on the test thread.
-        selection[0] = swingConsole.select(labels);
-      }
+    new Thread(() -> {
+      // This method blocks so we can't run it on the test thread.
+      selection[0] = swingConsole.select(labels);
     }).start();
     Thread.sleep(250);  // TO DO: Come up with a proper solution to this race condition.
     frameFixture.button("Selection-1").click();

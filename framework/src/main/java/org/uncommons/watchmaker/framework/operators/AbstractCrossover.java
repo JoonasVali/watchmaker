@@ -67,8 +67,8 @@ public abstract class AbstractCrossover<T> implements EvolutionaryOperator<T> {
    */
   protected AbstractCrossover(int crossoverPoints,
                               Probability crossoverProbability) {
-    this(new ConstantGenerator<Integer>(crossoverPoints),
-        new ConstantGenerator<Probability>(crossoverProbability));
+    this(new ConstantGenerator<>(crossoverPoints),
+        new ConstantGenerator<>(crossoverProbability));
     if (crossoverPoints <= 0) {
       throw new IllegalArgumentException("Number of cross-over points must be positive.");
     }
@@ -86,7 +86,7 @@ public abstract class AbstractCrossover<T> implements EvolutionaryOperator<T> {
    */
   protected AbstractCrossover(NumberGenerator<Integer> crossoverPointsVariable) {
     this(crossoverPointsVariable,
-        new ConstantGenerator<Probability>(Probability.ONE));
+        new ConstantGenerator<>(Probability.ONE));
   }
 
 
@@ -126,10 +126,10 @@ public abstract class AbstractCrossover<T> implements EvolutionaryOperator<T> {
     // Shuffle the collection before applying each operation so that the
     // evolution is not influenced by any ordering artifacts from previous
     // operations.
-    List<T> selectionClone = new ArrayList<T>(selectedCandidates);
+    List<T> selectionClone = new ArrayList<>(selectedCandidates);
     Collections.shuffle(selectionClone, rng);
 
-    List<T> result = new ArrayList<T>(selectedCandidates.size());
+    List<T> result = new ArrayList<>(selectedCandidates.size());
     Iterator<T> iterator = selectionClone.iterator();
     while (iterator.hasNext()) {
       T parent1 = iterator.next();

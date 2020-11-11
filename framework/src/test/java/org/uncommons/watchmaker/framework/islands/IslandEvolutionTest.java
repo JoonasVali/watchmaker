@@ -44,7 +44,7 @@ public class IslandEvolutionTest {
     final int epochCount = 2;
     final int generationCount = 5;
 
-    IslandEvolution<Integer> islandEvolution = new IslandEvolution<Integer>(islandCount,
+    IslandEvolution<Integer> islandEvolution = new IslandEvolution<>(islandCount,
         new RingMigration(),
         new StubIntegerFactory(),
         new IntegerAdjuster(2),
@@ -76,7 +76,7 @@ public class IslandEvolutionTest {
 
   @Test
   public void testInterrupt() {
-    IslandEvolution<Integer> islandEvolution = new IslandEvolution<Integer>(2,
+    IslandEvolution<Integer> islandEvolution = new IslandEvolution<>(2,
         new RingMigration(),
         new StubIntegerFactory(),
         new IntegerAdjuster(2),
@@ -108,7 +108,7 @@ public class IslandEvolutionTest {
 
   @Test(expectedExceptions = IllegalStateException.class)
   public void testGetSatisfiedTerminationConditionsBeforeStart() {
-    IslandEvolution<Integer> islandEvolution = new IslandEvolution<Integer>(3,
+    IslandEvolution<Integer> islandEvolution = new IslandEvolution<>(3,
         new RingMigration(),
         new StubIntegerFactory(),
         new IntegerAdjuster(2),

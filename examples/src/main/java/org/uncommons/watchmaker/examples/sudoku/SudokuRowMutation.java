@@ -90,7 +90,7 @@ public class SudokuRowMutation implements EvolutionaryOperator<Sudoku> {
       buildCache(selectedCandidates.get(0));
     }
 
-    List<Sudoku> mutatedCandidates = new ArrayList<Sudoku>(selectedCandidates.size());
+    List<Sudoku> mutatedCandidates = new ArrayList<>(selectedCandidates.size());
     for (Sudoku sudoku : selectedCandidates) {
       mutatedCandidates.add(mutate(sudoku, rng));
     }

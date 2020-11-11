@@ -32,7 +32,7 @@ import java.util.List;
 public class ListInversionTest {
   @Test
   public void testZeroProbability() {
-    EvolutionaryOperator<List<Integer>> inversion = new ListInversion<Integer>(Probability.ZERO);
+    EvolutionaryOperator<List<Integer>> inversion = new ListInversion<>(Probability.ZERO);
     @SuppressWarnings("unchecked")
     List<List<Integer>> selection = Arrays.asList(Arrays.asList(1, 2, 3));
     List<List<Integer>> evolvedSelection = inversion.apply(selection, FrameworkTestUtils.getRNG());
@@ -43,7 +43,7 @@ public class ListInversionTest {
 
   @Test
   public void testInversion() {
-    EvolutionaryOperator<List<Integer>> inversion = new ListInversion<Integer>(Probability.ONE);
+    EvolutionaryOperator<List<Integer>> inversion = new ListInversion<>(Probability.ONE);
     @SuppressWarnings("unchecked")
     List<List<Integer>> selection = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
     for (int i = 0; i < 50; i++) // Try several times so that different random numbers are generated.
@@ -55,7 +55,7 @@ public class ListInversionTest {
       assert evolvedSelection.get(0).size() == selection.get(0).size() : "Candidate length should be unchanged.";
       assert !Arrays.deepEquals(evolvedSelection.get(0).toArray(), selection.get(0).toArray())
           : "Candidate should have been modified.";
-      assert new HashSet<Integer>(evolvedSelection.get(0)).size() == 8
+      assert new HashSet<>(evolvedSelection.get(0)).size() == 8
           : "Evolved candidate should contain each element once.";
     }
   }

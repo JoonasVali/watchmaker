@@ -64,15 +64,13 @@ public class SwingConsole extends JPanel implements Console<JComponent> {
    */
   public int select(final List<? extends JComponent> renderedEntities) {
     selectedIndex.set(-1);
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        removeAll();
-        int index = -1;
-        for (JComponent entity : renderedEntities) {
-          add(new EntityPanel(entity, ++index));
-        }
-        revalidate();
+    SwingUtilities.invokeLater(() -> {
+      removeAll();
+      int index = -1;
+      for (JComponent entity : renderedEntities) {
+        add(new EntityPanel(entity, ++index));
       }
+      revalidate();
     });
     waitForSelection();
     return selectedIndex.get();
@@ -104,15 +102,13 @@ public class SwingConsole extends JPanel implements Console<JComponent> {
       add(entityComponent, BorderLayout.CENTER);
       JButton selectButton = new JButton("Select");
       selectButton.setName("Selection-" + index); // This helps to find the button from a unit test.
-      selectButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent actionEvent) {
-          lock.lock();
-          try {
-            selectedIndex.set(index);
-            selected.signalAll();
-          } finally {
-            lock.unlock();
-          }
+      selectButton.addActionListener(actionEvent -> {
+        lock.lock();
+        try {
+          selectedIndex.set(index);
+          selected.signalAll();
+        } finally {
+          lock.unlock();
         }
       });
       add(selectButton, BorderLayout.SOUTH);

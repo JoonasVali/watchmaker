@@ -57,7 +57,7 @@ public class TruncationSelection implements SelectionStrategy<Object> {
    *                       select from the population.  The value must be positive and less than 1.
    */
   public TruncationSelection(double selectionRatio) {
-    this(new ConstantGenerator<Double>(selectionRatio));
+    this(new ConstantGenerator<>(selectionRatio));
     if (selectionRatio <= 0 || selectionRatio >= 1) {
       throw new IllegalArgumentException("Selection ratio must be greater than 0 and less than 1.");
     }
@@ -85,13 +85,13 @@ public class TruncationSelection implements SelectionStrategy<Object> {
                             boolean naturalFitnessScores,
                             int selectionSize,
                             Random rng) {
-    List<S> selection = new ArrayList<S>(selectionSize);
+    List<S> selection = new ArrayList<>(selectionSize);
 
     double ratio = selectionRatio.nextValue();
     assert ratio < 1 && ratio > 0 : "Selection ratio out-of-range: " + ratio;
 
     int eligibleCount = (int) Math.round(ratio * population.size());
-    eligibleCount = eligibleCount > selectionSize ? selectionSize : eligibleCount;
+    eligibleCount = Math.min(eligibleCount, selectionSize);
 
     do {
       int count = Math.min(eligibleCount, selectionSize - selection.size());

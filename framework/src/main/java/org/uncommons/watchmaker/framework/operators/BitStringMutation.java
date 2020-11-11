@@ -44,8 +44,8 @@ public class BitStringMutation implements EvolutionaryOperator<BitString> {
    * @param mutationProbability The probability of a candidate being mutated.
    */
   public BitStringMutation(Probability mutationProbability) {
-    this(new ConstantGenerator<Probability>(mutationProbability),
-        new ConstantGenerator<Integer>(1));
+    this(new ConstantGenerator<>(mutationProbability),
+        new ConstantGenerator<>(1));
   }
 
 
@@ -66,7 +66,7 @@ public class BitStringMutation implements EvolutionaryOperator<BitString> {
 
 
   public List<BitString> apply(List<BitString> selectedCandidates, Random rng) {
-    List<BitString> mutatedPopulation = new ArrayList<BitString>(selectedCandidates.size());
+    List<BitString> mutatedPopulation = new ArrayList<>(selectedCandidates.size());
     for (BitString b : selectedCandidates) {
       mutatedPopulation.add(mutateBitString(b, rng));
     }

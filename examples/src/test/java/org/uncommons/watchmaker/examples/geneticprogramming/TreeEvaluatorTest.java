@@ -35,7 +35,7 @@ public class TreeEvaluatorTest {
    */
   @Test
   public void testPerfectFunction() {
-    Map<double[], Double> data = new HashMap<double[], Double>();
+    Map<double[], Double> data = new HashMap<>();
     // Data for multiplication program.
     data.put(new double[]{5d, 3d}, 15d);
     data.put(new double[]{3d, 8d}, 24d);
@@ -57,7 +57,7 @@ public class TreeEvaluatorTest {
    */
   @Test
   public void testIncorrectFunction() {
-    Map<double[], Double> data = new HashMap<double[], Double>();
+    Map<double[], Double> data = new HashMap<>();
     // Data for multiplication program.
     data.put(new double[]{5d, 3d}, 15d);
     data.put(new double[]{3d, 8d}, 24d);

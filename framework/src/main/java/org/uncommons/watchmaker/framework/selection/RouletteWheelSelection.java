@@ -73,7 +73,7 @@ public class RouletteWheelSelection implements SelectionStrategy<Object> {
       cumulativeFitnesses[i] = cumulativeFitnesses[i - 1] + fitness;
     }
 
-    List<S> selection = new ArrayList<S>(selectionSize);
+    List<S> selection = new ArrayList<>(selectionSize);
     for (int i = 0; i < selectionSize; i++) {
       double randomFitness = rng.nextDouble() * cumulativeFitnesses[cumulativeFitnesses.length - 1];
       int index = Arrays.binarySearch(cumulativeFitnesses, randomFitness);

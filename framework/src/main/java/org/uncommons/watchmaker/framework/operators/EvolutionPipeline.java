@@ -46,7 +46,7 @@ public class EvolutionPipeline<T> implements EvolutionaryOperator<T> {
     if (pipeline.isEmpty()) {
       throw new IllegalArgumentException("Pipeline must contain at least one operator.");
     }
-    this.pipeline = new ArrayList<EvolutionaryOperator<T>>(pipeline);
+    this.pipeline = new ArrayList<>(pipeline);
   }
 
 

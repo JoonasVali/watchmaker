@@ -37,7 +37,7 @@ public class AddPolygonMutationTest {
   public void testAddPolygon() {
     List<ColouredPolygon> image = factory.generateRandomCandidate(ExamplesTestUtils.getRNG());
     assert image.size() == 2 : "Image should have 2 polygons";
-    List<List<ColouredPolygon>> list = new ArrayList<List<ColouredPolygon>>(1);
+    List<List<ColouredPolygon>> list = new ArrayList<>(1);
     list.add(image);
 
     EvolutionaryOperator<List<ColouredPolygon>> mutation = new AddPolygonMutation(Probability.ONE,
@@ -54,7 +54,7 @@ public class AddPolygonMutationTest {
   public void testZeroProbability() {
     List<ColouredPolygon> image = factory.generateRandomCandidate(ExamplesTestUtils.getRNG());
     assert image.size() == 2 : "Image should have 2 polygons";
-    List<List<ColouredPolygon>> list = new ArrayList<List<ColouredPolygon>>(1);
+    List<List<ColouredPolygon>> list = new ArrayList<>(1);
     list.add(image);
 
     EvolutionaryOperator<List<ColouredPolygon>> mutation = new AddPolygonMutation(Probability.ZERO,
@@ -77,7 +77,7 @@ public class AddPolygonMutationTest {
     List<ColouredPolygon> image = Arrays.asList(factory.createRandomPolygon(ExamplesTestUtils.getRNG()),
         factory.createRandomPolygon(ExamplesTestUtils.getRNG()),
         factory.createRandomPolygon(ExamplesTestUtils.getRNG()));
-    List<List<ColouredPolygon>> list = new ArrayList<List<ColouredPolygon>>(1);
+    List<List<ColouredPolygon>> list = new ArrayList<>(1);
     list.add(image);
 
     EvolutionaryOperator<List<ColouredPolygon>> mutation = new AddPolygonMutation(Probability.ONE,

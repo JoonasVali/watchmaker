@@ -52,27 +52,21 @@ public abstract class SwingBackgroundTask<V> {
    * @see #waitForCompletion()
    */
   public void execute() {
-    Runnable task = new Runnable() {
-      public void run() {
-        try {
-          final V result = performTask();
-          SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-              postProcessing(result);
-              latch.countDown();
-            }
-          });
-        }
-        // If an exception occurs performing the task, we need
-        // to handle it.
-        catch (final Throwable throwable) {
-          SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-              onError(throwable);
-              latch.countDown();
-            }
-          });
-        }
+    Runnable task = () -> {
+      try {
+        final V result = performTask();
+        SwingUtilities.invokeLater(() -> {
+          postProcessing(result);
+          latch.countDown();
+        });
+      }
+      // If an exception occurs performing the task, we need
+      // to handle it.
+      catch (final Throwable throwable) {
+        SwingUtilities.invokeLater(() -> {
+          onError(throwable);
+          latch.countDown();
+        });
       }
     };
     new Thread(task, "SwingBackgroundTask-" + id).start();

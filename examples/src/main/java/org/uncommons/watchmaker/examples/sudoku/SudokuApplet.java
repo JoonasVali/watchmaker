@@ -133,11 +133,7 @@ public class SudokuApplet extends AbstractExampleApplet {
         "Hard Demo (28 givens)",
         "Custom"});
     innerPanel.add(puzzleCombo);
-    puzzleCombo.addItemListener(new ItemListener() {
-      public void itemStateChanged(ItemEvent ev) {
-        sudokuView.setPuzzle(PUZZLES[puzzleCombo.getSelectedIndex()]);
-      }
-    });
+    puzzleCombo.addItemListener(ev -> sudokuView.setPuzzle(PUZZLES[puzzleCombo.getSelectedIndex()]));
     innerPanel.add(new JLabel("Selection Pressure: "));
     ProbabilityParameterControl selectionPressure = new ProbabilityParameterControl(Probability.EVENS,
         Probability.ONE,
@@ -160,17 +156,15 @@ public class SudokuApplet extends AbstractExampleApplet {
   private JComponent createButtonPanel() {
     JPanel buttonPanel = new JPanel(new FlowLayout());
     solveButton = new JButton("Solve");
-    solveButton.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent ev) {
-        int populationSize = (Integer) populationSizeSpinner.getValue();
-        puzzleCombo.setEnabled(false);
-        populationSizeSpinner.setEnabled(false);
-        solveButton.setEnabled(false);
-        abortControl.reset();
-        createTask(sudokuView.getPuzzle(),
-            populationSize,
-            (int) Math.round(populationSize * 0.05)).execute(); // Elite count is 5%.
-      }
+    solveButton.addActionListener(ev -> {
+      int populationSize = (Integer) populationSizeSpinner.getValue();
+      puzzleCombo.setEnabled(false);
+      populationSizeSpinner.setEnabled(false);
+      solveButton.setEnabled(false);
+      abortControl.reset();
+      createTask(sudokuView.getPuzzle(),
+          populationSize,
+          (int) Math.round(populationSize * 0.05)).execute(); // Elite count is 5%.
     });
 
     buttonPanel.add(solveButton);
@@ -238,11 +232,7 @@ public class SudokuApplet extends AbstractExampleApplet {
    */
   private class GridViewUpdater implements EvolutionObserver<Sudoku> {
     public void populationUpdate(final PopulationData<? extends Sudoku> data) {
-      SwingUtilities.invokeLater(new Runnable() {
-        public void run() {
-          sudokuView.setSolution(data.getBestCandidate());
-        }
-      });
+      SwingUtilities.invokeLater(() -> sudokuView.setSolution(data.getBestCandidate()));
     }
   }
 

@@ -33,13 +33,13 @@ import java.util.Set;
 public class ObjectArrayCrossoverTest {
   @Test
   public void testCrossover() {
-    EvolutionaryOperator<String[]> crossover = new ObjectArrayCrossover<String>();
-    List<String[]> population = new ArrayList<String[]>(4);
+    EvolutionaryOperator<String[]> crossover = new ObjectArrayCrossover<>();
+    List<String[]> population = new ArrayList<>(4);
     population.add(new String[]{"1", "2", "3", "4", "5"});
     population.add(new String[]{"6", "7", "8", "9", "10"});
     population.add(new String[]{"11", "12", "13", "14", "15"});
     population.add(new String[]{"16", "17", "18", "19", "20"});
-    Set<String> values = new HashSet<String>(20);
+    Set<String> values = new HashSet<>(20);
     for (int i = 0; i < 20; i++) {
       population = crossover.apply(population, FrameworkTestUtils.getRNG());
       assert population.size() == 4 : "Population size changed after cross-over.";
@@ -66,8 +66,8 @@ public class ObjectArrayCrossoverTest {
    */
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testDifferentLengthParents() {
-    EvolutionaryOperator<String[]> crossover = new ObjectArrayCrossover<String>(1, Probability.ONE);
-    List<String[]> population = new ArrayList<String[]>(2);
+    EvolutionaryOperator<String[]> crossover = new ObjectArrayCrossover<>(1, Probability.ONE);
+    List<String[]> population = new ArrayList<>(2);
     population.add(new String[]{"1", "2", "3", "4", "5"});
     population.add(new String[]{"6", "7", "8", "9", "10", "11", "12"});
     // This should cause an exception since the parents are different lengths.

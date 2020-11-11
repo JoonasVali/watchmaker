@@ -40,7 +40,7 @@ final class ItineraryPanel extends JPanel {
     super(new BorderLayout());
 
     JPanel checkBoxPanel = new JPanel(new GridLayout(0, 1));
-    checkBoxes = new ArrayList<JCheckBox>(cities.size());
+    checkBoxes = new ArrayList<>(cities.size());
     for (String city : cities) {
       JCheckBox checkBox = new JCheckBox(city, false);
       checkBox.setName(city); // Helps to find the checkbox from a unit test.
@@ -56,13 +56,10 @@ final class ItineraryPanel extends JPanel {
     clearButton = new JButton("Clear Selection");
     clearButton.setName("None");
     buttonPanel.add(clearButton);
-    ActionListener buttonListener = new ActionListener() {
-
-      public void actionPerformed(ActionEvent actionEvent) {
-        boolean select = actionEvent.getSource() == selectAllButton;
-        for (JCheckBox checkBox : checkBoxes) {
-          checkBox.setSelected(select);
-        }
+    ActionListener buttonListener = actionEvent -> {
+      boolean select = actionEvent.getSource() == selectAllButton;
+      for (JCheckBox checkBox : checkBoxes) {
+        checkBox.setSelected(select);
       }
     };
     selectAllButton.addActionListener(buttonListener);
@@ -79,7 +76,7 @@ final class ItineraryPanel extends JPanel {
    * @return A list of cities.
    */
   public Collection<String> getSelectedCities() {
-    Set<String> cities = new TreeSet<String>();
+    Set<String> cities = new TreeSet<>();
     for (JCheckBox checkBox : checkBoxes) {
       if (checkBox.isSelected()) {
         cities.add(checkBox.getText());

@@ -50,7 +50,7 @@ public class ListPermutationFactory<T> extends AbstractCandidateFactory<List<T>>
    * @return A random permutation.
    */
   public List<T> generateRandomCandidate(Random rng) {
-    List<T> candidate = new ArrayList<T>(elements);
+    List<T> candidate = new ArrayList<>(elements);
     Collections.shuffle(candidate, rng);
     return candidate;
   }

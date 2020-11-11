@@ -34,8 +34,8 @@ public class ListOperatorTest {
    */
   @Test
   public void testApplication() {
-    ListOperator<Integer> operator = new ListOperator<Integer>(new IntegerAdjuster(1));
-    List<List<Integer>> selection = new ArrayList<List<Integer>>(3);
+    ListOperator<Integer> operator = new ListOperator<>(new IntegerAdjuster(1));
+    List<List<Integer>> selection = new ArrayList<>(3);
     selection.add(Arrays.asList(1, 2, 3));
     selection.add(Arrays.asList(4, 5, 6));
     selection.add(Arrays.asList(7, 8, 9));

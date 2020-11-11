@@ -117,7 +117,7 @@ public class BitStringCrossover extends AbstractCrossover<BitString> {
       int crossoverIndex = (1 + rng.nextInt(parent1.getLength() - 1));
       offspring1.swapSubstring(offspring2, 0, crossoverIndex);
     }
-    List<BitString> result = new ArrayList<BitString>(2);
+    List<BitString> result = new ArrayList<>(2);
     result.add(offspring1);
     result.add(offspring2);
     return result;

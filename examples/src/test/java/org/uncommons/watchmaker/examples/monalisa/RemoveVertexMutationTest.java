@@ -37,7 +37,7 @@ public class RemoveVertexMutationTest {
   public void testRemoveVertex() {
     List<Point> points = Arrays.asList(new Point(1, 1), new Point(2, 2), new Point(3, 3), new Point(4, 4));
     ColouredPolygon polygon = new ColouredPolygon(Color.RED, points);
-    List<ColouredPolygon> image = new ArrayList<ColouredPolygon>(1);
+    List<ColouredPolygon> image = new ArrayList<>(1);
     image.add(polygon);
 
     EvolutionaryOperator<ColouredPolygon> mutation = new RemoveVertexMutation(canvasSize,
@@ -55,7 +55,7 @@ public class RemoveVertexMutationTest {
   public void testZeroProbability() {
     List<Point> points = Arrays.asList(new Point(1, 1), new Point(2, 2), new Point(3, 3), new Point(4, 4));
     ColouredPolygon polygon = new ColouredPolygon(Color.RED, points);
-    List<ColouredPolygon> image = new ArrayList<ColouredPolygon>(1);
+    List<ColouredPolygon> image = new ArrayList<>(1);
     image.add(polygon);
 
     EvolutionaryOperator<ColouredPolygon> mutation = new RemoveVertexMutation(canvasSize,
@@ -78,7 +78,7 @@ public class RemoveVertexMutationTest {
   public void testAddMaxPoints() {
     List<Point> points = Arrays.asList(new Point(1, 1), new Point(2, 2), new Point(3, 3));
     ColouredPolygon polygon = new ColouredPolygon(Color.RED, points);
-    List<ColouredPolygon> image = new ArrayList<ColouredPolygon>(1);
+    List<ColouredPolygon> image = new ArrayList<>(1);
     image.add(polygon);
 
     EvolutionaryOperator<ColouredPolygon> mutation = new RemoveVertexMutation(canvasSize,

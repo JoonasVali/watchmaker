@@ -48,7 +48,7 @@ class FitnessEvalutationTask<T> implements Callable<EvaluatedCandidate<T>> {
 
 
   public EvaluatedCandidate<T> call() {
-    return new EvaluatedCandidate<T>(candidate,
+    return new EvaluatedCandidate<>(candidate,
         fitnessEvaluator.getFitness(candidate, population));
   }
 }

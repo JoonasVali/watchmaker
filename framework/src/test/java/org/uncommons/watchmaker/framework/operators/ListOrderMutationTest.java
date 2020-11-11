@@ -31,14 +31,14 @@ import java.util.List;
 public class ListOrderMutationTest {
   @Test
   public void testMutation() {
-    ListOrderMutation<Character> operator = new ListOrderMutation<Character>();
-    List<Character> candidate = new ArrayList<Character>(5);
+    ListOrderMutation<Character> operator = new ListOrderMutation<>();
+    List<Character> candidate = new ArrayList<>(5);
     candidate.add('a');
     candidate.add('b');
     candidate.add('c');
     candidate.add('d');
     candidate.add('e');
-    List<List<Character>> population = new ArrayList<List<Character>>(1);
+    List<List<Character>> population = new ArrayList<>(1);
     population.add(candidate);
     List<List<Character>> mutatedPopulation = operator.apply(population, FrameworkTestUtils.getRNG());
     assert mutatedPopulation.size() == population.size() : "Population size should be unchanged.";

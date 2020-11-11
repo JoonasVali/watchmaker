@@ -43,7 +43,7 @@ public class StringMutation implements EvolutionaryOperator<String> {
    *                            is changed.
    */
   public StringMutation(char[] alphabet, Probability mutationProbability) {
-    this(alphabet, new ConstantGenerator<Probability>(mutationProbability));
+    this(alphabet, new ConstantGenerator<>(mutationProbability));
   }
 
 
@@ -63,7 +63,7 @@ public class StringMutation implements EvolutionaryOperator<String> {
 
 
   public List<String> apply(List<String> selectedCandidates, Random rng) {
-    List<String> mutatedPopulation = new ArrayList<String>(selectedCandidates.size());
+    List<String> mutatedPopulation = new ArrayList<>(selectedCandidates.size());
     for (String s : selectedCandidates) {
       mutatedPopulation.add(mutateString(s, rng));
     }

@@ -46,7 +46,7 @@ public class RandomMigration implements Migration<Object> {
    * @param <S>               The type of entity being evolved.
    */
   public <S extends Object> void migrate(List<List<EvaluatedCandidate<S>>> islandPopulations, int migrantCount, Random rng) {
-    List<EvaluatedCandidate<S>> migrants = new ArrayList<EvaluatedCandidate<S>>(migrantCount * islandPopulations.size());
+    List<EvaluatedCandidate<S>> migrants = new ArrayList<>(migrantCount * islandPopulations.size());
     for (List<EvaluatedCandidate<S>> island : islandPopulations) {
       Collections.shuffle(island, rng);
       for (int i = 0; i < migrantCount; i++) {

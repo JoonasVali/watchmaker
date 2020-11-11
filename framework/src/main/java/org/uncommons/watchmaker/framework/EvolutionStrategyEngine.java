@@ -93,7 +93,7 @@ public class EvolutionStrategyEngine<T> extends AbstractEvolutionEngine<T> {
 
     // Select candidates that will be operated on to create the offspring.
     int offspringCount = offspringMultiplier * evaluatedPopulation.size();
-    List<T> parents = new ArrayList<T>(offspringCount);
+    List<T> parents = new ArrayList<>(offspringCount);
     for (int i = 0; i < offspringCount; i++) {
       parents.add(evaluatedPopulation.get(rng.nextInt(evaluatedPopulation.size())).getCandidate());
     }

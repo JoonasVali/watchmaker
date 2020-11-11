@@ -62,7 +62,7 @@ public class ListOrderCrossover<T> extends AbstractCrossover<List<T>> {
    *                                     being copied, unchanged, into the output population.
    */
   public ListOrderCrossover(NumberGenerator<Probability> crossoverProbabilityVariable) {
-    super(new ConstantGenerator<Integer>(2), // Requires exactly two cross-over points.
+    super(new ConstantGenerator<>(2), // Requires exactly two cross-over points.
         crossoverProbabilityVariable);
   }
 
@@ -81,8 +81,8 @@ public class ListOrderCrossover<T> extends AbstractCrossover<List<T>> {
       throw new IllegalArgumentException("Cannot perform cross-over with different length parents.");
     }
 
-    List<T> offspring1 = new ArrayList<T>(parent1); // Use a random-access list for performance.
-    List<T> offspring2 = new ArrayList<T>(parent2);
+    List<T> offspring1 = new ArrayList<>(parent1); // Use a random-access list for performance.
+    List<T> offspring2 = new ArrayList<>(parent2);
 
     int point1 = rng.nextInt(parent1.size());
     int point2 = rng.nextInt(parent1.size());
@@ -92,8 +92,8 @@ public class ListOrderCrossover<T> extends AbstractCrossover<List<T>> {
       length += parent1.size();
     }
 
-    Map<T, T> mapping1 = new HashMap<T, T>(length * 2); // Big enough map to avoid re-hashing.
-    Map<T, T> mapping2 = new HashMap<T, T>(length * 2);
+    Map<T, T> mapping1 = new HashMap<>(length * 2); // Big enough map to avoid re-hashing.
+    Map<T, T> mapping2 = new HashMap<>(length * 2);
     for (int i = 0; i < length; i++) {
       int index = (i + point1) % parent1.size();
       T item1 = offspring1.get(index);
@@ -107,7 +107,7 @@ public class ListOrderCrossover<T> extends AbstractCrossover<List<T>> {
     checkUnmappedElements(offspring1, mapping2, point1, point2);
     checkUnmappedElements(offspring2, mapping1, point1, point2);
 
-    List<List<T>> result = new ArrayList<List<T>>(2);
+    List<List<T>> result = new ArrayList<>(2);
     result.add(offspring1);
     result.add(offspring2);
     return result;

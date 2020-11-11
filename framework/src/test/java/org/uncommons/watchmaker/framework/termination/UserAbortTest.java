@@ -28,7 +28,7 @@ public class UserAbortTest {
   public void testAbort() {
     UserAbort condition = new UserAbort();
     // This population data should be irrelevant.
-    PopulationData<Object> data = new PopulationData<Object>(new Object(), 0, 0, 0, true, 2, 0, 0, 100);
+    PopulationData<Object> data = new PopulationData<>(new Object(), 0, 0, 0, true, 2, 0, 0, 100);
     assert !condition.shouldTerminate(data) : "Should not terminate without user abort.";
     assert !condition.isAborted() : "Should not be aborted without user intervention.";
     condition.abort();

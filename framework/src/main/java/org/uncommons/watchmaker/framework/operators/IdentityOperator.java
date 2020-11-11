@@ -40,6 +40,6 @@ public class IdentityOperator<T> implements EvolutionaryOperator<T> {
    * @return The unaltered candidates.
    */
   public List<T> apply(List<T> selectedCandidates, Random rng) {
-    return new ArrayList<T>(selectedCandidates);
+    return new ArrayList<>(selectedCandidates);
   }
 }

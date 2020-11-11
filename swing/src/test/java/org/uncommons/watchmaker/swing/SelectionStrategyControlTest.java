@@ -36,10 +36,10 @@ public class SelectionStrategyControlTest {
   public void testInitialisation() {
     SelectionStrategy<Object> rank = new RankSelection();
     SelectionStrategy<Object> roulette = new RouletteWheelSelection();
-    List<SelectionStrategy<? super Object>> strategies = new LinkedList<SelectionStrategy<? super Object>>();
+    List<SelectionStrategy<? super Object>> strategies = new LinkedList<>();
     strategies.add(rank);
     strategies.add(roulette);
-    SelectionStrategyControl<?> control = new SelectionStrategyControl<Object>(strategies);
+    SelectionStrategyControl<?> control = new SelectionStrategyControl<>(strategies);
     JComboBox component = control.getControl();
     assert component.getItemCount() == 2 : "Combobox should contain 2 entries, is " + component.getItemCount();
     assert component.getItemAt(0) == rank : "First item should be rank selection.";
@@ -51,16 +51,16 @@ public class SelectionStrategyControlTest {
   public void testChangeSelection() {
     SelectionStrategy<Object> quarter = new TruncationSelection(0.25);
     SelectionStrategy<Object> half = new TruncationSelection(0.5);
-    List<SelectionStrategy<? super Object>> strategies = new LinkedList<SelectionStrategy<? super Object>>();
+    List<SelectionStrategy<? super Object>> strategies = new LinkedList<>();
     strategies.add(quarter);
     strategies.add(half);
-    SelectionStrategyControl<Object> control = new SelectionStrategyControl<Object>(strategies);
+    SelectionStrategyControl<Object> control = new SelectionStrategyControl<>(strategies);
 
-    List<EvaluatedCandidate<String>> population = new LinkedList<EvaluatedCandidate<String>>();
-    population.add(new EvaluatedCandidate<String>("DDD", 4));
-    population.add(new EvaluatedCandidate<String>("CCC", 3));
-    population.add(new EvaluatedCandidate<String>("BBB", 2));
-    population.add(new EvaluatedCandidate<String>("AAA", 1));
+    List<EvaluatedCandidate<String>> population = new LinkedList<>();
+    population.add(new EvaluatedCandidate<>("DDD", 4));
+    population.add(new EvaluatedCandidate<>("CCC", 3));
+    population.add(new EvaluatedCandidate<>("BBB", 2));
+    population.add(new EvaluatedCandidate<>("AAA", 1));
 
     // Using the first selection strategy, only the fittest 25% of candidates should be selected from.
     List<String> selection = control.getSelectionStrategy().select(population, true, 2, null);
@@ -81,19 +81,19 @@ public class SelectionStrategyControlTest {
   public void testReset() {
     SelectionStrategy<Object> quarter = new TruncationSelection(0.25);
     SelectionStrategy<Object> half = new TruncationSelection(0.5);
-    List<SelectionStrategy<? super Object>> strategies = new LinkedList<SelectionStrategy<? super Object>>();
+    List<SelectionStrategy<? super Object>> strategies = new LinkedList<>();
     strategies.add(quarter);
     strategies.add(half);
-    SelectionStrategyControl<Object> control = new SelectionStrategyControl<Object>(strategies);
+    SelectionStrategyControl<Object> control = new SelectionStrategyControl<>(strategies);
 
     control.getControl().setSelectedIndex(1); // Not the first strategy.
     control.reset(); // Reset to the first strategy.
 
-    List<EvaluatedCandidate<String>> population = new LinkedList<EvaluatedCandidate<String>>();
-    population.add(new EvaluatedCandidate<String>("DDD", 4));
-    population.add(new EvaluatedCandidate<String>("CCC", 3));
-    population.add(new EvaluatedCandidate<String>("BBB", 2));
-    population.add(new EvaluatedCandidate<String>("AAA", 1));
+    List<EvaluatedCandidate<String>> population = new LinkedList<>();
+    population.add(new EvaluatedCandidate<>("DDD", 4));
+    population.add(new EvaluatedCandidate<>("CCC", 3));
+    population.add(new EvaluatedCandidate<>("BBB", 2));
+    population.add(new EvaluatedCandidate<>("AAA", 1));
 
     // Using the first selection strategy, only the fittest 25% of candidates should be selected from.
     List<String> selection = control.getSelectionStrategy().select(population, true, 2, null);

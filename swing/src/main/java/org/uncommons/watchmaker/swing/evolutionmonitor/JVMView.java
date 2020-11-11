@@ -63,11 +63,7 @@ class JVMView extends JPanel {
     add(heapPanel, BorderLayout.CENTER);
     add(createControls(), BorderLayout.SOUTH);
 
-    Timer timer = new Timer(5000, new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        addMemoryDataPoint();
-      }
-    });
+    Timer timer = new Timer(5000, e -> addMemoryDataPoint());
 
     // Plot start values.
     addMemoryDataPoint();
@@ -118,11 +114,7 @@ class JVMView extends JPanel {
     JPanel controls = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     JButton gcButton = new JButton("Request GC");
     gcButton.setToolTipText("Perform garbage collection (the JVM may ignore this request).");
-    gcButton.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent ev) {
-        memoryBean.gc();
-      }
-    });
+    gcButton.addActionListener(ev -> memoryBean.gc());
     controls.add(gcButton);
     return controls;
   }

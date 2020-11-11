@@ -101,19 +101,17 @@ class IslandsView extends JPanel implements IslandEvolutionObserver<Object> {
     JPanel controls = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
     final JCheckBox meanCheckBox = new JCheckBox("Show Mean and Standard Deviation", false);
-    meanCheckBox.addItemListener(new ItemListener() {
-      public void itemStateChanged(ItemEvent itemEvent) {
-        chart.setNotify(false);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
-        if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
-          plot.setDataset(1, meanDataSet);
-          plot.setRenderer(1, meanRenderer);
-        } else {
-          plot.setDataset(1, null);
-          plot.setRenderer(1, null);
-        }
-        chart.setNotify(true);
+    meanCheckBox.addItemListener(itemEvent -> {
+      chart.setNotify(false);
+      CategoryPlot plot = (CategoryPlot) chart.getPlot();
+      if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
+        plot.setDataset(1, meanDataSet);
+        plot.setRenderer(1, meanRenderer);
+      } else {
+        plot.setDataset(1, null);
+        plot.setRenderer(1, null);
       }
+      chart.setNotify(true);
     });
     controls.add(meanCheckBox);
 
@@ -126,15 +124,13 @@ class IslandsView extends JPanel implements IslandEvolutionObserver<Object> {
     // reports its results first.
     if (islandIndex >= islandCount.get()) {
       try {
-        SwingUtilities.invokeAndWait(new Runnable() {
-          public void run() {
-            // Don't need synchronisation here because SwingUtilities queues these updates
-            // and if a second update gets queued, the loop will be a no-op so it's not a problem.
-            for (Integer i = islandCount.get(); i <= islandIndex; i++) {
-              bestDataSet.addValue(0, FITTEST_INDIVIDUAL_LABEL, i);
-              meanDataSet.add(0, 0, MEAN_FITNESS_LABEL, i);
-              islandCount.incrementAndGet();
-            }
+        SwingUtilities.invokeAndWait(() -> {
+          // Don't need synchronisation here because SwingUtilities queues these updates
+          // and if a second update gets queued, the loop will be a no-op so it's not a problem.
+          for (Integer i = islandCount.get(); i <= islandIndex; i++) {
+            bestDataSet.addValue(0, FITTEST_INDIVIDUAL_LABEL, i);
+            meanDataSet.add(0, 0, MEAN_FITNESS_LABEL, i);
+            islandCount.incrementAndGet();
           }
         });
       } catch (InterruptedException ex) {
@@ -144,30 +140,28 @@ class IslandsView extends JPanel implements IslandEvolutionObserver<Object> {
       }
     }
 
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        chart.setNotify(false);
-        bestDataSet.setValue(populationData.getBestCandidateFitness(), FITTEST_INDIVIDUAL_LABEL, (Integer) islandIndex);
-        meanDataSet.remove(MEAN_FITNESS_LABEL, (Integer) islandIndex);
-        meanDataSet.add(populationData.getMeanFitness(),
-            populationData.getFitnessStandardDeviation(),
-            MEAN_FITNESS_LABEL,
-            (Integer) islandIndex);
-        ValueAxis rangeAxis = ((CategoryPlot) chart.getPlot()).getRangeAxis();
-        // If the range is not sufficient to display all values, enlarge it.
-        synchronized (maxLock) {
-          max = Math.max(max, populationData.getBestCandidateFitness());
-          max = Math.max(max, populationData.getMeanFitness() + populationData.getFitnessStandardDeviation());
-          while (max > rangeAxis.getUpperBound()) {
-            rangeAxis.setUpperBound(rangeAxis.getUpperBound() * 2);
-          }
-          // If the range is much bigger than it needs to be, reduce it.
-          while (max < rangeAxis.getUpperBound() / 4) {
-            rangeAxis.setUpperBound(rangeAxis.getUpperBound() / 4);
-          }
+    SwingUtilities.invokeLater((Runnable) () -> {
+      chart.setNotify(false);
+      bestDataSet.setValue(populationData.getBestCandidateFitness(), FITTEST_INDIVIDUAL_LABEL, (Integer) islandIndex);
+      meanDataSet.remove(MEAN_FITNESS_LABEL, (Integer) islandIndex);
+      meanDataSet.add(populationData.getMeanFitness(),
+          populationData.getFitnessStandardDeviation(),
+          MEAN_FITNESS_LABEL,
+          (Integer) islandIndex);
+      ValueAxis rangeAxis = ((CategoryPlot) chart.getPlot()).getRangeAxis();
+      // If the range is not sufficient to display all values, enlarge it.
+      synchronized (maxLock) {
+        max = Math.max(max, populationData.getBestCandidateFitness());
+        max = Math.max(max, populationData.getMeanFitness() + populationData.getFitnessStandardDeviation());
+        while (max > rangeAxis.getUpperBound()) {
+          rangeAxis.setUpperBound(rangeAxis.getUpperBound() * 2);
         }
-        chart.setNotify(true);
+        // If the range is much bigger than it needs to be, reduce it.
+        while (max < rangeAxis.getUpperBound() / 4) {
+          rangeAxis.setUpperBound(rangeAxis.getUpperBound() / 4);
+        }
       }
+      chart.setNotify(true);
     });
   }
 

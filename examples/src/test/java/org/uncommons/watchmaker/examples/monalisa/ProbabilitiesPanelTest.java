@@ -78,7 +78,7 @@ public class ProbabilitiesPanelTest {
         Arrays.asList(new Point(1, 1))));
     List<ColouredPolygon> candidate2 = Arrays.asList(new ColouredPolygon(Color.BLACK,
         Arrays.asList(new Point(2, 2))));
-    List<List<ColouredPolygon>> population = new ArrayList<List<ColouredPolygon>>(2);
+    List<List<ColouredPolygon>> population = new ArrayList<>(2);
     population.add(candidate1);
     population.add(candidate2);
 

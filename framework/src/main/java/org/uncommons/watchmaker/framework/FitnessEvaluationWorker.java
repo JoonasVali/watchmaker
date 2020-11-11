@@ -42,7 +42,7 @@ public class FitnessEvaluationWorker {
   /**
    * Share this field to use Terracotta to distribute fitness evaluations.
    */
-  private final LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<Runnable>();
+  private final LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
 
 
   /**

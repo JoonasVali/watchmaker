@@ -36,11 +36,11 @@ public class TournamentSelectionTest {
   @Test
   public void testNaturalFitnessSelection() {
     SelectionStrategy<Object> selector = new TournamentSelection(new Probability(0.7d));
-    List<EvaluatedCandidate<String>> population = new ArrayList<EvaluatedCandidate<String>>(4);
-    EvaluatedCandidate<String> steve = new EvaluatedCandidate<String>("Steve", 10.0);
-    EvaluatedCandidate<String> mary = new EvaluatedCandidate<String>("Mary", 9.1);
-    EvaluatedCandidate<String> john = new EvaluatedCandidate<String>("John", 8.4);
-    EvaluatedCandidate<String> gary = new EvaluatedCandidate<String>("Gary", 6.2);
+    List<EvaluatedCandidate<String>> population = new ArrayList<>(4);
+    EvaluatedCandidate<String> steve = new EvaluatedCandidate<>("Steve", 10.0);
+    EvaluatedCandidate<String> mary = new EvaluatedCandidate<>("Mary", 9.1);
+    EvaluatedCandidate<String> john = new EvaluatedCandidate<>("John", 8.4);
+    EvaluatedCandidate<String> gary = new EvaluatedCandidate<>("Gary", 6.2);
     population.add(steve);
     population.add(mary);
     population.add(john);
@@ -56,11 +56,11 @@ public class TournamentSelectionTest {
   @Test
   public void testNonNaturalFitnessSelection() {
     SelectionStrategy<Object> selector = new TournamentSelection(new Probability(0.7d));
-    List<EvaluatedCandidate<String>> population = new ArrayList<EvaluatedCandidate<String>>(4);
-    EvaluatedCandidate<String> gary = new EvaluatedCandidate<String>("Gary", 6.2);
-    EvaluatedCandidate<String> john = new EvaluatedCandidate<String>("John", 8.4);
-    EvaluatedCandidate<String> mary = new EvaluatedCandidate<String>("Mary", 9.1);
-    EvaluatedCandidate<String> steve = new EvaluatedCandidate<String>("Steve", 10.0);
+    List<EvaluatedCandidate<String>> population = new ArrayList<>(4);
+    EvaluatedCandidate<String> gary = new EvaluatedCandidate<>("Gary", 6.2);
+    EvaluatedCandidate<String> john = new EvaluatedCandidate<>("John", 8.4);
+    EvaluatedCandidate<String> mary = new EvaluatedCandidate<>("Mary", 9.1);
+    EvaluatedCandidate<String> steve = new EvaluatedCandidate<>("Steve", 10.0);
     population.add(gary);
     population.add(john);
     population.add(mary);

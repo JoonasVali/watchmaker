@@ -54,15 +54,13 @@ public class SelectionStrategyControl<T> implements EvolutionControl {
    * @param options The selection strategies to choose from.
    */
   public SelectionStrategyControl(List<SelectionStrategy<? super T>> options) {
-    this.control = new JComboBox(new Vector<SelectionStrategy<? super T>>(options));
+    this.control = new JComboBox(new Vector<>(options));
     this.selectionStrategy = new ProxySelectionStrategy(options.get(0));
-    this.control.addItemListener(new ItemListener() {
-      public void itemStateChanged(ItemEvent ev) {
-        if (ev.getStateChange() == ItemEvent.SELECTED) {
-          @SuppressWarnings("unchecked")
-          SelectionStrategy<? super T> delegate = (SelectionStrategy<? super T>) control.getSelectedItem();
-          selectionStrategy.setDelegate(delegate);
-        }
+    this.control.addItemListener(ev -> {
+      if (ev.getStateChange() == ItemEvent.SELECTED) {
+        @SuppressWarnings("unchecked")
+        SelectionStrategy<? super T> delegate = (SelectionStrategy<? super T>) control.getSelectedItem();
+        selectionStrategy.setDelegate(delegate);
       }
     });
   }
@@ -79,7 +77,7 @@ public class SelectionStrategyControl<T> implements EvolutionControl {
    */
   public static <T> List<SelectionStrategy<? super T>> createDefaultOptions(Probability tournamentProbability,
                                                                             double truncationRatio) {
-    List<SelectionStrategy<? super T>> options = new LinkedList<SelectionStrategy<? super T>>();
+    List<SelectionStrategy<? super T>> options = new LinkedList<>();
     options.add(new RankSelection());
     options.add(new RouletteWheelSelection());
     options.add(new SigmaScaling());

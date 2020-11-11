@@ -35,7 +35,7 @@ public class ConstantTest {
     assert one.hashCode() == anotherOne.hashCode() : "Equal objects must have equal hash codes.";
     assert !zero.equals(one) : "Different valued constants must be non-equal.";
     assert !zero.equals(null) : "No non-null object should not be considered equal to null.";
-    assert !zero.equals(Double.valueOf(0)) : "Objects of different types should not be equal.";
+    assert !zero.equals((double) 0) : "Objects of different types should not be equal.";
   }
 
 

@@ -33,10 +33,8 @@ public class ConfigurableThreadFactoryTest {
     ThreadFactory threadFactory = new ConfigurableThreadFactory("Test",
         Thread.MIN_PRIORITY,
         true);
-    Runnable doNothing = new Runnable() {
-      public void run() {
-        // Do nothing.
-      }
+    Runnable doNothing = () -> {
+      // Do nothing.
     };
     Thread thread1 = threadFactory.newThread(doNothing);
     assert thread1.getName().startsWith("Test") : "Wrong thread name: " + thread1.getName();
@@ -55,10 +53,8 @@ public class ConfigurableThreadFactoryTest {
     ThreadFactory threadFactory = new ConfigurableThreadFactory("Test",
         Thread.MAX_PRIORITY,
         false);
-    Runnable doNothing = new Runnable() {
-      public void run() {
-        // Do nothing.
-      }
+    Runnable doNothing = () -> {
+      // Do nothing.
     };
     Thread thread = threadFactory.newThread(doNothing);
     assert thread.getName().startsWith("Test") : "Wrong thread name: " + thread.getName();
@@ -76,10 +72,8 @@ public class ConfigurableThreadFactoryTest {
     ThreadFactory threadFactory = new ConfigurableThreadFactory("Test",
         Thread.MAX_PRIORITY,
         false);
-    Runnable doNothing = new Runnable() {
-      public void run() {
-        throw new IllegalStateException("This is a test.");
-      }
+    Runnable doNothing = () -> {
+      throw new IllegalStateException("This is a test.");
     };
     Thread thread = threadFactory.newThread(doNothing);
     thread.start();
@@ -97,10 +91,8 @@ public class ConfigurableThreadFactoryTest {
         Thread.MAX_PRIORITY,
         false,
         exceptionHandler);
-    Runnable doNothing = new Runnable() {
-      public void run() {
-        throw new IllegalStateException("This is a test.");
-      }
+    Runnable doNothing = () -> {
+      throw new IllegalStateException("This is a test.");
     };
     Thread thread = threadFactory.newThread(doNothing);
     thread.start();

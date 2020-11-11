@@ -33,16 +33,16 @@ public class InteractiveSelectionTest {
   @Test
   public void testSingleSelectionPerGeneration() {
     final int groupSize = 2;
-    RandomConsole<Integer> console = new RandomConsole<Integer>(groupSize);
-    SelectionStrategy<Integer> strategy = new InteractiveSelection<Integer>(console,
+    RandomConsole<Integer> console = new RandomConsole<>(groupSize);
+    SelectionStrategy<Integer> strategy = new InteractiveSelection<>(console,
         groupSize,
         1);
-    List<EvaluatedCandidate<Integer>> population = new ArrayList<EvaluatedCandidate<Integer>>(5);
-    population.add(new EvaluatedCandidate<Integer>(1, 0));
-    population.add(new EvaluatedCandidate<Integer>(2, 0));
-    population.add(new EvaluatedCandidate<Integer>(3, 0));
-    population.add(new EvaluatedCandidate<Integer>(4, 0));
-    population.add(new EvaluatedCandidate<Integer>(5, 0));
+    List<EvaluatedCandidate<Integer>> population = new ArrayList<>(5);
+    population.add(new EvaluatedCandidate<>(1, 0));
+    population.add(new EvaluatedCandidate<>(2, 0));
+    population.add(new EvaluatedCandidate<>(3, 0));
+    population.add(new EvaluatedCandidate<>(4, 0));
+    population.add(new EvaluatedCandidate<>(5, 0));
 
     List<Integer> selection = strategy.select(population, true, 3, FrameworkTestUtils.getRNG());
     assert selection.size() == 3 : "Incorrect selection size: " + selection.size();
@@ -58,16 +58,16 @@ public class InteractiveSelectionTest {
   @Test
   public void testMultipleSelectionsPerGeneration() {
     final int groupSize = 5;
-    RandomConsole<Integer> console = new RandomConsole<Integer>(groupSize);
-    SelectionStrategy<Integer> strategy = new InteractiveSelection<Integer>(console,
+    RandomConsole<Integer> console = new RandomConsole<>(groupSize);
+    SelectionStrategy<Integer> strategy = new InteractiveSelection<>(console,
         groupSize,
         3);
-    List<EvaluatedCandidate<Integer>> population = new ArrayList<EvaluatedCandidate<Integer>>(5);
-    population.add(new EvaluatedCandidate<Integer>(1, 0));
-    population.add(new EvaluatedCandidate<Integer>(2, 0));
-    population.add(new EvaluatedCandidate<Integer>(3, 0));
-    population.add(new EvaluatedCandidate<Integer>(4, 0));
-    population.add(new EvaluatedCandidate<Integer>(5, 0));
+    List<EvaluatedCandidate<Integer>> population = new ArrayList<>(5);
+    population.add(new EvaluatedCandidate<>(1, 0));
+    population.add(new EvaluatedCandidate<>(2, 0));
+    population.add(new EvaluatedCandidate<>(3, 0));
+    population.add(new EvaluatedCandidate<>(4, 0));
+    population.add(new EvaluatedCandidate<>(5, 0));
 
     List<Integer> selection = strategy.select(population, true, 3, FrameworkTestUtils.getRNG());
     assert selection.size() == 3 : "Incorrect selection size.";
@@ -78,31 +78,31 @@ public class InteractiveSelectionTest {
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testInvalidMaxSelections() {
     final int groupSize = 5;
-    RandomConsole<Integer> console = new RandomConsole<Integer>(groupSize);
+    RandomConsole<Integer> console = new RandomConsole<>(groupSize);
     // This should throw an exception because max selections must be at least 1.
-    new InteractiveSelection<Integer>(console, groupSize, 0);
+    new InteractiveSelection<>(console, groupSize, 0);
   }
 
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testInvalidGroupSize() {
     final int groupSize = 1;
-    RandomConsole<Integer> console = new RandomConsole<Integer>(groupSize);
+    RandomConsole<Integer> console = new RandomConsole<>(groupSize);
     // This should throw an exception because group size must be at least 2.
-    new InteractiveSelection<Integer>(console, groupSize, 1);
+    new InteractiveSelection<>(console, groupSize, 1);
   }
 
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testGroupSizeTooBigForPopulation() {
     final int groupSize = 5;
-    RandomConsole<Integer> console = new RandomConsole<Integer>(groupSize);
-    SelectionStrategy<Integer> strategy = new InteractiveSelection<Integer>(console,
+    RandomConsole<Integer> console = new RandomConsole<>(groupSize);
+    SelectionStrategy<Integer> strategy = new InteractiveSelection<>(console,
         groupSize,
         1);
-    List<EvaluatedCandidate<Integer>> population = new LinkedList<EvaluatedCandidate<Integer>>();
-    population.add(new EvaluatedCandidate<Integer>(1, 1.0));
-    population.add(new EvaluatedCandidate<Integer>(1, 2.0));
+    List<EvaluatedCandidate<Integer>> population = new LinkedList<>();
+    population.add(new EvaluatedCandidate<>(1, 1.0));
+    population.add(new EvaluatedCandidate<>(1, 2.0));
     // This should fail because a population of 2 is not big enough with a
     // group size of 5.
     strategy.select(population, true, 2, FrameworkTestUtils.getRNG());

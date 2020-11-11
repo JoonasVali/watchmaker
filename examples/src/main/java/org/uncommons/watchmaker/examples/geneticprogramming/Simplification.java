@@ -61,7 +61,7 @@ public class Simplification implements EvolutionaryOperator<Node> {
    * @return The (possibly) simplified candidates.
    */
   public List<Node> apply(List<Node> selectedCandidates, Random rng) {
-    List<Node> evolved = new ArrayList<Node>(selectedCandidates.size());
+    List<Node> evolved = new ArrayList<>(selectedCandidates.size());
     for (Node node : selectedCandidates) {
       evolved.add(probability.nextEvent(rng) ? node.simplify() : node);
     }

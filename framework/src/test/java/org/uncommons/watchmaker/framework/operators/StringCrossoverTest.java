@@ -34,12 +34,12 @@ public class StringCrossoverTest {
   @Test
   public void testCrossover() {
     EvolutionaryOperator<String> crossover = new StringCrossover();
-    List<String> population = new ArrayList<String>(4);
+    List<String> population = new ArrayList<>(4);
     population.add("abcde");
     population.add("fghij");
     population.add("klmno");
     population.add("pqrst");
-    Set<Character> values = new HashSet<Character>(20);
+    Set<Character> values = new HashSet<>(20);
     for (int i = 0; i < 20; i++) {
       population = crossover.apply(population, FrameworkTestUtils.getRNG());
       assert population.size() == 4 : "Population size changed after cross-over.";
@@ -67,7 +67,7 @@ public class StringCrossoverTest {
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testDifferentLengthParents() {
     EvolutionaryOperator<String> crossover = new StringCrossover(1, Probability.ONE);
-    List<String> population = new ArrayList<String>(2);
+    List<String> population = new ArrayList<>(2);
     population.add("abcde");
     population.add("fghijklm");
     // This should cause an exception since the parents are different lengths.

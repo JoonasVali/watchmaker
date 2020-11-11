@@ -40,7 +40,7 @@ public class GeneticProgrammingExample {
   // This data describes the problem.  For each pair of inputs, the generated program
   // should return the associated output.  The goal of this appliction is to generalise
   // the examples into an equation.
-  private static final Map<double[], Double> TEST_DATA = new HashMap<double[], Double>();
+  private static final Map<double[], Double> TEST_DATA = new HashMap<>();
 
   static {
     TEST_DATA.put(new double[]{26, 35}, 829.0d);

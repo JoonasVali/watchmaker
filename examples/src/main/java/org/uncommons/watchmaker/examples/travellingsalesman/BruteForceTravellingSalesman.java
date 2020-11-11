@@ -68,7 +68,7 @@ public class BruteForceTravellingSalesman implements TravellingSalesmanStrategy 
                                              ProgressListener progressListener) {
     Iterator<String> iterator = cities.iterator();
     String startCity = iterator.next();
-    Collection<String> destinations = new ArrayList<String>(cities.size() - 1);
+    Collection<String> destinations = new ArrayList<>(cities.size() - 1);
     while (iterator.hasNext()) {
       destinations.add(iterator.next());
     }
@@ -79,14 +79,14 @@ public class BruteForceTravellingSalesman implements TravellingSalesmanStrategy 
     long count = 0;
     List<String> shortestRoute = null;
     double shortestDistance = Double.POSITIVE_INFINITY;
-    List<String> currentRoute = new ArrayList<String>(cities.size());
+    List<String> currentRoute = new ArrayList<>(cities.size());
     while (generator.hasMore()) {
       List<String> route = generator.nextPermutationAsList(currentRoute);
       route.add(0, startCity);
       double distance = evaluator.getFitness(route, null);
       if (distance < shortestDistance) {
         shortestDistance = distance;
-        shortestRoute = new ArrayList<String>(route);
+        shortestRoute = new ArrayList<>(route);
       }
       ++count;
       if (count % 1000 == 0 && progressListener != null) {

@@ -25,7 +25,7 @@ public class SwingEvolutionObserver<T> implements EvolutionObserver<T> {
   private final ScheduledExecutorService timer = Executors.newScheduledThreadPool(1, threadFactory);
 
   private final AtomicReference<PopulationData<? extends T>> latestPopulation
-      = new AtomicReference<PopulationData<? extends T>>();
+      = new AtomicReference<>();
 
 
   /**
@@ -61,10 +61,6 @@ public class SwingEvolutionObserver<T> implements EvolutionObserver<T> {
     }
 
     // Schedule an update in 300ms.
-    timer.schedule(new Runnable() {
-      public void run() {
-        delegate.populationUpdate(latestPopulation.getAndSet(null));
-      }
-    }, delay, unit);
+    timer.schedule(() -> delegate.populationUpdate(latestPopulation.getAndSet(null)), delay, unit);
   }
 }

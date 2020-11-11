@@ -33,10 +33,10 @@ import java.util.List;
 public class ListOrderCrossoverTest {
   @Test
   public void testCrossover() {
-    EvolutionaryOperator<List<Integer>> operator = new ListOrderCrossover<Integer>();
+    EvolutionaryOperator<List<Integer>> operator = new ListOrderCrossover<>();
     List<Integer> parent1 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
     List<Integer> parent2 = Arrays.asList(3, 7, 5, 1, 6, 8, 2, 4);
-    List<List<Integer>> population = new ArrayList<List<Integer>>(2);
+    List<List<Integer>> population = new ArrayList<>(2);
     population.add(parent1);
     population.add(parent2);
 
@@ -62,8 +62,8 @@ public class ListOrderCrossoverTest {
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testDifferentLengthParents() {
     EvolutionaryOperator<List<Integer>> crossover
-        = new ListOrderCrossover<Integer>(new ConstantGenerator<Probability>(Probability.ONE));
-    List<List<Integer>> population = new ArrayList<List<Integer>>(2);
+        = new ListOrderCrossover<>(new ConstantGenerator<>(Probability.ONE));
+    List<List<Integer>> population = new ArrayList<>(2);
     population.add(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
     population.add(Arrays.asList(9, 10, 11));
     // This should cause an exception since the parents are different lengths.

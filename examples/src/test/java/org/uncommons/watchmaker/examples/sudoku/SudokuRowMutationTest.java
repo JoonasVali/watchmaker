@@ -49,7 +49,7 @@ public class SudokuRowMutationTest {
             {9, 4, 6, 8, 5, 7, 3, 2, 1},
             {2, 3, 7, 1, 9, 4, 6, 8, 5}
         }));
-    final Set<Integer> counts = new HashSet<Integer>(Sudoku.SIZE);
+    final Set<Integer> counts = new HashSet<>(Sudoku.SIZE);
     for (int i = 0; i < 20; i++) {
       population = mutation.apply(population, ExamplesTestUtils.getRNG());
       assert population.size() == 1 : "Population size changed after mutation(s).";

@@ -100,8 +100,8 @@ public class ListCrossover<T> extends AbstractCrossover<List<T>> {
                                List<T> parent2,
                                int numberOfCrossoverPoints,
                                Random rng) {
-    List<T> offspring1 = new ArrayList<T>(parent1); // Use a random-access list for performance.
-    List<T> offspring2 = new ArrayList<T>(parent2);
+    List<T> offspring1 = new ArrayList<>(parent1); // Use a random-access list for performance.
+    List<T> offspring2 = new ArrayList<>(parent2);
     // Apply as many cross-overs as required.
     for (int i = 0; i < numberOfCrossoverPoints; i++) {
       // Cross-over index is always greater than zero and less than
@@ -118,7 +118,7 @@ public class ListCrossover<T> extends AbstractCrossover<List<T>> {
         }
       }
     }
-    List<List<T>> result = new ArrayList<List<T>>(2);
+    List<List<T>> result = new ArrayList<>(2);
     result.add(offspring1);
     result.add(offspring2);
     return result;

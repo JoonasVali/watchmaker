@@ -34,14 +34,14 @@ import java.util.Set;
 public class DoubleArrayCrossoverTest {
   @Test
   public void testCrossover() {
-    EvolutionaryOperator<double[]> crossover = new DoubleArrayCrossover(new ConstantGenerator<Integer>(1),
-        new ConstantGenerator<Probability>(Probability.ONE));
-    List<double[]> population = new ArrayList<double[]>(4);
+    EvolutionaryOperator<double[]> crossover = new DoubleArrayCrossover(new ConstantGenerator<>(1),
+        new ConstantGenerator<>(Probability.ONE));
+    List<double[]> population = new ArrayList<>(4);
     population.add(new double[]{1.1d, 2.2d, 3.3d, 4.4d, 5.5d});
     population.add(new double[]{6.6d, 7.7d, 8.8d, 9.9d, 10});
     population.add(new double[]{11, 12, 13, 14, 15});
     population.add(new double[]{16, 17, 18, 19, 20});
-    Set<Double> values = new HashSet<Double>(20);
+    Set<Double> values = new HashSet<>(20);
     for (int i = 0; i < 20; i++) {
       population = crossover.apply(population, FrameworkTestUtils.getRNG());
       assert population.size() == 4 : "Population size changed after cross-over.";
@@ -69,7 +69,7 @@ public class DoubleArrayCrossoverTest {
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testDifferentLengthParents() {
     EvolutionaryOperator<double[]> crossover = new DoubleArrayCrossover();
-    List<double[]> population = new ArrayList<double[]>(2);
+    List<double[]> population = new ArrayList<>(2);
     population.add(new double[]{1.1d, 2.2d, 3.3d, 4.4d, 5.5d});
     population.add(new double[]{6.6d, 7.7d, 8.8d});
     // This should cause an exception since the parents are different lengths.

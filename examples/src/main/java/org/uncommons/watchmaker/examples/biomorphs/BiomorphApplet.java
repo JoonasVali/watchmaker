@@ -132,12 +132,8 @@ public class BiomorphApplet extends AbstractExampleApplet {
    */
   private final class GenerationTracker implements EvolutionObserver<Biomorph> {
     public void populationUpdate(final PopulationData<? extends Biomorph> populationData) {
-      SwingUtilities.invokeLater(new Runnable() {
-        public void run() {
-          selectionDialog.setTitle("Biomorph Selection - Generation "
-              + (populationData.getGenerationNumber() + 1));
-        }
-      });
+      SwingUtilities.invokeLater(() -> selectionDialog.setTitle("Biomorph Selection - Generation "
+          + (populationData.getGenerationNumber() + 1)));
     }
   }
 
@@ -173,14 +169,12 @@ public class BiomorphApplet extends AbstractExampleApplet {
       inputPanel.add(generationsSpinner);
       JLabel mutationLabel = new JLabel("Mutation Type: ");
       mutationCombo = new JComboBox(new String[]{"Dawkins (Non-random)", "Random"});
-      mutationCombo.addItemListener(new ItemListener() {
-        public void itemStateChanged(ItemEvent itemEvent) {
-          if (mutationCombo.getSelectedIndex() == 0) {
-            populationSpinner.setValue(18);
-            populationSpinner.setEnabled(false);
-          } else {
-            populationSpinner.setEnabled(true);
-          }
+      mutationCombo.addItemListener(itemEvent -> {
+        if (mutationCombo.getSelectedIndex() == 0) {
+          populationSpinner.setValue(18);
+          populationSpinner.setEnabled(false);
+        } else {
+          populationSpinner.setEnabled(true);
         }
       });
       inputPanel.add(mutationLabel);
@@ -195,13 +189,11 @@ public class BiomorphApplet extends AbstractExampleApplet {
     private JComponent createButtonPanel() {
       JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
       JButton startButton = new JButton("Start");
-      startButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent actionEvent) {
-          createTask((Integer) populationSpinner.getValue(),
-              (Integer) generationsSpinner.getValue(),
-              mutationCombo.getSelectedIndex() == 1).execute();
-          selectionDialog.setVisible(true);
-        }
+      startButton.addActionListener(actionEvent -> {
+        createTask((Integer) populationSpinner.getValue(),
+            (Integer) generationsSpinner.getValue(),
+            mutationCombo.getSelectedIndex() == 1).execute();
+        selectionDialog.setVisible(true);
       });
       buttonPanel.add(startButton);
       return buttonPanel;

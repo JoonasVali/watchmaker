@@ -35,15 +35,15 @@ public class EvolutionPipelineTest {
    */
   @Test
   public void testCompoundEvolution() {
-    List<Integer> population = new ArrayList<Integer>(10);
+    List<Integer> population = new ArrayList<>(10);
     for (int i = 10; i <= 100; i += 10) {
       population.add(i);
     }
     // Increment 30% of the numbers and decrement the other 70%.
-    List<EvolutionaryOperator<Integer>> operators = new ArrayList<EvolutionaryOperator<Integer>>(2);
+    List<EvolutionaryOperator<Integer>> operators = new ArrayList<>(2);
     operators.add(new IntegerAdjuster(1));
     operators.add(new IntegerAdjuster(3));
-    EvolutionPipeline<Integer> evolutionScheme = new EvolutionPipeline<Integer>(operators);
+    EvolutionPipeline<Integer> evolutionScheme = new EvolutionPipeline<>(operators);
     population = evolutionScheme.apply(population, FrameworkTestUtils.getRNG());
     // Net result should be each candidate increased by 4.
     int aggregate = 0;
@@ -61,6 +61,6 @@ public class EvolutionPipelineTest {
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testEmptyPipeline() {
     List<EvolutionaryOperator<String>> operators = Collections.emptyList();
-    new EvolutionPipeline<String>(operators); // Should throw an IllegalArgumentException.
+    new EvolutionPipeline<>(operators); // Should throw an IllegalArgumentException.
   }
 }

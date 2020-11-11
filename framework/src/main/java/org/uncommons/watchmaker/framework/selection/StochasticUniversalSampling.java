@@ -41,7 +41,7 @@ public class StochasticUniversalSampling implements SelectionStrategy<Object> {
           naturalFitnessScores);
     }
 
-    List<S> selection = new ArrayList<S>(selectionSize);
+    List<S> selection = new ArrayList<>(selectionSize);
     // Pick a random offset between 0 and 1 as the starting point for selection.
     double startOffset = rng.nextDouble();
     double cumulativeExpectation = 0;

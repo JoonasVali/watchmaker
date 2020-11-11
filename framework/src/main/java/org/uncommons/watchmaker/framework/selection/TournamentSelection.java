@@ -63,7 +63,7 @@ public class TournamentSelection implements SelectionStrategy<Object> {
    *                             aspect of the evolutionary algorithm.
    */
   public TournamentSelection(Probability selectionProbability) {
-    this(new ConstantGenerator<Probability>(selectionProbability));
+    this(new ConstantGenerator<>(selectionProbability));
     if (selectionProbability.doubleValue() <= 0.5) {
       throw new IllegalArgumentException("Selection threshold must be greater than 0.5.");
     }
@@ -75,7 +75,7 @@ public class TournamentSelection implements SelectionStrategy<Object> {
                             boolean naturalFitnessScores,
                             int selectionSize,
                             Random rng) {
-    List<S> selection = new ArrayList<S>(selectionSize);
+    List<S> selection = new ArrayList<>(selectionSize);
     for (int i = 0; i < selectionSize; i++) {
       // Pick two candidates at random.
       EvaluatedCandidate<S> candidate1 = population.get(rng.nextInt(population.size()));

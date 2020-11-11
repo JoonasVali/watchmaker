@@ -68,19 +68,17 @@ class FittestCandidateView<T> extends JPanel implements IslandEvolutionObserver<
 
 
   public void populationUpdate(final PopulationData<? extends T> populationData) {
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        fitnessLabel.setText(String.valueOf(populationData.getBestCandidateFitness()));
-        // If the fittest candidate is already displayed (because it was the fittest
-        // candidate in the previous generation), don't incur the expense of rendering
-        // it again.  Note that we still have to update the fitness score label above
-        // because the fitness may be different even if the candidate isn't (in the
-        // case where fitness is evaluated against other members of the population).
-        if (populationData.getBestCandidate() != fittestCandidate) {
-          fittestCandidate = populationData.getBestCandidate();
-          JComponent renderedCandidate = renderer.render(fittestCandidate);
-          scroller.setViewportView(renderedCandidate);
-        }
+    SwingUtilities.invokeLater(() -> {
+      fitnessLabel.setText(String.valueOf(populationData.getBestCandidateFitness()));
+      // If the fittest candidate is already displayed (because it was the fittest
+      // candidate in the previous generation), don't incur the expense of rendering
+      // it again.  Note that we still have to update the fitness score label above
+      // because the fitness may be different even if the candidate isn't (in the
+      // case where fitness is evaluated against other members of the population).
+      if (populationData.getBestCandidate() != fittestCandidate) {
+        fittestCandidate = populationData.getBestCandidate();
+        JComponent renderedCandidate = renderer.render(fittestCandidate);
+        scroller.setViewportView(renderedCandidate);
       }
     });
   }

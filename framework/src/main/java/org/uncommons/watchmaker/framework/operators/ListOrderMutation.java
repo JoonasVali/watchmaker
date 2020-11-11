@@ -55,8 +55,8 @@ public class ListOrderMutation<T> implements EvolutionaryOperator<List<T>> {
    *                       which a list element will be displaced as a result of mutation.
    */
   public ListOrderMutation(int mutationCount, int mutationAmount) {
-    this(new ConstantGenerator<Integer>(mutationCount),
-        new ConstantGenerator<Integer>(mutationAmount));
+    this(new ConstantGenerator<>(mutationCount),
+        new ConstantGenerator<>(mutationAmount));
   }
 
 
@@ -78,9 +78,9 @@ public class ListOrderMutation<T> implements EvolutionaryOperator<List<T>> {
 
 
   public List<List<T>> apply(List<List<T>> selectedCandidates, Random rng) {
-    List<List<T>> result = new ArrayList<List<T>>(selectedCandidates.size());
+    List<List<T>> result = new ArrayList<>(selectedCandidates.size());
     for (List<T> candidate : selectedCandidates) {
-      List<T> newCandidate = new ArrayList<T>(candidate);
+      List<T> newCandidate = new ArrayList<>(candidate);
       int mutationCount = Math.abs(mutationCountVariable.nextValue());
       for (int i = 0; i < mutationCount; i++) {
         int fromIndex = rng.nextInt(newCandidate.size());

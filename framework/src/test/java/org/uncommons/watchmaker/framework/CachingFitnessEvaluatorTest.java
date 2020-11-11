@@ -28,7 +28,7 @@ import java.util.List;
 public class CachingFitnessEvaluatorTest {
   @Test
   public void testCacheMiss() {
-    FitnessEvaluator<String> evaluator = new CachingFitnessEvaluator<String>(new IncrementingEvaluator(true));
+    FitnessEvaluator<String> evaluator = new CachingFitnessEvaluator<>(new IncrementingEvaluator(true));
     double fitness = evaluator.getFitness("Test1", Collections.<String>emptyList());
     assert fitness == 1 : "Wrong fitness: " + fitness;
     // Different candidate so shouldn't return a cached value.
@@ -40,7 +40,7 @@ public class CachingFitnessEvaluatorTest {
 
   @Test
   public void testCacheHit() {
-    FitnessEvaluator<String> evaluator = new CachingFitnessEvaluator<String>(new IncrementingEvaluator(true));
+    FitnessEvaluator<String> evaluator = new CachingFitnessEvaluator<>(new IncrementingEvaluator(true));
     double fitness = evaluator.getFitness("Test", Collections.<String>emptyList());
     assert fitness == 1 : "Wrong fitness: " + fitness;
     fitness = evaluator.getFitness("Test", Collections.<String>emptyList());
@@ -51,14 +51,14 @@ public class CachingFitnessEvaluatorTest {
 
   @Test
   public void testNatural() {
-    FitnessEvaluator<String> evaluator = new CachingFitnessEvaluator<String>(new IncrementingEvaluator(true));
+    FitnessEvaluator<String> evaluator = new CachingFitnessEvaluator<>(new IncrementingEvaluator(true));
     assert evaluator.isNatural() : "Wrapper for natural scores should also be natural.";
   }
 
 
   @Test
   public void testNonNatural() {
-    FitnessEvaluator<String> evaluator = new CachingFitnessEvaluator<String>(new IncrementingEvaluator(false));
+    FitnessEvaluator<String> evaluator = new CachingFitnessEvaluator<>(new IncrementingEvaluator(false));
     assert !evaluator.isNatural() : "Wrapper for non-natural scores should also be non-natural.";
   }
 

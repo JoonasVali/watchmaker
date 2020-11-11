@@ -63,7 +63,7 @@ public class PolygonColourMutation implements EvolutionaryOperator<ColouredPolyg
 
 
   public List<ColouredPolygon> apply(List<ColouredPolygon> polygons, Random rng) {
-    List<ColouredPolygon> newPolygons = new ArrayList<ColouredPolygon>(polygons.size());
+    List<ColouredPolygon> newPolygons = new ArrayList<>(polygons.size());
     for (ColouredPolygon polygon : polygons) {
       Color newColour = mutateColour(polygon.getColour(), rng);
       newPolygons.add(newColour == polygon.getColour()

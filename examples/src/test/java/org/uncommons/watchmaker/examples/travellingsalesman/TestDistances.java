@@ -25,31 +25,31 @@ import java.util.TreeMap;
  * of the four cities in this data set is 47km.
  */
 final class TestDistances implements DistanceLookup {
-  private static final Map<String, Map<String, Integer>> distances = new TreeMap<String, Map<String, Integer>>();
+  private static final Map<String, Map<String, Integer>> distances = new TreeMap<>();
 
   static {
-    Map<String, Integer> city1 = new TreeMap<String, Integer>();
+    Map<String, Integer> city1 = new TreeMap<>();
     city1.put("City1", 0);
     city1.put("City2", 3);
     city1.put("City3", 5);
     city1.put("City4", 8);
     distances.put("City1", city1);
 
-    Map<String, Integer> city2 = new TreeMap<String, Integer>();
+    Map<String, Integer> city2 = new TreeMap<>();
     city2.put("City1", 3);
     city2.put("City2", 0);
     city2.put("City3", 13);
     city2.put("City4", 21);
     distances.put("City2", city2);
 
-    Map<String, Integer> city3 = new TreeMap<String, Integer>();
+    Map<String, Integer> city3 = new TreeMap<>();
     city3.put("City1", 5);
     city3.put("City2", 13);
     city3.put("City3", 0);
     city3.put("City4", 34);
     distances.put("City3", city3);
 
-    Map<String, Integer> city4 = new TreeMap<String, Integer>();
+    Map<String, Integer> city4 = new TreeMap<>();
     city4.put("City1", 8);
     city4.put("City2", 21);
     city4.put("City3", 34);
@@ -58,7 +58,7 @@ final class TestDistances implements DistanceLookup {
   }
 
   public List<String> getKnownCities() {
-    return new ArrayList<String>(distances.keySet());
+    return new ArrayList<>(distances.keySet());
   }
 
   public int getDistance(String startingCity, String destinationCity) {

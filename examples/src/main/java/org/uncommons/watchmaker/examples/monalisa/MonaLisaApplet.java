@@ -128,19 +128,17 @@ public class MonaLisaApplet extends AbstractExampleApplet {
 
     startButton = new JButton("Start");
     abort = new AbortControl();
-    startButton.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent ev) {
-        abort.getControl().setEnabled(true);
-        populationLabel.setEnabled(false);
-        populationSpinner.setEnabled(false);
-        elitismLabel.setEnabled(false);
-        elitismSpinner.setEnabled(false);
-        startButton.setEnabled(false);
-        new EvolutionTask((Integer) populationSpinner.getValue(),
-            (Integer) elitismSpinner.getValue(),
-            abort.getTerminationCondition(),
-            new Stagnation(1000, false)).execute();
-      }
+    startButton.addActionListener(ev -> {
+      abort.getControl().setEnabled(true);
+      populationLabel.setEnabled(false);
+      populationSpinner.setEnabled(false);
+      elitismLabel.setEnabled(false);
+      elitismSpinner.setEnabled(false);
+      startButton.setEnabled(false);
+      new EvolutionTask((Integer) populationSpinner.getValue(),
+          (Integer) elitismSpinner.getValue(),
+          abort.getTerminationCondition(),
+          new Stagnation(1000, false)).execute();
     });
     abort.getControl().setEnabled(false);
     parameters.add(startButton);

@@ -30,14 +30,14 @@ import java.util.List;
 public class EvolutionStrategyEngineTest {
   @Test
   public void testOnePlusOneEvolutionStrategy() {
-    EvolutionStrategyEngine<Integer> engine = new EvolutionStrategyEngine<Integer>(new StubIntegerFactory(),
+    EvolutionStrategyEngine<Integer> engine = new EvolutionStrategyEngine<>(new StubIntegerFactory(),
         new IntegerAdjuster(-1),
         new IntegerEvaluator(),
         true,
         1,
         FrameworkTestUtils.getRNG());
     @SuppressWarnings("unchecked")
-    List<EvaluatedCandidate<Integer>> population = Arrays.asList(new EvaluatedCandidate<Integer>(1, 1));
+    List<EvaluatedCandidate<Integer>> population = Arrays.asList(new EvaluatedCandidate<>(1, 1));
 
     List<EvaluatedCandidate<Integer>> evolvedPopulation
         = engine.nextEvolutionStep(population, 0, FrameworkTestUtils.getRNG());
@@ -49,14 +49,14 @@ public class EvolutionStrategyEngineTest {
 
   @Test
   public void testOneCommaOneEvolutionStrategy() {
-    EvolutionStrategyEngine<Integer> engine = new EvolutionStrategyEngine<Integer>(new StubIntegerFactory(),
+    EvolutionStrategyEngine<Integer> engine = new EvolutionStrategyEngine<>(new StubIntegerFactory(),
         new IntegerAdjuster(-1),
         new IntegerEvaluator(),
         false,
         1,
         FrameworkTestUtils.getRNG());
     @SuppressWarnings("unchecked")
-    List<EvaluatedCandidate<Integer>> population = Arrays.asList(new EvaluatedCandidate<Integer>(1, 1));
+    List<EvaluatedCandidate<Integer>> population = Arrays.asList(new EvaluatedCandidate<>(1, 1));
 
     List<EvaluatedCandidate<Integer>> evolvedPopulation
         = engine.nextEvolutionStep(population, 0, FrameworkTestUtils.getRNG());

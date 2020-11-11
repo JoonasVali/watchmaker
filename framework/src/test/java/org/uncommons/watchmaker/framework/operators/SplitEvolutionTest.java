@@ -32,12 +32,12 @@ public class SplitEvolutionTest {
    */
   @Test
   public void testSplit() {
-    List<Integer> population = new ArrayList<Integer>(10);
+    List<Integer> population = new ArrayList<>(10);
     for (int i = 10; i <= 100; i += 10) {
       population.add(i);
     }
     // Increment 30% of the numbers and decrement the other 70%.
-    SplitEvolution<Integer> evolutionScheme = new SplitEvolution<Integer>(new IntegerAdjuster(1),
+    SplitEvolution<Integer> evolutionScheme = new SplitEvolution<>(new IntegerAdjuster(1),
         new IntegerAdjuster(-1),
         0.3d);
     population = evolutionScheme.apply(population, FrameworkTestUtils.getRNG());
@@ -67,7 +67,7 @@ public class SplitEvolutionTest {
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testNegativeWeight() {
     // Negative weight.
-    new SplitEvolution<Integer>(new IntegerAdjuster(1), new IdentityOperator<Integer>(), -0.01d);
+    new SplitEvolution<>(new IntegerAdjuster(1), new IdentityOperator<>(), -0.01d);
   }
 
 
@@ -78,6 +78,6 @@ public class SplitEvolutionTest {
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testWeightTooHigh() {
     // Weight too high (must be less than or equal to one).
-    new SplitEvolution<Integer>(new IntegerAdjuster(1), new IdentityOperator<Integer>(), 1.01d);
+    new SplitEvolution<>(new IntegerAdjuster(1), new IdentityOperator<>(), 1.01d);
   }
 }

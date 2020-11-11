@@ -107,10 +107,10 @@ public class GenerationalEvolutionEngine<T> extends AbstractEvolutionEngine<T> {
   protected List<EvaluatedCandidate<T>> nextEvolutionStep(List<EvaluatedCandidate<T>> evaluatedPopulation,
                                                           int eliteCount,
                                                           Random rng) {
-    List<T> population = new ArrayList<T>(evaluatedPopulation.size());
+    List<T> population = new ArrayList<>(evaluatedPopulation.size());
 
     // First perform any elitist selection.
-    List<T> elite = new ArrayList<T>(eliteCount);
+    List<T> elite = new ArrayList<>(eliteCount);
     Iterator<EvaluatedCandidate<T>> iterator = evaluatedPopulation.iterator();
     while (elite.size() < eliteCount) {
       elite.add(iterator.next().getCandidate());

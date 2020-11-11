@@ -34,12 +34,12 @@ public class IntArrayCrossoverTest {
   @Test
   public void testCrossover() {
     EvolutionaryOperator<int[]> crossover = new IntArrayCrossover();
-    List<int[]> population = new ArrayList<int[]>(4);
+    List<int[]> population = new ArrayList<>(4);
     population.add(new int[]{1, 2, 3, 4, 5});
     population.add(new int[]{6, 7, 8, 9, 10});
     population.add(new int[]{11, 12, 13, 14, 15});
     population.add(new int[]{16, 17, 18, 19, 20});
-    Set<Integer> values = new HashSet<Integer>(20);
+    Set<Integer> values = new HashSet<>(20);
     for (int i = 0; i < 20; i++) {
       population = crossover.apply(population, FrameworkTestUtils.getRNG());
       assert population.size() == 4 : "Population size changed after cross-over.";
@@ -67,7 +67,7 @@ public class IntArrayCrossoverTest {
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testDifferentLengthParents() {
     EvolutionaryOperator<int[]> crossover = new IntArrayCrossover(1, Probability.ONE);
-    List<int[]> population = new ArrayList<int[]>(2);
+    List<int[]> population = new ArrayList<>(2);
     population.add(new int[]{1, 2, 3, 4, 5});
     population.add(new int[]{2});
     // This should cause an exception since the parents are different lengths.

@@ -69,12 +69,12 @@ public class SigmaScaling implements SelectionStrategy<Object> {
       statistics.addValue(candidate.getFitness());
     }
 
-    List<EvaluatedCandidate<S>> scaledPopulation = new ArrayList<EvaluatedCandidate<S>>(population.size());
+    List<EvaluatedCandidate<S>> scaledPopulation = new ArrayList<>(population.size());
     for (EvaluatedCandidate<S> candidate : population) {
       double scaledFitness = getSigmaScaledFitness(candidate.getFitness(),
           statistics.getArithmeticMean(),
           statistics.getStandardDeviation());
-      scaledPopulation.add(new EvaluatedCandidate<S>(candidate.getCandidate(),
+      scaledPopulation.add(new EvaluatedCandidate<>(candidate.getCandidate(),
           scaledFitness));
     }
     return delegate.select(scaledPopulation, naturalFitnessScores, selectionSize, rng);

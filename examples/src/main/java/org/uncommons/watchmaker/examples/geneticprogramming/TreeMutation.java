@@ -51,7 +51,7 @@ public class TreeMutation implements EvolutionaryOperator<Node> {
 
 
   public List<Node> apply(List<Node> selectedCandidates, Random rng) {
-    List<Node> mutatedPopulation = new ArrayList<Node>(selectedCandidates.size());
+    List<Node> mutatedPopulation = new ArrayList<>(selectedCandidates.size());
     for (Node tree : selectedCandidates) {
       mutatedPopulation.add(tree.mutate(rng, mutationProbability, treeFactory));
     }

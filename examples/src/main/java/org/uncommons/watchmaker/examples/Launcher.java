@@ -35,7 +35,7 @@ import java.util.Map;
  * @author Daniel Dyer
  */
 public class Launcher {
-  private static final Map<String, Class<?>> EXAMPLES = new LinkedHashMap<String, Class<?>>();
+  private static final Map<String, Class<?>> EXAMPLES = new LinkedHashMap<>();
 
   static {
     EXAMPLES.put("biomorphs", BiomorphApplet.class);

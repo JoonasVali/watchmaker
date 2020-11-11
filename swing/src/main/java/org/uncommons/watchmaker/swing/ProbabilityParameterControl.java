@@ -73,7 +73,7 @@ public class ProbabilityParameterControl implements EvolutionControl {
     }
     this.format = createFormat(decimalPlaces);
     this.defaultValue = initialValue;
-    this.numberGenerator = new AdjustableNumberGenerator<Probability>(this.defaultValue);
+    this.numberGenerator = new AdjustableNumberGenerator<>(this.defaultValue);
     this.range = (int) Maths.raiseToPower(10, decimalPlaces);
     this.probabilitySlider = createSlider(initialValue, minimum, maximum);
     probabilitySlider.setName("Slider"); // For easy look-up in unit tests.
@@ -102,12 +102,10 @@ public class ProbabilityParameterControl implements EvolutionControl {
     int min = (int) Math.round(range * minimum.doubleValue());
     int max = (int) Math.round(range * maximum.doubleValue());
     final JSlider slider = new JSlider(min, max, value);
-    slider.addChangeListener(new ChangeListener() {
-      public void stateChanged(ChangeEvent changeEvent) {
-        Probability probability = new Probability((double) slider.getValue() / range);
-        numberGenerator.setValue(probability);
-        valueLabel.setText(format.format(probability));
-      }
+    slider.addChangeListener(changeEvent -> {
+      Probability probability = new Probability((double) slider.getValue() / range);
+      numberGenerator.setValue(probability);
+      valueLabel.setText(format.format(probability));
     });
     slider.setMajorTickSpacing(10);
     slider.setMinorTickSpacing(5);

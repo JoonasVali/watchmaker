@@ -120,7 +120,7 @@ public class ByteArrayCrossover extends AbstractCrossover<byte[]> {
       System.arraycopy(offspring2, 0, offspring1, 0, crossoverIndex);
       System.arraycopy(temp, 0, offspring2, 0, crossoverIndex);
     }
-    List<byte[]> result = new ArrayList<byte[]>(2);
+    List<byte[]> result = new ArrayList<>(2);
     result.add(offspring1);
     result.add(offspring2);
     return result;

@@ -28,26 +28,26 @@ public class StagnationTest {
   @Test
   public void testFittestCandidateStagnation() {
     TerminationCondition stagnation = new Stagnation(2, true);
-    PopulationData<Object> data = new PopulationData<Object>(new Object(), 2, 1, 0.1, true, 10, 0, 0, 1);
+    PopulationData<Object> data = new PopulationData<>(new Object(), 2, 1, 0.1, true, 10, 0, 0, 1);
     assert !stagnation.shouldTerminate(data) : "Stagnation should not be triggered for at least 2 more generations.";
     // Best doesn't improve even though mean does.
-    data = new PopulationData<Object>(new Object(), 1.8, 1.2, 0.1, true, 10, 0, 1, 2);
+    data = new PopulationData<>(new Object(), 1.8, 1.2, 0.1, true, 10, 0, 1, 2);
     assert !stagnation.shouldTerminate(data) : "Stagnation should not be triggered for at least 1 more generation.";
     // Best doesn't improve even though mean does.
-    data = new PopulationData<Object>(new Object(), 2, 1.5, 0.1, true, 10, 0, 2, 3);
+    data = new PopulationData<>(new Object(), 2, 1.5, 0.1, true, 10, 0, 2, 3);
     assert stagnation.shouldTerminate(data) : "Stagnation should be triggered after 2 generations without improvement.";
   }
 
   @Test
   public void testFittestCandidateStagnationNonNatural() {
     TerminationCondition stagnation = new Stagnation(2, false);
-    PopulationData<Object> data = new PopulationData<Object>(new Object(), 2, 1.5, 0.1, true, 10, 0, 0, 1);
+    PopulationData<Object> data = new PopulationData<>(new Object(), 2, 1.5, 0.1, true, 10, 0, 0, 1);
     assert !stagnation.shouldTerminate(data) : "Stagnation should not be triggered for at least 2 more generations.";
     // Best doesn't improve even though mean does.
-    data = new PopulationData<Object>(new Object(), 2.2, 1.2, 0.1, true, 10, 0, 1, 2);
+    data = new PopulationData<>(new Object(), 2.2, 1.2, 0.1, true, 10, 0, 1, 2);
     assert !stagnation.shouldTerminate(data) : "Stagnation should not be triggered for at least 1 more generation.";
     // Best doesn't improve even though mean does.
-    data = new PopulationData<Object>(new Object(), 2, 1, 0.1, true, 10, 0, 2, 3);
+    data = new PopulationData<>(new Object(), 2, 1, 0.1, true, 10, 0, 2, 3);
     assert stagnation.shouldTerminate(data) : "Stagnation should be triggered after 2 generations without improvement.";
   }
 
@@ -55,19 +55,19 @@ public class StagnationTest {
   @Test
   public void testPopulationMeanStagnation() {
     TerminationCondition stagnation = new Stagnation(2, true, true);
-    PopulationData<Object> data = new PopulationData<Object>(new Object(), 2, 1, 0.1, true, 10, 0, 0, 1);
+    PopulationData<Object> data = new PopulationData<>(new Object(), 2, 1, 0.1, true, 10, 0, 0, 1);
     assert !stagnation.shouldTerminate(data) : "Stagnation should not be triggered for at least 2 more generations.";
     // Best doesn't improve but mean does.
-    data = new PopulationData<Object>(new Object(), 2, 1.2, 0.1, true, 10, 0, 1, 2);
+    data = new PopulationData<>(new Object(), 2, 1.2, 0.1, true, 10, 0, 1, 2);
     assert !stagnation.shouldTerminate(data) : "Stagnation should not be triggered for at least 2 more generations.";
     // Best doesn't improve but mean does.
-    data = new PopulationData<Object>(new Object(), 2, 1.5, 0.1, true, 10, 0, 2, 3);
+    data = new PopulationData<>(new Object(), 2, 1.5, 0.1, true, 10, 0, 2, 3);
     // Best has stagnated but mean hasn't so shouldn't terminate.
     assert !stagnation.shouldTerminate(data) : "Stagnation should not be triggered for at least 2 more generations.";
     // Now we let the mean stagnate...and let the best candidate get fitter...
-    data = new PopulationData<Object>(new Object(), 2.1, 1.5, 0.1, true, 10, 0, 3, 4);
+    data = new PopulationData<>(new Object(), 2.1, 1.5, 0.1, true, 10, 0, 3, 4);
     assert !stagnation.shouldTerminate(data) : "Stagnation should not be triggered for at least 1 more generation.";
-    data = new PopulationData<Object>(new Object(), 2.2, 1.5, 0.1, true, 10, 0, 4, 4);
+    data = new PopulationData<>(new Object(), 2.2, 1.5, 0.1, true, 10, 0, 4, 4);
     assert stagnation.shouldTerminate(data) : "Stagnation should be triggered after 2 generations without improvement.";
   }
 
@@ -75,19 +75,19 @@ public class StagnationTest {
   @Test
   public void testPopulationMeanStagnationNonNatural() {
     TerminationCondition stagnation = new Stagnation(2, false, true);
-    PopulationData<Object> data = new PopulationData<Object>(new Object(), 2, 1.5, 0.1, true, 10, 0, 0, 1);
+    PopulationData<Object> data = new PopulationData<>(new Object(), 2, 1.5, 0.1, true, 10, 0, 0, 1);
     assert !stagnation.shouldTerminate(data) : "Stagnation should not be triggered for at least 2 more generations.";
     // Best doesn't improve but mean does.
-    data = new PopulationData<Object>(new Object(), 2, 1.2, 0.1, true, 10, 0, 1, 2);
+    data = new PopulationData<>(new Object(), 2, 1.2, 0.1, true, 10, 0, 1, 2);
     assert !stagnation.shouldTerminate(data) : "Stagnation should not be triggered for at least 2 more generations.";
     // Best doesn't improve but mean does.
-    data = new PopulationData<Object>(new Object(), 2, 1, 0.1, true, 10, 0, 2, 3);
+    data = new PopulationData<>(new Object(), 2, 1, 0.1, true, 10, 0, 2, 3);
     // Best has stagnated but mean hasn't so shouldn't terminate.
     assert !stagnation.shouldTerminate(data) : "Stagnation should not be triggered for at least 2 more generations.";
     // Now we let the mean stagnate...and let the best candidate get fitter...
-    data = new PopulationData<Object>(new Object(), 2.1, 1.6, 0.1, true, 10, 0, 3, 4);
+    data = new PopulationData<>(new Object(), 2.1, 1.6, 0.1, true, 10, 0, 3, 4);
     assert !stagnation.shouldTerminate(data) : "Stagnation should not be triggered for at least 1 more generation.";
-    data = new PopulationData<Object>(new Object(), 2.2, 1.5, 0.1, true, 10, 0, 4, 4);
+    data = new PopulationData<>(new Object(), 2.2, 1.5, 0.1, true, 10, 0, 4, 4);
     assert stagnation.shouldTerminate(data) : "Stagnation should be triggered after 2 generations without improvement.";
   }
 }

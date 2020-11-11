@@ -41,7 +41,7 @@ public class ObjectArrayPermutationFactoryTest {
    */
   @Test
   public void testUnseededPopulation() {
-    CandidateFactory<Integer[]> factory = new ObjectArrayPermutationFactory<Integer>(elements);
+    CandidateFactory<Integer[]> factory = new ObjectArrayPermutationFactory<>(elements);
     List<Integer[]> population = factory.generateInitialPopulation(populationSize, FrameworkTestUtils.getRNG());
     assert population.size() == populationSize : "Wrong size population generated: " + population.size();
 
@@ -56,7 +56,7 @@ public class ObjectArrayPermutationFactoryTest {
    */
   @Test
   public void testSeededPopulation() {
-    CandidateFactory<Integer[]> factory = new ObjectArrayPermutationFactory<Integer>(elements);
+    CandidateFactory<Integer[]> factory = new ObjectArrayPermutationFactory<>(elements);
 
     Integer[] seed1 = elements.clone();
     Integer[] seed2 = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
@@ -80,7 +80,7 @@ public class ObjectArrayPermutationFactoryTest {
    */
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testTooManySeedCandidates() {
-    CandidateFactory<Integer[]> factory = new ObjectArrayPermutationFactory<Integer>(elements);
+    CandidateFactory<Integer[]> factory = new ObjectArrayPermutationFactory<>(elements);
     // The following call should cause an exception since the 3 seed candidates
     // won't fit into a population of size 2.
     factory.generateInitialPopulation(2,

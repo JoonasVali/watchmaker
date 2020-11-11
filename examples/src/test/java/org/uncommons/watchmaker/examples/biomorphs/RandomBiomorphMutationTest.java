@@ -33,7 +33,7 @@ public class RandomBiomorphMutationTest {
   @Test
   public void testValidity() {
     EvolutionaryOperator<Biomorph> mutation = new RandomBiomorphMutation(Probability.ONE); // Mutate every gene.
-    List<Biomorph> population = new ArrayList<Biomorph>(3);
+    List<Biomorph> population = new ArrayList<>(3);
     population.add(new Biomorph(new int[]{5, -4, -3, -2, -1, 0, 1, 2, 8}));
     population.add(new Biomorph(new int[]{-5, 4, 4, -5, 5, 3, 0, 2, 2}));
     population.add(new Biomorph(new int[]{-4, -1, 0, 0, 3, 0, 4, 5, 4}));

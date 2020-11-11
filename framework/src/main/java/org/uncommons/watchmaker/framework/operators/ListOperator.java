@@ -57,7 +57,7 @@ public class ListOperator<T> implements EvolutionaryOperator<List<T>> {
    * in each list candidates.
    */
   public List<List<T>> apply(List<List<T>> selectedCandidates, Random rng) {
-    List<List<T>> output = new ArrayList<List<T>>(selectedCandidates.size());
+    List<List<T>> output = new ArrayList<>(selectedCandidates.size());
     for (List<T> item : selectedCandidates) {
       output.add(delegate.apply(item, rng));
     }

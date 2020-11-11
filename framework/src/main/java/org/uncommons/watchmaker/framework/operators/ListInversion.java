@@ -40,7 +40,7 @@ public class ListInversion<T> implements EvolutionaryOperator<List<T>> {
    *                             subsection inverted.
    */
   public ListInversion(Probability inversionProbability) {
-    this(new ConstantGenerator<Probability>(inversionProbability));
+    this(new ConstantGenerator<>(inversionProbability));
   }
 
 
@@ -54,10 +54,10 @@ public class ListInversion<T> implements EvolutionaryOperator<List<T>> {
 
 
   public List<List<T>> apply(List<List<T>> selectedCandidates, Random rng) {
-    List<List<T>> result = new ArrayList<List<T>>(selectedCandidates.size());
+    List<List<T>> result = new ArrayList<>(selectedCandidates.size());
     for (List<T> candidate : selectedCandidates) {
       if (inversionProbability.nextValue().nextEvent(rng)) {
-        List<T> newCandidate = new ArrayList<T>(candidate);
+        List<T> newCandidate = new ArrayList<>(candidate);
         int length = newCandidate.size();
         int start = rng.nextInt(length);
         int offset = 2 + rng.nextInt(length - 2); // Make sure segment length is at least 2.

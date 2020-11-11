@@ -66,7 +66,7 @@ public class RendererAdapter<T, S> implements Renderer<T, S> {
     Method renderMethod = ReflectionUtils.findKnownMethod(Renderer.class,
         "render",
         Object.class);
-    return ReflectionUtils.<S>invokeUnchecked(renderMethod,
+    return ReflectionUtils.invokeUnchecked(renderMethod,
         renderer2,
         renderer1.render(entity));
   }

@@ -60,7 +60,7 @@ public class SudokuFactoryTest {
       assert sudoku.getValue(8, 8) == 9 : "Cell (8, 8) should contain 9.";
 
       // Check that each row has no duplicates.
-      Set<Integer> set = new HashSet<Integer>();
+      Set<Integer> set = new HashSet<>();
       for (int i = 0; i < 9; i++) {
         Sudoku.Cell[] row = sudoku.getRow(i);
         for (Sudoku.Cell cell : row) {

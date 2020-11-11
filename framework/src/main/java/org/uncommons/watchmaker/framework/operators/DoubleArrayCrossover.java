@@ -120,7 +120,7 @@ public class DoubleArrayCrossover extends AbstractCrossover<double[]> {
       System.arraycopy(offspring2, 0, offspring1, 0, crossoverIndex);
       System.arraycopy(temp, 0, offspring2, 0, crossoverIndex);
     }
-    List<double[]> result = new ArrayList<double[]>(2);
+    List<double[]> result = new ArrayList<>(2);
     result.add(offspring1);
     result.add(offspring2);
     return result;

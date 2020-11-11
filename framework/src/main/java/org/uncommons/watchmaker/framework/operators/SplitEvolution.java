@@ -60,7 +60,7 @@ public class SplitEvolution<T> implements EvolutionaryOperator<T> {
   public SplitEvolution(EvolutionaryOperator<T> operator1,
                         EvolutionaryOperator<T> operator2,
                         double weight) {
-    this(operator1, operator2, new ConstantGenerator<Double>(weight));
+    this(operator1, operator2, new ConstantGenerator<>(weight));
     if (weight <= 0 || weight >= 1) {
       throw new IllegalArgumentException("Split ratio must be greater than 0 and less than 1.");
     }
@@ -103,12 +103,12 @@ public class SplitEvolution<T> implements EvolutionaryOperator<T> {
     // Shuffle the collection before applying each operation so that the
     // split is not influenced by any ordering artifacts from previous
     // operations.
-    List<T> selectionClone = new ArrayList<T>(selectedCandidates);
+    List<T> selectionClone = new ArrayList<>(selectedCandidates);
     Collections.shuffle(selectionClone, rng);
 
     List<T> list1 = selectionClone.subList(0, size);
     List<T> list2 = selectionClone.subList(size, selectedCandidates.size());
-    List<T> result = new ArrayList<T>(selectedCandidates.size());
+    List<T> result = new ArrayList<>(selectedCandidates.size());
     result.addAll(operator1.apply(list1, rng));
     result.addAll(operator2.apply(list2, rng));
     return result;

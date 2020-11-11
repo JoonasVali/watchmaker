@@ -50,7 +50,7 @@ public class PolygonImageFactory extends AbstractCandidateFactory<List<ColouredP
 
 
   public List<ColouredPolygon> generateRandomCandidate(Random rng) {
-    List<ColouredPolygon> polygons = new ArrayList<ColouredPolygon>(MINIMUM_POLYGON_COUNT);
+    List<ColouredPolygon> polygons = new ArrayList<>(MINIMUM_POLYGON_COUNT);
     for (int i = 0; i < MINIMUM_POLYGON_COUNT; i++) {
       polygons.add(createRandomPolygon(rng));
     }
@@ -59,7 +59,7 @@ public class PolygonImageFactory extends AbstractCandidateFactory<List<ColouredP
 
 
   ColouredPolygon createRandomPolygon(Random rng) {
-    List<Point> vertices = new ArrayList<Point>(MINIMUM_VERTEX_COUNT);
+    List<Point> vertices = new ArrayList<>(MINIMUM_VERTEX_COUNT);
     for (int j = 0; j < MINIMUM_VERTEX_COUNT; j++) {
       vertices.add(new Point(rng.nextInt(canvasSize.width), rng.nextInt(canvasSize.height)));
     }

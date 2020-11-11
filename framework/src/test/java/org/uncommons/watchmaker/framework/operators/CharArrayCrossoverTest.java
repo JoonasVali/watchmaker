@@ -34,12 +34,12 @@ public class CharArrayCrossoverTest {
   @Test
   public void testCrossover() {
     EvolutionaryOperator<char[]> crossover = new CharArrayCrossover();
-    List<char[]> population = new ArrayList<char[]>(4);
+    List<char[]> population = new ArrayList<>(4);
     population.add(new char[]{'a', 'b', 'c', 'd', 'e'});
     population.add(new char[]{'f', 'g', 'h', 'i', 'j'});
     population.add(new char[]{'k', 'l', 'm', 'n', 'o'});
     population.add(new char[]{'p', 'q', 'r', 's', 't'});
-    Set<Character> values = new HashSet<Character>(20);
+    Set<Character> values = new HashSet<>(20);
     for (int i = 0; i < 20; i++) {
       population = crossover.apply(population, FrameworkTestUtils.getRNG());
       assert population.size() == 4 : "Population size changed after cross-over.";
@@ -67,7 +67,7 @@ public class CharArrayCrossoverTest {
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testDifferentLengthParents() {
     EvolutionaryOperator<char[]> crossover = new CharArrayCrossover(1, Probability.ONE);
-    List<char[]> population = new ArrayList<char[]>(2);
+    List<char[]> population = new ArrayList<>(2);
     population.add(new char[]{'a', 'b', 'c', 'd', 'e'});
     population.add(new char[]{'f', 'g', 'h', 'i', 'j', 'k'});
     // This should cause an exception since the parents are different lengths.

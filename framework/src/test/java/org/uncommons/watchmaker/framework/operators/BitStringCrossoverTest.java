@@ -58,8 +58,8 @@ public class BitStringCrossoverTest {
    */
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testDifferentLengthParents() {
-    EvolutionaryOperator<BitString> crossover = new BitStringCrossover(new ConstantGenerator<Integer>(1));
-    List<BitString> population = new ArrayList<BitString>(2);
+    EvolutionaryOperator<BitString> crossover = new BitStringCrossover(new ConstantGenerator<>(1));
+    List<BitString> population = new ArrayList<>(2);
     population.add(new BitString(32, FrameworkTestUtils.getRNG()));
     population.add(new BitString(33, FrameworkTestUtils.getRNG()));
     // This should cause an exception since the parents are different lengths.

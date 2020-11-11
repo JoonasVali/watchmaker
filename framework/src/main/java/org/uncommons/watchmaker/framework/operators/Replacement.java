@@ -52,7 +52,7 @@ public class Replacement<T> implements EvolutionaryOperator<T> {
    */
   public Replacement(CandidateFactory<T> factory,
                      Probability replacementProbability) {
-    this(factory, new ConstantGenerator<Probability>(replacementProbability));
+    this(factory, new ConstantGenerator<>(replacementProbability));
   }
 
 
@@ -85,7 +85,7 @@ public class Replacement<T> implements EvolutionaryOperator<T> {
    * with new individuals.
    */
   public List<T> apply(List<T> selectedCandidates, Random rng) {
-    List<T> output = new ArrayList<T>(selectedCandidates.size());
+    List<T> output = new ArrayList<>(selectedCandidates.size());
     for (T candidate : selectedCandidates) {
       output.add(replacementProbability.nextValue().nextEvent(rng)
           ? factory.generateRandomCandidate(rng)

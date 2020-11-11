@@ -95,7 +95,7 @@ public class SudokuVerticalCrossover extends AbstractCrossover<Sudoku> {
       System.arraycopy(temp, 0, offspring2, 0, crossoverIndex);
     }
 
-    List<Sudoku> result = new ArrayList<Sudoku>(2);
+    List<Sudoku> result = new ArrayList<>(2);
     result.add(new Sudoku(offspring1));
     result.add(new Sudoku(offspring2));
     return result;

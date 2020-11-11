@@ -34,7 +34,7 @@ public class ReplacementTest {
   public void testReplacement() {
     IntegerFactory factory = new IntegerFactory();
     List<Integer> candidates = Arrays.asList(10, 11, 12);
-    Replacement<Integer> replacement = new Replacement<Integer>(factory,
+    Replacement<Integer> replacement = new Replacement<>(factory,
         Probability.ONE);
     // Numbers will be replaced with lower ones.
     List<Integer> output = replacement.apply(candidates, FrameworkTestUtils.getRNG());
@@ -49,7 +49,7 @@ public class ReplacementTest {
   public void testZeroProbability() {
     IntegerFactory factory = new IntegerFactory();
     List<Integer> candidates = Arrays.asList(10, 11, 12);
-    Replacement<Integer> replacement = new Replacement<Integer>(factory,
+    Replacement<Integer> replacement = new Replacement<>(factory,
         Probability.ZERO);
     // Numbers will be replaced with lower ones.
     List<Integer> output = replacement.apply(candidates, FrameworkTestUtils.getRNG());

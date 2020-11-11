@@ -51,13 +51,13 @@ public class RemovePolygonMutation implements EvolutionaryOperator<List<Coloured
 
 
   public List<List<ColouredPolygon>> apply(List<List<ColouredPolygon>> selectedCandidates, Random rng) {
-    List<List<ColouredPolygon>> mutatedCandidates = new ArrayList<List<ColouredPolygon>>(selectedCandidates.size());
+    List<List<ColouredPolygon>> mutatedCandidates = new ArrayList<>(selectedCandidates.size());
     for (List<ColouredPolygon> candidate : selectedCandidates) {
       // A single polygon is removed with the configured probability, unless
       // we already have the minimum permitted number of polygons.
       if (candidate.size() > PolygonImageFactory.MINIMUM_POLYGON_COUNT
           && removePolygonProbability.nextValue().nextEvent(rng)) {
-        List<ColouredPolygon> newPolygons = new ArrayList<ColouredPolygon>(candidate);
+        List<ColouredPolygon> newPolygons = new ArrayList<>(candidate);
         newPolygons.remove(rng.nextInt(newPolygons.size()));
         mutatedCandidates.add(newPolygons);
       } else // Nothing changed.
