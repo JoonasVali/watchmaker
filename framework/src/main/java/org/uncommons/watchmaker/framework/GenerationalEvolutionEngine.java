@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * <p>This class implements a general-purpose generational evolutionary algorithm.
@@ -109,12 +110,11 @@ public class GenerationalEvolutionEngine<T> extends AbstractEvolutionEngine<T> {
                                                           Random rng) {
     List<T> population = new ArrayList<>(evaluatedPopulation.size());
 
-    // First perform any elitist selection.
-    List<T> elite = new ArrayList<>(eliteCount);
-    Iterator<EvaluatedCandidate<T>> iterator = evaluatedPopulation.iterator();
-    while (elite.size() < eliteCount) {
-      elite.add(iterator.next().getCandidate());
-    }
+    // First perform any elitist selection. (The evaluated population is ordered)
+    List<T> elite = evaluatedPopulation.stream().limit(eliteCount)
+        .map(EvaluatedCandidate::getCandidate)
+        .collect(Collectors.toList());
+
     // Then select candidates that will be operated on to create the evolved
     // portion of the next generation.
     population.addAll(selectionStrategy.select(evaluatedPopulation,

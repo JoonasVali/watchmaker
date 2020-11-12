@@ -94,6 +94,13 @@ public class FitnessEvaluationWorker {
     new FitnessEvaluationWorker(false);
   }
 
+  /**
+   * A FitnessWorker cannot be garbage-collected if its thread pool has not been shutdown.
+   * This method shuts down the thread pool so that the threads can be released.
+   */
+  public void shutdown() {
+    executor.shutdown();
+  }
 
   /**
    * A FitnessWorker cannot be garbage-collected if its thread pool has not been shutdown.

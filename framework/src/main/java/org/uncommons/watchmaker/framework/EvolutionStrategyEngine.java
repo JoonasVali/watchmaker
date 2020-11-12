@@ -102,8 +102,8 @@ public class EvolutionStrategyEngine<T> extends AbstractEvolutionEngine<T> {
     List<T> offspring = evolutionScheme.apply(parents, rng);
 
     List<EvaluatedCandidate<T>> evaluatedOffspring = evaluatePopulation(offspring);
-    if (plusSelection) // Plus-selection means parents are considered for survival as well as offspring.
-    {
+    // Plus-selection means parents are considered for survival as well as offspring.
+    if (plusSelection) {
       evaluatedOffspring.addAll(evaluatedPopulation);
     }
     EvolutionUtils.sortEvaluatedPopulation(evaluatedOffspring, fitnessEvaluator.isNatural());

@@ -17,9 +17,11 @@ package org.uncommons.watchmaker.framework;
 
 import org.uncommons.maths.statistics.DataSet;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Utility methods used by different evolution implementations.  This class exists to
@@ -53,12 +55,9 @@ public final class EvolutionUtils {
       return Collections.emptyList();
     }
     // Otherwise check the termination conditions for the evolution.
-    List<TerminationCondition> satisfiedConditions = new LinkedList<>();
-    for (TerminationCondition condition : conditions) {
-      if (condition.shouldTerminate(data)) {
-        satisfiedConditions.add(condition);
-      }
-    }
+    List<TerminationCondition> satisfiedConditions = Arrays.stream(conditions)
+        .filter(condition -> condition.shouldTerminate(data))
+        .collect(Collectors.toList());
     return satisfiedConditions.isEmpty() ? null : satisfiedConditions;
   }
 
@@ -75,11 +74,11 @@ public final class EvolutionUtils {
   public static <T> void sortEvaluatedPopulation(List<EvaluatedCandidate<T>> evaluatedPopulation,
                                                  boolean naturalFitness) {
     // Sort candidates in descending order according to fitness.
-    if (naturalFitness) // Descending values for natural fitness.
-    {
+    if (naturalFitness) {
+      // Descending values for natural fitness.
       evaluatedPopulation.sort(Collections.reverseOrder());
-    } else // Ascending values for non-natural fitness.
-    {
+    } else {
+      // Ascending values for non-natural fitness.
       Collections.sort(evaluatedPopulation);
     }
   }
@@ -105,9 +104,7 @@ public final class EvolutionUtils {
                                                         int iterationNumber,
                                                         long startTime) {
     DataSet stats = new DataSet(evaluatedPopulation.size());
-    for (EvaluatedCandidate<T> candidate : evaluatedPopulation) {
-      stats.addValue(candidate.getFitness());
-    }
+    evaluatedPopulation.forEach(candidate -> stats.addValue(candidate.getFitness()));
     return new PopulationData<>(evaluatedPopulation.get(0).getCandidate(),
         evaluatedPopulation.get(0).getFitness(),
         stats.getArithmeticMean(),

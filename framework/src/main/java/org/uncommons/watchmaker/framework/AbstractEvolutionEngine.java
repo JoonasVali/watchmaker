@@ -24,6 +24,8 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 /**
  * Base class for {@link EvolutionEngine} implementations.
@@ -35,7 +37,7 @@ import java.util.concurrent.Future;
  */
 public abstract class AbstractEvolutionEngine<T> implements EvolutionEngine<T> {
   // A single multi-threaded worker is shared among multiple evolution engine instances.
-  private static FitnessEvaluationWorker concurrentWorker = null;
+  private static AtomicReference<FitnessEvaluationWorker> concurrentWorker = new AtomicReference<>();
 
   private final Set<EvolutionObserver<? super T>> observers = new CopyOnWriteArraySet<>();
 
@@ -200,13 +202,16 @@ public abstract class AbstractEvolutionEngine<T> implements EvolutionEngine<T> {
       // proceed until all threads have finished processing.
       try {
         List<T> unmodifiablePopulation = Collections.unmodifiableList(population);
-        List<Future<EvaluatedCandidate<T>>> results = new ArrayList<>(population.size());
+
         // Submit tasks for execution and wait until all threads have finished fitness evaluations.
-        for (T candidate : population) {
-          results.add(getSharedWorker().submit(new FitnessEvalutationTask<>(fitnessEvaluator,
-              candidate,
-              unmodifiablePopulation)));
-        }
+        List<Future<EvaluatedCandidate<T>>> results =
+            population.stream()
+                .map(candidate ->
+                    getSharedWorker().submit(
+                        new FitnessEvalutationTask<>(fitnessEvaluator, candidate, unmodifiablePopulation)
+                    )
+                ).collect(Collectors.toList());
+
         for (Future<EvaluatedCandidate<T>> result : results) {
           evaluatedPopulation.add(result.get());
         }
@@ -283,9 +288,7 @@ public abstract class AbstractEvolutionEngine<T> implements EvolutionEngine<T> {
    * @param data Information about the current state of the population.
    */
   private void notifyPopulationChange(PopulationData<T> data) {
-    for (EvolutionObserver<? super T> observer : observers) {
-      observer.populationUpdate(data);
-    }
+    observers.forEach(obs -> obs.populationUpdate(data));
   }
 
 
@@ -307,10 +310,15 @@ public abstract class AbstractEvolutionEngine<T> implements EvolutionEngine<T> {
   /**
    * Lazily create the multi-threaded worker for fitness evaluations.
    */
-  private static synchronized FitnessEvaluationWorker getSharedWorker() {
-    if (concurrentWorker == null) {
-      concurrentWorker = new FitnessEvaluationWorker();
+  private static FitnessEvaluationWorker getSharedWorker() {
+    FitnessEvaluationWorker worker = concurrentWorker.get();
+    if (worker == null) {
+      worker = new FitnessEvaluationWorker();
+      if (!concurrentWorker.compareAndSet(null, worker)) {
+        worker.shutdown();
+        return concurrentWorker.get();
+      }
     }
-    return concurrentWorker;
+    return worker;
   }
 }
