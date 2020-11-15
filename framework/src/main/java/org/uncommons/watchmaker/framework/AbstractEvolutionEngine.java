@@ -188,40 +188,39 @@ public abstract class AbstractEvolutionEngine<T> implements EvolutionEngine<T> {
    * scores).
    */
   protected List<EvaluatedCandidate<T>> evaluatePopulation(List<T> population) {
-    List<EvaluatedCandidate<T>> evaluatedPopulation = new ArrayList<>(population.size());
+    List<EvaluatedCandidate<T>> evaluatedPopulation;
 
-    if (singleThreaded) // Do fitness evaluations on the request thread.
-    {
-      for (T candidate : population) {
-        evaluatedPopulation.add(new EvaluatedCandidate<>(candidate,
-            fitnessEvaluator.getFitness(candidate, population)));
-      }
+    if (singleThreaded) { // Do fitness evaluations on the request thread.
+      evaluatedPopulation = population.stream()
+          .map(candidate -> new EvaluatedCandidate<>(candidate, fitnessEvaluator.getFitness(candidate, population)))
+          .collect(Collectors.toList());
     } else {
       // Divide the required number of fitness evaluations equally among the
       // available processors and coordinate the threads so that we do not
       // proceed until all threads have finished processing.
-      try {
-        List<T> unmodifiablePopulation = Collections.unmodifiableList(population);
+      List<T> unmodifiablePopulation = Collections.unmodifiableList(population);
 
-        // Submit tasks for execution and wait until all threads have finished fitness evaluations.
-        List<Future<EvaluatedCandidate<T>>> results =
-            population.stream()
-                .map(candidate ->
-                    getSharedWorker().submit(
-                        new FitnessEvalutationTask<>(fitnessEvaluator, candidate, unmodifiablePopulation)
-                    )
-                ).collect(Collectors.toList());
+      // Submit tasks for execution and wait until all threads have finished fitness evaluations.
+      List<Future<EvaluatedCandidate<T>>> results =
+          population.stream()
+              .map(candidate ->
+                  getSharedWorker().submit(
+                      new FitnessEvalutationTask<>(fitnessEvaluator, candidate, unmodifiablePopulation)
+                  )
+              ).collect(Collectors.toList());
 
-        for (Future<EvaluatedCandidate<T>> result : results) {
-          evaluatedPopulation.add(result.get());
+      evaluatedPopulation = results.stream().map(result -> {
+        try {
+          return result.get();
+        } catch (InterruptedException e) {
+          // Restore the interrupted status, allows methods further up the call-stack
+          // to abort processing if appropriate.
+          Thread.currentThread().interrupt();
+          return null;
+        } catch (ExecutionException e) {
+          throw new IllegalStateException("Fitness evaluation task execution failed.", e);
         }
-      } catch (ExecutionException ex) {
-        throw new IllegalStateException("Fitness evaluation task execution failed.", ex);
-      } catch (InterruptedException ex) {
-        // Restore the interrupted status, allows methods further up the call-stack
-        // to abort processing if appropriate.
-        Thread.currentThread().interrupt();
-      }
+      }).collect(Collectors.toList());
     }
 
     return evaluatedPopulation;
