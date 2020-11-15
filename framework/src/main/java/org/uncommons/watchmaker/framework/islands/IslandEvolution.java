@@ -161,7 +161,7 @@ public class IslandEvolution<T> {
    * <p><em>If you interrupt the request thread before this method returns, the
    * method will return prematurely (with the best individual found so far).
    * After returning in this way, the current thread's interrupted flag
-   * will be set.  It is preferable to use an appropritate
+   * will be set.  It is preferable to use an appropriate
    * {@link org.uncommons.watchmaker.framework.TerminationCondition} rather than interrupting the evolution in
    * this way.</em></p>
    *

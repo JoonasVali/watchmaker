@@ -1,3 +1,10 @@
+Changes in version 0.***
+------------------------
+
+* Moved codebase to Java 8 and refactored structure to classical maven.
+* Performance fix: CachingFitnessEvaluator uses FutureTask to avoid concurrent evaluation of the same candidate.
+* Switched Google collections dependency for Google Guava
+
 Changes in version 0.7.2
 ------------------------
 

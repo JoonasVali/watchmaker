@@ -50,8 +50,7 @@ public class RingMigration implements Migration<Object> {
     for (List<EvaluatedCandidate<S>> island : islandPopulations) {
       // Migrants from the last island are immigrants for this island.
       List<EvaluatedCandidate<S>> immigrants = migrants;
-      if (island != lastIsland) // We've already migrated individuals from the last island.
-      {
+      if (island != lastIsland) { // We've already migrated individuals from the last island.
         // Select the migrants that will move to the next island to make room for the immigrants here.
         // Randomise the population so that there is no bias concerning which individuals are migrated.
         Collections.shuffle(island, rng);

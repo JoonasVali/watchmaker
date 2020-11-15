@@ -19,6 +19,7 @@ import com.google.common.collect.MapMaker;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.FutureTask;
 
 /**
  * <p>A wrapper that provides caching for {@link FitnessEvaluator} implementations.  The
@@ -55,7 +56,7 @@ public class CachingFitnessEvaluator<T> implements FitnessEvaluator<T> {
 
   // This field is marked as transient, even though the class is not Serializable, because
   // Terracotta will respect the fact it is transient and not try to share it.
-  private final transient ConcurrentMap<T, Double> cache = new MapMaker().weakKeys().makeMap();
+  private final transient ConcurrentMap<T, FutureTask<Double>> cache = new MapMaker().weakKeys().makeMap();
 
 
   /**
@@ -76,14 +77,16 @@ public class CachingFitnessEvaluator<T> implements FitnessEvaluator<T> {
    * candidate that score is returned without delegating to the wrapped evaluator.</p>
    */
   public double getFitness(T candidate, List<? extends T> population) {
-    Double fitness = cache.get(candidate);
-    if (fitness == null) {
-      fitness = delegate.getFitness(candidate, population);
-      cache.put(candidate, fitness);
+    FutureTask<Double> fitness = cache.computeIfAbsent(candidate, t -> new FutureTask<>(
+        () -> delegate.getFitness(candidate, population)
+    ));
+    fitness.run();
+    try {
+      return fitness.get();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
-    return fitness;
   }
-
 
   /**
    * {@inheritDoc}
